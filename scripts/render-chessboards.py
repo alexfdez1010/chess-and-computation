@@ -80,7 +80,15 @@ def canonical(attrs: dict[str, str]) -> str:
 
 
 def board_name(attrs: dict[str, str]) -> str:
-    digest = hashlib.sha256(canonical(attrs).encode()).hexdigest()[:16]
+    cache_key = canonical(attrs)
+    # Arrow coordinates changed without changing the declarative board data.
+    # Salt those filenames so deployed pages cannot reuse the old SVG cache.
+    uses_python_chess_arrows = attrs.get("data-size", "8") == "8" and (
+        attrs.get("data-arrows") or (attrs.get("data-marks") and not labels(attrs))
+    )
+    if uses_python_chess_arrows:
+        cache_key += "|arrow-ranks-v2"
+    digest = hashlib.sha256(cache_key.encode()).hexdigest()[:16]
     return f"board-{attrs.get('data-size', '8')}x{attrs.get('data-size', '8')}-{digest}.svg"
 
 

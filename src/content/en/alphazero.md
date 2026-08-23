@@ -155,7 +155,7 @@ $\alpha_d$ is the coefficient of the directions (see [Figure 6](#fig-asignacion-
 Below is an example to clarify the operation.
 
 <figure id="fig-ejemplo-de-codificacion-de-los-movimientos-de-la-dama">
-  <div class="chessboard" data-fen="8/8/8/8/3Q4/8/8/8" data-size="8" data-arrows="d4-d2" data-chess-options="&quot;maxfield=h8, setfen=8/8/8/8/3Q4/8/8/8, pgfstyle=straightmove, markmoves={d4-d2}, arrow=to, showmover=false, largeboard&quot;" role="img" aria-label="Example of encoding queen movements" data-rendered="source" data-board-asset="board-8x8-6f00fb5752ab9392.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-6f00fb5752ab9392.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="chessboard" data-fen="8/8/8/8/3Q4/8/8/8" data-size="8" data-arrows="d4-d2" data-chess-options="&quot;maxfield=h8, setfen=8/8/8/8/3Q4/8/8/8, pgfstyle=straightmove, markmoves={d4-d2}, arrow=to, showmover=false, largeboard&quot;" role="img" aria-label="Example of encoding queen movements" data-rendered="source" data-board-asset="board-8x8-927b8da24fad7a8f.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-927b8da24fad7a8f.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
   <figcaption>Example of encoding queen movements</figcaption>
 </figure>
 
@@ -172,7 +172,7 @@ In this formula, $\beta_s$ denotes the coefficient of the knight jump according 
 [Figure 7](#fig-ejemplo-de-codificacion-de-los-movimientos-del-caballo) provides an illustrative example of this encoding scheme.
 
 <figure id="fig-ejemplo-de-codificacion-de-los-movimientos-del-caballo">
-  <div class="chessboard" data-fen="8/8/8/8/8/5n2/8/8" data-size="8" data-arrows="f3-e1" data-chess-options="&quot;maxfield=h8, setfen=8/8/8/8/8/5n2/8/8, pgfstyle=straightmove, markmoves={f3-e1}, arrow=to, showmover=false, largeboard&quot;" role="img" aria-label="Example of encoding knight movements" data-rendered="source" data-board-asset="board-8x8-1819eb6e318dd5b5.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-1819eb6e318dd5b5.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="chessboard" data-fen="8/8/8/8/8/5n2/8/8" data-size="8" data-arrows="f3-e1" data-chess-options="&quot;maxfield=h8, setfen=8/8/8/8/8/5n2/8/8, pgfstyle=straightmove, markmoves={f3-e1}, arrow=to, showmover=false, largeboard&quot;" role="img" aria-label="Example of encoding knight movements" data-rendered="source" data-board-asset="board-8x8-3b41809924b33ab0.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-3b41809924b33ab0.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
   <figcaption>Example of encoding knight movements</figcaption>
 </figure>
 
@@ -201,7 +201,7 @@ Where $\delta_p$ is the coefficient of the promoted piece and $m$ the value of t
 Below is an example of pawn promotion. [Figure 8](#fig-ejemplo-de-codificacion-de-la-coronacion-de-un-peon) represents the initial position.
 
 <figure id="fig-ejemplo-de-codificacion-de-la-coronacion-de-un-peon">
-  <div class="chessboard" data-fen="8/1P6/8/8/8/8/8/8" data-size="8" data-arrows="b7-c8" data-chess-options="&quot;maxfield=h8, setfen=8/1P6/8/8/8/8/8/8, pgfstyle=straightmove, markmoves={b7-c8}, arrow=to, showmover=false, largeboard&quot;" role="img" aria-label="Example of encoding pawn promotion" data-rendered="source" data-board-asset="board-8x8-bc29baaa433bc133.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-bc29baaa433bc133.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="chessboard" data-fen="8/1P6/8/8/8/8/8/8" data-size="8" data-arrows="b7-c8" data-chess-options="&quot;maxfield=h8, setfen=8/1P6/8/8/8/8/8/8, pgfstyle=straightmove, markmoves={b7-c8}, arrow=to, showmover=false, largeboard&quot;" role="img" aria-label="Example of encoding pawn promotion" data-rendered="source" data-board-asset="board-8x8-f9125459a1b66bf9.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-f9125459a1b66bf9.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
   <figcaption>Example of encoding pawn promotion</figcaption>
 </figure>
 
@@ -259,7 +259,7 @@ Below is an illustrative example that aims to clarify the functioning of the Mon
 Consider the position shown in [Figure 9](#fig-posicion-de-ejemplo-para-mcts), where White must choose between three possible moves: Kf3, b3 and Qb3.
 
 <figure id="fig-posicion-de-ejemplo-para-mcts">
-  <div class="chessboard" data-fen="r3k2r/p2p1ppp/bqp1p3/3nP3/1bP1NP2/8/PP2K1PP/R1BQ1B1R w kq - 3 12" data-size="8" data-arrows="b2-b3, d1-b3, e2-f3" data-chess-options="&quot;maxfield=h8, setfen=r3k2r/p2p1ppp/bqp1p3/3nP3/1bP1NP2/8/PP2K1PP/R1BQ1B1R w kq - 3 12, pgfstyle=straightmove, markmoves={b2-b3, d1-b3, e2-f3}, arrow=to, largeboard&quot;" role="img" aria-label="Example position for MCTS analysis" data-rendered="source" data-board-asset="board-8x8-69f84c80365099a9.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-69f84c80365099a9.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="chessboard" data-fen="r3k2r/p2p1ppp/bqp1p3/3nP3/1bP1NP2/8/PP2K1PP/R1BQ1B1R w kq - 3 12" data-size="8" data-arrows="b2-b3, d1-b3, e2-f3" data-chess-options="&quot;maxfield=h8, setfen=r3k2r/p2p1ppp/bqp1p3/3nP3/1bP1NP2/8/PP2K1PP/R1BQ1B1R w kq - 3 12, pgfstyle=straightmove, markmoves={b2-b3, d1-b3, e2-f3}, arrow=to, largeboard&quot;" role="img" aria-label="Example position for MCTS analysis" data-rendered="source" data-board-asset="board-8x8-958788d5adc1815c.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-958788d5adc1815c.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
   <figcaption>Example position for MCTS analysis</figcaption>
 </figure>
 
