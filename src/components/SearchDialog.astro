@@ -1,0 +1,54 @@
+---
+import type { ChapterEntry, Language } from './content';
+import { copy } from './content';
+const { lang, entries } = Astro.props as { lang: Language; entries: ChapterEntry[] };
+const searchEntries = entries.map(({ title, description, slug, order }, index) => ({ title, description, slug, chapter: (order ?? index) + 1 }));
+---
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog">
+  <span aria-hidden="true">⌕</span><span>{copy[lang].search}</span><kbd>/</kbd>
+</button>
+
+<dialog class="search-dialog" data-search-dialog aria-label={copy[lang].search}>
+  <form method="dialog" class="search-head">
+    <label class="sr-only" for="book-search">{copy[lang].search}</label>
+    <input id="book-search" type="search" autocomplete="off" placeholder={copy[lang].searchHint} />
+    <button value="close" aria-label={lang === 'es' ? 'Cerrar búsqueda' : 'Close search'}>Esc</button>
+  </form>
+  <div class="search-results" aria-live="polite"></div>
+  <p class="search-empty" hidden>{copy[lang].noResults}</p>
+</dialog>
+
+<script is:inline define:vars={{ searchEntries, lang }}>
+  const dialog = document.querySelector('[data-search-dialog]');
+  const input = dialog?.querySelector('input');
+  const results = dialog?.querySelector('.search-results');
+  const empty = dialog?.querySelector('.search-empty');
+  const normalize = (value) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const render = (query = '') => {
+    const needle = normalize(query);
+    const matches = searchEntries.filter((item) => normalize(`${item.title} ${item.description || ''}`).includes(needle)).slice(0, 12);
+    results.replaceChildren(...matches.map((item) => {
+      const link = document.createElement('a');
+      link.href = `/${lang}/${item.slug}`;
+      const index = document.createElement('span');
+      index.textContent = String(item.chapter || '').padStart(2, '0');
+      const body = document.createElement('span');
+      const strong = document.createElement('strong');
+      strong.textContent = item.title;
+      const small = document.createElement('small');
+      small.textContent = item.description || '';
+      body.append(strong, small);
+      link.append(index, body);
+      return link;
+    }));
+    empty.hidden = matches.length > 0;
+  };
+  document.querySelector('[data-search-open]')?.addEventListener('click', () => { render(); dialog.showModal(); requestAnimationFrame(() => input.focus()); });
+  input?.addEventListener('input', () => render(input.value));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+      event.preventDefault(); render(); dialog.showModal(); requestAnimationFrame(() => input.focus());
+    }
+  });
+  dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+</script>

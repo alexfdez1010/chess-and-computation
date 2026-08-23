@@ -1,0 +1,213 @@
+---
+import type { Language } from './content';
+const { lang } = Astro.props as { lang: Language };
+---
+<script is:inline define:vars={{ pageLanguage: lang }}>
+  const pieceGlyphs = { k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟', K: '♔', Q: '♕', R: '♖', B: '♗', N: '♘', P: '♙' };
+  const pieceNames = {
+    es: { k: 'rey negro', q: 'dama negra', r: 'torre negra', b: 'alfil negro', n: 'caballo negro', p: 'peón negro', K: 'rey blanco', Q: 'dama blanca', R: 'torre blanca', B: 'alfil blanco', N: 'caballo blanco', P: 'peón blanco' },
+    en: { k: 'black king', q: 'black queen', r: 'black rook', b: 'black bishop', n: 'black knight', p: 'black pawn', K: 'white king', Q: 'white queen', R: 'white rook', B: 'white bishop', N: 'white knight', P: 'white pawn' },
+  };
+  const startPieces = ['ra8','nb8','bc8','qd8','ke8','bf8','ng8','rh8','pa7','pb7','pc7','pd7','pe7','pf7','pg7','ph7','Pa2','Pb2','Pc2','Pd2','Pe2','Pf2','Pg2','Ph2','Ra1','Nb1','Bc1','Qd1','Ke1','Bf1','Ng1','Rh1'];
+  const fenPieces = (fen, size) => {
+    const placement = (fen || '').split(/\s+/)[0];
+    if (!placement.includes('/')) return [];
+    const rows = placement.split('/');
+    const pieces = [];
+    rows.slice(0, size).forEach((row, rowIndex) => {
+      let file = 0;
+      for (let index = 0; index < row.length && file < size; index++) {
+        const token = row[index];
+        if (/\d/.test(token)) {
+          let digits = token;
+          while (/\d/.test(row[index + 1] || '')) digits += row[++index];
+          file += Number(digits);
+        } else if (pieceGlyphs[token]) {
+          pieces.push(`${token}${String.fromCharCode(97 + file)}${size - rowIndex}`);
+          file++;
+        } else file++;
+      }
+    });
+    return pieces;
+  };
+
+  const parseSquare = (square, size) => {
+    const match = square.match(/^([a-j])(10|[1-9])$/i);
+    if (!match) return null;
+    const file = match[1].toLowerCase().charCodeAt(0) - 97;
+    const rank = Number(match[2]);
+    if (file >= size || rank > size) return null;
+    return { file, rank, x: (file + .5) * 100 / size, y: (size - rank + .5) * 100 / size };
+  };
+
+  document.querySelectorAll('.chessboard').forEach((board) => {
+    if (board.dataset.rendered) return;
+    const size = Math.min(10, Math.max(1, Number(board.dataset.size) || 8));
+    const orientation = board.dataset.orientation === 'black' ? 'black' : 'white';
+    const visual = document.createElement('div');
+    visual.className = 'chessboard-grid';
+    visual.style.setProperty('--board-size', size);
+    visual.setAttribute('role', 'grid');
+    const descriptions = [];
+    for (let row = 0; row < size; row++) {
+      for (let column = 0; column < size; column++) {
+        const file = orientation === 'white' ? column : size - column - 1;
+        const rank = orientation === 'white' ? size - row : row + 1;
+        const square = `${String.fromCharCode(97 + file)}${rank}`;
+        const cell = document.createElement('span');
+        cell.className = 'chess-square';
+        cell.dataset.square = square;
+        cell.setAttribute('role', 'gridcell');
+        cell.setAttribute('aria-label', square);
+        if ((file + rank) % 2 === 1) cell.classList.add('is-dark');
+        if ((orientation === 'white' ? row === size - 1 : row === 0)) cell.dataset.file = String.fromCharCode(97 + file);
+        if ((orientation === 'white' ? column === 0 : column === size - 1)) cell.dataset.rank = String(rank);
+        visual.append(cell);
+      }
+    }
+    const declaredPieces = (board.dataset.pieces || '').split(',').map((value) => value.trim()).filter(Boolean);
+    const rawPieces = declaredPieces.length ? declaredPieces : (board.dataset.fen === 'start' ? startPieces : fenPieces(board.dataset.fen, size));
+    rawPieces.forEach((notation) => {
+      const match = notation.match(/^([kqrbnpKQRBNP])([a-j](?:10|[1-9]))$/);
+      if (!match) return;
+      const cell = visual.querySelector(`[data-square="${match[2]}"]`);
+      if (!cell) return;
+      const piece = document.createElement('b');
+      piece.className = 'chess-piece';
+      piece.textContent = pieceGlyphs[match[1]];
+      piece.setAttribute('aria-label', pieceNames[pageLanguage][match[1]]);
+      cell.append(piece);
+      descriptions.push(`${pieceNames[pageLanguage][match[1]]} ${pageLanguage === 'es' ? 'en' : 'on'} ${match[2]}`);
+    });
+    try {
+      const labels = JSON.parse(board.dataset.labels || '{}');
+      Object.entries(labels).forEach(([square, value]) => {
+        const cell = visual.querySelector(`[data-square="${square}"]`);
+        if (!cell || cell.querySelector('.chess-piece')) return;
+        const label = document.createElement('b');
+        label.className = 'square-value';
+        label.textContent = String(value);
+        label.setAttribute('aria-label', `${square}: ${value}`);
+        cell.append(label);
+        descriptions.push(`${square}: ${value}`);
+      });
+    } catch { /* Invalid optional labels do not prevent the board rendering. */ }
+    (board.dataset.marks || '').split(',').map((value) => value.trim().split(/-|:|>/)[0]).filter(Boolean).forEach((square) => visual.querySelector(`[data-square="${square}"]`)?.classList.add('is-marked'));
+    const arrows = document.createElement('div');
+    arrows.className = 'board-arrows';
+    (board.dataset.arrows || '').split(',').map((value) => value.trim()).filter(Boolean).forEach((arrow) => {
+      const match = arrow.match(/^([a-j](?:10|[1-9]))(?:-|:|>)([a-j](?:10|[1-9]))$/i);
+      if (!match) return;
+      const start = parseSquare(match[1], size); const end = parseSquare(match[2], size);
+      if (!start || !end) return;
+      const line = document.createElement('i');
+      const dx = end.x - start.x; const dy = end.y - start.y;
+      line.style.left = `${start.x}%`; line.style.top = `${start.y}%`;
+      line.style.width = `${Math.hypot(dx, dy)}%`; line.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
+      arrows.append(line);
+    });
+    visual.append(arrows);
+    board.replaceChildren(visual);
+    board.dataset.rendered = 'true';
+    board.setAttribute('role', 'img');
+    board.setAttribute('aria-label', board.getAttribute('aria-label') || `${pageLanguage === 'es' ? 'Tablero de ajedrez' : 'Chessboard'}. ${descriptions.join(', ')}`);
+  });
+
+  const labels = {
+    es: {
+      input: 'Entrada', hidden: 'Capas ocultas', policy: 'Política', value: 'Valor', output: 'Salida',
+      state: 'Estado', agent: 'Agente', action: 'Acción', environment: 'Entorno', reward: 'Recompensa',
+      select: 'Seleccionar', expand: 'Expandir', evaluate: 'Evaluar', backup: 'Propagar', root: 'Raíz', move: 'Jugada',
+      board: 'Tablero', planes: 'Planos de características', residual: 'Bloque residual', games: 'Partidas', solutions: 'Soluciones', queens: 'Número de reinas',
+    },
+    en: {
+      input: 'Input', hidden: 'Hidden layers', policy: 'Policy', value: 'Value', output: 'Output',
+      state: 'State', agent: 'Agent', action: 'Action', environment: 'Environment', reward: 'Reward',
+      select: 'Select', expand: 'Expand', evaluate: 'Evaluate', backup: 'Backup', root: 'Root', move: 'Move',
+      board: 'Board', planes: 'Feature planes', residual: 'Residual block', games: 'Games', solutions: 'Solutions', queens: 'Number of queens',
+    },
+  }[pageLanguage];
+  const node = (text, className = '') => `<span class="diagram-node ${className}">${text}</span>`;
+  const arrow = '<i class="diagram-arrow" aria-hidden="true">→</i>';
+  const templates = {
+    cover: `<div class="cover-diagram"><div class="cover-mini-board">${Array.from({ length: 16 }, (_, i) => `<i class="${(Math.floor(i/4)+i)%2 ? 'dark' : ''}"></i>`).join('')}<b>♞</b></div><p>64<sup>+</sup></p></div>`,
+    'n-queens': `<div class="bar-chart">${[1,0,0,2,10,4,40,92].map((value, i) => `<span style="--value:${Math.max(2,value)}"><i>${value}</i><b>${i+1}</b></span>`).join('')}</div><div class="diagram-legend"><span>${labels.queens}</span><span>${labels.solutions}</span></div>`,
+    definition: `<div class="diagram-cycle">${node(labels.state)}${arrow}${node(labels.agent,'accent')}${arrow}${node(labels.action)}${arrow}${node(labels.environment,'wide')}${arrow}${node(labels.reward)}</div>`,
+    'agent-environment': `<div class="diagram-cycle">${node(labels.agent,'accent')}${arrow}${node(labels.action)}${arrow}${node(labels.environment,'wide')}${arrow}${node(labels.state)}${arrow}${node(labels.reward)}</div>`,
+    'alphazero-network': `<div class="network-diagram">${node(labels.board)}${arrow}${node('8 × 8 × 119','wide')}${arrow}${node(labels.residual,'accent wide')}${arrow}<span class="network-fork">${node(labels.policy)}${node(labels.value)}</span></div>`,
+    'alphazero-residual': `<div class="residual-diagram">${node('x','accent')}${arrow}${node('Conv 3×3')}${arrow}${node('BN + ReLU')}${arrow}${node('Conv 3×3')}<i class="skip-line"></i>${arrow}${node('x + F(x)','accent')}</div>`,
+    'alphazero-directions': `<div class="direction-diagram"><div class="direction-board"><b>♞</b>${['↖','↑','↗','←','→','↙','↓','↘'].map((d) => `<i>${d}</i>`).join('')}</div><p>8 × 8 × 73</p></div>`,
+    'mcts-initial': `<div class="tree-diagram"><span class="tree-root">${labels.root}</span><div>${[1,2,3].map((i) => `<span>${labels.move} ${i}</span>`).join('')}</div></div><div class="diagram-steps"><b>${labels.select}</b><b>${labels.expand}</b></div>`,
+    'mcts-final': `<div class="tree-diagram expanded"><span class="tree-root">N = 800</span><div>${['N=412','N=267','N=121'].map((v) => `<span>${v}</span>`).join('')}</div></div><div class="diagram-steps"><b>${labels.evaluate}</b><b>${labels.backup}</b></div>`,
+    'game-tree': `<div class="tree-diagram expanded"><span class="tree-root">${labels.state}</span><div>${[1,2,3].map((i) => `<span>${labels.move} ${i}<small>${i === 2 ? '+1' : i === 1 ? '0' : '−1'}</small></span>`).join('')}</div></div>`,
+    'alpha-beta': `<div class="tree-diagram pruned"><span class="tree-root">MAX</span><div><span>3</span><span class="prune">β ≤ α</span><span>5</span></div></div>`,
+  };
+  document.querySelectorAll('.localized-diagram[data-diagram]').forEach((figure) => {
+    const key = figure.dataset.diagram;
+    if (key === 'flowchart') return;
+    const template = templates[key];
+    if (!template) return;
+    const stage = document.createElement('div');
+    stage.className = `diagram-stage diagram-${key}`;
+    stage.innerHTML = template;
+    figure.replaceChildren(stage);
+    figure.setAttribute('role', 'img');
+    figure.setAttribute('aria-label', figure.dataset.label || key.replaceAll('-', ' '));
+    figure.dataset.rendered = 'true';
+  });
+</script>
+
+<script>
+  import katex from 'katex';
+
+  const flowcharts = [...document.querySelectorAll<HTMLElement>('.mermaid-flowchart[data-mermaid]')];
+  if (flowcharts.length) {
+    const { default: mermaid } = await import('mermaid');
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: 'base',
+      flowchart: { curve: 'basis', htmlLabels: true, nodeSpacing: 42, rankSpacing: 58, useMaxWidth: true },
+      themeVariables: {
+        fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
+        fontSize: '15px',
+        lineColor: '#46765f',
+        edgeLabelBackground: '#f3f3ed',
+        clusterBkg: 'transparent',
+        clusterBorder: 'transparent',
+      },
+    });
+    for (const [index, flowchart] of flowcharts.entries()) {
+      const source = flowchart.dataset.mermaid;
+      if (!source) continue;
+      try {
+        const { svg, bindFunctions } = await mermaid.render(`mermaid-flowchart-${index}`, source);
+        flowchart.innerHTML = svg;
+        const visual = flowchart.querySelector('svg');
+        visual?.setAttribute('aria-hidden', 'true');
+        visual?.setAttribute('focusable', 'false');
+        bindFunctions?.(flowchart);
+        flowchart.dataset.rendered = 'true';
+      } catch (error) {
+        flowchart.dataset.mermaidError = 'true';
+        console.error('Unable to render Mermaid flowchart', error);
+      }
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('.figure-equation[data-math]').forEach((equation) => {
+    const formula = equation.dataset.math;
+    if (!formula) return;
+    try {
+      katex.render(formula, equation, {
+        displayMode: true,
+        throwOnError: false,
+        strict: 'ignore',
+      });
+    } catch {
+      // Preserve the accessible text supplied by the generated content if a
+      // malformed upstream formula cannot be rendered.
+      equation.textContent = equation.getAttribute('aria-label') || formula;
+    }
+  });
+</script>

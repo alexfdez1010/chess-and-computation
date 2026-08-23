@@ -1,0 +1,46 @@
+---
+import SearchDialog from './SearchDialog.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import type { ChapterEntry, Language } from './content';
+import { copy } from './content';
+const { lang, entries, alternatePath = `/${lang === 'es' ? 'en' : 'es'}` } = Astro.props as {
+  lang: Language; entries: ChapterEntry[]; alternatePath?: string;
+};
+---
+<header class="site-header">
+  <a class="wordmark" href={`/${lang}`} aria-label={copy[lang].title}>
+    <span class="brand-piece" aria-hidden="true">♞</span>
+    <span>{lang === 'es' ? 'Ajedrez' : 'Chess'}<small>&amp; computation</small></span>
+  </a>
+  <div class="header-actions">
+    <SearchDialog {lang} {entries} />
+    <a class="language-switch" href={alternatePath} hreflang={lang === 'es' ? 'en' : 'es'}>{lang === 'es' ? 'EN' : 'ES'}<span>{copy[lang].language}</span></a>
+    <ThemeToggle {lang} />
+    <button class="menu-toggle icon-button" type="button" aria-label={copy[lang].contents} aria-expanded="false" aria-controls="book-sidebar"><i></i><i></i></button>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const sidebar = document.querySelector<HTMLElement>('#book-sidebar');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    sidebar?.toggleAttribute('data-open', open);
+    document.body.classList.toggle('nav-open', open);
+  });
+  const closeMenu = () => {
+    toggle?.setAttribute('aria-expanded', 'false');
+    sidebar?.removeAttribute('data-open');
+    document.body.classList.remove('nav-open');
+  };
+  sidebar?.addEventListener('click', (event) => {
+    if ((event.target as HTMLElement).closest('a')) closeMenu();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+</script>

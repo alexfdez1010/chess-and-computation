@@ -1,0 +1,54 @@
+---
+import type { ChapterEntry, Language } from './content';
+import { copy, navigationGroupsFor } from './content';
+const { lang, entries, activeSlug } = Astro.props as { lang: Language; entries: ChapterEntry[]; activeSlug?: string };
+const groups = navigationGroupsFor(lang);
+const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.padStart(2, '0') : key === 'references' ? '—' : key;
+---
+<aside class="book-sidebar" id="book-sidebar">
+  <div class="sidebar-scroll">
+    <p class="sidebar-title">{copy[lang].contents}<span>{entries.length} {copy[lang].sections}</span></p>
+    <nav aria-label={copy[lang].contents}>
+      {groups.map((group) => (
+        <section class:list={['chapter-group', `group-${group.kind}`]}>
+          <h2>
+            {group.landing ? (
+              <a href={`/${lang}/${group.landing.slug}`} aria-current={group.landing.slug === activeSlug ? 'page' : undefined}>
+                <span>{groupNumber(group.key)}</span>{group.title}
+              </a>
+            ) : <span class="group-heading"><b>{groupNumber(group.key)}</b>{group.title}</span>}
+          </h2>
+          {group.sections.length > 0 && <ol>
+            {group.sections.map((item) => (
+              <li>
+                <a href={`/${lang}/${item.slug}`} aria-current={item.slug === activeSlug ? 'page' : undefined}>
+                  <span>{item.sectionNumber}</span>{item.sectionTitle || item.title}
+                </a>
+              </li>
+            ))}
+          </ol>}
+        </section>
+      ))}
+    </nav>
+    {activeSlug && <div class="page-toc" data-page-toc hidden><h2>{copy[lang].onPage}</h2><ol></ol></div>}
+  </div>
+</aside>
+
+<script>
+  const article = document.querySelector('.book-prose');
+  const toc = document.querySelector<HTMLElement>('[data-page-toc]');
+  const list = toc?.querySelector('ol');
+  if (article && toc && list) {
+    const headings = [...article.querySelectorAll<HTMLElement>('h2, h3')];
+    headings.forEach((heading, index) => {
+      if (!heading.id) heading.id = `section-${index + 1}`;
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = `#${heading.id}`;
+      link.textContent = heading.textContent || '';
+      if (heading.tagName === 'H3') link.dataset.depth = '3';
+      item.append(link); list.append(item);
+    });
+    toc.hidden = headings.length === 0;
+  }
+</script>

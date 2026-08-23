@@ -1,0 +1,54 @@
+---
+import BookLayout from '../../layouts/BookLayout.astro';
+import ReadingProgress from '../../components/ReadingProgress.astro';
+import { chapters, chaptersFor, equivalentPath, copy, type ChapterEntry, type Language } from '../../components/content';
+
+export function getStaticPaths() {
+  return chapters.map((entry) => ({ params: { lang: entry.lang, slug: entry.slug }, props: { entry } }));
+}
+const { entry } = Astro.props as { entry: ChapterEntry };
+const lang = entry.lang as Language;
+const entries = chaptersFor(lang);
+const index = entries.findIndex((item) => item.slug === entry.slug);
+const previous = entries[index - 1];
+const next = entries[index + 1];
+const chapterLanding = entries.find((item) => item.bookChapter === entry.bookChapter && item.navDepth === 1);
+const isSection = entry.navDepth === 2;
+const isAppendix = /^[A-D]$/.test(entry.bookChapter || '');
+const entryLabel = isSection
+  ? (lang === 'es' ? 'Sección' : 'Section')
+  : isAppendix
+    ? (lang === 'es' ? 'Apéndice' : 'Appendix')
+    : entry.bookChapter === 'references'
+      ? (lang === 'es' ? 'Material final' : 'Back matter')
+      : entry.bookChapter === '0'
+        ? (lang === 'es' ? 'Introducción' : 'Introduction')
+        : (lang === 'es' ? 'Capítulo' : 'Chapter');
+const displayNumber = entry.bookChapter === '0' ? undefined : isSection ? entry.sectionNumber : /^\d$/.test(entry.bookChapter || '') ? entry.bookChapter?.padStart(2, '0') : entry.bookChapter;
+const alternatePath = equivalentPath(entry, lang === 'es' ? 'en' : 'es');
+const Content = entry.Content;
+---
+<BookLayout {lang} entry={entry} title={entry.title} description={entry.description} {alternatePath}>
+  <article class="chapter-page">
+    <nav class="breadcrumbs" aria-label={lang === 'es' ? 'Migas de pan' : 'Breadcrumb'}>
+      <a href={`/${lang}`}>{copy[lang].title}</a><span aria-hidden="true">/</span>
+      {isSection && chapterLanding && chapterLanding.slug !== entry.slug
+        ? <a href={`/${lang}/${chapterLanding.slug}`}>{entry.bookChapterTitle}</a>
+        : isSection ? <span>{entry.bookChapterTitle}</span> : null}
+    </nav>
+    <header class="chapter-header">
+      <div class="chapter-number"><span>{entryLabel}</span>{displayNumber && <b>{displayNumber}</b>}</div>
+      <div>
+        {isSection && <p>{entry.bookChapterTitle}</p>}
+        <h1>{entry.title}</h1>
+        {entry.description && <p class="chapter-deck">{entry.description}</p>}
+      </div>
+    </header>
+    <div class="book-prose"><Content /></div>
+    <ReadingProgress {lang} slug={entry.slug} />
+    <nav class="chapter-pagination" aria-label={lang === 'es' ? 'Navegación de capítulos' : 'Chapter navigation'}>
+      {previous ? <a href={`/${lang}/${previous.slug}`} rel="prev"><span>← {copy[lang].previous}</span><strong>{previous.title}</strong></a> : <span></span>}
+      {next ? <a href={`/${lang}/${next.slug}`} rel="next"><span>{copy[lang].next} →</span><strong>{next.title}</strong></a> : <span></span>}
+    </nav>
+  </article>
+</BookLayout>

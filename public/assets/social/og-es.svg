@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Ajedrez y computación</title>
+  <desc id="description">Vista social del libro web sobre ajedrez, algoritmos e inteligencia artificial.</desc>
+  <image href="og-base.png" width="1200" height="630" preserveAspectRatio="xMidYMid slice" />
+  <g fill="#171a18">
+    <text x="72" y="128" fill="#176b4d" font-family="Avenir Next, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="4">EDICIÓN WEB ABIERTA</text>
+    <text x="68" y="235" font-family="Iowan Old Style, Baskerville, Georgia, serif" font-size="78" font-weight="500" letter-spacing="-3">Ajedrez</text>
+    <text x="68" y="317" font-family="Iowan Old Style, Baskerville, Georgia, serif" font-size="78" font-weight="500" letter-spacing="-3">y computación</text>
+    <line x1="72" y1="365" x2="476" y2="365" stroke="#176b4d" stroke-width="3" />
+    <text x="72" y="418" fill="#5c625e" font-family="Avenir Next, Helvetica, Arial, sans-serif" font-size="26">Algoritmos · búsqueda · aprendizaje</text>
+    <text x="72" y="548" fill="#176b4d" font-family="SFMono-Regular, Consolas, monospace" font-size="17">AJEDREZ · ALGORITMOS · IA</text>
+  </g>
+</svg>

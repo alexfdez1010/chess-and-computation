@@ -1,0 +1,18 @@
+---
+import type { Language } from './content';
+import { copy } from './content';
+const { lang } = Astro.props as { lang: Language };
+---
+<button class="icon-button theme-toggle" type="button" aria-label={copy[lang].theme} title={copy[lang].theme}>
+  <span class="theme-mark" aria-hidden="true"></span>
+</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
+  const root = document.documentElement;
+  button?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    localStorage.setItem('ac-theme', next);
+  });
+</script>

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "source": "tmp/source/AC",
+  "publicRoot": "/assets/book",
+  "summary": {
+    "total": 77,
+    "sharedAcrossLocales": 63,
+    "localeSpecificOriginals": 14,
+    "png": 45,
+    "svg": 32,
+    "bytes": 6952836
+  },
+  "sharedGroups": [
+    { "glob": "appendix1/*.svg", "count": 6, "reason": "Chess boards; coordinates only" },
+    { "glob": "appendix3/*.svg", "count": 8, "reason": "Chess boards; coordinates only" },
+    { "glob": "game/*.svg", "count": 10, "reason": "Chess boards; coordinates only" },
+    { "glob": "game-tree/*.svg", "count": 6, "reason": "Chess boards; coordinates only" },
+    { "glob": "heuristics/*.svg", "count": 1, "reason": "Chess board; coordinates only" },
+    { "glob": "state/*.svg", "count": 1, "reason": "Chess board; coordinates only" },
+    { "glob": "alpha-beta/{initial,phase1,phase2,phase3,phase4}.png", "count": 5, "reason": "Numeric alpha-beta trees; Max/Min notation" },
+    { "glob": "definition/chain.png", "count": 1, "reason": "Numeric state chain" },
+    { "glob": "game/image1.png", "count": 1, "reason": "Pawn moves in language-neutral algebraic notation" },
+    { "glob": "knight-tour/*.png", "count": 5, "reason": "Tours and numbered graph; no prose" },
+    { "glob": "min-max/{example1,example2,example3,example4,example5,step1,step2,step3}.png", "count": 8, "reason": "Numeric trees; Max/Min notation" },
+    { "glob": "n-queens/turing.png", "count": 1, "reason": "Portrait without text" },
+    { "glob": "networks/*.png", "count": 5, "reason": "Symbolic diagrams without natural-language labels" },
+    { "glob": "reward/*.png", "count": 5, "reason": "Boards and numeric values without prose" }
+  ],
+  "localeSpecific": [
+    {
+      "path": "cover-es.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "Spanish title and author line",
+      "recommendedWebReplacement": "Localized HTML/CSS cover composition"
+    },
+    {
+      "path": "alpha-beta/pruning-example.png",
+      "available": ["en"],
+      "missing": ["es"],
+      "reason": "English chess piece initials in move labels",
+      "recommendedWebReplacement": "Animated alpha-beta tree with localized SAN labels"
+    },
+    {
+      "path": "alphazero/directions.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "O/NO/SO compass abbreviations",
+      "recommendedWebReplacement": "CSS/SVG eight-direction animation; W/NW/SW in English"
+    },
+    {
+      "path": "alphazero/initial_MCTS.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "Spanish chess initials and decimal commas",
+      "recommendedWebReplacement": "Animated MCTS tree with locale-aware SAN and decimals"
+    },
+    {
+      "path": "alphazero/final_MCTS.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "Spanish chess initials and decimal commas",
+      "recommendedWebReplacement": "Animated MCTS tree with locale-aware SAN and decimals"
+    },
+    {
+      "path": "alphazero/network.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "Spanish neural-network labels",
+      "recommendedWebReplacement": "Localized layered network component"
+    },
+    {
+      "path": "alphazero/residual.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "Spanish residual-block labels",
+      "recommendedWebReplacement": "Localized animated residual-block component"
+    },
+    {
+      "path": "definition/example_definition.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "Contains the word Agente",
+      "recommendedWebReplacement": "Localized agent/environment diagram"
+    },
+    {
+      "path": "game/image2.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "Spanish knight initial C in move notation",
+      "recommendedWebReplacement": "Animated graph with localized SAN labels"
+    },
+    {
+      "path": "game/image3.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "Spanish knight initial C in move notation",
+      "recommendedWebReplacement": "Animated graph with localized SAN labels"
+    },
+    {
+      "path": "game-tree/tree.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "Spanish piece initials D/R/C in move notation",
+      "recommendedWebReplacement": "Animated game tree with localized SAN labels"
+    },
+    {
+      "path": "min-max/example1-es.png",
+      "available": ["es"],
+      "missing": [],
+      "counterpart": "min-max/example1-en.png",
+      "reason": "Spanish chess piece initials"
+    },
+    {
+      "path": "min-max/example1-en.png",
+      "available": ["en"],
+      "missing": [],
+      "counterpart": "min-max/example1-es.png",
+      "reason": "English chess piece initials"
+    },
+    {
+      "path": "n-queens/myplot.png",
+      "available": ["es"],
+      "missing": ["en"],
+      "reason": "Spanish axis labels",
+      "recommendedWebReplacement": "Locale-aware responsive chart"
+    }
+  ],
+  "notes": [
+    "Source SVG files are preserved as vectors.",
+    "Source PNG files are preserved losslessly; the complete image set is only 6.63 MiB.",
+    "The four 4000x4000 knight-tour PNGs use indexed color and together remain below 3.1 MiB, so destructive downscaling was avoided.",
+    "Upstream names are retained for stable traceability; only Portada.png is normalized to cover-es.png."
+  ]
+}

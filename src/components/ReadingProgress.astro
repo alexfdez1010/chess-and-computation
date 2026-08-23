@@ -1,0 +1,28 @@
+---
+import type { Language } from './content';
+import { copy } from './content';
+const { lang, slug } = Astro.props as { lang: Language; slug: string };
+---
+<div class="reading-meter" aria-hidden="true"><span></span></div>
+<button class="read-status" type="button" data-read-status data-key={`${lang}:${slug}`}>
+  <span class="read-check" aria-hidden="true"></span><b data-read-label>{copy[lang].read}</b>
+</button>
+
+<script is:inline define:vars={{ idleLabel: copy[lang].read, doneLabel: copy[lang].readDone }}>
+  const meter = document.querySelector('.reading-meter span');
+  const button = document.querySelector('[data-read-status]');
+  const label = button?.querySelector('[data-read-label]');
+  const key = `ac-read:${button?.dataset.key}`;
+  const updateStatus = (done) => { button?.toggleAttribute('data-done', done); if (label) label.textContent = done ? doneLabel : idleLabel; };
+  updateStatus(localStorage.getItem(key) === '1');
+  button?.addEventListener('click', () => { const done = !button.hasAttribute('data-done'); localStorage.setItem(key, done ? '1' : '0'); updateStatus(done); });
+  const updateMeter = () => {
+    const article = document.querySelector('.book-prose');
+    if (!article || !meter) return;
+    const start = article.getBoundingClientRect().top + scrollY;
+    const distance = Math.max(1, article.scrollHeight - innerHeight * .55);
+    const progress = Math.min(1, Math.max(0, (scrollY - start + innerHeight * .2) / distance));
+    meter.style.transform = `scaleX(${progress})`;
+  };
+  updateMeter(); addEventListener('scroll', updateMeter, { passive: true }); addEventListener('resize', updateMeter);
+</script>

@@ -1,0 +1,111 @@
+---
+import Header from '../components/Header.astro';
+import Sidebar from '../components/Sidebar.astro';
+import InteractiveFigures from '../components/InteractiveFigures.astro';
+import type { ChapterEntry, Language } from '../components/content';
+import { chaptersFor, copy, navigationGroupsFor } from '../components/content';
+import '../styles/global.css';
+import 'katex/dist/katex.min.css';
+
+const { lang, title, description, entry, alternatePath } = Astro.props as {
+  lang: Language;
+  title?: string;
+  description?: string;
+  entry?: ChapterEntry;
+  alternatePath?: string;
+};
+const entries = chaptersFor(lang);
+const navigationGroups = navigationGroupsFor(lang);
+const pageTitle = title ? `${title} — ${copy[lang].title}` : copy[lang].title;
+const summary = description || copy[lang].description;
+const currentPath = entry ? `/${lang}/${entry.slug}` : `/${lang}`;
+const translated = alternatePath || `/${lang === 'es' ? 'en' : 'es'}`;
+const canonical = new URL(currentPath, Astro.site);
+const alternate = new URL(translated, Astro.site);
+const socialImage = new URL(`/assets/social/og-${lang}.png`, Astro.site);
+const author = 'Alejandro Fernández Camello';
+const bookSchema = {
+  '@type': 'Book',
+  name: copy[lang].title,
+  alternateName: copy[lang].subtitle,
+  author: { '@type': 'Person', name: author },
+  inLanguage: lang,
+  datePublished: '2023-11-10',
+  url: new URL(`/${lang}`, Astro.site),
+  image: socialImage,
+  hasPart: navigationGroups.map((group, index) => ({
+    '@type': 'CreativeWork',
+    name: group.title,
+    position: index + 1,
+    url: new URL(`/${lang}/${(group.landing || group.sections[0]).slug}`, Astro.site),
+  })),
+};
+const structuredData = {
+  '@context': 'https://schema.org',
+  ...(entry ? {
+    '@type': 'TechArticle',
+    headline: entry.title,
+    description: summary,
+    articleSection: entry.bookChapterTitle,
+    pagination: entry.sectionNumber,
+    inLanguage: lang,
+    position: (entry.order ?? 0) + 1,
+    author: { '@type': 'Person', name: author },
+    isPartOf: bookSchema,
+    mainEntityOfPage: canonical,
+    image: socialImage,
+  } : bookSchema),
+};
+---
+<!doctype html>
+<html lang={lang} data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#f3f3ed" />
+    <meta name="description" content={summary} />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:type" content={entry ? 'article' : 'website'} />
+    <meta property="og:site_name" content={copy[lang].title} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={summary} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_ES'} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={lang === 'es' ? 'Ajedrez y computación: algoritmos, búsqueda y aprendizaje' : 'Chess and computation: algorithms, search, and learning'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={summary} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={lang === 'es' ? 'Ajedrez y computación' : 'Chess and computation'} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={lang === 'es' ? 'en' : 'es'} href={alternate} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/es', Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{pageTitle}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem('ac-theme');
+        document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
+    <Header {lang} {entries} {alternatePath} />
+    <div class="book-shell">
+      <Sidebar {lang} {entries} activeSlug={entry?.slug} />
+      <main id="main-content" tabindex="-1"><slot /></main>
+    </div>
+    <footer class="site-footer">
+      <span>© {new Date().getFullYear()} {copy[lang].title}</span>
+      <a href="https://github.com/alexfdez1010/AC" rel="noreferrer">{lang === 'es' ? 'Código fuente' : 'Source code'} ↗</a>
+    </footer>
+    <InteractiveFigures {lang} />
+  </body>
+</html>
