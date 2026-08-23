@@ -162,8 +162,10 @@ def render_standard(attrs: dict[str, str]) -> str:
     marked = [] if labels(attrs) else parse_pairs(attrs.get("data-marks", ""), 8)
     arrows = []
     for start, end in parse_pairs(attrs.get("data-arrows", ""), 8) + marked:
-        from_square = chess.square(*start)
-        to_square = chess.square(*end)
+        # ``square_parts`` keeps human-readable ranks (1..8), while
+        # python-chess expects a zero-based rank index.
+        from_square = chess.square(start[0], start[1] - 1)
+        to_square = chess.square(end[0], end[1] - 1)
         arrows.append(chess.svg.Arrow(from_square, to_square, color="#195f47d9"))
     svg = chess.svg.board(
         board,
