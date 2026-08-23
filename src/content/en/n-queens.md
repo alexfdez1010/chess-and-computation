@@ -46,8 +46,16 @@ In the case of a chessboard of size $n\times n$ with $n = 5$, numerous solutions
 To be more specific, from the first solution (left board), a total of 8 different solutions can be generated, while from the second solution (right board), only 2 distinct solutions can be obtained, applying the rotation and reflection operations mentioned above.
 
 <figure id="fig-soluciones-del-tablero-5x5">
-  <div class="chessboard" data-fen="start" data-size="5" data-pieces="qa5, qb3, qc1, qd4, qe2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={qa5, qb3, qc1, qd4, qe2}, largeboard&quot;" role="img" aria-label="Solutions for the 5x5 board" data-rendered="source" data-board-asset="board-5x5-12344181e6c75897.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-12344181e6c75897.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
-  <div class="chessboard" data-fen="start" data-size="5" data-pieces="qa4, qb1, qc3, qd5, qe2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={qa4, qb1, qc3, qd5, qe2}, largeboard&quot;" role="img" aria-label="Solutions for the 5x5 board" data-rendered="source" data-board-asset="board-5x5-707d875a043b87cd.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-707d875a043b87cd.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="subfigure-grid" role="group" aria-label="Solutions for the 5x5 board">
+    <figure class="subfigure" id="fig-8-soluciones" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <div class="chessboard" data-fen="start" data-size="5" data-pieces="qa5, qb3, qc1, qd4, qe2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={qa5, qb3, qc1, qd4, qe2}, largeboard&quot;" role="img" aria-label="8 solutions" data-rendered="source" data-board-asset="board-5x5-12344181e6c75897.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-12344181e6c75897.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>8 solutions</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-2-soluciones" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <div class="chessboard" data-fen="start" data-size="5" data-pieces="qa4, qb1, qc3, qd5, qe2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={qa4, qb1, qc3, qd5, qe2}, largeboard&quot;" role="img" aria-label="2 solutions" data-rendered="source" data-board-asset="board-5x5-707d875a043b87cd.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-707d875a043b87cd.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>2 solutions</figcaption>
+    </figure>
+  </div>
   <figcaption>Solutions for the 5x5 board</figcaption>
 </figure>
 

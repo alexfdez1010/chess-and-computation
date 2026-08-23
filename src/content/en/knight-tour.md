@@ -34,10 +34,24 @@ The elegance of this solution can be appreciated in Figure [reference](#fig-cuad
 Beyond this intriguing construction, this problem can also be used as a means to generate computational art. Below is a series of artistic compositions inspired by the movements of a knight:
 
 <figure id="fig-composiciones-artisticas-con-el-tour-del-caballo">
-  <img src="/assets/book/knight-tour/board_knight20x20art-83.png" alt="Artistic compositions based on the Knight&#39;s Tour" loading="lazy" />
-  <img src="/assets/book/knight-tour/board_knight50x50art-82.png" alt="Artistic compositions based on the Knight&#39;s Tour" loading="lazy" />
-  <img src="/assets/book/knight-tour/board_knight64x64art-84.png" alt="Artistic compositions based on the Knight&#39;s Tour" loading="lazy" />
-  <img src="/assets/book/knight-tour/board_knight130x130art-85.png" alt="Artistic compositions based on the Knight&#39;s Tour" loading="lazy" />
+  <div class="subfigure-grid" role="group" aria-label="Artistic compositions based on the Knight&#39;s Tour">
+    <figure class="subfigure" id="fig-tablero-20x20" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <img src="/assets/book/knight-tour/board_knight20x20art-83.png" alt="Composition based on a 20x20 board" loading="lazy" />
+      <figcaption>Composition based on a 20x20 board</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-tablero-50x50" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <img src="/assets/book/knight-tour/board_knight50x50art-82.png" alt="Composition based on a 50x50 board" loading="lazy" />
+      <figcaption>Composition based on a 50x50 board</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-tablero-64x64" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <img src="/assets/book/knight-tour/board_knight64x64art-84.png" alt="Composition based on a 64x64 board" loading="lazy" />
+      <figcaption>Composition based on a 64x64 board</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-tablero-130x130" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <img src="/assets/book/knight-tour/board_knight130x130art-85.png" alt="Composition based on a 130x130 board" loading="lazy" />
+      <figcaption>Composition based on a 130x130 board</figcaption>
+    </figure>
+  </div>
   <figcaption>Artistic compositions based on the Knight's Tour</figcaption>
 </figure>
 
@@ -71,8 +85,16 @@ But how do graphs and the different Hamiltonian problems relate to the knight's 
 Although it may not be evident at first glance, the chessboard can be considered as an implicit graph, where the vertices and edges are present in a disguised manner. In this case, the vertices would represent the squares of the board, while the edges would model the relationship between two squares. Therefore, there would be an edge between two specific squares if it is possible to move from one to the other through a single knight's move. Below is an example of a $3 \times 3$ board and its corresponding transformation into a graph that illustrates the previous concept.
 
 <figure id="fig-tablero-de-ajedrez-a-grafo">
-  <img src="/assets/book/knight-tour/graph_3x3.png" alt="Chessboard to graph" loading="lazy" />
-  <div class="chessboard" data-fen="start" data-size="3" data-marks="a1-a1, b1-b1, c1-c1, a2-a2, b2-b2, c2-c2, a3-a3, b3-b3, c3-c3" data-labels="{&quot;a1&quot;:&quot;1&quot;,&quot;b1&quot;:&quot;2&quot;,&quot;c1&quot;:&quot;3&quot;,&quot;a2&quot;:&quot;4&quot;,&quot;b2&quot;:&quot;5&quot;,&quot;c2&quot;:&quot;6&quot;,&quot;a3&quot;:&quot;7&quot;,&quot;b3&quot;:&quot;8&quot;,&quot;c3&quot;:&quot;9&quot;}" data-chess-options="&quot;maxfield=c3, largeboard, showmover=false, pgfstyle=text, text= \\bfseries 1, markregions={a1-a1}, text= \\bfseries 2, markregions={b1-b1}, text= \\bfseries 3, markregions={c1-c1}, text= \\bfseries 4, markregions={a2-a2}, text= \\bfseries 5, markregions={b2-b2}, text= \\bfseries 6, markregions={c2-c2}, text= \\bfseries 7, markregions={a3-a3}, text= \\bfseries 8, markregions={b3-b3}, text= \\bfseries 9, markregions={c3-c3}&quot;" role="img" aria-label="Chessboard to graph" data-rendered="source" data-board-asset="board-3x3-02af1a615070534e.svg"><img class="source-chessboard" src="/assets/boards/board-3x3-02af1a615070534e.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="subfigure-grid" role="group" aria-label="Chessboard to graph">
+    <figure class="subfigure" id="fig-tablero-de-ajedrez" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="chessboard" data-fen="start" data-size="3" data-marks="a1-a1, b1-b1, c1-c1, a2-a2, b2-b2, c2-c2, a3-a3, b3-b3, c3-c3" data-labels="{&quot;a1&quot;:&quot;1&quot;,&quot;b1&quot;:&quot;2&quot;,&quot;c1&quot;:&quot;3&quot;,&quot;a2&quot;:&quot;4&quot;,&quot;b2&quot;:&quot;5&quot;,&quot;c2&quot;:&quot;6&quot;,&quot;a3&quot;:&quot;7&quot;,&quot;b3&quot;:&quot;8&quot;,&quot;c3&quot;:&quot;9&quot;}" data-chess-options="&quot;maxfield=c3, largeboard, showmover=false, pgfstyle=text, text= \\bfseries 1, markregions={a1-a1}, text= \\bfseries 2, markregions={b1-b1}, text= \\bfseries 3, markregions={c1-c1}, text= \\bfseries 4, markregions={a2-a2}, text= \\bfseries 5, markregions={b2-b2}, text= \\bfseries 6, markregions={c2-c2}, text= \\bfseries 7, markregions={a3-a3}, text= \\bfseries 8, markregions={b3-b3}, text= \\bfseries 9, markregions={c3-c3}&quot;" role="img" aria-label="Chessboard" data-rendered="source" data-board-asset="board-3x3-02af1a615070534e.svg"><img class="source-chessboard" src="/assets/boards/board-3x3-02af1a615070534e.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>Chessboard</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-grafo" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <img src="/assets/book/knight-tour/graph_3x3.png" alt="Graph" loading="lazy" />
+      <figcaption>Graph</figcaption>
+    </figure>
+  </div>
   <figcaption>Chessboard to graph</figcaption>
 </figure>
 
@@ -193,21 +215,66 @@ Once we have clarified this term, we can proceed to solve the problem on a 5x5 b
 In the first circuit around the board, the knight has passed through the four corners, since these always have degree 1, as they lead to only two squares and one of them will already have been visited (the one through which it reached the corner). In the second move, when moving from square b3 to a5, the rule is clearly applied by preferring to go to corner a5 with degree 1 instead of going to squares c5 or d4 with degree 3. The visited matrix would be as follows, next to the board indicating the knight's moves:
 
 <figure id="fig-primera-fase-del-tour-del-caballo-usando-vuelta-atras">
-  <div class="chessboard" data-fen="start" data-size="5" data-pieces="nc2" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nc2}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2}, arrow=to&quot;" role="img" aria-label="First phase of the knight&#39;s tour using backtracking" data-rendered="source" data-board-asset="board-5x5-f8d48ac43784681e.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-f8d48ac43784681e.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="subfigure-grid" role="group" aria-label="First phase of the knight&#39;s tour using backtracking">
+    <figure class="subfigure" id="fig-tablero-de-ajedrez-con-los-movimientos-de-la-primera-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="chessboard" data-fen="start" data-size="5" data-pieces="nc2" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nc2}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2}, arrow=to&quot;" role="img" aria-label="Chessboard with the moves of the first phase" data-rendered="source" data-board-asset="board-5x5-f8d48ac43784681e.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-f8d48ac43784681e.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>Chessboard with the moves of the first phase</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-matriz-con-los-movimientos-de-la-primera-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    3 &amp; 0 &amp; 0 &amp; 0 &amp; 5 \\
+                    0 &amp; 0 &amp; 4 &amp; 0 &amp; 0 \\
+                    0 &amp; 2 &amp; 0 &amp; 6 &amp; 0 \\
+                    0 &amp; 0 &amp; 8 &amp; 0 &amp; 0 \\
+                    1 &amp; 0 &amp; 0 &amp; 0 &amp; 7 \\
+                \end{bmatrix}" aria-label="bmatrix 3 &amp; 0 &amp; 0 &amp; 0 &amp; 5 \\ 0 &amp; 0 &amp; 4 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 &amp; 6 &amp; 0 \\ 0 &amp; 0 &amp; 8 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; 0 &amp; 0 &amp; 7 \\ bmatrix"></div>
+      <figcaption>Matrix with the moves of the first phase</figcaption>
+    </figure>
+  </div>
   <figcaption>First phase of the knight's tour using backtracking</figcaption>
 </figure>
 
 Following the same heuristic, the knight performs a second circuit through the board, obtaining the following board and state:
 
 <figure id="fig-segunda-fase-del-tour-del-caballo-usando-vuelta-atras">
-  <div class="chessboard" data-fen="start" data-size="5" data-pieces="nb1" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-d3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nb1}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-d3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1}, arrow=to&quot;" role="img" aria-label="Second phase of the knight&#39;s tour using backtracking" data-rendered="source" data-board-asset="board-5x5-1f137e80750d7288.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-1f137e80750d7288.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="subfigure-grid" role="group" aria-label="Second phase of the knight&#39;s tour using backtracking">
+    <figure class="subfigure" id="fig-tablero-de-ajedrez-con-los-movimientos-de-la-segunda-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="chessboard" data-fen="start" data-size="5" data-pieces="nb1" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-d3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nb1}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-d3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1}, arrow=to&quot;" role="img" aria-label="Chessboard with the moves of the second phase" data-rendered="source" data-board-asset="board-5x5-1f137e80750d7288.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-1f137e80750d7288.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>Chessboard with the moves of the second phase</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-matriz-con-los-movimientos-de-la-segunda-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    3 &amp; 0 &amp; 13 &amp; 0 &amp; 5 \\
+                    12 &amp; 0 &amp; 4 &amp; 0 &amp; 14 \\
+                    0 &amp; 2 &amp; 0 &amp; 6 &amp; 9 \\
+                    0 &amp; 11 &amp; 8 &amp; 15 &amp; 0 \\
+                    1 &amp; 16 &amp; 0 &amp; 10 &amp; 7 \\
+                \end{bmatrix}" aria-label="bmatrix 3 &amp; 0 &amp; 13 &amp; 0 &amp; 5 \\ 12 &amp; 0 &amp; 4 &amp; 0 &amp; 14 \\ 0 &amp; 2 &amp; 0 &amp; 6 &amp; 9 \\ 0 &amp; 11 &amp; 8 &amp; 15 &amp; 0 \\ 1 &amp; 16 &amp; 0 &amp; 10 &amp; 7 \\ bmatrix"></div>
+      <figcaption>Matrix with the moves of the second phase</figcaption>
+    </figure>
+  </div>
   <figcaption>Second phase of the knight's tour using backtracking</figcaption>
 </figure>
 
 In the last circuit, the board would be completed and the following final board and state would be obtained:
 
 <figure id="fig-tercera-fase-del-tour-del-caballo-usando-vuelta-atras">
-  <div class="chessboard" data-fen="start" data-size="5" data-pieces="nc3" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-e3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1, b1-a3, a3-b5, b5-d4, d4-e2, e2-c1, c1-a2, a2-b4, b4-d5, d5-c3" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nc3}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-e3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1, b1-a3, a3-b5, b5-d4, d4-e2, e2-c1, c1-a2, a2-b4, b4-d5, d5-c3}, arrow=to, normalboard&quot;" role="img" aria-label="Third phase of the knight&#39;s tour using backtracking" data-rendered="source" data-board-asset="board-5x5-0c192892af64ded2.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-0c192892af64ded2.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="subfigure-grid" role="group" aria-label="Third phase of the knight&#39;s tour using backtracking">
+    <figure class="subfigure" id="fig-tablero-de-ajedrez-con-los-movimientos-de-la-tercera-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="chessboard" data-fen="start" data-size="5" data-pieces="nc3" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-e3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1, b1-a3, a3-b5, b5-d4, d4-e2, e2-c1, c1-a2, a2-b4, b4-d5, d5-c3" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nc3}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-e3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1, b1-a3, a3-b5, b5-d4, d4-e2, e2-c1, c1-a2, a2-b4, b4-d5, d5-c3}, arrow=to, normalboard&quot;" role="img" aria-label="Chessboard with the moves of the third phase" data-rendered="source" data-board-asset="board-5x5-0c192892af64ded2.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-0c192892af64ded2.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>Chessboard with the moves of the third phase</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-matriz-con-los-movimientos-de-la-tercera-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    3 &amp; 18 &amp; 13 &amp; 24 &amp; 5 \\
+                    12 &amp; 23 &amp; 4 &amp; 19 &amp; 14 \\
+                    17 &amp; 2 &amp; 25 &amp; 6 &amp; 9 \\
+                    22 &amp; 11 &amp; 8 &amp; 15 &amp; 20 \\
+                    1 &amp; 16 &amp; 21 &amp; 10 &amp; 7 \\
+                \end{bmatrix}" aria-label="bmatrix 3 &amp; 18 &amp; 13 &amp; 24 &amp; 5 \\ 12 &amp; 23 &amp; 4 &amp; 19 &amp; 14 \\ 17 &amp; 2 &amp; 25 &amp; 6 &amp; 9 \\ 22 &amp; 11 &amp; 8 &amp; 15 &amp; 20 \\ 1 &amp; 16 &amp; 21 &amp; 10 &amp; 7 \\ bmatrix"></div>
+      <figcaption>Matrix with the moves of the third phase</figcaption>
+    </figure>
+  </div>
   <figcaption>Third phase of the knight's tour using backtracking</figcaption>
 </figure>
 

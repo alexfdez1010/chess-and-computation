@@ -168,6 +168,57 @@ div.outline-heading { color: var(--ink); }
 .book-prose img, .book-prose svg { max-width: 100%; height: auto; display: block; margin: 2.2em auto; border-radius: var(--radius); }
 .book-prose figure { margin: 2.5em 0; }
 .book-prose figcaption { margin-top: -1.2em; color: var(--ink-soft); font: 11px/1.5 var(--sans); text-align: center; }
+/* Grouped figures mirror LaTeX subfigures while keeping each panel readable. */
+.book-prose figure > .subfigure-grid {
+  --subfigure-gap: clamp(12px, 2.4vw, 24px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: start;
+  gap: var(--subfigure-gap);
+  margin: 1.8em 0 .9em;
+  counter-reset: subfigure;
+}
+.book-prose .subfigure {
+  flex: 0 1 calc(var(--subfigure-width, 50%) - var(--subfigure-gap) / 2);
+  min-width: 0;
+  margin: 0;
+  counter-increment: subfigure;
+}
+.book-prose .subfigure > :is(img, svg, picture, video, canvas, .chessboard, .localized-diagram, .diagram-stage, .figure-equation, .figure-table) {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0;
+}
+.book-prose .subfigure > picture img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+}
+.book-prose .subfigure .figure-table { overflow-x: auto; }
+.book-prose .subfigure .figure-table table { margin: 0; }
+.book-prose .subfigure > figcaption {
+  margin: .65em 0 0;
+  color: var(--ink-soft);
+  font: 10px/1.4 var(--sans);
+  text-align: center;
+}
+.book-prose .subfigure > figcaption::before {
+  content: "(" counter(subfigure, lower-alpha) ") ";
+  color: var(--ink);
+  font-weight: 700;
+}
+.book-prose figure > .subfigure-grid + figcaption {
+  margin: .85em 0 0;
+  padding-top: .75em;
+  border-top: 1px solid var(--line);
+}
 .book-prose code { padding: .12em .3em; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-raised); font: .82em var(--mono); }
 .book-prose pre { overflow-x: auto; margin: 2em 0; padding: 20px; border-radius: var(--radius); color: #edf3ee; background: var(--code); font-size: 13px; line-height: 1.65; }
 .book-prose pre code { padding: 0; border: 0; color: inherit; background: none; }
@@ -328,6 +379,10 @@ div.outline-heading { color: var(--ink); }
   .chapter-deck { font-size: 16px; }
   .book-prose { font-size: 17px; line-height: 1.75; }
   .book-prose h2 { font-size: 29px; }
+  .book-prose figure > .subfigure-grid {
+    --subfigure-gap: 14px;
+  }
+  .book-prose .subfigure { flex-basis: 100%; }
   .book-prose table { display: block; overflow-x: auto; }
   .chapter-pagination { grid-template-columns: 1fr; }
   .chapter-pagination > span:empty { display: none; }
@@ -343,9 +398,9 @@ div.outline-heading { color: var(--ink); }
   .diagram-node { min-width: 66px; padding: 9px 8px; }
   .diagram-node.wide { min-width: 92px; }
   .mermaid-flowchart { min-height: 180px; padding: 18px 10px; }
-  .mermaid-flowchart svg { min-width: 610px; }
+  .mermaid-flowchart svg { width: 100%; min-width: 0; max-width: 100% !important; }
   .mermaid-flowchart[data-node-count="1"] svg { min-width: 190px; max-width: 240px !important; }
-  .mermaid-flowchart[data-node-count="2"] svg { min-width: 390px; max-width: 480px !important; }
+  .mermaid-flowchart[data-node-count="2"] svg { width: 100%; min-width: 0; max-width: 480px !important; }
   .residual-diagram .skip-line { display: none; }
   .cover-diagram { grid-template-columns: 1fr; }
 }

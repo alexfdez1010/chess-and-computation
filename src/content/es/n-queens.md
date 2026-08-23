@@ -46,8 +46,16 @@ En el caso de un tablero de ajedrez de tamaño $n\times n$ con $n = 5$, se puede
 Para ser más específicos, a partir de la primera solución (tablero de la izquierda), se pueden generar un total de 8 soluciones diferentes, mientras que a partir de la segunda solución (tablero de la derecha), se pueden obtener únicamente 2 soluciones distintas, aplicando las operaciones de rotación y reflexión mencionadas anteriormente.
 
 <figure id="fig-soluciones-del-tablero-5x5">
-  <div class="chessboard" data-fen="start" data-size="5" data-pieces="qa5, qb3, qc1, qd4, qe2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={qa5, qb3, qc1, qd4, qe2}, largeboard&quot;" role="img" aria-label="Soluciones del tablero 5x5" data-rendered="source" data-board-asset="board-5x5-12344181e6c75897.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-12344181e6c75897.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
-  <div class="chessboard" data-fen="start" data-size="5" data-pieces="qa4, qb1, qc3, qd5, qe2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={qa4, qb1, qc3, qd5, qe2}, largeboard&quot;" role="img" aria-label="Soluciones del tablero 5x5" data-rendered="source" data-board-asset="board-5x5-707d875a043b87cd.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-707d875a043b87cd.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="subfigure-grid" role="group" aria-label="Soluciones del tablero 5x5">
+    <figure class="subfigure" id="fig-8-soluciones" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <div class="chessboard" data-fen="start" data-size="5" data-pieces="qa5, qb3, qc1, qd4, qe2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={qa5, qb3, qc1, qd4, qe2}, largeboard&quot;" role="img" aria-label="8 soluciones" data-rendered="source" data-board-asset="board-5x5-12344181e6c75897.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-12344181e6c75897.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>8 soluciones</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-2-soluciones" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <div class="chessboard" data-fen="start" data-size="5" data-pieces="qa4, qb1, qc3, qd5, qe2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={qa4, qb1, qc3, qd5, qe2}, largeboard&quot;" role="img" aria-label="2 soluciones" data-rendered="source" data-board-asset="board-5x5-707d875a043b87cd.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-707d875a043b87cd.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>2 soluciones</figcaption>
+    </figure>
+  </div>
   <figcaption>Soluciones del tablero 5x5</figcaption>
 </figure>
 

@@ -419,57 +419,131 @@ function parseTabularHtml(body, lang) {
   return `<table>\n${cells.join("\n")}\n  </table>`;
 }
 
+function environmentBlocks(source, name) {
+  const begin = `\\begin{${name}}`;
+  const end = `\\end{${name}}`;
+  const blocks = [];
+  let cursor = 0;
+  while (cursor < source.length) {
+    const start = source.indexOf(begin, cursor);
+    if (start < 0) break;
+    let depth = 1;
+    let scan = start + begin.length;
+    while (depth > 0) {
+      const nextBegin = source.indexOf(begin, scan);
+      const nextEnd = source.indexOf(end, scan);
+      if (nextEnd < 0) return blocks;
+      if (nextBegin >= 0 && nextBegin < nextEnd) {
+        depth += 1;
+        scan = nextBegin + begin.length;
+        continue;
+      }
+      depth -= 1;
+      if (depth === 0) {
+        const endOffset = nextEnd + end.length;
+        blocks.push({
+          start,
+          end: endOffset,
+          body: source.slice(start + begin.length, nextEnd),
+          raw: source.slice(start, endOffset),
+        });
+        cursor = endOffset;
+      } else {
+        scan = nextEnd + end.length;
+      }
+    }
+  }
+  return blocks;
+}
+
+function subfigureWidth(raw) {
+  const source = String(raw || "").trim();
+  if (/^\\(?:textwidth|linewidth|columnwidth)$/.test(source)) {
+    return { source, css: "100%" };
+  }
+  const match = source.match(/^([0-9]+(?:\.[0-9]+)?)\\(?:textwidth|linewidth|columnwidth)$/);
+  if (!match) return { source, css: "" };
+  const ratio = Math.min(1, Math.max(0.05, Number(match[1])));
+  return { source, css: `${ratio * 100}%` };
+}
+
 function parseFigure(body, lang) {
-  const captions = commandArguments(body, "caption");
-  const labels = [...body.matchAll(/\\label\s*\{([^{}]+)\}/gs)];
+  const subfigures = environmentBlocks(body, "subfigure");
+  const outerBody = subfigures.reduce((value, block) => value.replace(block.raw, ""), body);
+  const captions = commandArguments(outerBody, "caption");
+  const labels = [...outerBody.matchAll(/\\label\s*\{([^{}]+)\}/gs)];
   const captionSource = captions.at(-1);
   const labelMatch = labels.at(-1);
   const caption = inlineHtml(captionSource || (lang === "es" ? "Ilustración" : "Illustration"), lang);
   const captionText = accessiblePlainText(caption);
   const id = slugify(labelMatch?.[1] || captionText);
-  const images = [...body.matchAll(/\\includegraphics(?:\[[^\]]*\])?\s*\{([^{}]+)\}/g)];
-  const boardMatches = [...body.matchAll(/\\chessboard\s*\[([\s\S]*?)\]/g)];
-  const rendered = images.map((match) => {
-    let path = match[1].replace(/^\.\//, "");
-    // Upstream English LaTeX still points at the Spanish SAN-labelled variant.
-    if (lang === "en" && /min-max\/example1-es\.png$/.test(path)) {
-      path = path.replace(/example1-es\.png$/, "example1-en.png");
+  const renderContent = (content, visualCaptionText) => {
+    const visualCaption = inlineHtml(visualCaptionText, lang);
+    const images = [...content.matchAll(/\\includegraphics(?:\[[^\]]*\])?\s*\{([^{}]+)\}/g)];
+    const boardMatches = [...content.matchAll(/\\chessboard\s*\[([\s\S]*?)\]/g)];
+    const rendered = images.map((match) => {
+      let path = match[1].replace(/^\.\//, "");
+      // Upstream English LaTeX still points at the Spanish SAN-labelled variant.
+      if (lang === "en" && /min-max\/example1-es\.png$/.test(path)) {
+        path = path.replace(/example1-es\.png$/, "example1-en.png");
+      }
+      // The second upstream MCTS figure accidentally repeats the initial image.
+      // Its caption identifies the post-simulation state and therefore final_MCTS.
+      if (/alphazero\/initial_MCTS\.png$/.test(path) && /after|despu[eé]s|final/i.test(visualCaptionText)) {
+        path = path.replace(/initial_MCTS\.png$/, "final_MCTS.png");
+      }
+      if (sourceAssetPath(path) === "definition/example_definition.png") {
+        return `  ${definitionChessFlow(lang, visualCaption)}`;
+      }
+      const diagramKey = localizedDiagramKey(lang, path, visualCaption);
+      if (diagramKey) return `  ${localizedDiagram(diagramKey, visualCaption)}`;
+      const relative = sourceAssetPath(path);
+      if (unavailableAssetsByLang.get(lang)?.has(relative)) {
+        throw new Error(`Missing localized replacement for ${lang}: ${relative}`);
+      }
+      return `  <img src=\"${escapeAttribute(publicAssetPath(path))}\" alt=\"${escapeAttribute(accessiblePlainText(visualCaption))}\" loading=\"lazy\" />`;
+    });
+    for (const match of boardMatches) {
+      rendered.push(`  ${boardHtml(match[1], accessiblePlainText(visualCaption))}`);
     }
-    // The second upstream MCTS figure accidentally repeats the initial image.
-    // Its caption identifies the post-simulation state and therefore final_MCTS.
-    if (/alphazero\/initial_MCTS\.png$/.test(path) && /after|despu[eé]s|final/i.test(captionText)) {
-      path = path.replace(/initial_MCTS\.png$/, "final_MCTS.png");
+    if (!rendered.length) {
+      const equations = [...content.matchAll(/\\begin\{(?:align\*?|equation\*?)\}([\s\S]*?)\\end\{(?:align\*?|equation\*?)\}/g)];
+      for (const equation of equations) {
+        const rawMath = equation[1].trim();
+        // An align environment can legally start each row with `&`. Once the
+        // outer LaTeX environment is removed for the web renderer, those
+        // alignment points are invalid unless we restore an aligned wrapper.
+        const math = rawMath.startsWith("&")
+          ? `\\begin{aligned}\n${rawMath}\n\\end{aligned}`
+          : rawMath;
+        rendered.push(`  <div class=\"figure-equation\" data-math=\"${escapeAttribute(math)}\" aria-label=\"${escapeAttribute(plainText(math))}\"></div>`);
+      }
+      const tabular = content.match(/\\begin\{tabular\}(?:\[[^\]]*\])?\s*\{[^{}]*\}([\s\S]*?)\\end\{tabular\}/);
+      if (tabular) rendered.push(`  <div class=\"figure-table\">\n${parseTabularHtml(tabular[1], lang)}\n  </div>`);
+      const tikz = content.match(/\\begin\{tikzpicture\}(?:\[[^\]]*\])?([\s\S]*?)\\end\{tikzpicture\}/);
+      if (tikz) rendered.push(`  ${parseDiagram(tikz[1], accessiblePlainText(visualCaption))}`);
     }
-    if (sourceAssetPath(path) === "definition/example_definition.png") {
-      return `  ${definitionChessFlow(lang, caption)}`;
-    }
-    const diagramKey = localizedDiagramKey(lang, path, caption);
-    if (diagramKey) return `  ${localizedDiagram(diagramKey, caption)}`;
-    const relative = sourceAssetPath(path);
-    if (unavailableAssetsByLang.get(lang)?.has(relative)) {
-      throw new Error(`Missing localized replacement for ${lang}: ${relative}`);
-    }
-    return `  <img src=\"${escapeAttribute(publicAssetPath(path))}\" alt=\"${escapeAttribute(captionText)}\" loading=\"lazy\" />`;
-  });
-  for (const match of boardMatches) {
-    rendered.push(`  ${boardHtml(match[1], captionText)}`);
-  }
-  if (!rendered.length) {
-    const equations = [...body.matchAll(/\\begin\{(?:align\*?|equation\*?)\}([\s\S]*?)\\end\{(?:align\*?|equation\*?)\}/g)];
-    for (const equation of equations) {
-      const rawMath = equation[1].trim();
-      // An align environment can legally start each row with `&`. Once the
-      // outer LaTeX environment is removed for the web renderer, those
-      // alignment points are invalid unless we restore an aligned wrapper.
-      const math = rawMath.startsWith("&")
-        ? `\\begin{aligned}\n${rawMath}\n\\end{aligned}`
-        : rawMath;
-      rendered.push(`  <div class=\"figure-equation\" data-math=\"${escapeAttribute(math)}\" aria-label=\"${escapeAttribute(plainText(math))}\"></div>`);
-    }
-    const tabular = body.match(/\\begin\{tabular\}(?:\[[^\]]*\])?\s*\{[^{}]*\}([\s\S]*?)\\end\{tabular\}/);
-    if (tabular) rendered.push(`  <div class=\"figure-table\">\n${parseTabularHtml(tabular[1], lang)}\n  </div>`);
-    const tikz = body.match(/\\begin\{tikzpicture\}(?:\[[^\]]*\])?([\s\S]*?)\\end\{tikzpicture\}/);
-    if (tikz) rendered.push(`  ${parseDiagram(tikz[1], captionText)}`);
+    return rendered;
+  };
+  const rendered = renderContent(outerBody, captionText);
+  if (subfigures.length) {
+    const subfigureMarkup = subfigures.map((subfigure) => {
+      const subCaptionSource = commandArguments(subfigure.body, "caption").at(-1);
+      const subCaption = inlineHtml(subCaptionSource || (lang === "es" ? "Ilustración" : "Illustration"), lang);
+      const subCaptionText = accessiblePlainText(subCaption);
+      const subLabelMatch = [...subfigure.body.matchAll(/\\label\s*\{([^{}]+)\}/gs)].at(-1);
+      const subId = slugify(subLabelMatch?.[1] || subCaptionText);
+      const width = subfigureWidth(subfigure.body.match(/^\s*(?:\[[^\]]*\]\s*)?\{([^{}]+)\}/s)?.[1]);
+      const attributes = [
+        `class=\"subfigure\"`,
+        `id=\"${escapeAttribute(subId)}\"`,
+        width.source && `data-width=\"${escapeAttribute(width.source)}\"`,
+        width.css && `style=\"--subfigure-width:${width.css}\"`,
+      ].filter(Boolean).join(" ");
+      const subRendered = renderContent(subfigure.body, subCaptionText);
+      return `<figure ${attributes}>\n${subRendered.join("\n")}\n  <figcaption>${subCaption}</figcaption>\n</figure>`;
+    });
+    rendered.push(`  <div class=\"subfigure-grid\" role=\"group\" aria-label=\"${escapeAttribute(captionText)}\">\n${subfigureMarkup.map((figure) => `    ${figure.replace(/\n/g, "\n    ")}`).join("\n")}\n  </div>`);
   }
   return `<figure id=\"${id}\">\n${rendered.join("\n")}\n  <figcaption>${caption}</figcaption>\n</figure>`;
 }

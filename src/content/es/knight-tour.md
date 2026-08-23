@@ -34,10 +34,24 @@ La elegancia de esta solución se puede apreciar en la Figura [referencia](#fig-
 Más allá de esta intrigante construcción, este problema también puede ser utilizado como un medio para generar arte computacional. A continuación, se presenta una serie de composiciones artísticas inspiradas en los movimientos de un caballo:
 
 <figure id="fig-composiciones-artisticas-con-el-tour-del-caballo">
-  <img src="/assets/book/knight-tour/board_knight20x20art-83.png" alt="Composiciones artísticas basadas en el Tour del Caballo" loading="lazy" />
-  <img src="/assets/book/knight-tour/board_knight50x50art-82.png" alt="Composiciones artísticas basadas en el Tour del Caballo" loading="lazy" />
-  <img src="/assets/book/knight-tour/board_knight64x64art-84.png" alt="Composiciones artísticas basadas en el Tour del Caballo" loading="lazy" />
-  <img src="/assets/book/knight-tour/board_knight130x130art-85.png" alt="Composiciones artísticas basadas en el Tour del Caballo" loading="lazy" />
+  <div class="subfigure-grid" role="group" aria-label="Composiciones artísticas basadas en el Tour del Caballo">
+    <figure class="subfigure" id="fig-tablero-20x20" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <img src="/assets/book/knight-tour/board_knight20x20art-83.png" alt="Composición basada en un tablero de 20x20" loading="lazy" />
+      <figcaption>Composición basada en un tablero de 20x20</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-tablero-50x50" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <img src="/assets/book/knight-tour/board_knight50x50art-82.png" alt="Composición basada en un tablero de 50x50" loading="lazy" />
+      <figcaption>Composición basada en un tablero de 50x50</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-tablero-64x64" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <img src="/assets/book/knight-tour/board_knight64x64art-84.png" alt="Composición basada en un tablero de 64x64" loading="lazy" />
+      <figcaption>Composición basada en un tablero de 64x64</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-tablero-130x130" data-width="0.49\textwidth" style="--subfigure-width:49%">
+      <img src="/assets/book/knight-tour/board_knight130x130art-85.png" alt="Composición basada en un tablero de 130x130" loading="lazy" />
+      <figcaption>Composición basada en un tablero de 130x130</figcaption>
+    </figure>
+  </div>
   <figcaption>Composiciones artísticas basadas en el Tour del Caballo</figcaption>
 </figure>
 
@@ -71,8 +85,16 @@ Pero ¿cómo se relacionan los grafos y los diferentes problemas hamiltonianos c
 Aunque no sea evidente a primera vista, el tablero de ajedrez puede considerarse como un grafo implícito, donde los vértices y las aristas están presentes de manera disimulada. En este caso, los vértices representarían las casillas del tablero, mientras que las aristas modelarían la relación entre dos casillas. Por lo tanto, habría una arista entre dos casillas específicas si es posible moverse de una a otra mediante un único movimiento del caballo. A continuación, se muestra un ejemplo de un tablero de $3 \times 3$ y su correspondiente transformación en un grafo que ilustra el anterior concepto.
 
 <figure id="fig-tablero-de-ajedrez-a-grafo">
-  <img src="/assets/book/knight-tour/graph_3x3.png" alt="Tablero de ajedrez a grafo" loading="lazy" />
-  <div class="chessboard" data-fen="start" data-size="3" data-marks="a1-a1, b1-b1, c1-c1, a2-a2, b2-b2, c2-c2, a3-a3, b3-b3, c3-c3" data-labels="{&quot;a1&quot;:&quot;1&quot;,&quot;b1&quot;:&quot;2&quot;,&quot;c1&quot;:&quot;3&quot;,&quot;a2&quot;:&quot;4&quot;,&quot;b2&quot;:&quot;5&quot;,&quot;c2&quot;:&quot;6&quot;,&quot;a3&quot;:&quot;7&quot;,&quot;b3&quot;:&quot;8&quot;,&quot;c3&quot;:&quot;9&quot;}" data-chess-options="&quot;maxfield=c3, largeboard, showmover=false, pgfstyle=text, text= \\bfseries 1, markregions={a1-a1}, text= \\bfseries 2, markregions={b1-b1}, text= \\bfseries 3, markregions={c1-c1}, text= \\bfseries 4, markregions={a2-a2}, text= \\bfseries 5, markregions={b2-b2}, text= \\bfseries 6, markregions={c2-c2}, text= \\bfseries 7, markregions={a3-a3}, text= \\bfseries 8, markregions={b3-b3}, text= \\bfseries 9, markregions={c3-c3}&quot;" role="img" aria-label="Tablero de ajedrez a grafo" data-rendered="source" data-board-asset="board-3x3-02af1a615070534e.svg"><img class="source-chessboard" src="/assets/boards/board-3x3-02af1a615070534e.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="subfigure-grid" role="group" aria-label="Tablero de ajedrez a grafo">
+    <figure class="subfigure" id="fig-tablero-de-ajedrez" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="chessboard" data-fen="start" data-size="3" data-marks="a1-a1, b1-b1, c1-c1, a2-a2, b2-b2, c2-c2, a3-a3, b3-b3, c3-c3" data-labels="{&quot;a1&quot;:&quot;1&quot;,&quot;b1&quot;:&quot;2&quot;,&quot;c1&quot;:&quot;3&quot;,&quot;a2&quot;:&quot;4&quot;,&quot;b2&quot;:&quot;5&quot;,&quot;c2&quot;:&quot;6&quot;,&quot;a3&quot;:&quot;7&quot;,&quot;b3&quot;:&quot;8&quot;,&quot;c3&quot;:&quot;9&quot;}" data-chess-options="&quot;maxfield=c3, largeboard, showmover=false, pgfstyle=text, text= \\bfseries 1, markregions={a1-a1}, text= \\bfseries 2, markregions={b1-b1}, text= \\bfseries 3, markregions={c1-c1}, text= \\bfseries 4, markregions={a2-a2}, text= \\bfseries 5, markregions={b2-b2}, text= \\bfseries 6, markregions={c2-c2}, text= \\bfseries 7, markregions={a3-a3}, text= \\bfseries 8, markregions={b3-b3}, text= \\bfseries 9, markregions={c3-c3}&quot;" role="img" aria-label="Tablero de ajedrez" data-rendered="source" data-board-asset="board-3x3-02af1a615070534e.svg"><img class="source-chessboard" src="/assets/boards/board-3x3-02af1a615070534e.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>Tablero de ajedrez</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-grafo" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <img src="/assets/book/knight-tour/graph_3x3.png" alt="Grafo" loading="lazy" />
+      <figcaption>Grafo</figcaption>
+    </figure>
+  </div>
   <figcaption>Tablero de ajedrez a grafo</figcaption>
 </figure>
 
@@ -193,21 +215,66 @@ Una vez que hemos aclarado este término, podemos proceder a resolver el problem
 En la primera vuelta alrededor del tablero, el caballo ha pasado por las cuatro esquinas, ya que estas siempre tienen grado 1, al llevar solo a dos casillas y una de ellas ya estará visitada (por la que ha llegado a la esquina). En el segundo movimiento, al moverse desde la casilla b3 a la a5, se aplica claramente la regla al preferir ir a la esquina a5 con grado 1 en lugar de ir a las casillas c5 o d4 con grado 3. La matriz de visitados quedaría de la siguiente manera, junto al tablero que indica los movimientos del caballo:
 
 <figure id="fig-primera-fase-del-tour-del-caballo-usando-vuelta-atras">
-  <div class="chessboard" data-fen="start" data-size="5" data-pieces="nc2" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nc2}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2}, arrow=to&quot;" role="img" aria-label="Primera fase del tour del caballo usando vuelta atrás" data-rendered="source" data-board-asset="board-5x5-f8d48ac43784681e.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-f8d48ac43784681e.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="subfigure-grid" role="group" aria-label="Primera fase del tour del caballo usando vuelta atrás">
+    <figure class="subfigure" id="fig-tablero-de-ajedrez-con-los-movimientos-de-la-primera-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="chessboard" data-fen="start" data-size="5" data-pieces="nc2" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nc2}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2}, arrow=to&quot;" role="img" aria-label="Tablero de ajedrez con los movimientos de la primera fase" data-rendered="source" data-board-asset="board-5x5-f8d48ac43784681e.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-f8d48ac43784681e.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>Tablero de ajedrez con los movimientos de la primera fase</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-matriz-con-los-movimientos-de-la-primera-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    3 &amp; 0 &amp; 0 &amp; 0 &amp; 5 \\
+                    0 &amp; 0 &amp; 4 &amp; 0 &amp; 0 \\
+                    0 &amp; 2 &amp; 0 &amp; 6 &amp; 0 \\
+                    0 &amp; 0 &amp; 8 &amp; 0 &amp; 0 \\
+                    1 &amp; 0 &amp; 0 &amp; 0 &amp; 7 \\
+                \end{bmatrix}" aria-label="bmatrix 3 &amp; 0 &amp; 0 &amp; 0 &amp; 5 \\ 0 &amp; 0 &amp; 4 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 &amp; 6 &amp; 0 \\ 0 &amp; 0 &amp; 8 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; 0 &amp; 0 &amp; 7 \\ bmatrix"></div>
+      <figcaption>Matriz con los movimientos de la primera fase</figcaption>
+    </figure>
+  </div>
   <figcaption>Primera fase del tour del caballo usando vuelta atrás</figcaption>
 </figure>
 
 Siguiendo la misma heurística, el caballo realiza una segunda vuelta por el tablero, obteniendo el siguiente tablero y estado:
 
 <figure id="fig-segunda-fase-del-tour-del-caballo-usando-vuelta-atras">
-  <div class="chessboard" data-fen="start" data-size="5" data-pieces="nb1" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-d3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nb1}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-d3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1}, arrow=to&quot;" role="img" aria-label="Segunda fase del tour del caballo usando vuelta atrás" data-rendered="source" data-board-asset="board-5x5-1f137e80750d7288.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-1f137e80750d7288.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="subfigure-grid" role="group" aria-label="Segunda fase del tour del caballo usando vuelta atrás">
+    <figure class="subfigure" id="fig-tablero-de-ajedrez-con-los-movimientos-de-la-segunda-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="chessboard" data-fen="start" data-size="5" data-pieces="nb1" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-d3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nb1}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-d3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1}, arrow=to&quot;" role="img" aria-label="Tablero de ajedrez con los movimientos de la segunda fase" data-rendered="source" data-board-asset="board-5x5-1f137e80750d7288.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-1f137e80750d7288.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>Tablero de ajedrez con los movimientos de la segunda fase</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-matriz-con-los-movimientos-de-la-segunda-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    3 &amp; 0 &amp; 13 &amp; 0 &amp; 5 \\
+                    12 &amp; 0 &amp; 4 &amp; 0 &amp; 14 \\
+                    0 &amp; 2 &amp; 0 &amp; 6 &amp; 9 \\
+                    0 &amp; 11 &amp; 8 &amp; 15 &amp; 0 \\
+                    1 &amp; 16 &amp; 0 &amp; 10 &amp; 7 \\
+                \end{bmatrix}" aria-label="bmatrix 3 &amp; 0 &amp; 13 &amp; 0 &amp; 5 \\ 12 &amp; 0 &amp; 4 &amp; 0 &amp; 14 \\ 0 &amp; 2 &amp; 0 &amp; 6 &amp; 9 \\ 0 &amp; 11 &amp; 8 &amp; 15 &amp; 0 \\ 1 &amp; 16 &amp; 0 &amp; 10 &amp; 7 \\ bmatrix"></div>
+      <figcaption>Matriz con los movimientos de la segunda fase</figcaption>
+    </figure>
+  </div>
   <figcaption>Segunda fase del tour del caballo usando vuelta atrás</figcaption>
 </figure>
 
 En la última vuelta, el tablero se completaría y se obtendría el siguiente tablero y estado final:
 
 <figure id="fig-tercera-fase-del-tour-del-caballo-usando-vuelta-atras">
-  <div class="chessboard" data-fen="start" data-size="5" data-pieces="nc3" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-e3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1, b1-a3, a3-b5, b5-d4, d4-e2, e2-c1, c1-a2, a2-b4, b4-d5, d5-c3" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nc3}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-e3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1, b1-a3, a3-b5, b5-d4, d4-e2, e2-c1, c1-a2, a2-b4, b4-d5, d5-c3}, arrow=to, normalboard&quot;" role="img" aria-label="Tercera fase del tour del caballo usando vuelta atrás" data-rendered="source" data-board-asset="board-5x5-0c192892af64ded2.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-0c192892af64ded2.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <div class="subfigure-grid" role="group" aria-label="Tercera fase del tour del caballo usando vuelta atrás">
+    <figure class="subfigure" id="fig-tablero-de-ajedrez-con-los-movimientos-de-la-tercera-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="chessboard" data-fen="start" data-size="5" data-pieces="nc3" data-arrows="a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-e3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1, b1-a3, a3-b5, b5-d4, d4-e2, e2-c1, c1-a2, a2-b4, b4-d5, d5-c3" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={nc3}, pgfstyle=straightmove, markmoves={a1-b3, b3-a5, a5-c4, c4-e5, e5-d3, d3-e1, e1-c2, c2-e3, e3-d1, d1-b2, b2-a4, a4-c5, c5-e4, e4-d2, d2-b1, b1-a3, a3-b5, b5-d4, d4-e2, e2-c1, c1-a2, a2-b4, b4-d5, d5-c3}, arrow=to, normalboard&quot;" role="img" aria-label="Tablero de ajedrez con los movimientos de la tercera fase" data-rendered="source" data-board-asset="board-5x5-0c192892af64ded2.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-0c192892af64ded2.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+      <figcaption>Tablero de ajedrez con los movimientos de la tercera fase</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-matriz-con-los-movimientos-de-la-tercera-fase" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    3 &amp; 18 &amp; 13 &amp; 24 &amp; 5 \\
+                    12 &amp; 23 &amp; 4 &amp; 19 &amp; 14 \\
+                    17 &amp; 2 &amp; 25 &amp; 6 &amp; 9 \\
+                    22 &amp; 11 &amp; 8 &amp; 15 &amp; 20 \\
+                    1 &amp; 16 &amp; 21 &amp; 10 &amp; 7 \\
+                \end{bmatrix}" aria-label="bmatrix 3 &amp; 18 &amp; 13 &amp; 24 &amp; 5 \\ 12 &amp; 23 &amp; 4 &amp; 19 &amp; 14 \\ 17 &amp; 2 &amp; 25 &amp; 6 &amp; 9 \\ 22 &amp; 11 &amp; 8 &amp; 15 &amp; 20 \\ 1 &amp; 16 &amp; 21 &amp; 10 &amp; 7 \\ bmatrix"></div>
+      <figcaption>Matriz con los movimientos de la tercera fase</figcaption>
+    </figure>
+  </div>
   <figcaption>Tercera fase del tour del caballo usando vuelta atrás</figcaption>
 </figure>
 

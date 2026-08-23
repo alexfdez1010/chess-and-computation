@@ -41,6 +41,9 @@ const localizedMermaidKeys = [
 const localizedMermaidCounts = new Map(localizedMermaidKeys.map((key) => [key, 0]));
 let mdpChessFlowCount = 0;
 let mdpChessboardCount = 0;
+let subfigureGridCount = 0;
+let subfigureCount = 0;
+let captionedSubfigureCount = 0;
 
 for (const [file, html] of htmlByFile) {
   const relative = file.slice(dist.length);
@@ -52,6 +55,9 @@ for (const [file, html] of htmlByFile) {
   }
   mdpChessFlowCount += (html.match(/class="[^"]*mdp-chess-flow[^"]*"/g) || []).length;
   mdpChessboardCount += (html.match(/class="chessboard"[^>]*data-board-asset=/g) || []).length;
+  subfigureGridCount += (html.match(/class="subfigure-grid"/g) || []).length;
+  subfigureCount += (html.match(/<figure class="subfigure"(?:\s|>)/g) || []).length;
+  captionedSubfigureCount += (html.match(/<figure class="subfigure"[^>]*>[\s\S]*?<figcaption>[\s\S]*?<\/figcaption>\s*<\/figure>/g) || []).length;
   if (/data-diagram="flowchart"[^>]*data-(?:nodes|edges)=/.test(html)) failures.push(`${relative}: contains a legacy non-Mermaid flowchart`);
 
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
@@ -100,6 +106,9 @@ for (const [key, count] of localizedMermaidCounts) {
 }
 if (mdpChessFlowCount !== 2 || mdpChessboardCount < 4) {
   failures.push(`expected two localized MDP chess flows with generated boards, found ${mdpChessFlowCount} flows and ${mdpChessboardCount} boards`);
+}
+if (subfigureGridCount !== 26 || subfigureCount !== 88 || captionedSubfigureCount !== subfigureCount) {
+  failures.push(`expected 26 grouped figures with 88 captioned panels, found ${subfigureGridCount} groups and ${captionedSubfigureCount}/${subfigureCount} captioned panels`);
 }
 
 const legacyLocalizedBitmaps = [

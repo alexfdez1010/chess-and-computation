@@ -44,15 +44,23 @@ $$
 Here, $x_i$ represents the inputs that are multiplied by their respective weights $w_i$, and then the value $b$ is added to them. Therefore, the parameters to be learned are $b$ and all the weights $w_i$. Normally, a vector notation is used to express the perceptron, where both inputs and parameters are represented as vectors. The notation used for the perceptron in Figure [reference](#fig-perceptron-con-3-entradas) would be as follows:
 
 <figure id="fig-representacion-vectorial-del-perceptron-de-3-entradas">
-  <div class="figure-equation" data-math="\begin{bmatrix}
-                1 &amp; x_0 &amp; x_1 &amp; x_2 \\
-            \end{bmatrix}" aria-label="bmatrix 1 &amp; x0 &amp; x1 &amp; x2 \\ bmatrix"></div>
-  <div class="figure-equation" data-math="\begin{bmatrix}
-                b \\
-                w_0 \\
-                w_1 \\
-                w_2 \\
-            \end{bmatrix}" aria-label="bmatrix b \\ w0 \\ w1 \\ w2 \\ bmatrix"></div>
+  <div class="subfigure-grid" role="group" aria-label="Vector representation of the 3-input perceptron">
+    <figure class="subfigure" id="fig-representacion-de-la-entrada-del-perceptron-de-3-entradas" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    1 &amp; x_0 &amp; x_1 &amp; x_2 \\
+                \end{bmatrix}" aria-label="bmatrix 1 &amp; x0 &amp; x1 &amp; x2 \\ bmatrix"></div>
+      <figcaption>Representation of the input of the 3-input perceptron</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-representacion-de-los-parametros-del-perceptron-de-3-entradas" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    b \\
+                    w_0 \\
+                    w_1 \\
+                    w_2 \\
+                \end{bmatrix}" aria-label="bmatrix b \\ w0 \\ w1 \\ w2 \\ bmatrix"></div>
+      <figcaption>Representation of the parameters of the 3-input perceptron</figcaption>
+    </figure>
+  </div>
   <figcaption>Vector representation of the 3-input perceptron</figcaption>
 </figure>
 
@@ -61,15 +69,23 @@ This representation has a peculiarity. The first input, with a value of $1$, is 
 Furthermore, this representation is very useful when there are several perceptrons in the same layer, since by representing the parameters of each one in a vector, all vectors can be combined into a matrix. For example, consider a layer with three perceptrons and three inputs. We could represent them as follows using matrices:
 
 <figure id="fig-representacion-matricial-de-la-capa-de-perceptrones-de-3-entradas">
-  <div class="figure-equation" data-math="\begin{bmatrix}
-                1 &amp; x_0 &amp; x_1 &amp; x_2 \\
-            \end{bmatrix}" aria-label="bmatrix 1 &amp; x0 &amp; x1 &amp; x2 \\ bmatrix"></div>
-  <div class="figure-equation" data-math="\begin{bmatrix}
-                b_0 &amp; b_1 &amp; b_2 \\
-                w_{00} &amp; w_{01} &amp; w_{02} \\
-                w_{10} &amp; w_{11} &amp; w_{12} \\
-                w_{20} &amp; w_{21} &amp; w_{22} \\
-            \end{bmatrix}" aria-label="bmatrix b0 &amp; b1 &amp; b2 \\ w00 &amp; w01 &amp; w02 \\ w10 &amp; w11 &amp; w12 \\ w20 &amp; w21 &amp; w22 \\ bmatrix"></div>
+  <div class="subfigure-grid" role="group" aria-label="Matrix representation of the 3-input perceptron layer">
+    <figure class="subfigure" id="fig-representacion-de-la-entrada-de-la-capa-de-perceptrones-de-3-entradas" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    1 &amp; x_0 &amp; x_1 &amp; x_2 \\
+                \end{bmatrix}" aria-label="bmatrix 1 &amp; x0 &amp; x1 &amp; x2 \\ bmatrix"></div>
+      <figcaption>Representation of the input of the 3-input perceptron layer</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-representacion-de-los-parametros-de-la-capa-de-perceptrones-de-3-entradas" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    b_0 &amp; b_1 &amp; b_2 \\
+                    w_{00} &amp; w_{01} &amp; w_{02} \\
+                    w_{10} &amp; w_{11} &amp; w_{12} \\
+                    w_{20} &amp; w_{21} &amp; w_{22} \\
+                \end{bmatrix}" aria-label="bmatrix b0 &amp; b1 &amp; b2 \\ w00 &amp; w01 &amp; w02 \\ w10 &amp; w11 &amp; w12 \\ w20 &amp; w21 &amp; w22 \\ bmatrix"></div>
+      <figcaption>Representation of the parameters of the 3-input perceptron layer</figcaption>
+    </figure>
+  </div>
   <figcaption>Matrix representation of the 3-input perceptron layer</figcaption>
 </figure>
 
@@ -114,25 +130,47 @@ Fortunately, there is a highly effective procedure known as convolution, which a
 Convolution is similar to the operation of a perceptron, but operates on square regions (on exceptional occasions rectangular sections can be used) of an image. To better understand how a convolution layer works, it is useful to use an example. In Figure [reference](#fig-ejemplo-de-convolucion), the initial configuration of the input and convolution parameters is shown.
 
 <figure id="fig-ejemplo-de-convolucion">
-  <div class="figure-equation" data-math="\begin{bmatrix}
-                0,24 &amp; 0,12 &amp; 0,09 \\
-                0,13 &amp; 0,13 &amp; 0,21 \\
-                0,05 &amp; 0,12 &amp; 0,24 \\
-            \end{bmatrix}" aria-label="bmatrix 0,24 &amp; 0,12 &amp; 0,09 \\ 0,13 &amp; 0,13 &amp; 0,21 \\ 0,05 &amp; 0,12 &amp; 0,24 \\ bmatrix"></div>
-  <div class="figure-equation" data-math="\begin{bmatrix}
-                0,56 &amp; -0,54 \\
-                0,07 &amp; 0,32 \\
-            \end{bmatrix}" aria-label="bmatrix 0,56 &amp; -0,54 \\ 0,07 &amp; 0,32 \\ bmatrix"></div>
+  <div class="subfigure-grid" role="group" aria-label="Convolution example">
+    <figure class="subfigure" id="fig-entrada-de-la-convolucion-de-ejemplo" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    0,24 &amp; 0,12 &amp; 0,09 \\
+                    0,13 &amp; 0,13 &amp; 0,21 \\
+                    0,05 &amp; 0,12 &amp; 0,24 \\
+                \end{bmatrix}" aria-label="bmatrix 0,24 &amp; 0,12 &amp; 0,09 \\ 0,13 &amp; 0,13 &amp; 0,21 \\ 0,05 &amp; 0,12 &amp; 0,24 \\ bmatrix"></div>
+      <figcaption>Input of the example convolution</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-parametros-de-la-convolucion-de-ejemplo" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <div class="figure-equation" data-math="\begin{bmatrix}
+                    0,56 &amp; -0,54 \\
+                    0,07 &amp; 0,32 \\
+                \end{bmatrix}" aria-label="bmatrix 0,56 &amp; -0,54 \\ 0,07 &amp; 0,32 \\ bmatrix"></div>
+      <figcaption>Parameters of the example convolution</figcaption>
+    </figure>
+  </div>
   <figcaption>Convolution example</figcaption>
 </figure>
 
 In this example, we will use a *stride* (displacement) with a value of 1 and a value of $b=1$ (which is added similarly to perceptrons). With the current configuration, a total of 4 convolutions will be performed. In Figure [reference](#fig-convoluciones-realizadas-en-el-ejemplo), it is shown how the convolutions would be carried out.
 
 <figure id="fig-convoluciones-realizadas-en-el-ejemplo">
-  <img src="/assets/book/networks/convolution1.png" alt="Convolutions performed in the example" loading="lazy" />
-  <img src="/assets/book/networks/convolution2.png" alt="Convolutions performed in the example" loading="lazy" />
-  <img src="/assets/book/networks/convolution3.png" alt="Convolutions performed in the example" loading="lazy" />
-  <img src="/assets/book/networks/convolution4.png" alt="Convolutions performed in the example" loading="lazy" />
+  <div class="subfigure-grid" role="group" aria-label="Convolutions performed in the example">
+    <figure class="subfigure" id="fig-primera-convolucion" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <img src="/assets/book/networks/convolution1.png" alt="First convolution" loading="lazy" />
+      <figcaption>First convolution</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-segunda-convolucion" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <img src="/assets/book/networks/convolution2.png" alt="Second convolution" loading="lazy" />
+      <figcaption>Second convolution</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-tercera-convolucion" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <img src="/assets/book/networks/convolution3.png" alt="Third convolution" loading="lazy" />
+      <figcaption>Third convolution</figcaption>
+    </figure>
+    <figure class="subfigure" id="fig-cuarta-convolucion" data-width="0.45\textwidth" style="--subfigure-width:45%">
+      <img src="/assets/book/networks/convolution4.png" alt="Fourth convolution" loading="lazy" />
+      <figcaption>Fourth convolution</figcaption>
+    </figure>
+  </div>
   <figcaption>Convolutions performed in the example</figcaption>
 </figure>
 
