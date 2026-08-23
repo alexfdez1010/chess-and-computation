@@ -225,6 +225,7 @@ div.outline-heading { color: var(--ink); }
 .book-prose table { width: 100%; margin: 2em 0; border-collapse: collapse; font-family: var(--sans); font-size: 13px; }
 .book-prose th, .book-prose td { padding: 10px 12px; border: 1px solid var(--line); text-align: left; }
 .book-prose th { background: var(--accent-soft); }
+.book-prose .katex svg { max-width: none; height: inherit; margin: 0; border-radius: 0; }
 .book-prose .katex-display { overflow-x: auto; overflow-y: hidden; padding: .5em 0; font-size: 1.05em; }
 .book-prose .katex-display[data-matrix-fit="scaled"] { overflow-x: hidden; }
 .figure-equation { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .5em 0; }
