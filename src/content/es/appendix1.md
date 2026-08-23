@@ -26,9 +26,10 @@ Para iniciar nuestro recorrido, es crucial conocer los elementos básicos o bloq
 El bloque "Comienzo/Fin" marca el inicio y el cierre del flujo del programa. Un diagrama de flujo puede tener múltiples bloques de "Fin", pero solo un bloque de "Comienzo". Ambos son representados por un rectángulo de bordes redondeados. La Figura [referencia](#fig-representacion-de-comienzo-y-fin-en-un-diagrama-de-flujo) ilustra estos bloques.
 
 <figure id="fig-representacion-de-comienzo-y-fin-en-un-diagrama-de-flujo">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart LR
-  start([&quot;Comienzo&quot;]):::terminal
-  end([&quot;Fin&quot;]):::terminal
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="2" data-mermaid="flowchart LR
+  node_start([&quot;Comienzo&quot;]):::terminal
+  node_end([&quot;Fin&quot;]):::terminal
+  node_start ~~~ node_end
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px
@@ -39,9 +40,10 @@ El bloque "Comienzo/Fin" marca el inicio y el cierre del flujo del programa. Un 
 Los bloques de "Entrada/Salida" definen las entradas y salidas del algoritmo. A diferencia de los bloques de "Comienzo" y "Fin", estos pueden llevar un nombre descriptivo en lugar de un término genérico, proporcionando una visión más detallada de la funcionalidad del algoritmo. Estos bloques se representan a través de romboides, como se muestra en la Figura [referencia](#fig-representacion-de-entradas-y-salidas-en-un-diagrama-de-flujo).
 
 <figure id="fig-representacion-de-entradas-y-salidas-en-un-diagrama-de-flujo">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart LR
-  in[/&quot;Entrada&quot;/]:::io
-  out[/&quot;Salida&quot;/]:::io
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="2" data-mermaid="flowchart LR
+  node_in[/&quot;Entrada&quot;/]:::io
+  node_out[/&quot;Salida&quot;/]:::io
+  node_in ~~~ node_out
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px
@@ -52,8 +54,8 @@ Los bloques de "Entrada/Salida" definen las entradas y salidas del algoritmo. A 
 El bloque "Bifurcación" brinda la posibilidad de ejecutar distintas acciones dependiendo del cumplimiento de una condición determinada. Esto amplía la expresividad de los algoritmos y permite incorporar lógica condicional. Se representan con un cuadrado rotado 45 grados. La Figura [referencia](#fig-representacion-de-bifurcaciones-en-un-diagrama-de-flujo) ilustra este bloque.
 
 <figure id="fig-representacion-de-bifurcaciones-en-un-diagrama-de-flujo">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart LR
-  branch{&quot;Bifurcación&quot;}:::decision
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="1" data-mermaid="flowchart LR
+  node_branch{&quot;Bifurcación&quot;}:::decision
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px
@@ -64,8 +66,8 @@ El bloque "Bifurcación" brinda la posibilidad de ejecutar distintas acciones de
 Por último, los bloques de "Proceso" indican las acciones que se realizan en relación al algoritmo. Aunque su representación suele ser abstracta en la mayoría de los casos, estos bloques suelen incluir una descripción más detallada de la acción que se está llevando a cabo. Se representan mediante un rectángulo. La Figura [referencia](#fig-representacion-de-procesos-en-un-diagrama-de-flujo) muestra cómo se representa un bloque de proceso en un diagrama de flujo.
 
 <figure id="fig-representacion-de-procesos-en-un-diagrama-de-flujo">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart LR
-  branch[&quot;Proceso&quot;]:::process
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="1" data-mermaid="flowchart LR
+  node_branch[&quot;Proceso&quot;]:::process
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px

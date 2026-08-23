@@ -311,24 +311,27 @@ function parseDiagram(body, label) {
     return [{ from: ids[0], to: ids.at(-1), label: edgeLabel ? plainText(edgeLabel) : "" }];
   });
   const cleanMermaidLabel = (value) => value.replace(/"/g, "'").replace(/\s+/g, " ").trim();
+  const mermaidId = (id) => `node_${id.replace(/[^a-zA-Z0-9_]/g, "_")}`;
   const shape = (node) => {
     const text = cleanMermaidLabel(node.label);
-    if (node.type === "startstop") return `${node.id}([\"${text}\"]):::terminal`;
-    if (node.type === "io") return `${node.id}[/\"${text}\"/]:::io`;
-    if (node.type === "decision") return `${node.id}{\"${text}\"}:::decision`;
-    return `${node.id}[\"${text}\"]:::process`;
+    const id = mermaidId(node.id);
+    if (node.type === "startstop") return `${id}([\"${text}\"]):::terminal`;
+    if (node.type === "io") return `${id}[/\"${text}\"/]:::io`;
+    if (node.type === "decision") return `${id}{\"${text}\"}:::decision`;
+    return `${id}[\"${text}\"]:::process`;
   };
   const mermaid = [
     `flowchart ${edges.length ? "TD" : "LR"}`,
     ...nodes.map((node) => `  ${shape(node)}`),
-    ...edges.map((edge) => `  ${edge.from} -->${edge.label ? `|${cleanMermaidLabel(edge.label)}|` : ""} ${edge.to}`),
+    ...edges.map((edge) => `  ${mermaidId(edge.from)} -->${edge.label ? `|${cleanMermaidLabel(edge.label)}|` : ""} ${mermaidId(edge.to)}`),
+    ...(edges.length || nodes.length < 2 ? [] : [`  ${nodes.map((node) => mermaidId(node.id)).join(" ~~~ ")}`]),
     "  classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px",
     "  classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px",
     "  classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px",
     "  classDef process fill:#f7f7f1,color:#171a17,stroke:#6f786f,stroke-width:1.5px",
   ].join("\n");
   const summary = nodes.map((node) => escapeHtml(node.label)).filter(Boolean).join(" → ");
-  return `<div class=\"localized-diagram flow-diagram mermaid-flowchart\" data-diagram=\"flowchart\" data-mermaid=\"${escapeAttribute(mermaid)}\" role=\"img\" aria-label=\"${escapeAttribute(label)}\">${summary}</div>`;
+  return `<div class=\"localized-diagram flow-diagram mermaid-flowchart\" data-diagram=\"flowchart\" data-node-count=\"${nodes.length}\" data-mermaid=\"${escapeAttribute(mermaid)}\" role=\"img\" aria-label=\"${escapeAttribute(label)}\">${summary}</div>`;
 }
 
 function tabularRows(body, lang) {

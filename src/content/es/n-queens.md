@@ -200,24 +200,24 @@ Una desventaja de este método es su complejidad computacional, ya que requiere 
 Una vez analizado un ejemplo y comprendido su funcionamiento, podemos definir el algoritmo mediante un diagrama de flujo que ilustre el proceso general de resolución. La Figura [referencia](#fig-diagrama-de-flujo-de-backtracking-aplicado-a-n-damas) muestra dicho diagrama de flujo. En un programa real, sería necesario detallar más específicamente las acciones realizadas en cada paso del diagrama de flujo, pero dado que este libro tiene un carácter divulgativo, no es necesario entrar en esos detalles técnicos.
 
 <figure id="fig-diagrama-de-flujo-de-backtracking-aplicado-a-n-damas">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart TD
-  start([&quot;Comienzo&quot;]):::terminal
-  in[/&quot;Entrada&quot;/]:::io
-  branch1{&quot;¿Colocadas?&quot;}:::decision
-  branch2{&quot;¿Se puede colocar dama en la fila?&quot;}:::decision
-  out[/&quot;Solución&quot;/]:::io
-  end([&quot;Fin&quot;]):::terminal
-  process1[&quot;Retroceder última bifurcación&quot;]:::process
-  process2[&quot;Añadir dama&quot;]:::process
-  start --&gt; in
-  in --&gt; branch1
-  branch1 --&gt;|no| branch2
-  branch1 --&gt;|sí| out
-  out --&gt; end
-  branch2 --&gt;|no| process1
-  branch2 --&gt;|sí| process2
-  process1 --&gt; in
-  process2 --&gt; in
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="8" data-mermaid="flowchart TD
+  node_start([&quot;Comienzo&quot;]):::terminal
+  node_in[/&quot;Entrada&quot;/]:::io
+  node_branch1{&quot;¿Colocadas?&quot;}:::decision
+  node_branch2{&quot;¿Se puede colocar dama en la fila?&quot;}:::decision
+  node_out[/&quot;Solución&quot;/]:::io
+  node_end([&quot;Fin&quot;]):::terminal
+  node_process1[&quot;Retroceder última bifurcación&quot;]:::process
+  node_process2[&quot;Añadir dama&quot;]:::process
+  node_start --&gt; node_in
+  node_in --&gt; node_branch1
+  node_branch1 --&gt;|no| node_branch2
+  node_branch1 --&gt;|sí| node_out
+  node_out --&gt; node_end
+  node_branch2 --&gt;|no| node_process1
+  node_branch2 --&gt;|sí| node_process2
+  node_process1 --&gt; node_in
+  node_process2 --&gt; node_in
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px

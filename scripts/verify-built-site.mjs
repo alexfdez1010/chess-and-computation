@@ -27,10 +27,15 @@ function routeCandidates(pathname) {
 const files = await walk(dist);
 const htmlFiles = files.filter((file) => file.endsWith('.html'));
 const htmlByFile = new Map(await Promise.all(htmlFiles.map(async (file) => [file, await readFile(file, 'utf8')])));
+let flowchartCount = 0;
+let mermaidFlowchartCount = 0;
 
 for (const [file, html] of htmlByFile) {
   const relative = file.slice(dist.length);
   if (/\bundefined\b/.test(html)) failures.push(`${relative}: contains "undefined"`);
+  flowchartCount += (html.match(/data-diagram="flowchart"/g) || []).length;
+  mermaidFlowchartCount += (html.match(/class="[^"]*mermaid-flowchart[^"]*"[^>]*data-diagram="flowchart"[^>]*data-mermaid="[^"]+"/g) || []).length;
+  if (/data-diagram="flowchart"[^>]*data-(?:nodes|edges)=/.test(html)) failures.push(`${relative}: contains a legacy non-Mermaid flowchart`);
 
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
@@ -63,6 +68,10 @@ for (const [file, html] of htmlByFile) {
     const attrs = image[1];
     if (!/\balt="[^"]*"/.test(attrs)) failures.push(`${relative}: image without alt attribute`);
   }
+}
+
+if (flowchartCount !== 12 || mermaidFlowchartCount !== flowchartCount) {
+  failures.push(`expected 12 Mermaid flowcharts, found ${mermaidFlowchartCount}/${flowchartCount}`);
 }
 
 for (const required of ['robots.txt', 'sitemap-index.xml', 'favicon.svg', 'assets/social/og-es.png', 'assets/social/og-en.png']) {

@@ -17,3 +17,5 @@ making the repository's `images` directory available at that public path.
 Most LaTeX is converted to portable Markdown/HTML. Chessboard diagrams expose
 their source positions as `.chessboard[data-fen]`. Unsupported drawing/layout
 constructs are emitted as visible `.latex-source` blocks instead of being lost.
+TikZ flowcharts are converted to localized Mermaid definitions, including node
+shapes, decision labels, and return edges.

@@ -236,6 +236,8 @@ div.outline-heading { color: var(--ink); }
 .diagram-steps b { padding: 6px 9px; color: var(--accent); border: 1px solid var(--accent); border-radius: var(--radius); font: 600 9px var(--mono); }
 .mermaid-flowchart { min-height: 210px; display: grid; place-items: center; overflow-x: auto; padding: clamp(22px, 4vw, 44px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-raised); }
 .mermaid-flowchart svg { display: block; width: 100%; min-width: 520px; max-width: 760px !important; height: auto; margin: auto; }
+.mermaid-flowchart[data-node-count="1"] svg { min-width: 220px; max-width: 300px !important; }
+.mermaid-flowchart[data-node-count="2"] svg { min-width: 420px; max-width: 560px !important; }
 .mermaid-flowchart .edgeLabel { color: #33483d; font-family: var(--mono) !important; font-size: 11px !important; font-weight: 700; text-transform: uppercase; }
 .mermaid-flowchart .edgeLabel p { padding: 2px 5px; border-radius: 2px; background: #f3f3ed !important; }
 .mermaid-flowchart .nodeLabel { line-height: 1.25; }
@@ -324,6 +326,8 @@ div.outline-heading { color: var(--ink); }
   .diagram-node.wide { min-width: 92px; }
   .mermaid-flowchart { min-height: 180px; padding: 18px 10px; }
   .mermaid-flowchart svg { min-width: 610px; }
+  .mermaid-flowchart[data-node-count="1"] svg { min-width: 190px; max-width: 240px !important; }
+  .mermaid-flowchart[data-node-count="2"] svg { min-width: 390px; max-width: 480px !important; }
   .residual-diagram .skip-line { display: none; }
   .cover-diagram { grid-template-columns: 1fr; }
 }

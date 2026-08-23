@@ -70,6 +70,14 @@ Primary presentation uses pre-rendered SVGs generated from the structured source
 
 Used only when an original image contains language-specific text without a counterpart. Labels are selected from the active locale, and motion collapses under `prefers-reduced-motion`.
 
+### Flowcharts
+
+Algorithm flowcharts and the four notation examples are generated from the
+source TikZ with Mermaid. Terminal, input/output, decision, and process shapes
+remain semantically distinct; branch labels and return edges must match the
+book. Mermaid is loaded only on routes containing a flowchart, and every chart
+retains a localized text fallback and an accessible figure label.
+
 ### Search
 
 Keyboard-accessible dialog. Results always link to the active locale and expose a clear empty state.
@@ -92,4 +100,3 @@ Keyboard-accessible dialog. Results always link to the active locale and expose 
 ## SEO and sharing
 
 Every route must provide canonical and alternate-language links, localized Open Graph metadata, Twitter cards, and structured data. The project ships a sitemap, robots policy, real favicon, and 1200x630 share images.
-

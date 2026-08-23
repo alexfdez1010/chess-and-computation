@@ -26,9 +26,10 @@ To begin our journey, it is crucial to know the basic elements or blocks that ma
 The "Start/End" block marks the beginning and closure of the program flow. A flowchart can have multiple "End" blocks, but only one "Start" block. Both are represented by a rounded-edge rectangle. Figure [reference](#fig-representacion-de-comienzo-y-fin-en-un-diagrama-de-flujo) illustrates these blocks.
 
 <figure id="fig-representacion-de-comienzo-y-fin-en-un-diagrama-de-flujo">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart LR
-  start([&quot;Start&quot;]):::terminal
-  end([&quot;End&quot;]):::terminal
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="2" data-mermaid="flowchart LR
+  node_start([&quot;Start&quot;]):::terminal
+  node_end([&quot;End&quot;]):::terminal
+  node_start ~~~ node_end
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px
@@ -39,9 +40,10 @@ The "Start/End" block marks the beginning and closure of the program flow. A flo
 The "Input/Output" blocks define the inputs and outputs of the algorithm. Unlike the "Start" and "End" blocks, these can carry a descriptive name instead of a generic term, providing a more detailed view of the algorithm's functionality. These blocks are represented through rhomboids, as shown in Figure [reference](#fig-representacion-de-entradas-y-salidas-en-un-diagrama-de-flujo).
 
 <figure id="fig-representacion-de-entradas-y-salidas-en-un-diagrama-de-flujo">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart LR
-  in[/&quot;Input&quot;/]:::io
-  out[/&quot;Output&quot;/]:::io
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="2" data-mermaid="flowchart LR
+  node_in[/&quot;Input&quot;/]:::io
+  node_out[/&quot;Output&quot;/]:::io
+  node_in ~~~ node_out
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px
@@ -52,8 +54,8 @@ The "Input/Output" blocks define the inputs and outputs of the algorithm. Unlike
 The "Branch" block provides the possibility of executing different actions depending on the fulfillment of a specific condition. This expands the expressiveness of algorithms and allows the incorporation of conditional logic. They are represented with a square rotated 45 degrees. Figure [reference](#fig-representacion-de-bifurcaciones-en-un-diagrama-de-flujo) illustrates this block.
 
 <figure id="fig-representacion-de-bifurcaciones-en-un-diagrama-de-flujo">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart LR
-  branch{&quot;Branch&quot;}:::decision
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="1" data-mermaid="flowchart LR
+  node_branch{&quot;Branch&quot;}:::decision
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px
@@ -64,8 +66,8 @@ The "Branch" block provides the possibility of executing different actions depen
 Finally, the "Process" blocks indicate the actions that are performed in relation to the algorithm. Although their representation is usually abstract in most cases, these blocks usually include a more detailed description of the action being carried out. They are represented by a rectangle. Figure [reference](#fig-representacion-de-procesos-en-un-diagrama-de-flujo) shows how a process block is represented in a flowchart.
 
 <figure id="fig-representacion-de-procesos-en-un-diagrama-de-flujo">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart LR
-  branch[&quot;Process&quot;]:::process
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="1" data-mermaid="flowchart LR
+  node_branch[&quot;Process&quot;]:::process
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px

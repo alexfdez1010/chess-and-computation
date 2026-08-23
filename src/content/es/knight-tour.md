@@ -216,24 +216,24 @@ Como resultado interesante, se observa que la última casilla visitada es justam
 Para terminar, a continuación se presenta el diagrama de flujo que indica el funcionamiento del algoritmo usado para resolver el tour del caballo.
 
 <figure id="fig-diagrama-de-flujo-de-backtracking-aplicado-al-tour-del-caballo">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart TD
-  start([&quot;Comienzo&quot;]):::terminal
-  in[/&quot;Entrada&quot;/]:::io
-  branch1{&quot;¿Todas las casillas recorridas?&quot;}:::decision
-  branch2{&quot;¿Se puede mover el caballo a una casilla?&quot;}:::decision
-  out[/&quot;Solución&quot;/]:::io
-  end([&quot;Fin&quot;]):::terminal
-  process1[&quot;Retroceder última bifurcación&quot;]:::process
-  process2[&quot;Mover caballo&quot;]:::process
-  start --&gt; in
-  in --&gt; branch1
-  branch1 --&gt;|no| branch2
-  branch1 --&gt;|sí| out
-  out --&gt; end
-  branch2 --&gt;|no| process1
-  branch2 --&gt;|sí| process2
-  process1 --&gt; in
-  process2 --&gt; in
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="8" data-mermaid="flowchart TD
+  node_start([&quot;Comienzo&quot;]):::terminal
+  node_in[/&quot;Entrada&quot;/]:::io
+  node_branch1{&quot;¿Todas las casillas recorridas?&quot;}:::decision
+  node_branch2{&quot;¿Se puede mover el caballo a una casilla?&quot;}:::decision
+  node_out[/&quot;Solución&quot;/]:::io
+  node_end([&quot;Fin&quot;]):::terminal
+  node_process1[&quot;Retroceder última bifurcación&quot;]:::process
+  node_process2[&quot;Mover caballo&quot;]:::process
+  node_start --&gt; node_in
+  node_in --&gt; node_branch1
+  node_branch1 --&gt;|no| node_branch2
+  node_branch1 --&gt;|sí| node_out
+  node_out --&gt; node_end
+  node_branch2 --&gt;|no| node_process1
+  node_branch2 --&gt;|sí| node_process2
+  node_process1 --&gt; node_in
+  node_process2 --&gt; node_in
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px

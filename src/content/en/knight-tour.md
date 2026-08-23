@@ -216,24 +216,24 @@ As an interesting result, it is observed that the last square visited is exactly
 To conclude, below is the flowchart indicating the operation of the algorithm used to solve the knight's tour.
 
 <figure id="fig-diagrama-de-flujo-de-backtracking-aplicado-al-tour-del-caballo">
-  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-mermaid="flowchart TD
-  start([&quot;Start&quot;]):::terminal
-  in[/&quot;Input&quot;/]:::io
-  branch1{&quot;All squares traversed?&quot;}:::decision
-  branch2{&quot;Can the knight move to a square?&quot;}:::decision
-  out[/&quot;Solution&quot;/]:::io
-  end([&quot;End&quot;]):::terminal
-  process1[&quot;Backtrack to last branching&quot;]:::process
-  process2[&quot;Move knight&quot;]:::process
-  start --&gt; in
-  in --&gt; branch1
-  branch1 --&gt;|no| branch2
-  branch1 --&gt;|yes| out
-  out --&gt; end
-  branch2 --&gt;|no| process1
-  branch2 --&gt;|yes| process2
-  process1 --&gt; in
-  process2 --&gt; in
+  <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="8" data-mermaid="flowchart TD
+  node_start([&quot;Start&quot;]):::terminal
+  node_in[/&quot;Input&quot;/]:::io
+  node_branch1{&quot;All squares traversed?&quot;}:::decision
+  node_branch2{&quot;Can the knight move to a square?&quot;}:::decision
+  node_out[/&quot;Solution&quot;/]:::io
+  node_end([&quot;End&quot;]):::terminal
+  node_process1[&quot;Backtrack to last branching&quot;]:::process
+  node_process2[&quot;Move knight&quot;]:::process
+  node_start --&gt; node_in
+  node_in --&gt; node_branch1
+  node_branch1 --&gt;|no| node_branch2
+  node_branch1 --&gt;|yes| node_out
+  node_out --&gt; node_end
+  node_branch2 --&gt;|no| node_process1
+  node_branch2 --&gt;|yes| node_process2
+  node_process1 --&gt; node_in
+  node_process2 --&gt; node_in
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px
