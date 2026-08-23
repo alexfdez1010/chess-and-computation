@@ -25,10 +25,12 @@ This is the reason why the use of a model can be extremely fruitful, without the
 To further illustrate this concept, let us consider the example of a 2D *Grid*. Knowing the model of this game in its original form, that is, in a deterministic environment, would add no value, since we already know which state each action leads to. However, if we slightly modify the game's definition, incorporating a 10% probability that each action could result in an unforeseen state, the action definitions would change to:
 
 $$
-&0: \textrm{Up } 90\%, \textrm{ Right } 10\% \\
-&1: \textrm{Right } 90\%, \textrm{ Down } 10\% \\
-&2: \textrm{Down } 90\%, \textrm{ Left } 10\% \\
-&3: \textrm{Left } 90\%, \textrm{ Up } 10\%
+\begin{aligned}
+0 &: \text{Up } 90\%, \text{Right } 10\% \\
+1 &: \text{Right } 90\%, \text{Down } 10\% \\
+2 &: \text{Down } 90\%, \text{Left } 10\% \\
+3 &: \text{Left } 90\%, \text{Up } 10\%
+\end{aligned}
 $$
 
 These actions are similar to those presented in the previous section, with the additional nuance previously mentioned. Furthermore, these actions model real-life situations more accurately, for example, the task of guiding a robot through a path, where the robot's moving parts can introduce imprecisions or errors.

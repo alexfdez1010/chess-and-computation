@@ -22,7 +22,7 @@ El cálculo directo de la recompensa esperada es inviable por el motivo previame
 
 Para determinar la recompensa esperada, es necesario sumar todas las recompensas obtenidas en los estados posteriores hasta la conclusión del episodio. En el caso del ajedrez, este proceso se simplifica ya que la recompensa es cero en todos los estados no terminales. Además, se puede aplicar un "descuento" a la recompensa, lo que significa que cuanto más tiempo se tarde en obtener una recompensa, menor será su valor. Así, una recompensa de 1 obtenida en el estado actual tendrá más valor en la recompensa esperada que una recompensa de 1 obtenida tres estados después.
 
-A continuación se presenta un ejemplo para solidificar estos conceptos. La Figura [referencia](#fig-juego-de-grid-de-2-dimensiones) muestra el juego en cuestión.
+A continuación se presenta un ejemplo para solidificar estos conceptos. El [juego Grid de 2 dimensiones](#fig-juego-de-grid-de-2-dimensiones) muestra el juego en cuestión.
 
 <figure id="fig-juego-de-grid-de-2-dimensiones">
   <img src="/assets/book/reward/game.png" alt="Juego de Grid de 2 dimensiones" loading="lazy" />
@@ -31,7 +31,7 @@ A continuación se presenta un ejemplo para solidificar estos conceptos. La Figu
 
 El objetivo del juego es guiar la ficha negra hasta la casilla gris oscuro. Al llegar a la casilla gris oscuro, se obtiene una recompensa de 1. La ficha puede moverse arriba, abajo, a la derecha o a la izquierda. Si estos movimientos conducen a una posición fuera del tablero, el episodio finaliza con una recompensa de -0,5. Por tanto, la ficha debe alcanzar la casilla gris oscuro a través de un camino específico. Como la ficha no conoce este camino, el agente tendrá que descubrirlo a partir de las recompensas obtenidas. Una vez que un episodio termina, la ficha negra retorna a la posición inicial.
 
-Inicialmente, se realiza un recorrido por el juego. El recorrido seguido se muestra en la Figura [referencia](#fig-primer-recorrido-en-el-grid-de-2-dimensiones).
+Inicialmente, se realiza un recorrido por el juego. El recorrido seguido se muestra en el [primer recorrido por el Grid](#fig-primer-recorrido-en-el-grid-de-2-dimensiones).
 
 <figure id="fig-primer-recorrido-en-el-grid-de-2-dimensiones">
   <img src="/assets/book/reward/path1.png" alt="Primer recorrido en el Grid de 2 dimensiones" loading="lazy" />
@@ -40,7 +40,7 @@ Inicialmente, se realiza un recorrido por el juego. El recorrido seguido se mues
 
 Con este recorrido, se logra finalizar el juego de manera exitosa. Por tanto, todos los estados recibirán una recompensa positiva. En este caso, se usará un factor de descuento $\gamma$ de 0,99, lo que significa que la recompensa esperada del estado siguiente se reducirá en un 0,99.
 
-Con este factor de descuento, se puede calcular de manera sencilla la recompensa esperada para todos los estados por los que ha pasado el agente. La Figura [referencia](#fig-recompensas-esperadas-despues-del-primer-recorrido-en-el-grid-de-2-dimensiones) muestra el resultado de estos cálculos.
+Con este factor de descuento, se puede calcular de manera sencilla la recompensa esperada para todos los estados por los que ha pasado el agente. Las [recompensas esperadas después del primer recorrido](#fig-recompensas-esperadas-despues-del-primer-recorrido-en-el-grid-de-2-dimensiones) muestran el resultado de estos cálculos.
 
 <figure id="fig-recompensas-esperadas-despues-del-primer-recorrido-en-el-grid-de-2-dimensiones">
   <img src="/assets/book/reward/values1.png" alt="Recompensas esperadas después del primer recorrido en el Grid de 2 dimensiones" loading="lazy" />
@@ -49,14 +49,14 @@ Con este factor de descuento, se puede calcular de manera sencilla la recompensa
 
 Se empieza con el estado terminal, que tiene una recompensa de 1. Se procede al penúltimo estado, multiplicando la recompensa del estado final por 0,99 y añadiendo la recompensa de este nuevo estado (en este caso 0). De esta forma, se obtiene la recompensa esperada de este estado. Este proceso se repite hasta llegar al estado inicial, que tiene una recompensa de 0,94 (todos los valores están redondeados a dos decimales).
 
-Se realiza otro recorrido por el *Grid*, pero en esta ocasión no será tan exitoso y la ficha se saldrá del camino. El camino seguido se muestra en la Figura [referencia](#fig-segundo-recorrido-en-el-grid-de-2-dimensiones).
+Se realiza otro recorrido por el *Grid*, pero en esta ocasión no será tan exitoso y la ficha se saldrá del camino. El camino seguido se muestra en el [segundo recorrido por el Grid](#fig-segundo-recorrido-en-el-grid-de-2-dimensiones).
 
 <figure id="fig-segundo-recorrido-en-el-grid-de-2-dimensiones">
   <img src="/assets/book/reward/path2.png" alt="Segundo recorrido en el Grid de 2 dimensiones" loading="lazy" />
   <figcaption>Segundo recorrido en el <em>Grid</em> de 2 dimensiones</figcaption>
 </figure>
 
-Ahora es el momento de actualizar las casillas por las que ha pasado la ficha. Su nuevo valor se calculará como la media de las recompensas esperadas del primer y segundo recorrido para las casillas que se incluyen en ambos caminos. La Figura [referencia](#fig-recompensas-esperadas-despues-del-segundo-recorrido-en-el-grid-de-2-dimensiones) muestra el resultado final de estos cálculos.
+Ahora es el momento de actualizar las casillas por las que ha pasado la ficha. Su nuevo valor se calculará como la media de las recompensas esperadas del primer y segundo recorrido para las casillas que se incluyen en ambos caminos. Las [recompensas esperadas después del segundo recorrido](#fig-recompensas-esperadas-despues-del-segundo-recorrido-en-el-grid-de-2-dimensiones) muestran el resultado final de estos cálculos.
 
 <figure id="fig-recompensas-esperadas-despues-del-segundo-recorrido-en-el-grid-de-2-dimensiones">
   <img src="/assets/book/reward/values2.png" alt="Recompensas esperadas después del segundo recorrido en el Grid de 2 dimensiones" loading="lazy" />

@@ -23,9 +23,11 @@ Throughout this text, we will assume that the policy operates on a discrete acti
 Deterministic policies can be represented by the following function:
 
 $$
-f(\alpha) = \beta \\
-\alpha \in E \\
-\beta \in A
+\begin{aligned}
+f(\alpha) &= \beta \\
+\alpha &\in E \\
+\beta &\in A
+\end{aligned}
 $$
 
 where:
@@ -33,7 +35,7 @@ where:
 - $\alpha$ represents the current state,
 - $\beta$ is the action to be taken,
 - $E$ is the set of all possible states,
-- $A$ is the set of all possible actions \\ 
+- $A$ is the set of all possible actions
   ($A=\{0,1,...,n-1\}$) and
 - $n$ is the total number of actions.
 
@@ -42,9 +44,11 @@ Since actions are enumerated from $0$ to $n-1$, any number in that range could b
 The structuring of non-deterministic policies is a bit more complex. Instead of returning a single number, these policies return a vector with $n$ elements, where $n$ is the number of actions. The elements of this vector are probabilities, so that the value at position $i$ of the vector represents the probability of choosing action $i$. Being probabilities, the sum of all elements of the vector must be $1$. The function that represents these policies is as follows:
 
 $$
-f(\alpha) = \Delta \\
-\alpha \in E \\
-\Delta = \{\delta_0, ...,& \delta_{n-1}\}
+\begin{aligned}
+f(\alpha) &= \Delta \\
+\alpha &\in E \\
+\Delta &= \{\delta_0, \ldots, \delta_{n-1}\}
+\end{aligned}
 $$
 
 where:
@@ -60,17 +64,19 @@ After receiving the output of this function, an action is chosen according to th
 In the case of the 2D game board described in the previous section, there are four possible actions (up, right, down, and left). We enumerate these actions as follows to be able to implement the policies:
 
 $$
-&0: \textrm{Up} \\
-&1: \textrm{Right} \\
-&2: \textrm{Down} \\
-&3: \textrm{Left} \\
+\begin{aligned}
+0 &: \text{Up} \\
+1 &: \text{Right} \\
+2 &: \text{Down} \\
+3 &: \text{Left}
+\end{aligned}
 $$
 
-Given the expected rewards (values) shown in Figure [reference](#fig-recompensas-esperadas-para-calcular-la-politica-en-el-grid-de-2-dimensiones), we can show how a deterministic policy and a non-deterministic policy would select actions.
+Given the expected rewards (values) shown in [Figure 1: Expected rewards for calculating the policy](#fig-recompensas-esperadas-para-calcular-la-politica-en-el-grid-de-2-dimensiones), we can show how a deterministic policy and a non-deterministic policy would select actions.
 
 <figure id="fig-recompensas-esperadas-para-calcular-la-politica-en-el-grid-de-2-dimensiones">
   <img src="/assets/book/reward/values2.png" alt="Expected rewards for calculating the policy in the 2-dimensional Grid" loading="lazy" />
-  <figcaption>Expected rewards for calculating the policy in the 2-dimensional <em>Grid</em></figcaption>
+  <figcaption>Figure 1. Expected rewards for calculating the policy in the 2-dimensional <em>Grid</em></figcaption>
 </figure>
 
 The game piece is located at the initial square (upper left corner) and can perform all four actions. Since squares without any value would have a value of $0$, the deterministic policy would return the value 2, corresponding to moving down. This move would lead to the state with the highest value. Following this procedure, the deterministic policy would continue selecting value 2 until reaching the lower left corner. From that point, it would only return value 1, corresponding to the move to the right, until reaching the final square.

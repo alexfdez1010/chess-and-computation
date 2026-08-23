@@ -35,7 +35,7 @@ $$
 
 Having established an abstract definition of what constitutes a heuristic, let us proceed to explore how it is applied in the context of chess. One of the most commonly used heuristics in chess involves calculating the difference in "pawns" between the two players. To do this, each piece (with the exception of the king) is assigned a value based on its strategic relevance in the game. Then, the total value of the pieces for each player is calculated and the total value of the Black player's pieces is subtracted from the total value of the White player's pieces. In this sense, if the result of this heuristic is positive, White is in an advantageous position; if it is 0, the position is balanced; and if it is negative, Black has superiority.
 
-Below, in Figure [reference](#fig-valor-en-peones-asociados-a-cada-pieza), the value assigned to each piece is shown. Of course, the value of a piece depends on its specific position on the board, but these estimates are usually good approximations in most situations.
+Below, the [piece values table](#fig-valor-en-peones-asociados-a-cada-pieza) shows the value assigned to each piece. Of course, the value of a piece depends on its specific position on the board, but these estimates are usually good approximations in most situations.
 
 <figure id="fig-valor-en-peones-asociados-a-cada-pieza">
   <div class="figure-table">
@@ -53,7 +53,7 @@ Below, in Figure [reference](#fig-valor-en-peones-asociados-a-cada-pieza), the v
 
 Following a scale based on pawns, these have a unit value of 1. The bishop and knight are assigned a value of 3, although some opinions hold that bishops may be slightly more valuable than knights, attributing them a value of 3.5 pawns. The rook is valued at 5 pawns, while the value of the queen depends on the presence on the board of the rooks corresponding to its own side. These valuations of the pieces are the result of empirical consensus of the chess community over the years and, in fact, it is one of the first things that beginners learn in this challenging game. It should be noted that the king is not included in this valuation due to its critical importance in the game: its capture ends the game and it is always present on the board.
 
-Next, the application of this heuristic is illustrated with a specific position, shown in Figure [reference](#fig-posicion-de-ejemplo-para-calcular-la-heuristica).
+Next, the application of this heuristic is illustrated with a specific position, shown in the [example heuristic position](#fig-posicion-de-ejemplo-para-calcular-la-heuristica).
 
 <figure id="fig-posicion-de-ejemplo-para-calcular-la-heuristica">
   <div class="chessboard" data-fen="rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7" data-size="8" data-chess-options="&quot;maxfield=h8, setfen=rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7, largeboard&quot;" role="img" aria-label="Example position to calculate the heuristic" data-rendered="source" data-board-asset="board-8x8-8a233edf3b81d5da.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-8a233edf3b81d5da.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>

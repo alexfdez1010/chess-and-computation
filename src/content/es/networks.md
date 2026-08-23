@@ -22,11 +22,11 @@ Existen capas simples, como los perceptrones, y capas más complejas, como las c
 
 ### Perceptrón
 
-El elemento fundamental de las redes neuronales es el perceptrón. Se trata de un componente muy simple que recibe varias entradas y produce una salida. Sin embargo, cuando múltiples perceptrones actúan en conjunto, logran un rendimiento sorprendente. La Figura [referencia](#fig-perceptron-con-3-entradas) muestra un perceptrón simple con tres entradas.
+El elemento fundamental de las redes neuronales es el perceptrón. Se trata de un componente muy simple que recibe varias entradas y produce una salida. Sin embargo, cuando múltiples perceptrones actúan en conjunto, logran un rendimiento sorprendente. La [Figura 1: Perceptrón con 3 entradas](#fig-perceptron-con-3-entradas) muestra un perceptrón simple con tres entradas.
 
 <figure id="fig-perceptron-con-3-entradas">
   <img src="/assets/book/networks/perceptron.png" alt="Perceptrón con 3 entradas" loading="lazy" />
-  <figcaption>Perceptrón con 3 entradas</figcaption>
+  <figcaption>Figura 1. Perceptrón con 3 entradas</figcaption>
 </figure>
 
 A partir de la imagen anterior, podemos establecer una definición matemática utilizando la siguiente función:
@@ -41,7 +41,7 @@ $$
 f(x) = b + \sum_{i=0}^{n-1}x_iw_i
 $$
 
-Aquí, $x_i$ representa las entradas que se multiplican por sus respectivos pesos $w_i$, y luego se les suma el valor $b$. Por lo tanto, los parámetros a aprender son $b$ y todos los pesos $w_i$. Normalmente, se utiliza una notación vectorial para expresar el perceptrón, donde tanto las entradas como los parámetros se representan como vectores. La notación utilizada para el perceptrón de la Figura [referencia](#fig-perceptron-con-3-entradas) sería la siguiente:
+Aquí, $x_i$ representa las entradas que se multiplican por sus respectivos pesos $w_i$, y luego se les suma el valor $b$. Por lo tanto, los parámetros a aprender son $b$ y todos los pesos $w_i$. Normalmente, se utiliza una notación vectorial para expresar el perceptrón, donde tanto las entradas como los parámetros se representan como vectores. La notación utilizada para el perceptrón de la [Figura 1: Perceptrón con 3 entradas](#fig-perceptron-con-3-entradas) sería la siguiente:
 
 <figure id="fig-representacion-vectorial-del-perceptron-de-3-entradas">
   <div class="subfigure-grid" role="group" aria-label="Representación vectorial del perceptrón de 3 entradas">
@@ -61,7 +61,7 @@ Aquí, $x_i$ representa las entradas que se multiplican por sus respectivos peso
       <figcaption>Representación de los parámetros del perceptrón de 3 entradas</figcaption>
     </figure>
   </div>
-  <figcaption>Representación vectorial del perceptrón de 3 entradas</figcaption>
+  <figcaption>Figura 2. Representación vectorial del perceptrón de 3 entradas</figcaption>
 </figure>
 
 Esta representación presenta una peculiaridad. La primera entrada, con un valor de $1$, es fija y no se considera una entrada propiamente dicha. Se representa de esta manera para poder sumar directamente el producto de los dos vectores finales al valor de $b$. La generalización de esta definición para $n$ entradas es sencilla a partir de este ejemplo. Simplemente se deben agregar las entradas y parámetros a sus respectivos vectores, sin olvidar incluir $1$ y $b$ al inicio de los vectores.
@@ -86,10 +86,10 @@ Además, esta representación resulta muy útil cuando se tienen varios perceptr
       <figcaption>Representación de los parámetros de la capa de perceptrones de 3 entradas</figcaption>
     </figure>
   </div>
-  <figcaption>Representación matricial de la capa de perceptrones de 3 entradas</figcaption>
+  <figcaption>Figura 3. Representación matricial de la capa de perceptrones de 3 entradas</figcaption>
 </figure>
 
-En la Figura [referencia](#fig-representacion-matricial-de-la-capa-de-perceptrones-de-3-entradas), el peso $w_{ij}$ se refiere al peso $i$ asociado al perceptrón $j$. Es importante destacar que la entrada se mantiene constante sin importar el número de perceptrones en la capa. Para obtener las salidas, solo es necesario realizar una multiplicación matricial, que consiste en multiplicar uno a uno cada elemento de los vectores de parámetros con el vector de entrada. La Figura [referencia](#fig-representacion-matricial-de-la-salida-de-la-capa-de-perceptrones-de-3-entradas) ilustra cómo sería la salida utilizando la misma representación.
+En la [Figura 3: Representación matricial de la capa de perceptrones](#fig-representacion-matricial-de-la-capa-de-perceptrones-de-3-entradas), el peso $w_{ij}$ se refiere al peso $i$ asociado al perceptrón $j$. Es importante destacar que la entrada se mantiene constante sin importar el número de perceptrones en la capa. Para obtener las salidas, solo es necesario realizar una multiplicación matricial, que consiste en multiplicar uno a uno cada elemento de los vectores de parámetros con el vector de entrada. La [Figura 4: Representación matricial de la salida](#fig-representacion-matricial-de-la-salida-de-la-capa-de-perceptrones-de-3-entradas) ilustra cómo sería la salida utilizando la misma representación.
 
 <figure id="fig-representacion-matricial-de-la-salida-de-la-capa-de-perceptrones-de-3-entradas">
   <div class="figure-equation" data-math="\begin{bmatrix}
@@ -107,16 +107,16 @@ En la Figura [referencia](#fig-representacion-matricial-de-la-capa-de-perceptron
             y_0 &amp; y_1 &amp; y_2
         \end{bmatrix}
         \\" aria-label="bmatrix 1 &amp; x0 &amp; x1 &amp; x2 \\ bmatrix bmatrix b0 &amp; b1 &amp; b2 \\ w00 &amp; w01 &amp; w02 \\ w10 &amp; w11 &amp; w12 \\ w20 &amp; w21 &amp; w22 \\ bmatrix = bmatrix y0 &amp; y1 &amp; y2 bmatrix \\"></div>
-  <figcaption>Representación matricial de la salida de la capa de perceptrones de 3 entradas</figcaption>
+  <figcaption>Figura 4. Representación matricial de la salida de la capa de perceptrones de 3 entradas</figcaption>
 </figure>
 
-La multiplicación de matrices se realiza en la práctica aplicando las fórmulas mostradas en la Figura [referencia](#fig-formula-directa-para-calcular-la-salida-de-capa-de-perceptrones-de-3-entradas). Estas fórmulas representan el proceso directo para calcular la salida de una capa de perceptrones de 3 entradas.
+La multiplicación de matrices se realiza en la práctica aplicando las fórmulas mostradas en la [Figura 5: Fórmulas directas de salida](#fig-formula-directa-para-calcular-la-salida-de-capa-de-perceptrones-de-3-entradas). Estas fórmulas representan el proceso directo para calcular la salida de una capa de perceptrones de 3 entradas.
 
 <figure id="fig-formula-directa-para-calcular-la-salida-de-capa-de-perceptrones-de-3-entradas">
   <div class="figure-equation" data-math="y_0 = b_0 + \sum_{i=0}^{2}x_{i0}w_{i0}" aria-label="y0 = b0 + i=0^2xi0wi0"></div>
   <div class="figure-equation" data-math="y_1 = b_1 + \sum_{i=0}^{2}x_{i1}w_{i1}" aria-label="y1 = b1 + i=0^2xi1wi1"></div>
   <div class="figure-equation" data-math="y_2 = b_2 + \sum_{i=0}^{2}x_{i2}w_{i2}" aria-label="y2 = b2 + i=0^2xi2wi2"></div>
-  <figcaption>Fórmula directa para calcular la salida de capa de perceptrones de 3 entradas</figcaption>
+  <figcaption>Figura 5. Fórmula directa para calcular la salida de capa de perceptrones de 3 entradas</figcaption>
 </figure>
 
 El proceso de aprendizaje de los perceptrones es bastante simple. Comparan la salida obtenida por el perceptrón con la salida esperada y utilizan la diferencia entre ambas para ajustar los pesos. Sin embargo, el principal problema de los perceptrones radica en su naturaleza totalmente lineal, lo cual se hace evidente al representarlos mediante vectores y matrices. Para superar esta limitación, se aplica una función de activación a la salida del perceptrón, lo que introduce no linealidad en el proceso.
@@ -127,7 +127,7 @@ Afortunadamente, existe un procedimiento altamente efectivo conocido como convol
 
 ### Convolución
 
-La convolución se asemeja al funcionamiento de un perceptrón, pero opera en regiones cuadradas (en ocasiones excepcionales se pueden usar secciones rectangulares) de una imagen. Para comprender mejor el funcionamiento de una capa de convolución, es útil utilizar un ejemplo. En la Figura [referencia](#fig-ejemplo-de-convolucion), se muestra la configuración inicial de la entrada y los parámetros de la convolución.
+La convolución se asemeja al funcionamiento de un perceptrón, pero opera en regiones cuadradas (en ocasiones excepcionales se pueden usar secciones rectangulares) de una imagen. Para comprender mejor el funcionamiento de una capa de convolución, es útil utilizar un ejemplo. En la [Figura 6: Ejemplo de convolución](#fig-ejemplo-de-convolucion), se muestra la configuración inicial de la entrada y los parámetros de la convolución.
 
 <figure id="fig-ejemplo-de-convolucion">
   <div class="subfigure-grid" role="group" aria-label="Ejemplo de convolución">
@@ -147,10 +147,10 @@ La convolución se asemeja al funcionamiento de un perceptrón, pero opera en re
       <figcaption>Parámetros de la convolución de ejemplo</figcaption>
     </figure>
   </div>
-  <figcaption>Ejemplo de convolución</figcaption>
+  <figcaption>Figura 6. Ejemplo de convolución</figcaption>
 </figure>
 
-En este ejemplo, utilizaremos un *stride* (desplazamiento) con un valor de 1 y un valor de $b=1$ (que se suma de manera similar a los perceptrones). Con la configuración actual, se realizarán un total de 4 convoluciones. En la Figura [referencia](#fig-convoluciones-realizadas-en-el-ejemplo), se muestra cómo se llevarían a cabo las convoluciones.
+En este ejemplo, utilizaremos un *stride* (desplazamiento) con un valor de 1 y un valor de $b=1$ (que se suma de manera similar a los perceptrones). Con la configuración actual, se realizarán un total de 4 convoluciones. En la [Figura 7: Convoluciones realizadas en el ejemplo](#fig-convoluciones-realizadas-en-el-ejemplo), se muestra cómo se llevarían a cabo las convoluciones.
 
 <figure id="fig-convoluciones-realizadas-en-el-ejemplo">
   <div class="subfigure-grid" role="group" aria-label="Convoluciones realizadas en el ejemplo">
@@ -171,17 +171,17 @@ En este ejemplo, utilizaremos un *stride* (desplazamiento) con un valor de 1 y u
       <figcaption>Cuarta convolución</figcaption>
     </figure>
   </div>
-  <figcaption>Convoluciones realizadas en el ejemplo</figcaption>
+  <figcaption>Figura 7. Convoluciones realizadas en el ejemplo</figcaption>
 </figure>
 
-Dado que se realizarán cuatro convoluciones, la salida resultante será una matriz de tamaño $2 \times 2$. Para obtener el resultado de cada convolución, se multiplica la entrada (la región sombreada en cada convolución) por los parámetros correspondientes de la convolución. Luego se suman todos estos resultados y se le agrega $b$, lo cual será el valor de salida para esa convolución específica. La Figura [referencia](#fig-salida-de-la-convolucion-de-ejemplo) muestra la salida obtenida al aplicar la convolución.
+Dado que se realizarán cuatro convoluciones, la salida resultante será una matriz de tamaño $2 \times 2$. Para obtener el resultado de cada convolución, se multiplica la entrada (la región sombreada en cada convolución) por los parámetros correspondientes de la convolución. Luego se suman todos estos resultados y se le agrega $b$, lo cual será el valor de salida para esa convolución específica. La [Figura 8: Salida de la convolución de ejemplo](#fig-salida-de-la-convolucion-de-ejemplo) muestra la salida obtenida al aplicar la convolución.
 
 <figure id="fig-salida-de-la-convolucion-de-ejemplo">
   <div class="figure-equation" data-math="\begin{bmatrix}
             1,12 &amp; 1,1 \\
             1,05 &amp; 1,05 \\
         \end{bmatrix}" aria-label="bmatrix 1,12 &amp; 1,1 \\ 1,05 &amp; 1,05 \\ bmatrix"></div>
-  <figcaption>Salida de la convolución de ejemplo</figcaption>
+  <figcaption>Figura 8. Salida de la convolución de ejemplo</figcaption>
 </figure>
 
 En el análisis detallado de la operación de convolución, observamos que el componente situado en el vértice superior izquierdo del resultado se determina a través de un cálculo específico: se realiza la suma de las multiplicaciones de cada elemento del kernel de convolución con el píxel correspondiente de la imagen de entrada. Para ejemplificar, consideremos los siguientes valores: $0.24, 0.12, 0.13, 0.13$, los cuales son multiplicados respectivamente por $0.56, -0.54, 0.07, 0.32$ para luego ser sumados entre sí y finalmente se añade una constante $1$, el término de sesgo denotado por $b=1$. De este modo, el valor calculado para el componente en la esquina superior izquierda es $1.12$.
@@ -199,8 +199,8 @@ ReLU (Rectified Linear Unit) es ampliamente utilizada en las capas intermedias d
 $$
 f(x) = 
     \begin{cases}
-    x, \textrm{ si } x \ge 0 \\
-    0, \textrm{ si } x < 0
+    x, \text{si } x \ge 0 \\
+    0, \text{si } x < 0
     \end{cases}
 $$
 

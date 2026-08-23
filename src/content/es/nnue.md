@@ -32,7 +32,7 @@ La representación binaria consta de un total de $64 \times 64 \times 8 \times 2
 
 En contraste, la salida de este sistema es mucho más simple y consta de un solo valor numérico que representa la evaluación de la posición en términos de centipeones, donde 1 peón equivale a 100 centipeones. Esta es una de las unidades de medida más comúnmente utilizadas para evaluar la posición en una partida de ajedrez.
 
-A continuación se presenta un ejemplo del funcionamiento de la entrada dado su complejidad. Dado el tablero mostrado en la Figura [referencia](#fig-tablero-de-ejemplo-para-halfkp).
+A continuación se presenta un ejemplo del funcionamiento de la entrada dado su complejidad. Dado el tablero mostrado en el [tablero de ejemplo HalfKP](#fig-tablero-de-ejemplo-para-halfkp).
 
 <figure id="fig-tablero-de-ejemplo-para-halfkp">
   <div class="chessboard" data-fen="b2r3r/k4p1p/p2q1np1/NppP4/3p1Q2/P4PPB/1PP4P/1K1RR3 w - - 1 24" data-size="8" data-chess-options="&quot;setfen=b2r3r/k4p1p/p2q1np1/NppP4/3p1Q2/P4PPB/1PP4P/1K1RR3 w - - 1 24, largeboard&quot;" role="img" aria-label="Tablero de ejemplo para HalfKP" data-rendered="source" data-board-asset="board-8x8-0e3dab4ed34f10af.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-0e3dab4ed34f10af.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>

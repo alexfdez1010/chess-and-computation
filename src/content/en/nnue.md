@@ -32,7 +32,7 @@ The binary representation consists of a total of $64 \times 64 \times 8 \times 2
 
 In contrast, the output of this system is much simpler and consists of a single numerical value that represents the evaluation of the position in terms of centipawns, where 1 pawn equals 100 centipawns. This is one of the most commonly used units of measurement to evaluate position in a chess game.
 
-Below is an example of how the input works given its complexity. Given the board shown in Figure [reference](#fig-tablero-de-ejemplo-para-halfkp).
+Below is an example of how the input works given its complexity. Given the board shown in the [HalfKP example board](#fig-tablero-de-ejemplo-para-halfkp).
 
 <figure id="fig-tablero-de-ejemplo-para-halfkp">
   <div class="chessboard" data-fen="b2r3r/k4p1p/p2q1np1/NppP4/3p1Q2/P4PPB/1PP4P/1K1RR3 w - - 1 24" data-size="8" data-chess-options="&quot;setfen=b2r3r/k4p1p/p2q1np1/NppP4/3p1Q2/P4PPB/1PP4P/1K1RR3 w - - 1 24, largeboard&quot;" role="img" aria-label="Example board for HalfKP" data-rendered="source" data-board-asset="board-8x8-0e3dab4ed34f10af.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-0e3dab4ed34f10af.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>

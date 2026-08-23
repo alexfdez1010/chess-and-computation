@@ -22,11 +22,11 @@ There are simple layers, such as perceptrons, and more complex layers, such as c
 
 ### Perceptron
 
-The fundamental element of neural networks is the perceptron. It is a very simple component that receives several inputs and produces an output. However, when multiple perceptrons act together, they achieve surprising performance. Figure [reference](#fig-perceptron-con-3-entradas) shows a simple perceptron with three inputs.
+The fundamental element of neural networks is the perceptron. It is a very simple component that receives several inputs and produces an output. However, when multiple perceptrons act together, they achieve surprising performance. [Figure 1: Perceptron with 3 inputs](#fig-perceptron-con-3-entradas) shows a simple perceptron with three inputs.
 
 <figure id="fig-perceptron-con-3-entradas">
   <img src="/assets/book/networks/perceptron.png" alt="Perceptron with 3 inputs" loading="lazy" />
-  <figcaption>Perceptron with 3 inputs</figcaption>
+  <figcaption>Figure 1. Perceptron with 3 inputs</figcaption>
 </figure>
 
 From the above image, we can establish a mathematical definition using the following function:
@@ -41,7 +41,7 @@ $$
 f(x) = b + \sum_{i=0}^{n-1}x_iw_i
 $$
 
-Here, $x_i$ represents the inputs that are multiplied by their respective weights $w_i$, and then the value $b$ is added to them. Therefore, the parameters to be learned are $b$ and all the weights $w_i$. Normally, a vector notation is used to express the perceptron, where both inputs and parameters are represented as vectors. The notation used for the perceptron in Figure [reference](#fig-perceptron-con-3-entradas) would be as follows:
+Here, $x_i$ represents the inputs that are multiplied by their respective weights $w_i$, and then the value $b$ is added to them. Therefore, the parameters to be learned are $b$ and all the weights $w_i$. Normally, a vector notation is used to express the perceptron, where both inputs and parameters are represented as vectors. The notation used for the perceptron in [Figure 1: Perceptron with 3 inputs](#fig-perceptron-con-3-entradas) would be as follows:
 
 <figure id="fig-representacion-vectorial-del-perceptron-de-3-entradas">
   <div class="subfigure-grid" role="group" aria-label="Vector representation of the 3-input perceptron">
@@ -61,7 +61,7 @@ Here, $x_i$ represents the inputs that are multiplied by their respective weight
       <figcaption>Representation of the parameters of the 3-input perceptron</figcaption>
     </figure>
   </div>
-  <figcaption>Vector representation of the 3-input perceptron</figcaption>
+  <figcaption>Figure 2. Vector representation of the 3-input perceptron</figcaption>
 </figure>
 
 This representation has a peculiarity. The first input, with a value of $1$, is fixed and is not considered a proper input. It is represented this way to be able to directly add the product of the two final vectors to the value of $b$. The generalization of this definition for $n$ inputs is simple from this example. Simply the inputs and parameters must be added to their respective vectors, without forgetting to include $1$ and $b$ at the beginning of the vectors.
@@ -86,10 +86,10 @@ Furthermore, this representation is very useful when there are several perceptro
       <figcaption>Representation of the parameters of the 3-input perceptron layer</figcaption>
     </figure>
   </div>
-  <figcaption>Matrix representation of the 3-input perceptron layer</figcaption>
+  <figcaption>Figure 3. Matrix representation of the 3-input perceptron layer</figcaption>
 </figure>
 
-In Figure [reference](#fig-representacion-matricial-de-la-capa-de-perceptrones-de-3-entradas), the weight $w_{ij}$ refers to weight $i$ associated with perceptron $j$. It is important to note that the input remains constant regardless of the number of perceptrons in the layer. To obtain the outputs, it is only necessary to perform a matrix multiplication, which consists of multiplying one by one each element of the parameter vectors with the input vector. Figure [reference](#fig-representacion-matricial-de-la-salida-de-la-capa-de-perceptrones-de-3-entradas) illustrates what the output would be like using the same representation.
+In [Figure 3: Matrix representation of the perceptron layer](#fig-representacion-matricial-de-la-capa-de-perceptrones-de-3-entradas), the weight $w_{ij}$ refers to weight $i$ associated with perceptron $j$. It is important to note that the input remains constant regardless of the number of perceptrons in the layer. To obtain the outputs, it is only necessary to perform a matrix multiplication, which consists of multiplying one by one each element of the parameter vectors with the input vector. [Figure 4: Matrix representation of the layer output](#fig-representacion-matricial-de-la-salida-de-la-capa-de-perceptrones-de-3-entradas) illustrates what the output would be like using the same representation.
 
 <figure id="fig-representacion-matricial-de-la-salida-de-la-capa-de-perceptrones-de-3-entradas">
   <div class="figure-equation" data-math="\begin{bmatrix}
@@ -107,16 +107,16 @@ In Figure [reference](#fig-representacion-matricial-de-la-capa-de-perceptrones-d
             y_0 &amp; y_1 &amp; y_2
         \end{bmatrix}
         \\" aria-label="bmatrix 1 &amp; x0 &amp; x1 &amp; x2 \\ bmatrix bmatrix b0 &amp; b1 &amp; b2 \\ w00 &amp; w01 &amp; w02 \\ w10 &amp; w11 &amp; w12 \\ w20 &amp; w21 &amp; w22 \\ bmatrix = bmatrix y0 &amp; y1 &amp; y2 bmatrix \\"></div>
-  <figcaption>Matrix representation of the output of the 3-input perceptron layer</figcaption>
+  <figcaption>Figure 4. Matrix representation of the output of the 3-input perceptron layer</figcaption>
 </figure>
 
-Matrix multiplication is performed in practice by applying the formulas shown in Figure [reference](#fig-formula-directa-para-calcular-la-salida-de-capa-de-perceptrones-de-3-entradas). These formulas represent the direct process for calculating the output of a 3-input perceptron layer.
+Matrix multiplication is performed in practice by applying the formulas shown in [Figure 5: Direct output formulas](#fig-formula-directa-para-calcular-la-salida-de-capa-de-perceptrones-de-3-entradas). These formulas represent the direct process for calculating the output of a 3-input perceptron layer.
 
 <figure id="fig-formula-directa-para-calcular-la-salida-de-capa-de-perceptrones-de-3-entradas">
   <div class="figure-equation" data-math="y_0 = b_0 + \sum_{i=0}^{2}x_{i0}w_{i0}" aria-label="y0 = b0 + i=0^2xi0wi0"></div>
   <div class="figure-equation" data-math="y_1 = b_1 + \sum_{i=0}^{2}x_{i1}w_{i1}" aria-label="y1 = b1 + i=0^2xi1wi1"></div>
   <div class="figure-equation" data-math="y_2 = b_2 + \sum_{i=0}^{2}x_{i2}w_{i2}" aria-label="y2 = b2 + i=0^2xi2wi2"></div>
-  <figcaption>Direct formula for calculating the output of a 3-input perceptron layer</figcaption>
+  <figcaption>Figure 5. Direct formula for calculating the output of a 3-input perceptron layer</figcaption>
 </figure>
 
 The learning process of perceptrons is quite simple. They compare the output obtained by the perceptron with the expected output and use the difference between them to adjust the weights. However, the main problem with perceptrons lies in their totally linear nature, which becomes evident when representing them using vectors and matrices. To overcome this limitation, an activation function is applied to the output of the perceptron, which introduces non-linearity into the process.
@@ -127,7 +127,7 @@ Fortunately, there is a highly effective procedure known as convolution, which a
 
 ### Convolution
 
-Convolution is similar to the operation of a perceptron, but operates on square regions (on exceptional occasions rectangular sections can be used) of an image. To better understand how a convolution layer works, it is useful to use an example. In Figure [reference](#fig-ejemplo-de-convolucion), the initial configuration of the input and convolution parameters is shown.
+Convolution is similar to the operation of a perceptron, but operates on square regions (on exceptional occasions rectangular sections can be used) of an image. To better understand how a convolution layer works, it is useful to use an example. In [Figure 6: Convolution example](#fig-ejemplo-de-convolucion), the initial configuration of the input and convolution parameters is shown.
 
 <figure id="fig-ejemplo-de-convolucion">
   <div class="subfigure-grid" role="group" aria-label="Convolution example">
@@ -147,10 +147,10 @@ Convolution is similar to the operation of a perceptron, but operates on square 
       <figcaption>Parameters of the example convolution</figcaption>
     </figure>
   </div>
-  <figcaption>Convolution example</figcaption>
+  <figcaption>Figure 6. Convolution example</figcaption>
 </figure>
 
-In this example, we will use a *stride* (displacement) with a value of 1 and a value of $b=1$ (which is added similarly to perceptrons). With the current configuration, a total of 4 convolutions will be performed. In Figure [reference](#fig-convoluciones-realizadas-en-el-ejemplo), it is shown how the convolutions would be carried out.
+In this example, we will use a *stride* (displacement) with a value of 1 and a value of $b=1$ (which is added similarly to perceptrons). With the current configuration, a total of 4 convolutions will be performed. In [Figure 7: Convolutions performed in the example](#fig-convoluciones-realizadas-en-el-ejemplo), it is shown how the convolutions would be carried out.
 
 <figure id="fig-convoluciones-realizadas-en-el-ejemplo">
   <div class="subfigure-grid" role="group" aria-label="Convolutions performed in the example">
@@ -171,17 +171,17 @@ In this example, we will use a *stride* (displacement) with a value of 1 and a v
       <figcaption>Fourth convolution</figcaption>
     </figure>
   </div>
-  <figcaption>Convolutions performed in the example</figcaption>
+  <figcaption>Figure 7. Convolutions performed in the example</figcaption>
 </figure>
 
-Since four convolutions will be performed, the resulting output will be a matrix of size $2 \times 2$. To obtain the result of each convolution, the input (the shaded region in each convolution) is multiplied by the corresponding convolution parameters. Then all these results are summed and $b$ is added, which will be the output value for that specific convolution. Figure [reference](#fig-salida-de-la-convolucion-de-ejemplo) shows the output obtained by applying the convolution.
+Since four convolutions will be performed, the resulting output will be a matrix of size $2 \times 2$. To obtain the result of each convolution, the input (the shaded region in each convolution) is multiplied by the corresponding convolution parameters. Then all these results are summed and $b$ is added, which will be the output value for that specific convolution. [Figure 8: Output of the example convolution](#fig-salida-de-la-convolucion-de-ejemplo) shows the output obtained by applying the convolution.
 
 <figure id="fig-salida-de-la-convolucion-de-ejemplo">
   <div class="figure-equation" data-math="\begin{bmatrix}
             1,12 &amp; 1,1 \\
             1,05 &amp; 1,05 \\
         \end{bmatrix}" aria-label="bmatrix 1,12 &amp; 1,1 \\ 1,05 &amp; 1,05 \\ bmatrix"></div>
-  <figcaption>Output of the example convolution</figcaption>
+  <figcaption>Figure 8. Output of the example convolution</figcaption>
 </figure>
 
 In the detailed analysis of the convolution operation, we observe that the component located at the upper left vertex of the result is determined through a specific calculation: the sum of the multiplications of each element of the convolution kernel with the corresponding pixel of the input image is performed. To exemplify, let us consider the following values: $0.24, 0.12, 0.13, 0.13$, which are multiplied respectively by $0.56, -0.54, 0.07, 0.32$ to then be summed together and finally a constant $1$ is added, the bias term denoted by $b=1$. Thus, the calculated value for the component in the upper left corner is $1.12$.
@@ -199,8 +199,8 @@ ReLU (Rectified Linear Unit) is widely used in the intermediate layers of neural
 $$
 f(x) = 
     \begin{cases}
-    x, \textrm{ if } x \ge 0 \\
-    0, \textrm{ if } x < 0
+    x, \text{if } x \ge 0 \\
+    0, \text{if } x < 0
     \end{cases}
 $$
 

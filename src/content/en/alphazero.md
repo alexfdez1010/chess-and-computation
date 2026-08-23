@@ -28,7 +28,7 @@ The main challenge that LCZero faces compared to AlphaZero lies in its limited c
 
 The neural network in question has a large number of layers, particularly in the feature extraction section. The input consists of a series of channels (8x8 matrices), which take only values 0 or 1. These channels contain the information of the position in a form that is easily interpretable for the neural network. Subsequently, feature extraction is performed; during this process, the neural network identifies and extracts patterns from the input channels. These patterns are then processed by the final layers of the network to determine the value of the current state and the action selection policy.
 
-Figure [reference](#fig-red-neuronal-de-alphazero) shows the neural network used by AlphaZero with the aforementioned parts.
+[Figure 1](#fig-red-neuronal-de-alphazero) shows the neural network used by AlphaZero with the aforementioned parts.
 
 <figure id="fig-red-neuronal-de-alphazero">
   <div class="localized-diagram" data-diagram="alphazero-network" data-label="AlphaZero neural network" role="img" aria-label="AlphaZero neural network">AlphaZero neural network</div>
@@ -43,14 +43,14 @@ The first group consists of information relating to the arrangement of pieces on
 
 To represent the arrangement of pieces, the format known as *one-hot encoding* is used. In this format, all elements of the $8 \times 8$ matrix are initially set to 0 and changed to 1 if a piece of a particular type is found in that square. Thus, each type of piece is associated with a specific channel.
 
-As an illustration, consider the board shown in Figure [reference](#fig-posicion-de-ejemplo-para-mostrar-el-formato-one-hot-encoding). Below, the channels corresponding to several of the pieces present on this board are shown.
+As an illustration, consider the board shown in [Figure 2](#fig-posicion-de-ejemplo-para-mostrar-el-formato-one-hot-encoding). Below, the channels corresponding to several of the pieces present on this board are shown.
 
 <figure id="fig-posicion-de-ejemplo-para-mostrar-el-formato-one-hot-encoding">
   <div class="chessboard" data-fen="rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7" data-size="8" data-chess-options="&quot;maxfield=h8, setfen=rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7, largeboard&quot;" role="img" aria-label="Example position to show one-hot encoding format" data-rendered="source" data-board-asset="board-8x8-8a233edf3b81d5da.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-8a233edf3b81d5da.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
   <figcaption>Example position to show <em>one-hot encoding</em> format</figcaption>
 </figure>
 
-First, we start with the white pawns. Figure [reference](#fig-representacion-en-formato-one-hot-encoding-de-los-peones-blancos) shows the resulting matrix. In this matrix, all positions occupied by white pawns are represented with the value 1, while empty positions are represented with the value 0. Each type of piece (pawn, knight, bishop, rook, queen and king of both colors) is assigned to a specific channel, giving a total of 12 distinct channels.
+First, we start with the white pawns. [Figure 3](#fig-representacion-en-formato-one-hot-encoding-de-los-peones-blancos) shows the resulting matrix. In this matrix, all positions occupied by white pawns are represented with the value 1, while empty positions are represented with the value 0. Each type of piece (pawn, knight, bishop, rook, queen and king of both colors) is assigned to a specific channel, giving a total of 12 distinct channels.
 
 <figure id="fig-representacion-en-formato-one-hot-encoding-de-los-peones-blancos">
   <div class="figure-equation" data-math="\begin{bmatrix}
@@ -66,7 +66,7 @@ First, we start with the white pawns. Figure [reference](#fig-representacion-en-
   <figcaption><em>One-hot encoding</em> representation of white pawns</figcaption>
 </figure>
 
-In the following case, we proceed with the black knights. Figure [reference](#fig-representacion-en-formato-one-hot-encoding-de-los-caballos-negros) illustrates the channel corresponding to this piece.
+In the following case, we proceed with the black knights. [Figure 4](#fig-representacion-en-formato-one-hot-encoding-de-los-caballos-negros) illustrates the channel corresponding to this piece.
 
 <figure id="fig-representacion-en-formato-one-hot-encoding-de-los-caballos-negros">
   <div class="figure-equation" data-math="\begin{bmatrix}
@@ -122,7 +122,7 @@ The portion of the neural network dedicated to feature extraction is quite volum
 
 Thanks to this residual connection, *backpropagation* can be performed more directly, without needing to pass through all intermediate layers.
 
-Figure [reference](#fig-estructura-de-un-bloque-residual-en-alphazero) illustrates the structure of a residual block as described above.
+[Figure 5](#fig-estructura-de-un-bloque-residual-en-alphazero) illustrates the structure of a residual block as described above.
 
 <figure id="fig-estructura-de-un-bloque-residual-en-alphazero">
   <div class="localized-diagram" data-diagram="alphazero-residual" data-label="Structure of a residual block in AlphaZero" role="img" aria-label="Structure of a residual block in AlphaZero">Structure of a residual block in AlphaZero</div>
@@ -137,7 +137,7 @@ Although at first glance, $8*8*73=4672$ may seem like an exorbitant amount of po
 
 Within these 73 possible moves, the first 56 correspond to queen moves, including all possible moves for the queen, king, bishop and rook. The next eight moves, that is, those from 57 to 64, encompass the eight possible knight jumps. Finally, the remaining 9 moves are reserved for situations where a pawn is promoted to a piece other than a queen.
 
-The logic behind queen moves is governed by the orientation of a compass; consequently, the queen can move in any of the 8 directions indicated by it. In each direction, the queen has the ability to move between 1 and 7 squares. The product of these values provides us with the total number of possible moves for the queen. During encoding, each direction will be assigned a numerical value between 1 and 7, as shown in Figure [reference](#fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama). To this value will be added the number of squares that the queen plans to move.
+The logic behind queen moves is governed by the orientation of a compass; consequently, the queen can move in any of the 8 directions indicated by it. In each direction, the queen has the ability to move between 1 and 7 squares. The product of these values provides us with the total number of possible moves for the queen. During encoding, each direction will be assigned a numerical value between 1 and 7, as shown in [Figure 6](#fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama). To this value will be added the number of squares that the queen plans to move.
 
 <figure id="fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama">
   <div class="localized-diagram" data-diagram="alphazero-directions" data-label="Assignment of values to the directions of queen movements" role="img" aria-label="Assignment of values to the directions of queen movements">Assignment of values to the directions of queen movements</div>
@@ -150,7 +150,7 @@ $$
 f(\alpha_d,c) = 7*\alpha_d + c
 $$
 
-$\alpha_d$ is the coefficient of the directions (see Figure [reference](#fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama)) and $c$ the number of squares to move.
+$\alpha_d$ is the coefficient of the directions (see [Figure 6](#fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama)) and $c$ the number of squares to move.
 
 Below is an example to clarify the operation.
 
@@ -169,7 +169,7 @@ $$
 
 In this formula, $\beta_s$ denotes the coefficient of the knight jump according to the clockwise direction. To this coefficient is added $56$ to indicate a knight move.
 
-Figure [reference](#fig-ejemplo-de-codificacion-de-los-movimientos-del-caballo) provides an illustrative example of this encoding scheme.
+[Figure 7](#fig-ejemplo-de-codificacion-de-los-movimientos-del-caballo) provides an illustrative example of this encoding scheme.
 
 <figure id="fig-ejemplo-de-codificacion-de-los-movimientos-del-caballo">
   <div class="chessboard" data-fen="8/8/8/8/8/5n2/8/8" data-size="8" data-arrows="f3-e1" data-chess-options="&quot;maxfield=h8, setfen=8/8/8/8/8/5n2/8/8, pgfstyle=straightmove, markmoves={f3-e1}, arrow=to, showmover=false, largeboard&quot;" role="img" aria-label="Example of encoding knight movements" data-rendered="source" data-board-asset="board-8x8-1819eb6e318dd5b5.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-1819eb6e318dd5b5.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
@@ -198,7 +198,7 @@ $$
 
 Where $\delta_p$ is the coefficient of the promoted piece and $m$ the value of the corresponding move. One is subtracted from the original value.
 
-Below is an example of pawn promotion. Figure [reference](#fig-ejemplo-de-codificacion-de-la-coronacion-de-un-peon) represents the initial position.
+Below is an example of pawn promotion. [Figure 8](#fig-ejemplo-de-codificacion-de-la-coronacion-de-un-peon) represents the initial position.
 
 <figure id="fig-ejemplo-de-codificacion-de-la-coronacion-de-un-peon">
   <div class="chessboard" data-fen="8/1P6/8/8/8/8/8/8" data-size="8" data-arrows="b7-c8" data-chess-options="&quot;maxfield=h8, setfen=8/1P6/8/8/8/8/8/8, pgfstyle=straightmove, markmoves={b7-c8}, arrow=to, showmover=false, largeboard&quot;" role="img" aria-label="Example of encoding pawn promotion" data-rendered="source" data-board-asset="board-8x8-bc29baaa433bc133.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-bc29baaa433bc133.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
@@ -209,7 +209,7 @@ In this case, the pawn aims to promote to a bishop, so the coefficient $\delta_p
 
 A possible question could be: how are promotions represented on the black pieces side? However, this would not be necessary since the board is always visualized from the player's perspective, so pawns would always promote on the last rank.
 
-This representation, however, presents a problem. Many of the actions cannot occur in all positions. For example, if you have a queen located in the lower left corner (square a1) it can never move to the southeast, south, southwest, west and northwest. In the case of a knight on that square, it could only move to 2 of the 8 possible squares. Additionally, a pawn can only promote if it is on the penultimate rank. Taking these factors into account, Leela Chess Zero was able to reduce the total number of moves to $1858$ <cite><a href="/en/references#cite-lczero-network" data-cite="lczero-network">[Desarrolladores de Leela Chess Zero]</a></cite>. To achieve this, the same system as before is followed, but all impossible moves are eliminated.
+This representation, however, presents a problem. Many of the actions cannot occur in all positions. For example, if you have a queen located in the lower left corner (square a1) it can never move to the southeast, south, southwest, west and northwest. In the case of a knight on that square, it could only move to 2 of the 8 possible squares. Additionally, a pawn can only promote if it is on the penultimate rank. Taking these factors into account, Leela Chess Zero was able to reduce the total number of moves to $1858$ <cite><a href="/en/references#cite-lczero-network" data-cite="lczero-network">[Leela Chess Zero developers]</a></cite>. To achieve this, the same system as before is followed, but all impossible moves are eliminated.
 
 #### Value
 
@@ -256,7 +256,7 @@ Once all simulations have finished, the best move is selected according to them.
 
 Below is an illustrative example that aims to clarify the functioning of the Monte Carlo tree search.
 
-Consider the position shown in Figure [reference](#fig-posicion-de-ejemplo-para-mcts), where White must choose between three possible moves: Kf3, b3 and Qb3.
+Consider the position shown in [Figure 9](#fig-posicion-de-ejemplo-para-mcts), where White must choose between three possible moves: Kf3, b3 and Qb3.
 
 <figure id="fig-posicion-de-ejemplo-para-mcts">
   <div class="chessboard" data-fen="r3k2r/p2p1ppp/bqp1p3/3nP3/1bP1NP2/8/PP2K1PP/R1BQ1B1R w kq - 3 12" data-size="8" data-arrows="b2-b3, d1-b3, e2-f3" data-chess-options="&quot;maxfield=h8, setfen=r3k2r/p2p1ppp/bqp1p3/3nP3/1bP1NP2/8/PP2K1PP/R1BQ1B1R w kq - 3 12, pgfstyle=straightmove, markmoves={b2-b3, d1-b3, e2-f3}, arrow=to, largeboard&quot;" role="img" aria-label="Example position for MCTS analysis" data-rendered="source" data-board-asset="board-8x8-69f84c80365099a9.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-69f84c80365099a9.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>

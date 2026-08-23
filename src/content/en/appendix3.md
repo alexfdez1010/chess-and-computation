@@ -45,7 +45,7 @@ Having introduced the theoretical principles, it is essential to illustrate with
   <figcaption>Initial position of a chess game</figcaption>
 </figure>
 
-Observing Figure [reference](#fig-posicion-inicial-del-ajedrez), one can appreciate the arrangement of rows and columns on the board, as described in the introduction. The white pieces make a move, resulting in the position shown in Figure [reference](#fig-posicion-despues-de-cf3).
+Observing the [initial chess position](#fig-posicion-inicial-del-ajedrez), one can appreciate the arrangement of rows and columns on the board, as described in the introduction. The white pieces make a move, resulting in the position shown in the [position after Nf3](#fig-posicion-despues-de-cf3).
 
 <figure id="fig-posicion-despues-de-cf3">
   <div class="chessboard" data-fen="rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b KQkq - 1 1" data-size="8" data-chess-options="&quot;setfen=rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b KQkq - 1 1, largeboard&quot;" role="img" aria-label="Position after Nf3" data-rendered="source" data-board-asset="board-8x8-3a516bc445886674.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-3a516bc445886674.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
@@ -54,7 +54,7 @@ Observing Figure [reference](#fig-posicion-inicial-del-ajedrez), one can appreci
 
 This move is represented as Nf3 in algebraic notation, since the knight moves from square g1 to square f3. Since there is no other knight that can move to square f3, it is not necessary to provide additional information.
 
-From this position, the black pieces make the move Nf6, leading us to the position shown in Figure [reference](#fig-posicion-despues-de-cf6).
+From this position, the black pieces make the move Nf6, leading us to the position shown in the [position after Nf6](#fig-posicion-despues-de-cf6).
 
 <figure id="fig-posicion-despues-de-cf6">
   <div class="chessboard" data-fen="rnbqkb1r/pppppppp/5n2/8/8/5N2/PPPPPPPP/RNBQKB1R w KQkq - 2 2" data-size="8" data-chess-options="&quot;setfen=rnbqkb1r/pppppppp/5n2/8/8/5N2/PPPPPPPP/RNBQKB1R w KQkq - 2 2, largeboard&quot;" role="img" aria-label="Position after Nf6" data-rendered="source" data-board-asset="board-8x8-ad88b41e7bdebc78.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-ad88b41e7bdebc78.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
@@ -77,7 +77,7 @@ Here a small problem arises: in the previous position, the white pieces wish to 
 
 In addition to the commonly seen moves, there are some special moves that deserve to be briefly mentioned. The first of these is called promotion, which occurs when a pawn reaches the last opposite row and is offered the opportunity to transform into another piece. The transformation options include bishop, knight, rook, or queen. Since the queen is the most powerful piece, it is usual for the pawn to transform into this piece, but depending on the circumstances, it could transform into another type of piece. To indicate this move, a lowercase letter is added at the end of the original move, indicating what piece it has transformed into.
 
-Finally, there remains the special move known as castling, which allows moving the king and a rook simultaneously. There are two types of castling: short castling, where the king moves to column g and the rook to column f (using the rook closest to the king), and is marked in notation with "0-0". Long castling, on the other hand, involves using the rook farthest from the king, and the king moves to column c and the rook to column d. It is marked with "0-0-0". To perform castling, neither the king nor the rook with which it is performed must have moved previously. Below is an example of how castling is performed in Figure [reference](#fig-ejemplo-de-como-efectuar-el-enroque). As a curious fact, this position belongs to the Spanish opening, also known as the Ruy López opening. Ruy López is considered the first world chess champion and is native to Extremadura, Spain.
+Finally, there remains the special move known as castling, which allows moving the king and a rook simultaneously. There are two types of castling: short castling, where the king moves to column g and the rook to column f (using the rook closest to the king), and is marked in notation with "0-0". Long castling, on the other hand, involves using the rook farthest from the king, and the king moves to column c and the rook to column d. It is marked with "0-0-0". To perform castling, neither the king nor the rook with which it is performed must have moved previously. Below is an [example of how to perform castling](#fig-ejemplo-de-como-efectuar-el-enroque). As a curious fact, this position belongs to the Spanish opening, also known as the Ruy López opening. Ruy López is considered the first world chess champion and is native to Extremadura, Spain.
 
 <figure id="fig-ejemplo-de-como-efectuar-el-enroque">
   <div class="subfigure-grid" role="group" aria-label="Example of how to perform castling">

@@ -32,14 +32,27 @@ La Notación de Forsyth-Edwards (FEN, por sus siglas en inglés) establece un es
 
 La notación FEN se divide en seis campos, cada uno separado por espacios. A continuación, se detalla el contenido y la interpretación de cada uno de estos campos:
 
-1. **Colocación de las piezas:** Define la disposición de las piezas en el tablero, fila por fila, comenzando desde la esquina superior izquierda. Cada pieza se representa por su letra identificativa en inglés (consultar la Tabla [referencia](#tab-designaciones-en-espanol-e-ingles-para-cada-tipo-de-pieza-de-ajedrez) para las correspondencias exactas de las piezas). Las piezas blancas se denotan con mayúsculas y las negras con minúsculas. Si existen espacios vacíos entre las piezas, se añade un número que representa la cantidad de espacios. Las filas se separan con '/'.
+<div id="tab-designaciones-en-espanol-e-ingles-para-cada-tipo-de-pieza-de-ajedrez"></div>
+
+| Pieza | Designación en inglés | Designación en español |
+| --- | --- | --- |
+| Rey | K | R |
+| Dama | Q | D |
+| Torre | R | T |
+| Alfil | B | A |
+| Caballo | N | C |
+| Peón | P | P |
+
+*Designaciones de las piezas en inglés y español*
+
+1. **Colocación de las piezas:** Define la disposición de las piezas en el tablero, fila por fila, comenzando desde la esquina superior izquierda. Cada pieza se representa por su letra identificativa en inglés (consulta la [Tabla 1](#tab-designaciones-en-espanol-e-ingles-para-cada-tipo-de-pieza-de-ajedrez) para las correspondencias exactas de las piezas). Las piezas blancas se denotan con mayúsculas y las negras con minúsculas. Si existen espacios vacíos entre las piezas, se añade un número que representa la cantidad de espacios. Las filas se separan con '/'.
 2. **Bando:** Indica el turno de juego. Se utiliza 'w' para indicar que es el turno de las blancas y 'b' para las negras.
 3. **Enroques:** Describe las posibilidades de enroque. Se coloca un '-' si no hay opciones de enroque para ninguno de los bandos. En caso contrario, se añade una 'K' para un enroque corto y una 'Q' para un enroque largo. Si la letra está en mayúscula, corresponde a las blancas; si está en minúscula, a las negras.
 4. ***En passant*:** Señala la posibilidad de realizar una jugada de comer al paso. Se utiliza un '-' si no es posible; de lo contrario, se indica la casilla por donde ha pasado el peón después de mover dos espacios, es decir, la casilla en la que terminaría el peón oponente si realizara la captura al paso.
 5. **Movimientos desde la última captura o avance de peón:** Proporciona el número de jugadas transcurridas sin que haya habido capturas ni movimientos de peón, lo que se relaciona con la regla de los 50 movimientos. Un "movimiento" se considera completo cuando ambos jugadores han realizado una jugada. Por lo tanto, esta regla se activaría cuando este contador alcance 100.
 6. **Contador de movimientos:** Representa el número total de movimientos realizados desde el inicio de la partida.
 
-Para aclarar estos conceptos, se propone un ejemplo a continuación. La Figura [referencia](#fig-tablero-de-ejemplo-para-fen) muestra una posición de ajedrez que representaremos usando la notación FEN.
+Para aclarar estos conceptos, se propone un ejemplo a continuación. La [Figura 1](#fig-tablero-de-ejemplo-para-fen) muestra una posición de ajedrez que representaremos usando la notación FEN.
 
 <figure id="fig-tablero-de-ejemplo-para-fen">
   <div class="chessboard" data-fen="rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2" data-size="8" data-chess-options="&quot;setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2 largeboard&quot;" role="img" aria-label="Tablero de ejemplo para FEN" data-rendered="source" data-board-asset="board-8x8-3afb5e96d80a3b70.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-3afb5e96d80a3b70.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
@@ -76,7 +89,7 @@ PGN (Portable Game Notation), según lo establecido por Edwards <cite><a href="/
 
 En cuanto a la representación de la partida en sí, se utiliza una lista de jugadas desde la posición inicial hasta la posición final de la partida. La representación de los movimientos se hace mediante la notación algebraica, la cual se describe en detalle en el anexo 3.
 
-En la mayoría de los casos, la notación algebraica emplea las designaciones en inglés para las piezas. También se muestra el número de movimiento antes de cada par de jugadas. Al finalizar la partida, se indica el resultado: "1-0" para la victoria de las blancas, "0-1" para la victoria de las negras, "1/2-1/2" para los empates y "*" si la partida aún no ha concluido. Es posible añadir comentarios después de cada jugada, encerrándolos entre "{}". Estos comentarios pueden contener información adicional sobre cada movimiento, como el tiempo restante de cada jugador, un recurso que se utiliza en plataformas como Lichess <cite><a href="/es/references#cite-lichess" data-cite="lichess">[lichess.org]</a></cite>.
+En la mayoría de los casos, la notación algebraica emplea las designaciones en inglés para las piezas. También se muestra el número de movimiento antes de cada par de jugadas. Al finalizar la partida, se indica el resultado: "1-0" para la victoria de las blancas, "0-1" para la victoria de las negras, "1/2-1/2" para los empates y "*" si la partida aún no ha concluido. Es posible añadir comentarios después de cada jugada, encerrándolos entre "{}". Estos comentarios pueden contener información adicional sobre cada movimiento, como el tiempo restante de cada jugador, un recurso que se utiliza en plataformas como Lichess <cite><a href="/es/references#cite-lichess" data-cite="lichess">[Lichess]</a></cite>.
 
 Previo a la lista de movimientos, se incorpora información adicional a la partida. Esta información puede ser heterogénea, aunque los programas informáticos suelen requerir la inclusión de siete elementos específicos. Estos son:
 

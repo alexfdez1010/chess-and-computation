@@ -23,7 +23,7 @@ To begin our journey, it is crucial to know the basic elements or blocks that ma
 - Branch
 - Process
 
-The "Start/End" block marks the beginning and closure of the program flow. A flowchart can have multiple "End" blocks, but only one "Start" block. Both are represented by a rounded-edge rectangle. Figure [reference](#fig-representacion-de-comienzo-y-fin-en-un-diagrama-de-flujo) illustrates these blocks.
+The "Start/End" block marks the beginning and closure of the program flow. A flowchart can have multiple "End" blocks, but only one "Start" block. Both are represented by a rounded-edge rectangle. The [start/end block diagram](#fig-representacion-de-comienzo-y-fin-en-un-diagrama-de-flujo) illustrates these blocks.
 
 <figure id="fig-representacion-de-comienzo-y-fin-en-un-diagrama-de-flujo">
   <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="2" data-mermaid="flowchart LR
@@ -37,7 +37,7 @@ The "Start/End" block marks the beginning and closure of the program flow. A flo
   <figcaption>Representation of start and end in a flowchart</figcaption>
 </figure>
 
-The "Input/Output" blocks define the inputs and outputs of the algorithm. Unlike the "Start" and "End" blocks, these can carry a descriptive name instead of a generic term, providing a more detailed view of the algorithm's functionality. These blocks are represented through rhomboids, as shown in Figure [reference](#fig-representacion-de-entradas-y-salidas-en-un-diagrama-de-flujo).
+The "Input/Output" blocks define the inputs and outputs of the algorithm. Unlike the "Start" and "End" blocks, these can carry a descriptive name instead of a generic term, providing a more detailed view of the algorithm's functionality. These blocks are represented through rhomboids, as shown in the [input/output block diagram](#fig-representacion-de-entradas-y-salidas-en-un-diagrama-de-flujo).
 
 <figure id="fig-representacion-de-entradas-y-salidas-en-un-diagrama-de-flujo">
   <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="2" data-mermaid="flowchart LR
@@ -51,7 +51,7 @@ The "Input/Output" blocks define the inputs and outputs of the algorithm. Unlike
   <figcaption>Representation of inputs and outputs in a flowchart</figcaption>
 </figure>
 
-The "Branch" block provides the possibility of executing different actions depending on the fulfillment of a specific condition. This expands the expressiveness of algorithms and allows the incorporation of conditional logic. They are represented with a square rotated 45 degrees. Figure [reference](#fig-representacion-de-bifurcaciones-en-un-diagrama-de-flujo) illustrates this block.
+The "Branch" block provides the possibility of executing different actions depending on the fulfillment of a specific condition. This expands the expressiveness of algorithms and allows the incorporation of conditional logic. They are represented with a square rotated 45 degrees. The [branch block diagram](#fig-representacion-de-bifurcaciones-en-un-diagrama-de-flujo) illustrates this block.
 
 <figure id="fig-representacion-de-bifurcaciones-en-un-diagrama-de-flujo">
   <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="1" data-mermaid="flowchart LR
@@ -63,7 +63,7 @@ The "Branch" block provides the possibility of executing different actions depen
   <figcaption>Representation of branches in a flowchart</figcaption>
 </figure>
 
-Finally, the "Process" blocks indicate the actions that are performed in relation to the algorithm. Although their representation is usually abstract in most cases, these blocks usually include a more detailed description of the action being carried out. They are represented by a rectangle. Figure [reference](#fig-representacion-de-procesos-en-un-diagrama-de-flujo) shows how a process block is represented in a flowchart.
+Finally, the "Process" blocks indicate the actions that are performed in relation to the algorithm. Although their representation is usually abstract in most cases, these blocks usually include a more detailed description of the action being carried out. They are represented by a rectangle. The [process block diagram](#fig-representacion-de-procesos-en-un-diagrama-de-flujo) shows how a process block is represented in a flowchart.
 
 <figure id="fig-representacion-de-procesos-en-un-diagrama-de-flujo">
   <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="1" data-mermaid="flowchart LR

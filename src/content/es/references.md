@@ -15,33 +15,29 @@ draft: false
 ---
 
 <ol class="bibliography">
-<li id="cite-8stevenhalimfelixhalim2013"><span class="citation-key">8stevenhalimfelixhalim2013</span> Steven Halim and Felix Halim (2013). Competitive Programming 3. Lulu.</li>
-<li id="cite-3stevenhalimfelixhalim2013"><span class="citation-key">3stevenhalimfelixhalim2013</span> Steven Halim and Felix Halim (2013). Competitive Programming 3. Lulu.</li>
-<li id="cite-5nosons-yanofsky2016"><span class="citation-key">5nosons.yanofsky2016</span> Noson S. Yanofsky (2016). The Outer Limits of Reason. MIT Press.</li>
-<li id="cite-6nosons-yanofsky2016"><span class="citation-key">6nosons.yanofsky2016</span> Noson S. Yanofsky (2016). The Outer Limits of Reason. MIT Press.</li>
-<li id="cite-compplaychess-shannon"><span class="citation-key">compplaychess.shannon</span> Claude E. Shannon (1950). Programming a Computer for Playing Chess. Philosophical Magazine.</li>
-<li id="cite-2deeprl2019"><span class="citation-key">2deeprl2019</span> Graesser, Laura and Keng, Wah Loon (2019). Foundations of deep reinforcement learning: theory and practice in Python. Addison-Wesley Professional.</li>
-<li id="cite-4deeprl2019"><span class="citation-key">4deeprl2019</span> Graesser, Laura and Keng, Wah Loon (2019). Foundations of deep reinforcement learning: theory and practice in Python. Addison-Wesley Professional.</li>
-<li id="cite-6deeprl2019"><span class="citation-key">6deeprl2019</span> Graesser, Laura and Keng, Wah Loon (2019). Foundations of deep reinforcement learning: theory and practice in Python. Addison-Wesley Professional.</li>
-<li id="cite-15gerrish2018smart"><span class="citation-key">15gerrish2018smart</span> Gerrish, Sean (2018). How smart machines think. MIT Press.</li>
-<li id="cite-lczero-network"><span class="citation-key">lczero-network</span> Desarrolladores de Leela Chess Zero. Leela Chess Zero Network Topology.</li>
-<li id="cite-silver2017mastering"><span class="citation-key">silver2017mastering</span> Silver, David and Hubert, Thomas and Schrittwieser, Julian and Antonoglou, Ioannis and Lai, Matthew and Guez, Arthur and Lanctot, Marc and Sifre, Laurent and Kumaran, Dharshan and Graepel, Thore and others (2017). Mastering chess and shogi by self-play with a general reinforcement learning algorithm. arXiv preprint arXiv:1712.01815.</li>
-<li id="cite-alphagozero-cheatsheet"><span class="citation-key">alphagozero-cheatsheet</span> David Foster. AlphaGo Zero Explained in One Diagram.</li>
-<li id="cite-silver2017masteringgo"><span class="citation-key">silver2017masteringgo</span> Silver, David and Schrittwieser, Julian and Simonyan, Karen and Antonoglou, Ioannis and Huang, Aja and Guez, Arthur and Hubert, Thomas and Baker, Lucas and Lai, Matthew and Bolton, Adrian and others (2017). Mastering the game of go without human knowledge. nature.</li>
-<li id="cite-cross-entropy"><span class="citation-key">cross-entropy</span> Kiprono Elijah Koech. Cross-Entropy Loss Function.</li>
-<li id="cite-mean-squared"><span class="citation-key">mean-squared</span> George Seif. Understanding the 3 most common loss functions for Machine Learning Regression.</li>
-<li id="cite-l2"><span class="citation-key">L2</span> Anuja Nagpal. L1 and L2 Regularization Methods.</li>
-<li id="cite-v1928theorie"><span class="citation-key">v1928theorie</span> v. Neumann, J (1928). Zur theorie der gesellschaftsspiele. Mathematische annalen.</li>
-<li id="cite-monnens2013commenced"><span class="citation-key">monnens2013commenced</span> Monnens, Devin (2013). I commenced an examination of a game called tit-tat-to: Charles Babbage and the First Computer Game.. DiGRA Conference.</li>
-<li id="cite-borel1921theorie"><span class="citation-key">borel1921theorie</span> Borel, Emile (1921). La th\'eorie du jeu et les \'equations int\'egralesa noyau sym\'etrique. Comptes rendus de l’Acad\'emie des Sciences.</li>
-<li id="cite-ioffe2015batch"><span class="citation-key">ioffe2015batch</span> Ioffe, Sergey and Szegedy, Christian (2015). Batch normalization: Accelerating deep network training by reducing internal covariate shift. International conference on machine learning.</li>
-<li id="cite-edwards1994portable"><span class="citation-key">edwards1994portable</span> Edwards, Steven J (1994). Portable game notation specification and implementation guide. Retrieved April.</li>
-<li id="cite-lichess"><span class="citation-key">lichess</span> lichess.org. Lichess.</li>
-<li id="cite-chessprogrammingboardrepresentation"><span class="citation-key">chessprogrammingBoardRepresentation</span> . Board Representation - Chessprogramming wiki --- chessprogramming.org.</li>
-<li id="cite-ershov1980early"><span class="citation-key">ershov1980early</span> Ershov, Andrei P and Shura-Bura, Mikhail R (1980). The early development of programming in the USSR. A History of Computing in the Twentieth Century.</li>
-<li id="cite-mcilroy2022learning"><span class="citation-key">mcilroy2022learning</span> McIlroy-Young, Reid and Wang, Russell and Sen, Siddhartha and Kleinberg, Jon and Anderson, Ashton (2022). Learning models of individual behavior in chess. Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining.</li>
-<li id="cite-mcilroy2020aligning"><span class="citation-key">mcilroy2020aligning</span> McIlroy-Young, Reid and Sen, Siddhartha and Kleinberg, Jon and Anderson, Ashton (2020). Aligning superhuman ai with human behavior: Chess as a model system. Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining.</li>
-<li id="cite-kunn2020cognitive"><span class="citation-key">kunn2020cognitive</span> K\"unn, Steffen and Seel, Christian and Zegners, Dainis (2020). Cognitive Performance in the Home Office - Evidence from Professional Chess. IZA Discussion Paper.</li>
-<li id="cite-nasu2018efficiently"><span class="citation-key">nasu2018efficiently</span> Nasu, Yu (2018). Efficiently updatable neural-network-based evaluation functions for computer shogi. The 28th World Computer Shogi Championship Appeal Document.</li>
-<li id="cite-klein2022neural"><span class="citation-key">klein2022neural</span> Klein, Dominik (2022). Neural Networks for Chess. arXiv preprint arXiv:2209.01506.</li>
+<li id="cite-8stevenhalimfelixhalim2013"><span id="cite-3stevenhalimfelixhalim2013" aria-hidden="true"></span>Steven Halim y Felix Halim (2013). <em>Competitive Programming 3</em>. Lulu.</li>
+<li id="cite-5nosons-yanofsky2016"><span id="cite-6nosons-yanofsky2016" aria-hidden="true"></span>Noson S. Yanofsky (2016). <em>The Outer Limits of Reason</em>. MIT Press.</li>
+<li id="cite-compplaychess-shannon">Claude E. Shannon (1950). «Programming a Computer for Playing Chess». <em>Philosophical Magazine</em>.</li>
+<li id="cite-2deeprl2019"><span id="cite-4deeprl2019" aria-hidden="true"></span><span id="cite-6deeprl2019" aria-hidden="true"></span>Laura Graesser y Wah Loon Keng (2019). <em>Foundations of Deep Reinforcement Learning: Theory and Practice in Python</em>. Addison-Wesley Professional.</li>
+<li id="cite-15gerrish2018smart">Sean Gerrish (2018). <em>How Smart Machines Think</em>. MIT Press.</li>
+<li id="cite-lczero-network">Desarrolladores de Leela Chess Zero. <em>Leela Chess Zero Network Topology</em>.</li>
+<li id="cite-silver2017mastering">David Silver, Thomas Hubert, Julian Schrittwieser, Ioannis Antonoglou, Matthew Lai, Arthur Guez, Marc Lanctot, Laurent Sifre, Dharshan Kumaran, Thore Graepel y otros (2017). “Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm.” <em>arXiv:1712.01815</em>.</li>
+<li id="cite-alphagozero-cheatsheet">David Foster. <em>AlphaGo Zero Explained in One Diagram</em>.</li>
+<li id="cite-silver2017masteringgo">David Silver, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, Lucas Baker, Matthew Lai, Adrian Bolton y otros (2017). “Mastering the Game of Go without Human Knowledge.” <em>Nature</em>.</li>
+<li id="cite-cross-entropy">Kiprono Elijah Koech. <em>Cross-Entropy Loss Function</em>.</li>
+<li id="cite-mean-squared">George Seif. <em>Understanding the Three Most Common Loss Functions for Machine Learning Regression</em>.</li>
+<li id="cite-l2">Anuja Nagpal. <em>L1 y L2 Regularization Methods</em>.</li>
+<li id="cite-v1928theorie">John von Neumann (1928). “Zur Theorie der Gesellschaftsspiele.” <em>Mathematische Annalen</em>.</li>
+<li id="cite-monnens2013commenced">Devin Monnens (2013). “I Commenced an Examination of a Game Called Tit-Tat-To: Charles Babbage y the First Computer Game.” <em>DiGRA Conference</em>.</li>
+<li id="cite-borel1921theorie">Émile Borel (1921). “La théorie du jeu et les équations intégrales à noyau symétrique.” <em>Comptes rendus de l’Académie des Sciences</em>.</li>
+<li id="cite-ioffe2015batch">Sergey Ioffe y Christian Szegedy (2015). “Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift.” <em>International Conference on Machine Learning</em>.</li>
+<li id="cite-edwards1994portable">Steven J. Edwards (1994). <em>Portable Game Notation Specification y Implementation Guide</em>.</li>
+<li id="cite-lichess"><em>Lichess</em>. lichess.org.</li>
+<li id="cite-chessprogrammingboardrepresentation"><em>Board Representation</em>. Chessprogramming Wiki.</li>
+<li id="cite-ershov1980early">Andrei P. Ershov y Mikhail R. Shura-Bura (1980). “The Early Development of Programming in the USSR.” <em>A History of Computing in the Twentieth Century</em>.</li>
+<li id="cite-mcilroy2022learning">Reid McIlroy-Young, Russell Wang, Siddhartha Sen, Jon Kleinberg, y Ashton Anderson (2022). “Learning Models of Individual Behavior in Chess.” <em>Proceedings of the 28th ACM SIGKDD Conference</em>.</li>
+<li id="cite-mcilroy2020aligning">Reid McIlroy-Young, Siddhartha Sen, Jon Kleinberg, y Ashton Anderson (2020). “Aligning Superhuman AI with Human Behavior: Chess as a Model System.” <em>Proceedings of the 26th ACM SIGKDD International Conference</em>.</li>
+<li id="cite-kunn2020cognitive">Steffen Künn, Christian Seel, y Dainis Zegners (2020). “Cognitive Performance in the Home Office: Evidence from Professional Chess.” <em>IZA Discussion Paper</em>.</li>
+<li id="cite-nasu2018efficiently">Yu Nasu (2018). <em>Efficiently Updatable Neural-Network-Based Evaluation Functions for Computer Shogi</em>.</li>
+<li id="cite-klein2022neural">Dominik Klein (2022). <em>Neural Networks for Chess</em>. arXiv:2209.01506.</li>
 </ol>

@@ -28,7 +28,7 @@ El principal desafío que enfrenta LCZero en comparación con AlphaZero radica e
 
 La red neuronal en cuestión cuenta con un gran número de capas, particularmente en la sección de extracción de características. La entrada está formada por una serie de canales (matrices de 8x8), los cuales adoptan únicamente valores 0 o 1. Estos canales contienen la información de la posición en una forma que resulta fácilmente interpretable para la red neuronal. Posteriormente, se realiza la extracción de características; durante este proceso, la red neuronal identifica y extrae patrones a partir de los canales de entrada. Estos patrones son luego procesados por las capas finales de la red para determinar el valor del estado actual y la política de selección de acciones.
 
-La Figura [referencia](#fig-red-neuronal-de-alphazero) muestra la red neuronal usada por AlphaZero con las partes antes mencionadas.
+La [Figura 1](#fig-red-neuronal-de-alphazero) muestra la red neuronal usada por AlphaZero con las partes antes mencionadas.
 
 <figure id="fig-red-neuronal-de-alphazero">
   <div class="localized-diagram" data-diagram="alphazero-network" data-label="Red neuronal de AlphaZero" role="img" aria-label="Red neuronal de AlphaZero">Red neuronal de AlphaZero</div>
@@ -43,14 +43,14 @@ El primer grupo se compone de la información relativa a la disposición de las 
 
 Para representar la disposición de las piezas se utiliza el formato conocido como *one-hot encoding*. En este formato, todos los elementos de la matriz $8 \times 8$ se establecen inicialmente en 0 y se cambian a 1 si una pieza de un tipo particular se encuentra en esa casilla. De este modo, cada tipo de pieza está asociado con un canal específico.
 
-A modo de ilustración, consideremos el tablero mostrado en la Figura [referencia](#fig-posicion-de-ejemplo-para-mostrar-el-formato-one-hot-encoding). A continuación, se muestran los canales correspondientes a varias de las piezas presentes en este tablero.
+A modo de ilustración, consideremos el tablero mostrado en la [Figura 2](#fig-posicion-de-ejemplo-para-mostrar-el-formato-one-hot-encoding). A continuación, se muestran los canales correspondientes a varias de las piezas presentes en este tablero.
 
 <figure id="fig-posicion-de-ejemplo-para-mostrar-el-formato-one-hot-encoding">
   <div class="chessboard" data-fen="rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7" data-size="8" data-chess-options="&quot;maxfield=h8, setfen=rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7, largeboard&quot;" role="img" aria-label="Posición de ejemplo para mostrar el formato one-hot encoding" data-rendered="source" data-board-asset="board-8x8-8a233edf3b81d5da.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-8a233edf3b81d5da.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
   <figcaption>Posición de ejemplo para mostrar el formato <em>one-hot encoding</em></figcaption>
 </figure>
 
-En primer lugar, se inicia con los peones blancos. La Figura [referencia](#fig-representacion-en-formato-one-hot-encoding-de-los-peones-blancos) muestra la matriz resultante. En esta matriz, todas las posiciones ocupadas por peones blancos se representan con el valor 1, mientras que las posiciones vacías se representan con el valor 0. Cada tipo de pieza (peón, caballo, alfil, torre, dama y rey de ambos colores) se asigna a un canal específico, lo que da un total de 12 canales distintos.
+En primer lugar, se inicia con los peones blancos. La [Figura 3](#fig-representacion-en-formato-one-hot-encoding-de-los-peones-blancos) muestra la matriz resultante. En esta matriz, todas las posiciones ocupadas por peones blancos se representan con el valor 1, mientras que las posiciones vacías se representan con el valor 0. Cada tipo de pieza (peón, caballo, alfil, torre, dama y rey de ambos colores) se asigna a un canal específico, lo que da un total de 12 canales distintos.
 
 <figure id="fig-representacion-en-formato-one-hot-encoding-de-los-peones-blancos">
   <div class="figure-equation" data-math="\begin{bmatrix}
@@ -66,7 +66,7 @@ En primer lugar, se inicia con los peones blancos. La Figura [referencia](#fig-r
   <figcaption>Representación en formato <em>one-hot encoding</em> de los peones blancos</figcaption>
 </figure>
 
-En el caso siguiente, se procede con los caballos negros. La Figura [referencia](#fig-representacion-en-formato-one-hot-encoding-de-los-caballos-negros) ilustra el canal correspondiente a esta pieza.
+En el caso siguiente, se procede con los caballos negros. La [Figura 4](#fig-representacion-en-formato-one-hot-encoding-de-los-caballos-negros) ilustra el canal correspondiente a esta pieza.
 
 <figure id="fig-representacion-en-formato-one-hot-encoding-de-los-caballos-negros">
   <div class="figure-equation" data-math="\begin{bmatrix}
@@ -122,7 +122,7 @@ La porción de la red neuronal que se dedica a la extracción de característica
 
 Gracias a esta conexión residual, se puede realizar la retropropagación (*backpropagation*) de manera más directa, sin necesidad de pasar por todas las capas intermedias.
 
-La Figura [referencia](#fig-estructura-de-un-bloque-residual-en-alphazero) ilustra la estructura de un bloque residual como el que se ha descrito anteriormente.
+La [Figura 5](#fig-estructura-de-un-bloque-residual-en-alphazero) ilustra la estructura de un bloque residual como el que se ha descrito anteriormente.
 
 <figure id="fig-estructura-de-un-bloque-residual-en-alphazero">
   <div class="localized-diagram" data-diagram="alphazero-residual" data-label="Estructura de un bloque residual en AlphaZero" role="img" aria-label="Estructura de un bloque residual en AlphaZero">Estructura de un bloque residual en AlphaZero</div>
@@ -137,7 +137,7 @@ Aunque a primera vista, $8*8*73=4672$ puede parecer una cantidad exorbitante de 
 
 Dentro de estos 73 movimientos posibles, los primeros 56 corresponden a los movimientos de la dama, incluyendo todos los movimientos posibles para la dama, rey, alfil y torre. Los ocho movimientos subsecuentes, es decir, aquellos del 57 al 64, engloban los ocho posibles saltos del caballo. Finalmente, los 9 movimientos restantes están reservados para las situaciones en que un peón es promovido a otra pieza que no es una dama.
 
-La lógica detrás de los movimientos de la dama se rige por la orientación de un compás; en consecuencia, la dama puede moverse en cualquiera de las 8 direcciones indicadas por este. En cada dirección, la dama tiene la capacidad de moverse entre 1 y 7 casillas. El producto de estos valores nos proporciona el total de movimientos posibles para la dama. Durante la codificación, se asignará a cada dirección un valor numérico entre 1 y 7, tal y como se muestra en la Figura [referencia](#fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama). A este valor se le sumará el número de casillas que la dama planea moverse.
+La lógica detrás de los movimientos de la dama se rige por la orientación de un compás; en consecuencia, la dama puede moverse en cualquiera de las 8 direcciones indicadas por este. En cada dirección, la dama tiene la capacidad de moverse entre 1 y 7 casillas. El producto de estos valores nos proporciona el total de movimientos posibles para la dama. Durante la codificación, se asignará a cada dirección un valor numérico entre 1 y 7, tal y como se muestra en la [Figura 6](#fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama). A este valor se le sumará el número de casillas que la dama planea moverse.
 
 <figure id="fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama">
   <div class="localized-diagram" data-diagram="alphazero-directions" data-label="Asignación de valores a las direcciones de los movimientos de dama" role="img" aria-label="Asignación de valores a las direcciones de los movimientos de dama">Asignación de valores a las direcciones de los movimientos de dama</div>
@@ -150,7 +150,7 @@ $$
 f(\alpha_d,c) = 7*\alpha_d + c
 $$
 
-$\alpha_d$ es el coeficiente de las direcciones (consultar Figura [referencia](#fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama)) y $c$ el número de casillas a mover.
+$\alpha_d$ es el coeficiente de las direcciones (consultar [Figura 6](#fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama)) y $c$ el número de casillas a mover.
 
 A continuación un ejemplo para clarificar el funcionamiento.
 
@@ -169,7 +169,7 @@ $$
 
 En esta fórmula, $\beta_s$ denota el coeficiente del salto del caballo conforme al sentido de las agujas del reloj. A este coeficiente se le suma $56$ para indicar un movimiento de caballo.
 
-La Figura [referencia](#fig-ejemplo-de-codificacion-de-los-movimientos-del-caballo) proporciona un ejemplo ilustrativo de este esquema de codificación.
+La [Figura 7](#fig-ejemplo-de-codificacion-de-los-movimientos-del-caballo) proporciona un ejemplo ilustrativo de este esquema de codificación.
 
 <figure id="fig-ejemplo-de-codificacion-de-los-movimientos-del-caballo">
   <div class="chessboard" data-fen="8/8/8/8/8/5n2/8/8" data-size="8" data-arrows="f3-e1" data-chess-options="&quot;maxfield=h8, setfen=8/8/8/8/8/5n2/8/8, pgfstyle=straightmove, markmoves={f3-e1}, arrow=to, showmover=false, largeboard&quot;" role="img" aria-label="Ejemplo de codificación de los movimientos del caballo" data-rendered="source" data-board-asset="board-8x8-1819eb6e318dd5b5.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-1819eb6e318dd5b5.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
@@ -198,7 +198,7 @@ $$
 
 Donde $\delta_p$ es el coeficiente de la pieza promovida y $m$ el valor del movimiento correspondiente. Al valor original se le resta uno.
 
-A continuación, se muestra un ejemplo de la promoción de un peón. La Figura [referencia](#fig-ejemplo-de-codificacion-de-la-coronacion-de-un-peon) representa la posición inicial.
+A continuación, se muestra un ejemplo de la promoción de un peón. La [Figura 8](#fig-ejemplo-de-codificacion-de-la-coronacion-de-un-peon) representa la posición inicial.
 
 <figure id="fig-ejemplo-de-codificacion-de-la-coronacion-de-un-peon">
   <div class="chessboard" data-fen="8/1P6/8/8/8/8/8/8" data-size="8" data-arrows="b7-c8" data-chess-options="&quot;maxfield=h8, setfen=8/1P6/8/8/8/8/8/8, pgfstyle=straightmove, markmoves={b7-c8}, arrow=to, showmover=false, largeboard&quot;" role="img" aria-label="Ejemplo de codificación de la coronación de un peón" data-rendered="source" data-board-asset="board-8x8-bc29baaa433bc133.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-bc29baaa433bc133.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
@@ -256,7 +256,7 @@ Una vez finalizadas todas las simulaciones, se selecciona el mejor movimiento de
 
 A continuación, se presenta un ejemplo ilustrativo que tiene por objetivo esclarecer el funcionamiento del árbol de búsqueda Monte Carlo.
 
-Consideremos la posición que se muestra en la Figura [referencia](#fig-posicion-de-ejemplo-para-mcts), donde las blancas deben seleccionar entre tres movimientos posibles: Rf3, b3 y Db3.
+Consideremos la posición que se muestra en la [Figura 9](#fig-posicion-de-ejemplo-para-mcts), donde las blancas deben seleccionar entre tres movimientos posibles: Rf3, b3 y Db3.
 
 <figure id="fig-posicion-de-ejemplo-para-mcts">
   <div class="chessboard" data-fen="r3k2r/p2p1ppp/bqp1p3/3nP3/1bP1NP2/8/PP2K1PP/R1BQ1B1R w kq - 3 12" data-size="8" data-arrows="b2-b3, d1-b3, e2-f3" data-chess-options="&quot;maxfield=h8, setfen=r3k2r/p2p1ppp/bqp1p3/3nP3/1bP1NP2/8/PP2K1PP/R1BQ1B1R w kq - 3 12, pgfstyle=straightmove, markmoves={b2-b3, d1-b3, e2-f3}, arrow=to, largeboard&quot;" role="img" aria-label="Posición de ejemplo para el análisis con MCTS" data-rendered="source" data-board-asset="board-8x8-69f84c80365099a9.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-69f84c80365099a9.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>

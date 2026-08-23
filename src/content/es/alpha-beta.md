@@ -50,21 +50,21 @@ El siguiente ejemplo aporta una extensión al presentado en el capítulo previo,
 
 Este esquema conlleva una particularidad: no será factible explorar el árbol nivel por nivel como se hizo en los ejemplos anteriores, pues necesitaremos hacer referencia a los valores $\alpha$ y $\beta$ de los nodos hermanos.
 
-Sin más preámbulos, se presenta el ejemplo concreto en la siguiente figura, a la que haremos referencia como Figura [referencia](#fig-arbol-de-juego-generico-con-poda-alfa-beta):
+Sin más preámbulos, se presenta el ejemplo concreto en la siguiente figura, a la que haremos referencia como el [árbol de juego genérico con poda alfa-beta](#fig-arbol-de-juego-generico-con-poda-alfa-beta):
 
 <figure id="fig-arbol-de-juego-generico-con-poda-alfa-beta">
   <img src="/assets/book/alpha-beta/initial.png" alt="Árbol de juego genérico con poda alfa-beta" loading="lazy" />
   <figcaption>Árbol de juego genérico con poda alfa-beta</figcaption>
 </figure>
 
-Iniciaremos nuestra exploración desde el extremo izquierdo del árbol. De haber optado por comenzar desde la derecha, hubiéramos obtenido un árbol ligeramente diferente, pero la evaluación en el nodo final hubiera permanecido invariable. Por tanto, ambas estrategias son válidas. Asimismo, si alteramos el orden de visita entre los nodos hermanos, el resultado final se mantiene, aunque el número de nodos a procesar puede variar. Lamentablemente, la determinación del orden óptimo para ordenar los nodos —de modo que minimice la cantidad de procesamiento— es imposible sin desarrollar el árbol en su totalidad. Tras la primera fase de resolución, obtendremos el árbol que se muestra en la Figura [referencia](#fig-primera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta).
+Iniciaremos nuestra exploración desde el extremo izquierdo del árbol. De haber optado por comenzar desde la derecha, hubiéramos obtenido un árbol ligeramente diferente, pero la evaluación en el nodo final hubiera permanecido invariable. Por tanto, ambas estrategias son válidas. Asimismo, si alteramos el orden de visita entre los nodos hermanos, el resultado final se mantiene, aunque el número de nodos a procesar puede variar. Lamentablemente, la determinación del orden óptimo para ordenar los nodos —de modo que minimice la cantidad de procesamiento— es imposible sin desarrollar el árbol en su totalidad. Tras la primera fase de resolución, obtendremos el árbol que se muestra en la [primera fase de resolución alfa-beta](#fig-primera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta).
 
 <figure id="fig-primera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta">
   <img src="/assets/book/alpha-beta/phase1.png" alt="Primera fase de resolución de árbol de juego genérico con poda alfa-beta" loading="lazy" />
   <figcaption>Primera fase de resolución de árbol de juego genérico con poda alfa-beta</figcaption>
 </figure>
 
-El nodo procesado, que es el primer elemento del nivel 2, tiene asignado un valor heurístico de 5. Este valor se obtiene al ser el máximo entre 1 y 5. Además, como el nodo es de maximización y es el primer nodo procesado en ese nivel, se le asigna un valor de beta de $+\infty$ (infinito positivo). A continuación, al explorar el nodo hermano de este, se obtiene el árbol representado en la Figura [referencia](#fig-segunda-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta), correspondiente a la segunda fase de resolución del árbol de juego genérico con poda alfa-beta.
+El nodo procesado, que es el primer elemento del nivel 2, tiene asignado un valor heurístico de 5. Este valor se obtiene al ser el máximo entre 1 y 5. Además, como el nodo es de maximización y es el primer nodo procesado en ese nivel, se le asigna un valor de beta de $+\infty$ (infinito positivo). A continuación, al explorar el nodo hermano de este, se obtiene el árbol representado en la [segunda fase de resolución alfa-beta](#fig-segunda-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta), correspondiente a la segunda fase de resolución del árbol de juego genérico con poda alfa-beta.
 
 <figure id="fig-segunda-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta">
   <img src="/assets/book/alpha-beta/phase2.png" alt="Segunda fase de resolución de árbol de juego genérico con poda alfa-beta" loading="lazy" />
@@ -75,7 +75,7 @@ En este caso, lamentablemente, no se ha obtenido una ventaja significativa, ya q
 
 La beta del hermano del nodo procesado en el primer paso tiene un valor de 5, ya que se ha actualizado según la fórmula y ha tomado el valor de 5 de su hermano. A continuación, se asciende un nivel y se llega al nodo padre de estos, el cual tiene un valor de 2. El valor de $\alpha$ de este nodo es menos infinito, dado que es el primer nodo procesado de entre sus hermanos.
 
-En la siguiente fase, se procede a procesar el segundo hijo del nodo inicial, como se muestra en la Figura [referencia](#fig-tercera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta).
+En la siguiente fase, se procede a procesar el segundo hijo del nodo inicial, como se muestra en la [tercera fase de resolución alfa-beta](#fig-tercera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta).
 
 <figure id="fig-tercera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta">
   <img src="/assets/book/alpha-beta/phase3.png" alt="Tercera fase de resolución de árbol de juego genérico con poda alfa-beta" loading="lazy" />
@@ -86,7 +86,7 @@ En la etapa inicial, se procede a procesar el hijo izquierdo del segundo hijo de
 
 La lógica detrás de esta poda es que no se puede obtener un valor mejor que 1 en este nodo, ya que al ser un nodo de minimización, siempre se elegirá el valor 1 o uno menor en otro hijo. Además, dado que el valor de $\alpha$ es 2 y este es mayor que 1, no se incrementa.
 
-En la última etapa, se procede a procesar el hijo más a la derecha del nodo inicial, lo que resulta en los resultados mostrados en la Figura [referencia](#fig-ultima-fase-de-resolucion-de-arbol-de-juego-generico-para-mostrar-la-poda-alfa-beta).
+En la última etapa, se procede a procesar el hijo más a la derecha del nodo inicial, lo que resulta en los resultados mostrados en la [fase final de resolución alfa-beta](#fig-ultima-fase-de-resolucion-de-arbol-de-juego-generico-para-mostrar-la-poda-alfa-beta).
 
 <figure id="fig-ultima-fase-de-resolucion-de-arbol-de-juego-generico-para-mostrar-la-poda-alfa-beta">
   <img src="/assets/book/alpha-beta/phase4.png" alt="Última fase de resolución de árbol de juego genérico para mostrar la poda alfa-beta" loading="lazy" />
@@ -103,7 +103,7 @@ Finalmente, se obtiene el valor del nodo inicial, que es el máximo entre los va
 
 En el caso del ajedrez, el funcionamiento del algoritmo alfa-beta es exactamente igual al ejemplo genérico anteriormente presentado. Por lo tanto, en esta sección nos centraremos en las implicaciones y la importancia del orden en el que se visitan los nodos.
 
-La Figura [referencia](#fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez) muestra el ejemplo específico que se va a tratar, el cual es el mismo que se presentó en la Figura [referencia](#fig-cuarta-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez) en la sección anterior, relacionada con el algoritmo minimax.
+El [ejemplo de poda alfa-beta aplicado al ajedrez](#fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez) muestra el ejemplo específico que se va a tratar, el cual es el mismo que se presentó en la [cuarta fase de Minimax](/es/min-max#fig-cuarta-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez) en la sección anterior, relacionada con el algoritmo minimax.
 
 <figure id="fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez">
   <img src="/assets/book/min-max/example5.png" alt="Ejemplo de poda alfa-beta aplicado al ajedrez" loading="lazy" />
@@ -125,7 +125,7 @@ $$
 \textit{P07} \rightarrow \textit{P03} \rightarrow \textit{P08} \rightarrow \textit{P09} \rightarrow \textit{P04} \rightarrow \textit{P01}
 $$
 
-La Figura [referencia](#fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez-usando-orden-izquierda-derecha) muestra el árbol usando el recorrido de izquierda-derecha descrito anteriormente.
+El [árbol alfa-beta de izquierda a derecha](#fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez-usando-orden-izquierda-derecha) muestra el árbol usando el recorrido de izquierda-derecha descrito anteriormente.
 
 <figure id="fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez-usando-orden-izquierda-derecha">
   <img src="/assets/book/min-max/example5.png" alt="Ejemplo de poda alfa beta aplicado al ajedrez usando orden izquierda-derecha" loading="lazy" />

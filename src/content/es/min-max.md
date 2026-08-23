@@ -26,7 +26,7 @@ Un último aspecto a explicar es cómo se determina la valoración de cada estad
 
 El concepto del algoritmo minimax puede ser un tanto abstracto a primera vista, por lo que se proporciona un ejemplo paso a paso de su aplicación en la sección a continuación.
 
-El primer paso es calcular los valores de los estados finales del árbol de juego generado (en este caso, los estados al final de cada rama), empleando la heurística. Este proceso se representa en la Figura [referencia](#fig-primer-paso-del-algoritmo-minimax-generico).
+El primer paso es calcular los valores de los estados finales del árbol de juego generado (en este caso, los estados al final de cada rama), empleando la heurística. Este proceso se representa en el [primer paso del Minimax genérico](#fig-primer-paso-del-algoritmo-minimax-generico).
 
 <figure id="fig-primer-paso-del-algoritmo-minimax-generico">
   <img src="/assets/book/min-max/step1.png" alt="Primer paso del algoritmo Minimax genérico" loading="lazy" />
@@ -35,14 +35,14 @@ El primer paso es calcular los valores de los estados finales del árbol de jueg
 
 En el árbol de decisión, aquellos valores que ya han sido determinados se ilustran utilizando su valor numérico correspondiente. Por otro lado, los nodos cuyos valores aún no han sido calculados se representarán como Max o Min, esto dependerá de si su valor será el máximo o mínimo de sus nodos hijos respectivamente. Es importante destacar que los nodos cuyos valores ya han sido calculados no poseen nodos hijos, es decir, no están vinculados a ningún nodo en un nivel inferior. En la terminología del árbol de decisiones, a estos nodos se les llama nodos hoja, haciendo una analogía con las hojas de un árbol en el mundo natural.
 
-Una vez que se han calculado las heurísticas de estos estados finales, podemos proceder a determinar la heurística del nivel inmediatamente adyacente. Para ello, debemos tomar el valor mínimo de los estados en el nivel inferior, lo cual corresponde a la fase de minimización. Por ejemplo, en el nodo ubicado a la izquierda del nivel 1, se tomará $\min(1,45;0,2)$, aquí, el uso del punto y coma es para evitar confusiones con la coma que se utiliza para separar cifras decimales y enteras, y se obtendrá como resultado 0,2, ya que este valor es menor que 1,45. Siguiendo este proceso, en el estado central del nivel 1, seleccionamos $\min(0,25;0,34)$ y obtenemos 0,25, ya que es menor que 0,34. Finalmente, el nodo ubicado a la derecha en el nivel 1, al ser un estado final, ya tiene un valor calculado, por lo que se ignora temporalmente. En la Figura [referencia](#fig-segundo-paso-del-algoritmo-minimax-generico), se ilustra el resultado de este proceso.
+Una vez que se han calculado las heurísticas de estos estados finales, podemos proceder a determinar la heurística del nivel inmediatamente adyacente. Para ello, debemos tomar el valor mínimo de los estados en el nivel inferior, lo cual corresponde a la fase de minimización. Por ejemplo, en el nodo ubicado a la izquierda del nivel 1, se tomará $\min(1,45;0,2)$, aquí, el uso del punto y coma es para evitar confusiones con la coma que se utiliza para separar cifras decimales y enteras, y se obtendrá como resultado 0,2, ya que este valor es menor que 1,45. Siguiendo este proceso, en el estado central del nivel 1, seleccionamos $\min(0,25;0,34)$ y obtenemos 0,25, ya que es menor que 0,34. Finalmente, el nodo ubicado a la derecha en el nivel 1, al ser un estado final, ya tiene un valor calculado, por lo que se ignora temporalmente. El [segundo paso del Minimax genérico](#fig-segundo-paso-del-algoritmo-minimax-generico) ilustra el resultado de este proceso.
 
 <figure id="fig-segundo-paso-del-algoritmo-minimax-generico">
   <img src="/assets/book/min-max/step2.png" alt="Segundo paso del algoritmo Minimax genérico" loading="lazy" />
   <figcaption>Segundo paso del algoritmo Minimax genérico</figcaption>
 </figure>
 
-Ahora, debemos llevar a cabo una fase de maximización. Es decir, necesitamos obtener el valor máximo de los estados adyacentes inferiores al estado situado en el nivel cero o estado inicial. Así, aplicamos $\max(0,2;0,25;2,32)$, obteniendo como resultado 2,32, ya que este valor es mayor que 0,2 y 0,25. Dado que este es el estado inicial, se ha completado el algoritmo Minimax. Por tanto, podemos determinar que la mejor transición es la que lleva al estado con el valor 2,32. En la Figura [referencia](#fig-tercer-paso-del-algoritmo-minimax-generico), se muestra el árbol de juego finalizado.
+Ahora, debemos llevar a cabo una fase de maximización. Es decir, necesitamos obtener el valor máximo de los estados adyacentes inferiores al estado situado en el nivel cero o estado inicial. Así, aplicamos $\max(0,2;0,25;2,32)$, obteniendo como resultado 2,32, ya que este valor es mayor que 0,2 y 0,25. Dado que este es el estado inicial, se ha completado el algoritmo Minimax. Por tanto, podemos determinar que la mejor transición es la que lleva al estado con el valor 2,32. El [tercer paso del Minimax genérico](#fig-tercer-paso-del-algoritmo-minimax-generico) muestra el árbol de juego finalizado.
 
 <figure id="fig-tercer-paso-del-algoritmo-minimax-generico">
   <img src="/assets/book/min-max/step3.png" alt="Tercer paso del algoritmo Minimax genérico" loading="lazy" />
@@ -63,14 +63,14 @@ Finalmente, cabe destacar que la expansión de este árbol de juego estará limi
 
 #### Ejemplo aplicado al ajedrez
 
-Se presenta el árbol de juego ilustrado en la Figura [referencia](#fig-arbol-de-juego-del-ejemplo-de-minimax-aplicado-al-ajedrez), que representa la secuencia de movimientos en el ejemplo de aplicación del algoritmo minimax al juego de ajedrez. La posición inicial corresponde al comienzo de una partida de ajedrez estándar, donde las blancas realizan la jugada d4, seguida por la respuesta de las negras con d5. A partir de esta posición, las blancas deben tomar la decisión de determinar cuál movimiento es el mejor.
+Se presenta el [árbol de juego del ejemplo de Minimax aplicado al ajedrez](#fig-arbol-de-juego-del-ejemplo-de-minimax-aplicado-al-ajedrez), que representa la secuencia de movimientos en el ejemplo de aplicación del algoritmo minimax al juego de ajedrez. La posición inicial corresponde al comienzo de una partida de ajedrez estándar, donde las blancas realizan la jugada d4, seguida por la respuesta de las negras con d5. A partir de esta posición, las blancas deben tomar la decisión de determinar cuál movimiento es el mejor.
 
 <figure id="fig-arbol-de-juego-del-ejemplo-de-minimax-aplicado-al-ajedrez">
   <img src="/assets/book/min-max/example1-es.png" alt="Árbol de juego del ejemplo de minimax aplicado al ajedrez" loading="lazy" />
   <figcaption>Árbol de juego del ejemplo de minimax aplicado al ajedrez</figcaption>
 </figure>
 
-Cada nodo del árbol representa una posición del tablero y las diferentes ramas indican los posibles movimientos que se pueden realizar desde esa posición. La Figura [referencia](#fig-tableros-representados-en-el-ejemplo-de-minimax-aplicado-al-ajedrez) muestra los tableros correspondientes a cada posición representada en el ejemplo de aplicación del algoritmo minimax al ajedrez.
+Cada nodo del árbol representa una posición del tablero y las diferentes ramas indican los posibles movimientos que se pueden realizar desde esa posición. Los [tableros del ejemplo de Minimax aplicado al ajedrez](#fig-tableros-representados-en-el-ejemplo-de-minimax-aplicado-al-ajedrez) muestran los tableros correspondientes a cada posición representada en el ejemplo de aplicación del algoritmo minimax al ajedrez.
 
 <figure id="fig-tableros-representados-en-el-ejemplo-de-minimax-aplicado-al-ajedrez">
   <div class="subfigure-grid" role="group" aria-label="Tableros representados en el ejemplo de minimax aplicado al ajedrez">
@@ -128,7 +128,7 @@ Cada nodo del árbol representa una posición del tablero y las diferentes ramas
 
 Una vez que se ha obtenido el árbol de juego y las posiciones correspondientes, se puede proceder a la siguiente fase del algoritmo Minimax, que consiste en calcular el valor de las posiciones terminales. Estas posiciones se refieren a aquellas que no tienen ramas saliendo de ellas, es decir, no se pueden realizar más movimientos a partir de ellas.
 
-Al calcular la heurística de estas posiciones terminales, se obtendrá una aproximación realista del valor de cada posición. El resultado de este cálculo dará lugar a una nueva representación del árbol de juego, como se muestra en la Figura [referencia](#fig-primera-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez).
+Al calcular la heurística de estas posiciones terminales, se obtendrá una aproximación realista del valor de cada posición. El resultado de este cálculo dará lugar a una nueva representación del árbol de juego, como se muestra en la [primera fase del ejemplo de Minimax aplicado al ajedrez](#fig-primera-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez).
 
 <figure id="fig-primera-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez">
   <img src="/assets/book/min-max/example2.png" alt="Primera fase del ejemplo de minimax aplicado al ajedrez" loading="lazy" />
@@ -157,7 +157,7 @@ En cuanto al proceso de minimización en el nivel 1, el estado P03 toma el valor
 
 En la tercera fase del algoritmo, se realiza el cálculo del valor del estado restante en el nivel 1, que es P02. En este caso, el valor de P02 se determina como el mínimo entre los valores de P05 y P06, ya que se encuentra en un nivel impar, lo que implica una fase de minimización.
 
-Con este cálculo adicional, se han obtenido todos los valores necesarios para calcular el valor del estado original. Este estado original está representado en la Figura [referencia](#fig-cuarta-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez). A partir de los valores calculados en las fases anteriores, se puede determinar el valor óptimo de este estado según el algoritmo minimax, considerando las estrategias de maximización y minimización en los niveles correspondientes del árbol de juego.
+Con este cálculo adicional, se han obtenido todos los valores necesarios para calcular el valor del estado original. Este estado original está representado en la [cuarta fase del ejemplo de Minimax aplicado al ajedrez](#fig-cuarta-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez). A partir de los valores calculados en las fases anteriores, se puede determinar el valor óptimo de este estado según el algoritmo minimax, considerando las estrategias de maximización y minimización en los niveles correspondientes del árbol de juego.
 
 <figure id="fig-cuarta-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez">
   <img src="/assets/book/min-max/example5.png" alt="Cuarta fase del ejemplo de minimax aplicado al ajedrez" loading="lazy" />

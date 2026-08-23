@@ -16,7 +16,7 @@ draft: false
 
 After exploring the search mechanisms in artificial intelligence games, it is crucial to examine another essential component: the representation of the game board. This element fulfills two primary functions in the context of search. The first of these is the generation of all possible moves from the current position in the game. Secondly, it handles the transitions from one move to the next, that is, it provides the new position on the board based on the move and the previous state of the same. Both functions are invoked repeatedly in the game tree. Given the relevance of these operations and the fact that the quality of a move depends both on the depth of tree expansion and the time this entails, it is essential that both functions be implemented as efficiently as possible.
 
-For an effective implementation of these functions, it is imperative to consider how the game board is represented in the computer's memory. There are various methods for this, each with its own benefits and limitations. We can group these methods into three general categories: piece-centric methods, board-centric methods, and hybrid methods <cite><a href="/en/references#cite-chessprogrammingboardrepresentation" data-cite="chessprogrammingBoardRepresentation">[chessprogrammingBoardRepresentation]</a></cite>. The nomenclature of these categories is quite descriptive.
+For an effective implementation of these functions, it is imperative to consider how the game board is represented in the computer's memory. There are various methods for this, each with its own benefits and limitations. We can group these methods into three general categories: piece-centric methods, board-centric methods, and hybrid methods <cite><a href="/en/references#cite-chessprogrammingboardrepresentation" data-cite="chessprogrammingBoardRepresentation">[Chessprogramming Wiki]</a></cite>. The nomenclature of these categories is quite descriptive.
 
 Piece-centric methods focus on representing the pieces directly, maintaining lists or other data structures with the information associated with each piece and its position on the board. On the other hand, board-centric methods focus on examining each square of the board individually to determine if it contains a piece and, if so, what type of piece it is. Finally, hybrid methods are those that combine aspects of both approaches.
 
@@ -51,7 +51,9 @@ Computers perform two types of basic operations: arithmetic and logical. Arithme
 
 Logical operations are usually performed on one or two variables, although they are easily extensible to a greater number of variables. To represent these operations, so-called logic gates are used. These take one or more variables as input and generate a single output. Both the variables and the output can take the values 0 or 1.
 
-The main logic gates for one variable are those shown in Table [reference](#tab-puertas-logicas-de-una-variable).
+The main logic gates for one variable are those shown in [Table 1](#tab-puertas-logicas-de-una-variable).
+
+<div id="tab-puertas-logicas-de-una-variable"></div>
 
 | Values | NOT | Identity |
 | --- | --- | --- |
@@ -62,7 +64,9 @@ The main logic gates for one variable are those shown in Table [reference](#tab-
 
 The NOT logic gate inverts the value of the input. If the input is 0, the output will be 1 and vice versa. On the other hand, the identity gate simply leaves the input value unchanged.
 
-Next, let us consider two-variable logic gates, which are somewhat more complex but can be extended to more than two variables. Table [reference](#tab-puertas-logicas-de-dos-variables) shows the main two-variable logic gates.
+Next, let us consider two-variable logic gates, which are somewhat more complex but can be extended to more than two variables. [Table 2](#tab-puertas-logicas-de-dos-variables) shows the main two-variable logic gates.
+
+<div id="tab-puertas-logicas-de-dos-variables"></div>
 
 | Values | OR | AND | XOR |
 | --- | --- | --- | --- |

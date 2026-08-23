@@ -23,9 +23,11 @@ A lo largo de este texto, vamos a asumir que la política opera sobre un espacio
 Las políticas deterministas se pueden representar mediante la siguiente función:
 
 $$
-f(\alpha) = \beta \\
-\alpha \in E \\
-\beta \in A
+\begin{aligned}
+f(\alpha) &= \beta \\
+\alpha &\in E \\
+\beta &\in A
+\end{aligned}
 $$
 
 donde:
@@ -33,7 +35,7 @@ donde:
 - $\alpha$ representa el estado actual,
 - $\beta$ es la acción a tomar,
 - $E$ es el conjunto de todos los estados posibles,
-- $A$ es el conjunto de todas las acciones posibles \\ 
+- $A$ es el conjunto de todas las acciones posibles
   ($A=\{0,1,...,n-1\}$) y
 - $n$ es el número total de acciones.
 
@@ -42,9 +44,11 @@ Dado que las acciones están enumeradas desde $0$ hasta $n-1$, cualquier número
 La estructuración de las políticas no deterministas es un poco más compleja. En lugar de devolver un solo número, estas políticas devuelven un vector con $n$ elementos, donde $n$ es el número de acciones. Los elementos de este vector son probabilidades, de modo que el valor en la posición $i$ del vector representa la probabilidad de escoger la acción $i$. Al tratarse de probabilidades, la suma de todos los elementos del vector debe ser $1$. La función que representa estas políticas es la siguiente:
 
 $$
-f(\alpha) = \Delta \\
-\alpha \in E \\
-\Delta = \{\delta_0, ...,& \delta_{n-1}\}
+\begin{aligned}
+f(\alpha) &= \Delta \\
+\alpha &\in E \\
+\Delta &= \{\delta_0, \ldots, \delta_{n-1}\}
+\end{aligned}
 $$
 
 donde:
@@ -60,17 +64,19 @@ Después de recibir la salida de esta función, se elige una acción de acuerdo 
 En el caso del tablero de juego 2D descrito en la sección anterior, hay cuatro acciones posibles (arriba, derecha, abajo e izquierda). Enumeramos estas acciones de la siguiente manera para poder implementar las políticas:
 
 $$
-&0: \textrm{Arriba} \\
-&1: \textrm{Derecha} \\
-&2: \textrm{Abajo} \\
-&3: \textrm{Izquierda} \\
+\begin{aligned}
+0 &: \text{Arriba} \\
+1 &: \text{Derecha} \\
+2 &: \text{Abajo} \\
+3 &: \text{Izquierda}
+\end{aligned}
 $$
 
-Dadas las recompensas esperadas (valores) mostradas en la Figura [referencia](#fig-recompensas-esperadas-para-calcular-la-politica-en-el-grid-de-2-dimensiones), podemos mostrar cómo seleccionaría las acciones una política determinista y una no determinista.
+Dadas las recompensas esperadas (valores) mostradas en la [Figura 1: Recompensas esperadas para calcular la política](#fig-recompensas-esperadas-para-calcular-la-politica-en-el-grid-de-2-dimensiones), podemos mostrar cómo seleccionaría las acciones una política determinista y una no determinista.
 
 <figure id="fig-recompensas-esperadas-para-calcular-la-politica-en-el-grid-de-2-dimensiones">
   <img src="/assets/book/reward/values2.png" alt="Recompensas esperadas para calcular la política en el Grid de 2 dimensiones" loading="lazy" />
-  <figcaption>Recompensas esperadas para calcular la política en el <em>Grid</em> de 2 dimensiones</figcaption>
+  <figcaption>Figura 1. Recompensas esperadas para calcular la política en el <em>Grid</em> de 2 dimensiones</figcaption>
 </figure>
 
 La pieza de juego está ubicada en la casilla inicial (esquina superior izquierda) y puede realizar las cuatro acciones. Dado que las casillas sin ningún valor tendrían un valor de $0$, la política determinista devolvería el valor 2, correspondiente a moverse hacia abajo. Este movimiento llevaría al estado con mayor valor. Siguiendo este procedimiento, la política determinista continuaría seleccionando el valor 2 hasta llegar a la esquina inferior izquierda. A partir de ese punto, sólo devolvería el valor 1, correspondiente al movimiento a la derecha, hasta llegar a la casilla final.

@@ -23,7 +23,7 @@ Para iniciar nuestro recorrido, es crucial conocer los elementos básicos o bloq
 - Bifurcación
 - Proceso
 
-El bloque "Comienzo/Fin" marca el inicio y el cierre del flujo del programa. Un diagrama de flujo puede tener múltiples bloques de "Fin", pero solo un bloque de "Comienzo". Ambos son representados por un rectángulo de bordes redondeados. La Figura [referencia](#fig-representacion-de-comienzo-y-fin-en-un-diagrama-de-flujo) ilustra estos bloques.
+El bloque "Comienzo/Fin" marca el inicio y el cierre del flujo del programa. Un diagrama de flujo puede tener múltiples bloques de "Fin", pero solo un bloque de "Comienzo". Ambos son representados por un rectángulo de bordes redondeados. El [diagrama de bloques de comienzo y fin](#fig-representacion-de-comienzo-y-fin-en-un-diagrama-de-flujo) ilustra estos bloques.
 
 <figure id="fig-representacion-de-comienzo-y-fin-en-un-diagrama-de-flujo">
   <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="2" data-mermaid="flowchart LR
@@ -37,7 +37,7 @@ El bloque "Comienzo/Fin" marca el inicio y el cierre del flujo del programa. Un 
   <figcaption>Representación de comienzo y fin en un diagrama de flujo</figcaption>
 </figure>
 
-Los bloques de "Entrada/Salida" definen las entradas y salidas del algoritmo. A diferencia de los bloques de "Comienzo" y "Fin", estos pueden llevar un nombre descriptivo en lugar de un término genérico, proporcionando una visión más detallada de la funcionalidad del algoritmo. Estos bloques se representan a través de romboides, como se muestra en la Figura [referencia](#fig-representacion-de-entradas-y-salidas-en-un-diagrama-de-flujo).
+Los bloques de "Entrada/Salida" definen las entradas y salidas del algoritmo. A diferencia de los bloques de "Comienzo" y "Fin", estos pueden llevar un nombre descriptivo en lugar de un término genérico, proporcionando una visión más detallada de la funcionalidad del algoritmo. Estos bloques se representan a través de romboides, como se muestra en el [diagrama de bloques de entrada y salida](#fig-representacion-de-entradas-y-salidas-en-un-diagrama-de-flujo).
 
 <figure id="fig-representacion-de-entradas-y-salidas-en-un-diagrama-de-flujo">
   <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="2" data-mermaid="flowchart LR
@@ -51,7 +51,7 @@ Los bloques de "Entrada/Salida" definen las entradas y salidas del algoritmo. A 
   <figcaption>Representación de entradas y salidas en un diagrama de flujo</figcaption>
 </figure>
 
-El bloque "Bifurcación" brinda la posibilidad de ejecutar distintas acciones dependiendo del cumplimiento de una condición determinada. Esto amplía la expresividad de los algoritmos y permite incorporar lógica condicional. Se representan con un cuadrado rotado 45 grados. La Figura [referencia](#fig-representacion-de-bifurcaciones-en-un-diagrama-de-flujo) ilustra este bloque.
+El bloque "Bifurcación" brinda la posibilidad de ejecutar distintas acciones dependiendo del cumplimiento de una condición determinada. Esto amplía la expresividad de los algoritmos y permite incorporar lógica condicional. Se representan con un cuadrado rotado 45 grados. El [diagrama del bloque de bifurcación](#fig-representacion-de-bifurcaciones-en-un-diagrama-de-flujo) ilustra este bloque.
 
 <figure id="fig-representacion-de-bifurcaciones-en-un-diagrama-de-flujo">
   <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="1" data-mermaid="flowchart LR
@@ -63,7 +63,7 @@ El bloque "Bifurcación" brinda la posibilidad de ejecutar distintas acciones de
   <figcaption>Representación de bifurcaciones en un diagrama de flujo</figcaption>
 </figure>
 
-Por último, los bloques de "Proceso" indican las acciones que se realizan en relación al algoritmo. Aunque su representación suele ser abstracta en la mayoría de los casos, estos bloques suelen incluir una descripción más detallada de la acción que se está llevando a cabo. Se representan mediante un rectángulo. La Figura [referencia](#fig-representacion-de-procesos-en-un-diagrama-de-flujo) muestra cómo se representa un bloque de proceso en un diagrama de flujo.
+Por último, los bloques de "Proceso" indican las acciones que se realizan en relación al algoritmo. Aunque su representación suele ser abstracta en la mayoría de los casos, estos bloques suelen incluir una descripción más detallada de la acción que se está llevando a cabo. Se representan mediante un rectángulo. El [diagrama del bloque de proceso](#fig-representacion-de-procesos-en-un-diagrama-de-flujo) muestra cómo se representa un bloque de proceso en un diagrama de flujo.
 
 <figure id="fig-representacion-de-procesos-en-un-diagrama-de-flujo">
   <div class="localized-diagram flow-diagram mermaid-flowchart" data-diagram="flowchart" data-node-count="1" data-mermaid="flowchart LR

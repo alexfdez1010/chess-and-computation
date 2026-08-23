@@ -48,7 +48,7 @@ On the board, at the beginning of the game, the king is located in the center of
   <figcaption>Possible king moves</figcaption>
 </figure>
 
-As can be seen on the board, the king can move to all adjacent squares, either in horizontal, vertical, or diagonal direction, but can only move one step at a time. In addition, the king has a special move called castling, which allows moving the king and a rook simultaneously in the same move, providing the king with a safer location. In Appendix 3, an example of how this special move is performed is shown in Figure [reference](#fig-ejemplo-de-como-efectuar-el-enroque).
+As can be seen on the board, the king can move to all adjacent squares, either in horizontal, vertical, or diagonal direction, but can only move one step at a time. In addition, the king has a special move called castling, which allows moving the king and a rook simultaneously in the same move, providing the king with a safer location. In Appendix 3, an example of how this special move is performed is shown in the [castling example](/en/appendix3#fig-ejemplo-de-como-efectuar-el-enroque).
 
 ### Queen
 
@@ -59,7 +59,7 @@ After the king, the queen is considered the most important piece in chess, since
   <figcaption>Possible queen moves</figcaption>
 </figure>
 
-The queen can move to any square along the row, column, or diagonal where it is located. As can be seen in Figure [reference](#fig-movimientos-de-la-dama), the queen can move in all directions at any distance, as long as there is no piece blocking its path. The premature loss of the queen can lead to an almost inevitable defeat, due to its ability to control large areas of the board and participate in numerous combinations and attacks.
+The queen can move to any square along the row, column, or diagonal where it is located. As can be seen in the [queen moves diagram](#fig-movimientos-de-la-dama), the queen can move in all directions at any distance, as long as there is no piece blocking its path. The premature loss of the queen can lead to an almost inevitable defeat, due to its ability to control large areas of the board and participate in numerous combinations and attacks.
 
 ### Rook
 
@@ -70,7 +70,7 @@ Each player has two rooks, located in the corners of their respective side of th
   <figcaption>Possible rook moves</figcaption>
 </figure>
 
-As can be seen in Figure [reference](#fig-movimientos-de-la-torre), rooks can move along rows and columns in all directions. They can move from one end of the board to the other, which gives them great strategic and tactical capability, especially in the middle and endgame. Rooks are valuable pieces in chess, as they can control entire columns and rows, participate in combined attacks, and protect the king in defensive positions. Their mobility and versatility make them key pieces for planning strategies and achieving objectives in the game.
+As can be seen in the [rook moves diagram](#fig-movimientos-de-la-torre), rooks can move along rows and columns in all directions. They can move from one end of the board to the other, which gives them great strategic and tactical capability, especially in the middle and endgame. Rooks are valuable pieces in chess, as they can control entire columns and rows, participate in combined attacks, and protect the king in defensive positions. Their mobility and versatility make them key pieces for planning strategies and achieving objectives in the game.
 
 ### Bishop
 
@@ -81,7 +81,7 @@ Each player has two bishops, one located to the left of the queen and the other 
   <figcaption>Possible bishop moves</figcaption>
 </figure>
 
-Like rooks, bishops are valuable pieces in chess due to their unique movement ability along diagonals. As shown in Figure [reference](#fig-movimientos-del-alfil), bishops can move diagonally across the entire board. They can move from one end to the other in a single movement, taking advantage of their characteristic movement. This diagonal movement ability gives them great strategic and tactical utility, as they can control squares of different colors and participate in combined attacks. Bishops are key pieces in the opening and middle game, where their mobility can influence the development of the game and the occupation of strategic positions.
+Like rooks, bishops are valuable pieces in chess due to their unique movement ability along diagonals. As shown in the [bishop moves diagram](#fig-movimientos-del-alfil), bishops can move diagonally across the entire board. They can move from one end to the other in a single movement, taking advantage of their characteristic movement. This diagonal movement ability gives them great strategic and tactical utility, as they can control squares of different colors and participate in combined attacks. Bishops are key pieces in the opening and middle game, where their mobility can influence the development of the game and the occupation of strategic positions.
 
 ### Knight
 
@@ -92,7 +92,7 @@ The knight is one of the most unique pieces in chess, as it has an L-shaped move
   <figcaption>Possible knight moves</figcaption>
 </figure>
 
-As shown in Figure [reference](#fig-movimientos-del-caballo), the knight can move in an L-shaped movement, advancing two squares in one direction (horizontal or vertical) and then turning at a right angle to advance one additional square in a perpendicular direction. This peculiarity of movement allows the knight to jump over other pieces in its trajectory, which makes it an unpredictable and strategically interesting piece in the game. Each player has a pair of knights, which are positioned between the rooks and bishops in the initial board configuration. Knights are known for their ability to maneuver quickly across the board and can play an important role in creating threats, defense, and performing tactical combinations.
+As shown in the [knight moves diagram](#fig-movimientos-del-caballo), the knight can move in an L-shaped movement, advancing two squares in one direction (horizontal or vertical) and then turning at a right angle to advance one additional square in a perpendicular direction. This peculiarity of movement allows the knight to jump over other pieces in its trajectory, which makes it an unpredictable and strategically interesting piece in the game. Each player has a pair of knights, which are positioned between the rooks and bishops in the initial board configuration. Knights are known for their ability to maneuver quickly across the board and can play an important role in creating threats, defense, and performing tactical combinations.
 
 ### Pawn
 
@@ -103,7 +103,7 @@ Despite being the piece of lowest value, the pawn has a rather peculiar movement
   <figcaption>Possible pawn moves</figcaption>
 </figure>
 
-The pawn has a particularity in its movement and capture. As for its regular movement, the pawn can advance one square forward in its column, as shown in Figure [reference](#fig-movimientos-del-peon). Additionally, when in a capturing position, the pawn can only capture a piece on the two diagonal squares toward the other side of the board from where it is located.
+The pawn has a particularity in its movement and capture. As for its regular movement, the pawn can advance one square forward in its column, as shown in the [pawn moves diagram](#fig-movimientos-del-peon). Additionally, when in a capturing position, the pawn can only capture a piece on the two diagonal squares toward the other side of the board from where it is located.
 
 The pawn also has a special move called "en passant capture". This move applies when an enemy pawn advances two squares from its initial position and is in a position adjacent to the rival pawn. In that case, the pawn can capture the enemy pawn as if it had only advanced one square.
 

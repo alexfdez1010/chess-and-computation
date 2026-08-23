@@ -25,10 +25,12 @@ Esta es la razón por la cual el uso de un modelo puede ser extremadamente fruct
 Para ilustrar aún más este concepto, consideremos el ejemplo de un *Grid* 2D. Conocer el modelo de este juego en su forma original, es decir, en un entorno determinista, no añadiría valor, ya que ya sabemos a qué estado lleva cada acción. Sin embargo, si modificamos ligeramente la definición del juego, incorporando una probabilidad del 10% de que cada acción pueda resultar en un estado no previsto, las definiciones de las acciones cambiarían a:
 
 $$
-&0: \textrm{Arriba } 90\%, \textrm{ Derecha } 10\% \\
-&1: \textrm{Derecha } 90\%, \textrm{ Abajo } 10\% \\
-&2: \textrm{Abajo } 90\%, \textrm{ Izquierda } 10\% \\
-&3: \textrm{Izquierda } 90\%, \textrm{ Arriba } 10\%
+\begin{aligned}
+0 &: \text{Arriba } 90\%, \text{Derecha } 10\% \\
+1 &: \text{Derecha } 90\%, \text{Abajo } 10\% \\
+2 &: \text{Abajo } 90\%, \text{Izquierda } 10\% \\
+3 &: \text{Izquierda } 90\%, \text{Arriba } 10\%
+\end{aligned}
 $$
 
 Estas acciones son similares a las presentadas en la sección anterior, con el matiz adicional previamente mencionado. Además, dichas acciones modelan de forma más precisa situaciones de la vida real, por ejemplo, la tarea de guiar a un robot a través de un camino, donde las partes móviles del robot pueden introducir imprecisiones o errores.

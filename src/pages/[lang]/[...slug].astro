@@ -24,7 +24,13 @@ const entryLabel = isSection
       : entry.bookChapter === '0'
         ? (lang === 'es' ? 'Introducción' : 'Introduction')
         : (lang === 'es' ? 'Capítulo' : 'Chapter');
-const displayNumber = entry.bookChapter === '0' ? undefined : isSection ? entry.sectionNumber : /^\d$/.test(entry.bookChapter || '') ? entry.bookChapter?.padStart(2, '0') : entry.bookChapter;
+const displayNumber = entry.bookChapter === '0' || entry.bookChapter === 'references'
+  ? undefined
+  : isSection
+    ? entry.sectionNumber
+    : /^\d$/.test(entry.bookChapter || '')
+      ? entry.bookChapter?.padStart(2, '0')
+      : entry.bookChapter;
 const alternatePath = equivalentPath(entry, lang === 'es' ? 'en' : 'es');
 const Content = entry.Content;
 ---

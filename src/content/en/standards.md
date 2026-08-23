@@ -32,14 +32,27 @@ Forsyth-Edwards Notation (FEN) establishes a universal standard that can be inte
 
 FEN notation is divided into six fields, each separated by spaces. Below, the content and interpretation of each of these fields are detailed:
 
-1. **Piece placement:** Defines the arrangement of pieces on the board, row by row, starting from the upper left corner. Each piece is represented by its identifying letter in English (consult Table [reference](#tab-designaciones-en-espanol-e-ingles-para-cada-tipo-de-pieza-de-ajedrez) for exact piece correspondences). White pieces are denoted with uppercase letters and black pieces with lowercase letters. If there are empty spaces between pieces, a number is added representing the number of spaces. Rows are separated with '/'.
+<div id="tab-designaciones-en-espanol-e-ingles-para-cada-tipo-de-pieza-de-ajedrez"></div>
+
+| Piece | English designation | Spanish designation |
+| --- | --- | --- |
+| King | K | R |
+| Queen | Q | D |
+| Rook | R | T |
+| Bishop | B | A |
+| Knight | N | C |
+| Pawn | P | P |
+
+*Piece designations in English and Spanish*
+
+1. **Piece placement:** Defines the arrangement of pieces on the board, row by row, starting from the upper left corner. Each piece is represented by its identifying letter in English (consult [Table 1](#tab-designaciones-en-espanol-e-ingles-para-cada-tipo-de-pieza-de-ajedrez) for exact piece correspondences). White pieces are denoted with uppercase letters and black pieces with lowercase letters. If there are empty spaces between pieces, a number is added representing the number of spaces. Rows are separated with '/'.
 2. **Side:** Indicates the turn to play. 'w' is used to indicate that it is white's turn and 'b' for black.
 3. **Castling:** Describes castling possibilities. A '-' is placed if there are no castling options for either side. Otherwise, a 'K' is added for kingside castling and a 'Q' for queenside castling. If the letter is uppercase, it corresponds to white; if lowercase, to black.
 4. ***En passant*:** Indicates the possibility of making an en passant capture. A '-' is used if it is not possible; otherwise, the square through which the pawn passed after moving two spaces is indicated, that is, the square where the opposing pawn would end up if it made the en passant capture.
 5. **Moves since last capture or pawn advance:** Provides the number of moves elapsed without captures or pawn movements, which is related to the 50-move rule. A "move" is considered complete when both players have made a move. Therefore, this rule would be activated when this counter reaches 100.
 6. **Move counter:** Represents the total number of moves made since the beginning of the game.
 
-To clarify these concepts, an example is proposed below. Figure [reference](#fig-tablero-de-ejemplo-para-fen) shows a chess position that we will represent using FEN notation.
+To clarify these concepts, an example is proposed below. [Figure 1](#fig-tablero-de-ejemplo-para-fen) shows a chess position that we will represent using FEN notation.
 
 <figure id="fig-tablero-de-ejemplo-para-fen">
   <div class="chessboard" data-fen="rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2" data-size="8" data-chess-options="&quot;setfen=rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2 largeboard&quot;" role="img" aria-label="Example board for FEN" data-rendered="source" data-board-asset="board-8x8-3afb5e96d80a3b70.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-3afb5e96d80a3b70.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
@@ -76,7 +89,7 @@ PGN (Portable Game Notation), as established by Edwards <cite><a href="/en/refer
 
 Regarding the representation of the game itself, a list of moves from the initial position to the final position of the game is used. The representation of moves is done using algebraic notation, which is described in detail in appendix 3.
 
-In most cases, algebraic notation uses the English designations for pieces. The move number is also shown before each pair of moves. At the end of the game, the result is indicated: "1-0" for white's victory, "0-1" for black's victory, "1/2-1/2" for draws, and "*" if the game has not yet concluded. It is possible to add comments after each move, enclosing them in "{}". These comments can contain additional information about each move, such as the remaining time of each player, a resource used on platforms such as Lichess <cite><a href="/en/references#cite-lichess" data-cite="lichess">[lichess.org]</a></cite>.
+In most cases, algebraic notation uses the English designations for pieces. The move number is also shown before each pair of moves. At the end of the game, the result is indicated: "1-0" for white's victory, "0-1" for black's victory, "1/2-1/2" for draws, and "*" if the game has not yet concluded. It is possible to add comments after each move, enclosing them in "{}". These comments can contain additional information about each move, such as the remaining time of each player, a resource used on platforms such as Lichess <cite><a href="/en/references#cite-lichess" data-cite="lichess">[Lichess]</a></cite>.
 
 Prior to the list of moves, additional information is incorporated into the game. This information can be heterogeneous, although computer programs usually require the inclusion of seven specific elements. These are:
 

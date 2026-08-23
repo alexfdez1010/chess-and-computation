@@ -48,7 +48,7 @@ En el tablero, al comienzo de la partida, el rey se encuentra ubicado en el cent
   <figcaption>Posibles movimientos del rey</figcaption>
 </figure>
 
-Como se puede observar en el tablero, el rey puede moverse a todas las casillas adyacentes, ya sea en dirección horizontal, vertical o diagonal, pero solo puede moverse un paso a la vez. Además, el rey cuenta con un movimiento especial llamado enroque, que permite mover al rey y a una torre simultáneamente en la misma jugada, proporcionando al rey una ubicación más segura. En el Anexo 3, se muestra un ejemplo de cómo se efectúa este movimiento especial en la Figura [referencia](#fig-ejemplo-de-como-efectuar-el-enroque).
+Como se puede observar en el tablero, el rey puede moverse a todas las casillas adyacentes, ya sea en dirección horizontal, vertical o diagonal, pero solo puede moverse un paso a la vez. Además, el rey cuenta con un movimiento especial llamado enroque, que permite mover al rey y a una torre simultáneamente en la misma jugada, proporcionando al rey una ubicación más segura. En el Anexo 3, se muestra un ejemplo de cómo se efectúa este movimiento especial en el [ejemplo de enroque](/es/appendix3#fig-ejemplo-de-como-efectuar-el-enroque).
 
 ### Dama
 
@@ -59,7 +59,7 @@ Después del rey, la dama es considerada la pieza más importante en el ajedrez,
   <figcaption>Posibles movimientos de la dama</figcaption>
 </figure>
 
-La dama puede moverse a cualquier casilla a lo largo de la fila, columna o diagonal en la que se encuentre. Como se puede apreciar en la Figura [referencia](#fig-movimientos-de-la-dama), la dama puede moverse en todas las direcciones a cualquier distancia, siempre y cuando no haya ninguna pieza bloqueando su camino. La pérdida prematura de la dama puede llevar a una derrota casi inevitable, debido a su capacidad de controlar grandes áreas del tablero y participar en numerosas combinaciones y ataques.
+La dama puede moverse a cualquier casilla a lo largo de la fila, columna o diagonal en la que se encuentre. Como se puede apreciar en el [diagrama de movimientos de la dama](#fig-movimientos-de-la-dama), la dama puede moverse en todas las direcciones a cualquier distancia, siempre y cuando no haya ninguna pieza bloqueando su camino. La pérdida prematura de la dama puede llevar a una derrota casi inevitable, debido a su capacidad de controlar grandes áreas del tablero y participar en numerosas combinaciones y ataques.
 
 ### Torre
 
@@ -70,7 +70,7 @@ Cada jugador dispone de dos torres, situadas en las esquinas de su correspondien
   <figcaption>Posibles movimientos de la torre</figcaption>
 </figure>
 
-Como se puede apreciar en la Figura [referencia](#fig-movimientos-de-la-torre), las torres pueden moverse a lo largo de las filas y columnas en todas las direcciones. Pueden desplazarse desde un extremo del tablero hasta el otro, lo que les confiere una gran capacidad estratégica y táctica, especialmente en la mitad y el final de la partida. Las torres son piezas valiosas en el ajedrez, ya que pueden controlar columnas y filas enteras, participar en ataques combinados y proteger al rey en posiciones defensivas. Su movilidad y versatilidad las convierten en piezas clave para la planificación de estrategias y la consecución de objetivos en el juego.
+Como se puede apreciar en el [diagrama de movimientos de la torre](#fig-movimientos-de-la-torre), las torres pueden moverse a lo largo de las filas y columnas en todas las direcciones. Pueden desplazarse desde un extremo del tablero hasta el otro, lo que les confiere una gran capacidad estratégica y táctica, especialmente en la mitad y el final de la partida. Las torres son piezas valiosas en el ajedrez, ya que pueden controlar columnas y filas enteras, participar en ataques combinados y proteger al rey en posiciones defensivas. Su movilidad y versatilidad las convierten en piezas clave para la planificación de estrategias y la consecución de objetivos en el juego.
 
 ### Alfil
 
@@ -81,7 +81,7 @@ Cada jugador dispone de dos alfiles, uno situado a la izquierda de la dama y otr
   <figcaption>Posibles movimientos del alfil</figcaption>
 </figure>
 
-Al igual que las torres, los alfiles son piezas valiosas en el ajedrez debido a su capacidad de movimiento único a lo largo de las diagonales. Como se muestra en la Figura [referencia](#fig-movimientos-del-alfil), los alfiles pueden desplazarse en diagonal por todo el tablero. Pueden moverse desde un extremo hasta el otro en un solo movimiento, aprovechando su movimiento característico. Esta capacidad de movimiento diagonal les confiere una gran utilidad estratégica y táctica, ya que pueden controlar casillas de diferentes colores y participar en ataques combinados. Los alfiles son piezas clave en la apertura y el medio juego, donde su movilidad puede influir en el desarrollo de la partida y la ocupación de posiciones estratégicas.
+Al igual que las torres, los alfiles son piezas valiosas en el ajedrez debido a su capacidad de movimiento único a lo largo de las diagonales. Como se muestra en el [diagrama de movimientos del alfil](#fig-movimientos-del-alfil), los alfiles pueden desplazarse en diagonal por todo el tablero. Pueden moverse desde un extremo hasta el otro en un solo movimiento, aprovechando su movimiento característico. Esta capacidad de movimiento diagonal les confiere una gran utilidad estratégica y táctica, ya que pueden controlar casillas de diferentes colores y participar en ataques combinados. Los alfiles son piezas clave en la apertura y el medio juego, donde su movilidad puede influir en el desarrollo de la partida y la ocupación de posiciones estratégicas.
 
 ### Caballo
 
@@ -92,7 +92,7 @@ El caballo es una de las piezas más singulares en el ajedrez, ya que tiene un m
   <figcaption>Posibles movimientos del caballo</figcaption>
 </figure>
 
-Como se muestra en la Figura [referencia](#fig-movimientos-del-caballo), el caballo puede moverse en un movimiento en L, avanzando dos casillas en una dirección (horizontal o vertical) y luego girando en ángulo recto para avanzar una casilla adicional en una dirección perpendicular. Esta peculiaridad de movimiento permite al caballo saltar sobre otras piezas en su trayectoria, lo que lo convierte en una pieza impredecible y estratégicamente interesante en el juego. Cada jugador cuenta con un par de caballos, que se sitúan entre las torres y los alfiles en la configuración inicial del tablero. Los caballos son conocidos por su capacidad de maniobrar rápidamente por el tablero y pueden desempeñar un papel importante en la creación de amenazas, la defensa y la realización de combinaciones tácticas.
+Como se muestra en el [diagrama de movimientos del caballo](#fig-movimientos-del-caballo), el caballo puede moverse en un movimiento en L, avanzando dos casillas en una dirección (horizontal o vertical) y luego girando en ángulo recto para avanzar una casilla adicional en una dirección perpendicular. Esta peculiaridad de movimiento permite al caballo saltar sobre otras piezas en su trayectoria, lo que lo convierte en una pieza impredecible y estratégicamente interesante en el juego. Cada jugador cuenta con un par de caballos, que se sitúan entre las torres y los alfiles en la configuración inicial del tablero. Los caballos son conocidos por su capacidad de maniobrar rápidamente por el tablero y pueden desempeñar un papel importante en la creación de amenazas, la defensa y la realización de combinaciones tácticas.
 
 ### Peón
 
@@ -103,7 +103,7 @@ A pesar de ser la pieza de menor valor, el peón tiene un movimiento bastante pe
   <figcaption>Posibles movimientos del peón</figcaption>
 </figure>
 
-El peón tiene una particularidad en su movimiento y captura. En cuanto a su movimiento regular, el peón puede avanzar una casilla hacia adelante en su columna, como se muestra en la Figura [referencia](#fig-movimientos-del-peon). Además, cuando se encuentra en una posición de captura, el peón solo puede capturar una pieza en las dos casillas diagonales hacia el otro lado del tablero desde donde se encuentra.
+El peón tiene una particularidad en su movimiento y captura. En cuanto a su movimiento regular, el peón puede avanzar una casilla hacia adelante en su columna, como se muestra en el [diagrama de movimientos del peón](#fig-movimientos-del-peon). Además, cuando se encuentra en una posición de captura, el peón solo puede capturar una pieza en las dos casillas diagonales hacia el otro lado del tablero desde donde se encuentra.
 
 El peón también tiene una jugada especial llamada "captura al paso". Esta jugada se aplica cuando un peón enemigo avanza dos casillas desde su posición inicial y se encuentra en una posición adyacente al peón rival. En ese caso, el peón puede capturar al peón enemigo como si este solo hubiera avanzado una casilla.
 

@@ -26,7 +26,7 @@ Pero, ¿qué es un PDM y cómo se relaciona con las Cadenas de Markov? Antes de 
 
 Las Cadenas de Markov surgen del campo de la probabilidad, lo que puede resultar sorprendente al relacionarlas con el ajedrez, un juego en el que el azar no tiene cabida. El nexo de unión radica en que, pese a ser el ajedrez un juego puramente determinista (dada una jugada, se puede prever con absoluta certeza la posición resultante), puede ser modelado como un fenómeno probabilístico donde la posición que surge después de una jugada específica tiene un 100% de probabilidad de ocurrir.
 
-En este contexto, las Cadenas de Markov representan procesos estocásticos en los que la probabilidad de que ocurran uno o más eventos depende únicamente del estado actual del proceso. La Figura [referencia](#fig-ejemplo-de-una-cadena-de-markov) proporciona un ejemplo visual de una Cadena de Markov.
+En este contexto, las Cadenas de Markov representan procesos estocásticos en los que la probabilidad de que ocurran uno o más eventos depende únicamente del estado actual del proceso. El [ejemplo de cadena de Markov](#fig-ejemplo-de-una-cadena-de-markov) proporciona un ejemplo visual de una Cadena de Markov.
 
 <figure id="fig-ejemplo-de-una-cadena-de-markov">
   <img src="/assets/book/definition/chain.png" alt="Ejemplo de una Cadena de Markov" loading="lazy" />
@@ -88,7 +88,7 @@ La secuencia de pasos se presenta de la siguiente manera:
 2. Después de recibir la información sobre la posición actual, el agente decide la acción (movimiento) que tomará en esa posición y la comunica al entorno.
 3. Tras recibir el movimiento del agente, el entorno aplica la función de transición para determinar la posición siguiente. Concluido este paso, se retorna al primer paso, y el agente correspondiente al color que toca mover toma el control.
 
-Este proceso se repite hasta que se llegue a un estado terminal, lo cual en el ajedrez significa generalmente un jaque mate, un empate o la rendición de uno de los jugadores. En la Figura [referencia](#fig-ejemplo-del-ajedrez-como-proceso-de-decision-de-markov) se muestra un ejemplo de todo este proceso.
+Este proceso se repite hasta que se llegue a un estado terminal, lo cual en el ajedrez significa generalmente un jaque mate, un empate o la rendición de uno de los jugadores. En el [ejemplo del proceso de decisión de Markov del ajedrez](#fig-ejemplo-del-ajedrez-como-proceso-de-decision-de-markov) se muestra un ejemplo de todo este proceso.
 
 <figure id="fig-ejemplo-del-ajedrez-como-proceso-de-decision-de-markov">
   <div class="localized-diagram mdp-chess-flow" role="group" aria-label="Ejemplo del ajedrez como Proceso de Decisión de Markov">

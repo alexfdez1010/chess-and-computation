@@ -26,7 +26,7 @@ But what is an MDP and how does it relate to Markov Chains? Before answering the
 
 Markov Chains arise from the field of probability, which may be surprising when relating them to chess, a game in which chance has no place. The connecting link lies in the fact that, despite chess being a purely deterministic game (given a move, the resulting position can be predicted with absolute certainty), it can be modeled as a probabilistic phenomenon where the position that arises after a specific move has a 100% probability of occurring.
 
-In this context, Markov Chains represent stochastic processes in which the probability of one or more events occurring depends solely on the current state of the process. Figure [reference](#fig-ejemplo-de-una-cadena-de-markov) provides a visual example of a Markov Chain.
+In this context, Markov Chains represent stochastic processes in which the probability of one or more events occurring depends solely on the current state of the process. The [Markov chain example](#fig-ejemplo-de-una-cadena-de-markov) provides a visual example of a Markov Chain.
 
 <figure id="fig-ejemplo-de-una-cadena-de-markov">
   <img src="/assets/book/definition/chain.png" alt="Example of a Markov Chain" loading="lazy" />
@@ -88,7 +88,7 @@ The sequence of steps is presented as follows:
 2. After receiving information about the current position, the agent decides the action (move) it will take in that position and communicates it to the environment.
 3. After receiving the agent's move, the environment applies the transition function to determine the next position. Once this step is completed, it returns to the first step, and the agent corresponding to the color whose turn it is takes control.
 
-This process is repeated until a terminal state is reached, which in chess generally means checkmate, a draw, or the resignation of one of the players. Figure [reference](#fig-ejemplo-del-ajedrez-como-proceso-de-decision-de-markov) shows an example of this entire process.
+This process is repeated until a terminal state is reached, which in chess generally means checkmate, a draw, or the resignation of one of the players. The [chess Markov decision process example](#fig-ejemplo-del-ajedrez-como-proceso-de-decision-de-markov) shows an example of this entire process.
 
 <figure id="fig-ejemplo-del-ajedrez-como-proceso-de-decision-de-markov">
   <div class="localized-diagram mdp-chess-flow" role="group" aria-label="Example of chess as a Markov Decision Process">

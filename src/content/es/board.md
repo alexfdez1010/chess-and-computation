@@ -16,7 +16,7 @@ draft: false
 
 Tras explorar los mecanismos de búsqueda en juegos de inteligencia artificial, es crucial examinar otro componente esencial: la representación del tablero de juego. Este elemento cumple con dos funciones primordiales en el contexto de la búsqueda. La primera de ellas es la generación de todas las jugadas posibles a partir de la posición actual en el juego. En segundo lugar, se encarga de las transiciones de una jugada a la siguiente, es decir, provee la nueva posición en el tablero basada en la jugada y el estado previo del mismo. Ambas funciones son invocadas repetidamente en el árbol de juego. Dada la relevancia de estas operaciones y el hecho de que la calidad de una jugada depende tanto de la profundidad de expansión del árbol como del tiempo que esto conlleva, es esencial que ambas funciones sean implementadas de la manera más eficiente posible.
 
-Para una implementación eficaz de estas funciones, es imperativo considerar cómo se representa el tablero de juego en la memoria de la computadora. Existen diversos métodos para ello, cada uno con sus propios beneficios y limitaciones. Podemos agrupar estos métodos en tres categorías generales: los métodos centrados en las piezas, los métodos centrados en el tablero y los métodos híbridos <cite><a href="/es/references#cite-chessprogrammingboardrepresentation" data-cite="chessprogrammingBoardRepresentation">[chessprogrammingBoardRepresentation]</a></cite>. La nomenclatura de estas categorías es bastante descriptiva.
+Para una implementación eficaz de estas funciones, es imperativo considerar cómo se representa el tablero de juego en la memoria de la computadora. Existen diversos métodos para ello, cada uno con sus propios beneficios y limitaciones. Podemos agrupar estos métodos en tres categorías generales: los métodos centrados en las piezas, los métodos centrados en el tablero y los métodos híbridos <cite><a href="/es/references#cite-chessprogrammingboardrepresentation" data-cite="chessprogrammingBoardRepresentation">[Chessprogramming Wiki]</a></cite>. La nomenclatura de estas categorías es bastante descriptiva.
 
 Los métodos centrados en las piezas se enfocan en representar las piezas de manera directa, manteniendo listas u otras estructuras de datos con la información asociada a cada pieza y su posición en el tablero. Por otra parte, los métodos centrados en el tablero se centran en examinar cada casilla del tablero de manera individual para determinar si contiene una pieza y, en caso afirmativo, qué tipo de pieza es. Finalmente, los métodos híbridos son aquellos que combinan aspectos de ambos enfoques.
 
@@ -51,7 +51,9 @@ Los ordenadores realizan dos tipos de operaciones básicas: aritméticas y lógi
 
 Las operaciones lógicas suelen realizarse sobre una o dos variables, aunque son fácilmente extensibles a un mayor número de variables. Para representar estas operaciones, se utilizan las llamadas puertas lógicas. Estas toman una o más variables como entrada y generan una única salida. Tanto las variables como la salida pueden tomar los valores 0 o 1.
 
-Las principales puertas lógicas para una variable son las que se muestran en la Tabla [referencia](#tab-puertas-logicas-de-una-variable).
+Las principales puertas lógicas para una variable son las que se muestran en la [Tabla 1](#tab-puertas-logicas-de-una-variable).
+
+<div id="tab-puertas-logicas-de-una-variable"></div>
 
 | Valores | NOT | Identidad |
 | --- | --- | --- |
@@ -62,7 +64,9 @@ Las principales puertas lógicas para una variable son las que se muestran en la
 
 La puerta lógica NOT invierte el valor de la entrada. Si la entrada es 0, la salida será 1 y viceversa. Por otro lado, la puerta de identidad simplemente deja el valor de entrada sin cambios.
 
-A continuación, consideremos las puertas lógicas de dos variables, que son algo más complejas pero pueden ser extendidas a más de dos variables. La Tabla [referencia](#tab-puertas-logicas-de-dos-variables) muestra las principales puertas lógicas de dos variables.
+A continuación, consideremos las puertas lógicas de dos variables, que son algo más complejas pero pueden ser extendidas a más de dos variables. La [Tabla 2](#tab-puertas-logicas-de-dos-variables) muestra las principales puertas lógicas de dos variables.
+
+<div id="tab-puertas-logicas-de-dos-variables"></div>
 
 | Valores | OR | AND | XOR |
 | --- | --- | --- | --- |

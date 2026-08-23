@@ -50,21 +50,21 @@ The following example provides an extension to the one presented in the previous
 
 This scheme entails a particularity: it will not be feasible to explore the tree level by level as was done in the previous examples, since we will need to reference the $\alpha$ and $\beta$ values of sibling nodes.
 
-Without further ado, the concrete example is presented in the following figure, which we will refer to as Figure [reference](#fig-arbol-de-juego-generico-con-poda-alfa-beta):
+Without further ado, the concrete example is presented in the following figure, which we will refer to as the [generic alpha-beta game tree](#fig-arbol-de-juego-generico-con-poda-alfa-beta):
 
 <figure id="fig-arbol-de-juego-generico-con-poda-alfa-beta">
   <img src="/assets/book/alpha-beta/initial.png" alt="Generic game tree with alpha-beta pruning" loading="lazy" />
   <figcaption>Generic game tree with alpha-beta pruning</figcaption>
 </figure>
 
-We will begin our exploration from the far left of the tree. Had we opted to start from the right, we would have obtained a slightly different tree, but the evaluation at the final node would have remained invariant. Therefore, both strategies are valid. Likewise, if we alter the order of visitation among sibling nodes, the final result remains, although the number of nodes to process may vary. Unfortunately, determining the optimal order to arrange nodes —so as to minimize the amount of processing— is impossible without developing the tree in its entirety. After the first resolution phase, we will obtain the tree shown in Figure [reference](#fig-primera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta).
+We will begin our exploration from the far left of the tree. Had we opted to start from the right, we would have obtained a slightly different tree, but the evaluation at the final node would have remained invariant. Therefore, both strategies are valid. Likewise, if we alter the order of visitation among sibling nodes, the final result remains, although the number of nodes to process may vary. Unfortunately, determining the optimal order to arrange nodes —so as to minimize the amount of processing— is impossible without developing the tree in its entirety. After the first resolution phase, we will obtain the tree shown in the [first alpha-beta resolution phase](#fig-primera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta).
 
 <figure id="fig-primera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta">
   <img src="/assets/book/alpha-beta/phase1.png" alt="First resolution phase of generic game tree with alpha-beta pruning" loading="lazy" />
   <figcaption>First resolution phase of generic game tree with alpha-beta pruning</figcaption>
 </figure>
 
-The processed node, which is the first element of level 2, has been assigned a heuristic value of 5. This value is obtained by being the maximum between 1 and 5. Additionally, since the node is a maximization node and is the first node processed at that level, it is assigned a beta value of $+\infty$ (positive infinity). Next, when exploring the sibling node of this one, the tree represented in Figure [reference](#fig-segunda-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta) is obtained, corresponding to the second resolution phase of the generic game tree with alpha-beta pruning.
+The processed node, which is the first element of level 2, has been assigned a heuristic value of 5. This value is obtained by being the maximum between 1 and 5. Additionally, since the node is a maximization node and is the first node processed at that level, it is assigned a beta value of $+\infty$ (positive infinity). Next, when exploring the sibling node of this one, the tree represented in the [second alpha-beta resolution phase](#fig-segunda-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta) is obtained, corresponding to the second resolution phase of the generic game tree with alpha-beta pruning.
 
 <figure id="fig-segunda-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta">
   <img src="/assets/book/alpha-beta/phase2.png" alt="Second resolution phase of generic game tree with alpha-beta pruning" loading="lazy" />
@@ -75,7 +75,7 @@ In this case, unfortunately, no significant advantage has been obtained, since t
 
 The beta of the sibling of the node processed in the first step has a value of 5, since it has been updated according to the formula and has taken the value of 5 from its sibling. Next, one ascends a level and reaches the parent node of these, which has a value of 2. The $\alpha$ value of this node is negative infinity, since it is the first node processed among its siblings.
 
-In the next phase, the second child of the initial node is processed, as shown in Figure [reference](#fig-tercera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta).
+In the next phase, the second child of the initial node is processed, as shown in the [third alpha-beta resolution phase](#fig-tercera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta).
 
 <figure id="fig-tercera-fase-de-resolucion-de-arbol-de-juego-generico-con-poda-alfa-beta">
   <img src="/assets/book/alpha-beta/phase3.png" alt="Third resolution phase of generic game tree with alpha-beta pruning" loading="lazy" />
@@ -86,7 +86,7 @@ In the initial stage, the left child of the second child of the initial node is 
 
 The logic behind this pruning is that a value better than 1 cannot be obtained at this node, since being a minimization node, value 1 or a lower one in another child will always be chosen. Furthermore, since the $\alpha$ value is 2 and this is greater than 1, it is not increased.
 
-In the last stage, the rightmost child of the initial node is processed, resulting in the results shown in Figure [reference](#fig-ultima-fase-de-resolucion-de-arbol-de-juego-generico-para-mostrar-la-poda-alfa-beta).
+In the last stage, the rightmost child of the initial node is processed, resulting in the results shown in the [final alpha-beta resolution phase](#fig-ultima-fase-de-resolucion-de-arbol-de-juego-generico-para-mostrar-la-poda-alfa-beta).
 
 <figure id="fig-ultima-fase-de-resolucion-de-arbol-de-juego-generico-para-mostrar-la-poda-alfa-beta">
   <img src="/assets/book/alpha-beta/phase4.png" alt="Last resolution phase of generic game tree to show alpha-beta pruning" loading="lazy" />
@@ -103,7 +103,7 @@ Finally, the value of the initial node is obtained, which is the maximum among t
 
 In the case of chess, the operation of the alpha-beta algorithm is exactly the same as the generic example previously presented. Therefore, in this section we will focus on the implications and importance of the order in which nodes are visited.
 
-Figure [reference](#fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez) shows the specific example to be addressed, which is the same one presented in Figure [reference](#fig-cuarta-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez) in the previous section, related to the minimax algorithm.
+The [chess alpha-beta example](#fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez) shows the specific example to be addressed, which is the same one presented in the [fourth minimax phase](/en/min-max#fig-cuarta-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez) in the previous section, related to the minimax algorithm.
 
 <figure id="fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez">
   <img src="/assets/book/min-max/example5.png" alt="Example of alpha-beta pruning applied to chess" loading="lazy" />
@@ -125,7 +125,7 @@ $$
 \textit{P07} \rightarrow \textit{P03} \rightarrow \textit{P08} \rightarrow \textit{P09} \rightarrow \textit{P04} \rightarrow \textit{P01}
 $$
 
-Figure [reference](#fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez-usando-orden-izquierda-derecha) shows the tree using the left-to-right traversal described above.
+The [left-to-right chess alpha-beta tree](#fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez-usando-orden-izquierda-derecha) shows the tree using the left-to-right traversal described above.
 
 <figure id="fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez-usando-orden-izquierda-derecha">
   <img src="/assets/book/min-max/example5.png" alt="Example of alpha beta pruning applied to chess using left-to-right order" loading="lazy" />

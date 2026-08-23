@@ -26,7 +26,7 @@ One last aspect to explain is how the valuation of each state is determined. Ide
 
 The concept of the minimax algorithm can be somewhat abstract at first glance, so a step-by-step example of its application is provided in the section below.
 
-The first step is to calculate the values of the final states of the generated game tree (in this case, the states at the end of each branch), using the heuristic. This process is represented in Figure [reference](#fig-primer-paso-del-algoritmo-minimax-generico).
+The first step is to calculate the values of the final states of the generated game tree (in this case, the states at the end of each branch), using the heuristic. This process is represented in the [first generic Minimax step](#fig-primer-paso-del-algoritmo-minimax-generico).
 
 <figure id="fig-primer-paso-del-algoritmo-minimax-generico">
   <img src="/assets/book/min-max/step1.png" alt="First step of the generic Minimax algorithm" loading="lazy" />
@@ -35,14 +35,14 @@ The first step is to calculate the values of the final states of the generated g
 
 In the decision tree, those values that have already been determined are illustrated using their corresponding numerical value. On the other hand, nodes whose values have not yet been calculated will be represented as Max or Min, depending on whether their value will be the maximum or minimum of their respective child nodes. It is important to note that nodes whose values have already been calculated do not have child nodes, that is, they are not linked to any node at a lower level. In decision tree terminology, these nodes are called leaf nodes, making an analogy with the leaves of a tree in the natural world.
 
-Once the heuristics of these final states have been calculated, we can proceed to determine the heuristic of the immediately adjacent level. To do this, we must take the minimum value of the states at the lower level, which corresponds to the minimization phase. For example, at the node located on the left of level 1, we will take $\min(1,45;0,2)$, here, the use of the semicolon is to avoid confusion with the comma used to separate decimal and integer figures, and we will obtain 0,2 as a result, since this value is less than 1,45. Following this process, at the central state of level 1, we select $\min(0,25;0,34)$ and obtain 0,25, since it is less than 0,34. Finally, the node located on the right at level 1, being a final state, already has a calculated value, so it is temporarily ignored. Figure [reference](#fig-segundo-paso-del-algoritmo-minimax-generico) illustrates the result of this process.
+Once the heuristics of these final states have been calculated, we can proceed to determine the heuristic of the immediately adjacent level. To do this, we must take the minimum value of the states at the lower level, which corresponds to the minimization phase. For example, at the node located on the left of level 1, we will take $\min(1,45;0,2)$, here, the use of the semicolon is to avoid confusion with the comma used to separate decimal and integer figures, and we will obtain 0,2 as a result, since this value is less than 1,45. Following this process, at the central state of level 1, we select $\min(0,25;0,34)$ and obtain 0,25, since it is less than 0,34. Finally, the node located on the right at level 1, being a final state, already has a calculated value, so it is temporarily ignored. The [second generic Minimax step](#fig-segundo-paso-del-algoritmo-minimax-generico) illustrates the result of this process.
 
 <figure id="fig-segundo-paso-del-algoritmo-minimax-generico">
   <img src="/assets/book/min-max/step2.png" alt="Second step of the generic Minimax algorithm" loading="lazy" />
   <figcaption>Second step of the generic Minimax algorithm</figcaption>
 </figure>
 
-Now, we must carry out a maximization phase. That is, we need to obtain the maximum value of the lower adjacent states to the state located at level zero or initial state. Thus, we apply $\max(0,2;0,25;2,32)$, obtaining 2,32 as a result, since this value is greater than 0,2 and 0,25. Since this is the initial state, the Minimax algorithm has been completed. Therefore, we can determine that the best transition is the one that leads to the state with value 2,32. Figure [reference](#fig-tercer-paso-del-algoritmo-minimax-generico) shows the finalized game tree.
+Now, we must carry out a maximization phase. That is, we need to obtain the maximum value of the lower adjacent states to the state located at level zero or initial state. Thus, we apply $\max(0,2;0,25;2,32)$, obtaining 2,32 as a result, since this value is greater than 0,2 and 0,25. Since this is the initial state, the Minimax algorithm has been completed. Therefore, we can determine that the best transition is the one that leads to the state with value 2,32. The [third generic Minimax step](#fig-tercer-paso-del-algoritmo-minimax-generico) shows the finalized game tree.
 
 <figure id="fig-tercer-paso-del-algoritmo-minimax-generico">
   <img src="/assets/book/min-max/step3.png" alt="Third step of the generic Minimax algorithm" loading="lazy" />
@@ -63,14 +63,14 @@ Finally, it should be noted that the expansion of this game tree will be limited
 
 #### Example applied to chess
 
-The game tree illustrated in Figure [reference](#fig-arbol-de-juego-del-ejemplo-de-minimax-aplicado-al-ajedrez) is presented, representing the sequence of moves in the example of minimax algorithm application to chess. The initial position corresponds to the start of a standard chess game, where White makes the move d4, followed by Black's response with d5. From this position, White must make the decision to determine which move is best.
+The [Minimax chess game tree](#fig-arbol-de-juego-del-ejemplo-de-minimax-aplicado-al-ajedrez) is presented, representing the sequence of moves in the example of minimax algorithm application to chess. The initial position corresponds to the start of a standard chess game, where White makes the move d4, followed by Black's response with d5. From this position, White must make the decision to determine which move is best.
 
 <figure id="fig-arbol-de-juego-del-ejemplo-de-minimax-aplicado-al-ajedrez">
   <img src="/assets/book/min-max/example1-en.png" alt="Game tree of the minimax example applied to chess" loading="lazy" />
   <figcaption>Game tree of the minimax example applied to chess</figcaption>
 </figure>
 
-Each node of the tree represents a board position and the different branches indicate the possible moves that can be made from that position. Figure [reference](#fig-tableros-representados-en-el-ejemplo-de-minimax-aplicado-al-ajedrez) shows the boards corresponding to each position represented in the example of minimax algorithm application to chess.
+Each node of the tree represents a board position and the different branches indicate the possible moves that can be made from that position. The [boards in the Minimax chess example](#fig-tableros-representados-en-el-ejemplo-de-minimax-aplicado-al-ajedrez) show the boards corresponding to each position represented in the example of minimax algorithm application to chess.
 
 <figure id="fig-tableros-representados-en-el-ejemplo-de-minimax-aplicado-al-ajedrez">
   <div class="subfigure-grid" role="group" aria-label="Boards represented in the minimax example applied to chess">
@@ -128,7 +128,7 @@ Each node of the tree represents a board position and the different branches ind
 
 Once the game tree and corresponding positions have been obtained, one can proceed to the next phase of the Minimax algorithm, which consists of calculating the value of terminal positions. These positions refer to those that have no branches exiting from them, that is, no more moves can be made from them.
 
-When calculating the heuristic of these terminal positions, a realistic approximation of the value of each position will be obtained. The result of this calculation will give rise to a new representation of the game tree, as shown in Figure [reference](#fig-primera-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez).
+When calculating the heuristic of these terminal positions, a realistic approximation of the value of each position will be obtained. The result of this calculation will give rise to a new representation of the game tree, as shown in the [first phase of the chess Minimax example](#fig-primera-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez).
 
 <figure id="fig-primera-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez">
   <img src="/assets/book/min-max/example2.png" alt="First phase of the minimax example applied to chess" loading="lazy" />
@@ -157,7 +157,7 @@ Regarding the minimization process at level 1, state P03 takes the value of P07,
 
 In the third phase of the algorithm, the calculation of the value of the remaining state at level 1, which is P02, is performed. In this case, the value of P02 is determined as the minimum between the values of P05 and P06, since it is at an odd level, which implies a minimization phase.
 
-With this additional calculation, all the necessary values have been obtained to calculate the value of the original state. This original state is represented in Figure [reference](#fig-cuarta-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez). From the values calculated in the previous phases, the optimal value of this state can be determined according to the minimax algorithm, considering the maximization and minimization strategies at the corresponding levels of the game tree.
+With this additional calculation, all the necessary values have been obtained to calculate the value of the original state. This original state is represented in the [fourth phase of the chess Minimax example](#fig-cuarta-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez). From the values calculated in the previous phases, the optimal value of this state can be determined according to the minimax algorithm, considering the maximization and minimization strategies at the corresponding levels of the game tree.
 
 <figure id="fig-cuarta-fase-del-ejemplo-de-minimax-aplicado-al-ajedrez">
   <img src="/assets/book/min-max/example5.png" alt="Fourth phase of the minimax example applied to chess" loading="lazy" />
