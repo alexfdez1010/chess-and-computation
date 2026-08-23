@@ -221,8 +221,8 @@ Once an example has been analyzed and its operation understood, we can define th
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px
-  classDef process fill:#f7f7f1,color:#171a17,stroke:#6f786f,stroke-width:1.5px" role="img" aria-label="Illustration">Start → Input → Placed? → Can place queen in row? → Solution → End → Backtrack to last branching → Add queen</div>
-  <figcaption>Illustration</figcaption>
+  classDef process fill:#f7f7f1,color:#171a17,stroke:#6f786f,stroke-width:1.5px" role="img" aria-label="Backtracking flowchart applied to n-queens">Start → Input → Placed? → Can place queen in row? → Solution → End → Backtrack to last branching → Add queen</div>
+  <figcaption><em>Backtracking</em> flowchart applied to $n$-queens</figcaption>
 </figure>
 
 Below, each of the algorithm steps represented in the flowchart is described in detail.

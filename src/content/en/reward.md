@@ -25,8 +25,8 @@ To determine the expected reward, it is necessary to sum all the rewards obtaine
 Below is an example to solidify these concepts. Figure [reference](#fig-juego-de-grid-de-2-dimensiones) shows the game in question.
 
 <figure id="fig-juego-de-grid-de-2-dimensiones">
-  <img src="/assets/book/reward/game.png" alt="Illustration" loading="lazy" />
-  <figcaption>Illustration</figcaption>
+  <img src="/assets/book/reward/game.png" alt="2-dimensional Grid game" loading="lazy" />
+  <figcaption>2-dimensional <em>Grid</em> game</figcaption>
 </figure>
 
 The objective of the game is to guide the black piece to the dark gray square. Upon reaching the dark gray square, a reward of 1 is obtained. The piece can move up, down, right or left. If these movements lead to a position outside the board, the episode ends with a reward of -0.5. Therefore, the piece must reach the dark gray square through a specific path. Since the piece does not know this path, the agent will have to discover it from the rewards obtained. Once an episode ends, the black piece returns to the initial position.
@@ -34,8 +34,8 @@ The objective of the game is to guide the black piece to the dark gray square. U
 Initially, a run through the game is performed. The path followed is shown in Figure [reference](#fig-primer-recorrido-en-el-grid-de-2-dimensiones).
 
 <figure id="fig-primer-recorrido-en-el-grid-de-2-dimensiones">
-  <img src="/assets/book/reward/path1.png" alt="Illustration" loading="lazy" />
-  <figcaption>Illustration</figcaption>
+  <img src="/assets/book/reward/path1.png" alt="First run in the 2-dimensional Grid" loading="lazy" />
+  <figcaption>First run in the 2-dimensional <em>Grid</em></figcaption>
 </figure>
 
 With this path, the game is successfully completed. Therefore, all states will receive a positive reward. In this case, a discount factor $\gamma$ of 0.99 will be used, which means that the expected reward of the next state will be reduced by 0.99.
@@ -43,8 +43,8 @@ With this path, the game is successfully completed. Therefore, all states will r
 With this discount factor, the expected reward for all the states through which the agent has passed can be easily calculated. Figure [reference](#fig-recompensas-esperadas-despues-del-primer-recorrido-en-el-grid-de-2-dimensiones) shows the result of these calculations.
 
 <figure id="fig-recompensas-esperadas-despues-del-primer-recorrido-en-el-grid-de-2-dimensiones">
-  <img src="/assets/book/reward/values1.png" alt="Illustration" loading="lazy" />
-  <figcaption>Illustration</figcaption>
+  <img src="/assets/book/reward/values1.png" alt="Expected rewards after the first run in the 2-dimensional Grid" loading="lazy" />
+  <figcaption>Expected rewards after the first run in the 2-dimensional <em>Grid</em></figcaption>
 </figure>
 
 We start with the terminal state, which has a reward of 1. We proceed to the penultimate state, multiplying the reward of the final state by 0.99 and adding the reward of this new state (in this case 0). In this way, the expected reward of this state is obtained. This process is repeated until reaching the initial state, which has a reward of 0.94 (all values are rounded to two decimal places).
@@ -52,15 +52,15 @@ We start with the terminal state, which has a reward of 1. We proceed to the pen
 Another run is made through the *Grid*, but this time it will not be so successful and the piece will go off the path. The path followed is shown in Figure [reference](#fig-segundo-recorrido-en-el-grid-de-2-dimensiones).
 
 <figure id="fig-segundo-recorrido-en-el-grid-de-2-dimensiones">
-  <img src="/assets/book/reward/path2.png" alt="Illustration" loading="lazy" />
-  <figcaption>Illustration</figcaption>
+  <img src="/assets/book/reward/path2.png" alt="Second run in the 2-dimensional Grid" loading="lazy" />
+  <figcaption>Second run in the 2-dimensional <em>Grid</em></figcaption>
 </figure>
 
 Now it is time to update the squares through which the piece has passed. Its new value will be calculated as the average of the expected rewards from the first and second runs for the squares that are included in both paths. Figure [reference](#fig-recompensas-esperadas-despues-del-segundo-recorrido-en-el-grid-de-2-dimensiones) shows the final result of these calculations.
 
 <figure id="fig-recompensas-esperadas-despues-del-segundo-recorrido-en-el-grid-de-2-dimensiones">
-  <img src="/assets/book/reward/values2.png" alt="Illustration" loading="lazy" />
-  <figcaption>Illustration</figcaption>
+  <img src="/assets/book/reward/values2.png" alt="Expected rewards after the second run in the 2-dimensional Grid" loading="lazy" />
+  <figcaption>Expected rewards after the second run in the 2-dimensional <em>Grid</em></figcaption>
 </figure>
 
 We start again from the terminal state (the square with value -0.5 which is where the piece deviated from the path) and each state is processed, calculating its new value as explained above. This process can be repeated as many times as necessary. Although the more it is repeated, the more accurate the values of each state will be, it must be taken into account that this involves a computational cost.

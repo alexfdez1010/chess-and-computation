@@ -29,12 +29,29 @@ const htmlFiles = files.filter((file) => file.endsWith('.html'));
 const htmlByFile = new Map(await Promise.all(htmlFiles.map(async (file) => [file, await readFile(file, 'utf8')])));
 let flowchartCount = 0;
 let mermaidFlowchartCount = 0;
+const localizedMermaidKeys = [
+  'alpha-beta',
+  'alphazero-directions',
+  'alphazero-network',
+  'alphazero-residual',
+  'game-tree',
+  'mcts-final',
+  'mcts-initial',
+];
+const localizedMermaidCounts = new Map(localizedMermaidKeys.map((key) => [key, 0]));
+let mdpChessFlowCount = 0;
+let mdpChessboardCount = 0;
 
 for (const [file, html] of htmlByFile) {
   const relative = file.slice(dist.length);
   if (/\bundefined\b/.test(html)) failures.push(`${relative}: contains "undefined"`);
   flowchartCount += (html.match(/data-diagram="flowchart"/g) || []).length;
   mermaidFlowchartCount += (html.match(/class="[^"]*mermaid-flowchart[^"]*"[^>]*data-diagram="flowchart"[^>]*data-mermaid="[^"]+"/g) || []).length;
+  for (const key of localizedMermaidKeys) {
+    localizedMermaidCounts.set(key, localizedMermaidCounts.get(key) + (html.match(new RegExp(`data-diagram="${key}"`, 'g')) || []).length);
+  }
+  mdpChessFlowCount += (html.match(/class="[^"]*mdp-chess-flow[^"]*"/g) || []).length;
+  mdpChessboardCount += (html.match(/class="chessboard"[^>]*data-board-asset=/g) || []).length;
   if (/data-diagram="flowchart"[^>]*data-(?:nodes|edges)=/.test(html)) failures.push(`${relative}: contains a legacy non-Mermaid flowchart`);
 
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
@@ -48,6 +65,11 @@ for (const [file, html] of htmlByFile) {
     if (!/<meta property="og:image" content="[^"]+">/.test(html)) failures.push(`${relative}: missing og:image`);
     const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
     try { JSON.parse(jsonLd || ''); } catch { failures.push(`${relative}: invalid or missing JSON-LD`); }
+  }
+  if (relative.startsWith('/es/') || relative === '/es/index.html') {
+    if (!html.includes('<meta property="og:site_name" content="Ajedrez y Computación">')) {
+      failures.push(`${relative}: incorrect Spanish book title`);
+    }
   }
 
   for (const match of html.matchAll(/<(?:a|img|script|link)\b[^>]*?\b(?:href|src)="([^"]+)"/g)) {
@@ -73,9 +95,35 @@ for (const [file, html] of htmlByFile) {
 if (flowchartCount !== 12 || mermaidFlowchartCount !== flowchartCount) {
   failures.push(`expected 12 Mermaid flowcharts, found ${mermaidFlowchartCount}/${flowchartCount}`);
 }
+for (const [key, count] of localizedMermaidCounts) {
+  if (count !== 2) failures.push(`expected paired ${key} diagrams, found ${count}`);
+}
+if (mdpChessFlowCount !== 2 || mdpChessboardCount < 4) {
+  failures.push(`expected two localized MDP chess flows with generated boards, found ${mdpChessFlowCount} flows and ${mdpChessboardCount} boards`);
+}
+
+const legacyLocalizedBitmaps = [
+  'alpha-beta/pruning-example.png',
+  'alphazero/directions.png',
+  'alphazero/final_MCTS.png',
+  'alphazero/initial_MCTS.png',
+  'alphazero/network.png',
+  'alphazero/residual.png',
+  'definition/example_definition.png',
+  'game-tree/tree.png',
+];
+for (const bitmap of legacyLocalizedBitmaps) {
+  if ([...htmlByFile.values()].some((html) => html.includes(`/assets/book/${bitmap}`))) {
+    failures.push(`localized flow still references language-specific bitmap ${bitmap}`);
+  }
+}
 
 for (const required of ['robots.txt', 'sitemap-index.xml', 'favicon.svg', 'assets/social/og-es.png', 'assets/social/og-en.png']) {
   if (!await exists(join(dist, required))) failures.push(`missing generated artifact /${required}`);
+}
+const spanishOgSvg = await readFile(join(root, 'public/assets/social/og-es.svg'), 'utf8');
+if (!spanishOgSvg.includes('<title id="title">Ajedrez y Computación</title>')) {
+  failures.push('Spanish social artwork has incorrect book title');
 }
 
 if (failures.length) {

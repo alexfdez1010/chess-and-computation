@@ -91,7 +91,20 @@ The sequence of steps is presented as follows:
 This process is repeated until a terminal state is reached, which in chess generally means checkmate, a draw, or the resignation of one of the players. Figure [reference](#fig-ejemplo-del-ajedrez-como-proceso-de-decision-de-markov) shows an example of this entire process.
 
 <figure id="fig-ejemplo-del-ajedrez-como-proceso-de-decision-de-markov">
-  <div class="localized-diagram" data-diagram="definition" data-label="Example of chess as a Markov Decision Process" role="img" aria-label="Example of chess as a Markov Decision Process">Example of chess as a Markov Decision Process</div>
+  <div class="localized-diagram mdp-chess-flow" role="group" aria-label="Example of chess as a Markov Decision Process">
+    <strong class="mdp-agent">Agent</strong>
+    <div class="mdp-state mdp-state-before"><div class="chessboard" data-fen="rnbqkb1r/pppppppp/5n2/8/3P4/5N2/PPP1PPPP/RNBQKB1R b KQkq - 2 2" data-size="8" data-chess-options="&quot;setfen=rnbqkb1r/pppppppp/5n2/8/3P4/5N2/PPP1PPPP/RNBQKB1R b KQkq - 2 2, largeboard&quot;" role="img" aria-label="Position before ...d5" data-rendered="source" data-board-asset="board-8x8-83f553f9ecb1316f.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-83f553f9ecb1316f.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div></div>
+    <div class="mdp-state mdp-state-after"><div class="chessboard" data-fen="rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq - 0 3" data-size="8" data-chess-options="&quot;setfen=rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq - 0 3, largeboard&quot;" role="img" aria-label="Position after ...d5" data-rendered="source" data-board-asset="board-8x8-45f7874441012b4c.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-45f7874441012b4c.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div></div>
+    <span class="mdp-edge-label mdp-edge-state-label">1. State (position) and reward (0)</span>
+    <span class="mdp-edge-label mdp-edge-action-label">2. Action (d5)</span>
+    <span class="mdp-edge-label mdp-edge-transition-label">3. Transition function</span>
+    <svg class="mdp-flow-arrows" viewBox="0 0 1000 650" preserveAspectRatio="none" aria-hidden="true">
+      <defs><marker id="mdp-arrow-en" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L0,9 L8,4.5 z" /></marker></defs>
+      <path d="M300 470 Q360 235 455 175" marker-end="url(#mdp-arrow-en)" />
+      <path d="M455 190 Q360 300 300 430" marker-end="url(#mdp-arrow-en)" />
+      <path d="M430 535 L670 535" marker-end="url(#mdp-arrow-en)" />
+    </svg>
+  </div>
   <figcaption>Example of chess as a Markov Decision Process</figcaption>
 </figure>
 

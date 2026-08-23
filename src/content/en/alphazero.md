@@ -46,8 +46,8 @@ To represent the arrangement of pieces, the format known as *one-hot encoding* i
 As an illustration, consider the board shown in Figure [reference](#fig-posicion-de-ejemplo-para-mostrar-el-formato-one-hot-encoding). Below, the channels corresponding to several of the pieces present on this board are shown.
 
 <figure id="fig-posicion-de-ejemplo-para-mostrar-el-formato-one-hot-encoding">
-  <div class="chessboard" data-fen="rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7" data-size="8" data-chess-options="&quot;maxfield=h8, setfen=rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7, largeboard&quot;" role="img" aria-label="Illustration" data-rendered="source" data-board-asset="board-8x8-8a233edf3b81d5da.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-8a233edf3b81d5da.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
-  <figcaption>Illustration</figcaption>
+  <div class="chessboard" data-fen="rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7" data-size="8" data-chess-options="&quot;maxfield=h8, setfen=rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7, largeboard&quot;" role="img" aria-label="Example position to show one-hot encoding format" data-rendered="source" data-board-asset="board-8x8-8a233edf3b81d5da.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-8a233edf3b81d5da.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <figcaption>Example position to show <em>one-hot encoding</em> format</figcaption>
 </figure>
 
 First, we start with the white pawns. Figure [reference](#fig-representacion-en-formato-one-hot-encoding-de-los-peones-blancos) shows the resulting matrix. In this matrix, all positions occupied by white pawns are represented with the value 1, while empty positions are represented with the value 0. Each type of piece (pawn, knight, bishop, rook, queen and king of both colors) is assigned to a specific channel, giving a total of 12 distinct channels.
@@ -63,7 +63,7 @@ First, we start with the white pawns. Figure [reference](#fig-representacion-en-
             1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
             0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
         \end{bmatrix}" aria-label="bmatrix 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ bmatrix"></div>
-  <figcaption>Illustration</figcaption>
+  <figcaption><em>One-hot encoding</em> representation of white pawns</figcaption>
 </figure>
 
 In the following case, we proceed with the black knights. Figure [reference](#fig-representacion-en-formato-one-hot-encoding-de-los-caballos-negros) illustrates the channel corresponding to this piece.
@@ -79,7 +79,7 @@ In the following case, we proceed with the black knights. Figure [reference](#fi
             0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
             0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
         \end{bmatrix}" aria-label="bmatrix 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ bmatrix"></div>
-  <figcaption>Illustration</figcaption>
+  <figcaption><em>One-hot encoding</em> representation of black knights</figcaption>
 </figure>
 
 Similarly, the process would proceed with the rest of the types of pieces. Continuing with the channels, it is pertinent to discuss the two channels used to report position repetition. The first channel will have all its values at 1 only if the position has been repeated once, while the second channel will be activated if the current position has been repeated exactly twice. This provides the neural network with the information that if it repeats the position one more time (having been repeated a total of three times), the game will be declared a draw. In total, this first group of channels has $12+2=14$ channels. This group is repeated 8 times, since the last 8 positions are stored instead of only the last one <span class="footnote" role="note">In my opinion, I do not consider it necessary to store the last 8 positions, with only the last one being necessary, since the information from the first two groups of channels provides all that is necessary for the current position</span>. Thus, there will be $14*8=112$ channels in total.

@@ -69,8 +69,8 @@ $$
 Given the expected rewards (values) shown in Figure [reference](#fig-recompensas-esperadas-para-calcular-la-politica-en-el-grid-de-2-dimensiones), we can show how a deterministic policy and a non-deterministic policy would select actions.
 
 <figure id="fig-recompensas-esperadas-para-calcular-la-politica-en-el-grid-de-2-dimensiones">
-  <img src="/assets/book/reward/values2.png" alt="Illustration" loading="lazy" />
-  <figcaption>Illustration</figcaption>
+  <img src="/assets/book/reward/values2.png" alt="Expected rewards for calculating the policy in the 2-dimensional Grid" loading="lazy" />
+  <figcaption>Expected rewards for calculating the policy in the 2-dimensional <em>Grid</em></figcaption>
 </figure>
 
 The game piece is located at the initial square (upper left corner) and can perform all four actions. Since squares without any value would have a value of $0$, the deterministic policy would return the value 2, corresponding to moving down. This move would lead to the state with the highest value. Following this procedure, the deterministic policy would continue selecting value 2 until reaching the lower left corner. From that point, it would only return value 1, corresponding to the move to the right, until reaching the final square.

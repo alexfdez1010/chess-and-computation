@@ -237,8 +237,8 @@ Para terminar, a continuación se presenta el diagrama de flujo que indica el fu
   classDef terminal fill:#46765f,color:#fff,stroke:#2f5d48,stroke-width:2px
   classDef io fill:#e8eee9,color:#171a17,stroke:#46765f,stroke-width:1.5px
   classDef decision fill:#f1eee2,color:#171a17,stroke:#46765f,stroke-width:2px
-  classDef process fill:#f7f7f1,color:#171a17,stroke:#6f786f,stroke-width:1.5px" role="img" aria-label="Ilustración">Comienzo → Entrada → ¿Todas las casillas recorridas? → ¿Se puede mover el caballo a una casilla? → Solución → Fin → Retroceder última bifurcación → Mover caballo</div>
-  <figcaption>Ilustración</figcaption>
+  classDef process fill:#f7f7f1,color:#171a17,stroke:#6f786f,stroke-width:1.5px" role="img" aria-label="Diagrama de flujo de Backtracking aplicado al tour del caballo">Comienzo → Entrada → ¿Todas las casillas recorridas? → ¿Se puede mover el caballo a una casilla? → Solución → Fin → Retroceder última bifurcación → Mover caballo</div>
+  <figcaption>Diagrama de flujo de <em>Backtracking</em> aplicado al tour del caballo</figcaption>
 </figure>
 
 A continuación, se describen detalladamente cada uno de los pasos del algoritmo representados en el diagrama de flujo.

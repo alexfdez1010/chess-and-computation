@@ -129,6 +129,166 @@ const { lang } = Astro.props as { lang: Language };
   }[pageLanguage];
   const node = (text, className = '') => `<span class="diagram-node ${className}">${text}</span>`;
   const arrow = '<i class="diagram-arrow" aria-hidden="true">→</i>';
+  const isSpanish = pageLanguage === 'es';
+  const mctsNode = (id, n, w, p) => `${id}["N=${n}<br/>W=${w}<br/>P=${p}"]`;
+  const flowAriaLabels = isSpanish ? {
+    'game-tree': 'Ejemplo de árbol de juego',
+    'game-path-1': 'Primera variante del árbol de juego',
+    'game-path-2': 'Segunda variante del árbol de juego',
+    'alpha-beta': 'Ejemplo de poda alfa-beta aplicado al ajedrez usando orden derecha-izquierda',
+    'alphazero-network': 'Red neuronal de AlphaZero',
+    'alphazero-residual': 'Estructura de un bloque residual en AlphaZero',
+    'alphazero-directions': 'Asignación de valores a las direcciones de los movimientos de dama',
+    'mcts-initial': 'Estado del árbol MCTS antes de realizar la última simulación',
+    'mcts-final': 'Estado del árbol MCTS después de finalizar la última simulación',
+  } : {
+    'game-tree': 'Game tree example',
+    'game-path-1': 'First game-tree variation',
+    'game-path-2': 'Second game-tree variation',
+    'alpha-beta': 'Example of alpha-beta pruning applied to chess using right-to-left order',
+    'alphazero-network': 'AlphaZero neural network',
+    'alphazero-residual': 'Structure of a residual block in AlphaZero',
+    'alphazero-directions': 'Assignment of values to the directions of queen movements',
+    'mcts-initial': 'State of the MCTS tree before performing the last simulation',
+    'mcts-final': 'State of the MCTS tree after finishing the last simulation',
+  };
+  const flowDefinitions = {
+    'game-tree': {
+      nodes: 6,
+      source: `flowchart TD
+        p1((P1)) -->|"${isSpanish ? 'Dc4' : 'Qc4'}"| p2((P2))
+        p1 -->|"${isSpanish ? 'Dg8' : 'Qg8'}"| p3((P3))
+        p1 -->|"${isSpanish ? 'Rg2' : 'Kg2'}"| p4((P4))
+        p3 -->|"${isSpanish ? 'Rxg8' : 'Kxg8'}"| p5((P5))
+        p5 -->|"${isSpanish ? 'Cf7#' : 'Nf7#'}"| p6((P6))`,
+    },
+    'game-path-1': {
+      nodes: 6,
+      source: `flowchart TD
+        p1((P1)) -->|"d4"| p5((P5))
+        p1 -->|"d4"| p2((P2))
+        p2 -->|"${isSpanish ? 'Cf6' : 'Nf6'}"| p6((P6))
+        p2 -->|"d5"| p3((P3))
+        p3 -->|"c4"| p4((P4))`,
+    },
+    'game-path-2': {
+      nodes: 4,
+      source: `flowchart TD
+        p7((P7)) -->|"${isSpanish ? 'Cf3' : 'Nf3'}"| p8((P8))
+        p8 -->|"${isSpanish ? 'Cf6' : 'Nf6'}"| p9((P9))
+        p9 -->|"${isSpanish ? 'Cg1' : 'Ng1'}"| p10((P10))
+        p10 -->|"${isSpanish ? 'Cg8' : 'Ng8'}"| p7`,
+    },
+    'alpha-beta': {
+      nodes: 12,
+      source: `flowchart TD
+        subgraph max0["${isSpanish ? 'Máx 0' : 'Max 0'}"]
+          p01((P01))
+        end
+        subgraph min1["${isSpanish ? 'Mín 1' : 'Min 1'}"]
+          p02((P02))
+          p03((P03))
+          p04((P04))
+        end
+        subgraph max2["${isSpanish ? 'Máx 2' : 'Max 2'}"]
+          p05((P05))
+          p06((P06))
+          p07((P07))
+          p08((P08))
+          p09((P09))
+        end
+        subgraph min3["${isSpanish ? 'Mín 3' : 'Min 3'}"]
+          p10((P10))
+          p11((P11))
+          p12((P12))
+        end
+        p01 -->|"c4"| p02
+        p01 -->|"${isSpanish ? 'Cf3' : 'Nf3'}"| p03
+        p01 -->|"${isSpanish ? 'Af4' : 'Bf4'}"| p04
+        p02 -.-> p05
+        p02 -->|"e6"| p06
+        p03 -->|"${isSpanish ? 'Ag4' : 'Bg4'}"| p07
+        p04 -->|"${isSpanish ? 'Af5' : 'Bf5'}"| p08
+        p04 -->|"${isSpanish ? 'Cf6' : 'Nf6'}"| p09
+        p05 -->|"${isSpanish ? 'Cc3' : 'Nc3'}"| p10
+        p05 -->|"${isSpanish ? 'Cf3' : 'Nf3'}"| p11
+        p06 -->|"cxd5"| p12`,
+    },
+    'alphazero-network': {
+      nodes: 6,
+      source: `flowchart BT
+        position["${isSpanish ? 'Posición' : 'Position'}"] --> features(("${isSpanish ? 'Extractor de<br/>características' : 'Feature<br/>extractor'}"))
+        subgraph network["${isSpanish ? 'Red neuronal' : 'Neural network'}"]
+          features
+          policy(("${isSpanish ? 'Política' : 'Policy'}"))
+          value(("${isSpanish ? 'Valor' : 'Value'}"))
+          features --> policy
+          features --> value
+        end
+        policy --> policyOutput["${isSpanish ? 'Salida de<br/>la política' : 'Policy<br/>output'}"]
+        value --> valueOutput["${isSpanish ? 'Salida<br/>del valor' : 'Value<br/>output'}"]`,
+    },
+    'alphazero-residual': {
+      nodes: 9,
+      source: `flowchart LR
+        input["${isSpanish ? 'Entrada' : 'Input'}"] --> convolution1(("${isSpanish ? 'Convolución' : 'Convolution'}"))
+        convolution1 --> batch1(("${isSpanish ? 'Normalización<br/>de batch' : 'Batch<br/>normalization'}"))
+        batch1 --> relu1((ReLU))
+        relu1 --> convolution2(("${isSpanish ? 'Convolución' : 'Convolution'}"))
+        convolution2 --> batch2(("${isSpanish ? 'Normalización<br/>de batch' : 'Batch<br/>normalization'}"))
+        batch2 --> add((+))
+        add --> relu2((ReLU))
+        relu2 --> output["${isSpanish ? 'Salida' : 'Output'}"]
+        input --> add`,
+    },
+    'alphazero-directions': {
+      nodes: 9,
+      source: `flowchart TB
+        center((·))
+        center --> northwest["${isSpanish ? 'NO: 1' : 'NW: 1'}"]
+        center --> north["N: 0"]
+        center --> northeast["NE: 1"]
+        center --> west["${isSpanish ? 'O: 6' : 'W: 6'}"]
+        center --> east["E: 2"]
+        center --> southwest["${isSpanish ? 'SO: 5' : 'SW: 5'}"]
+        center --> south["S: 4"]
+        center --> southeast["SE: 3"]`,
+    },
+    'mcts-initial': {
+      nodes: 7,
+      source: `flowchart TD
+        ${mctsNode('root', '140', '-3', isSpanish ? '1,000' : '1.000')}
+        ${mctsNode('rf3', '100', '4', isSpanish ? '0,625' : '0.625')}
+        ${mctsNode('b3', '10', '-4', isSpanish ? '0,125' : '0.125')}
+        ${mctsNode('db3', '30', '-3', isSpanish ? '0,250' : '0.250')}
+        ${mctsNode('f5a', '90', '-3', isSpanish ? '0,875' : '0.875')}
+        ${mctsNode('ce7', '10', '-1', isSpanish ? '0,125' : '0.125')}
+        ${mctsNode('f5b', '10', '-4', isSpanish ? '1,000' : '1.000')}
+        root -->|"${isSpanish ? 'Rf3' : 'Kf3'}"| rf3
+        root -->|"b3"| b3
+        root -->|"${isSpanish ? 'Db3' : 'Qb3'}"| db3
+        rf3 -->|"f5"| f5a
+        rf3 -->|"${isSpanish ? 'Ce7' : 'Ne7'}"| ce7
+        b3 -->|"f5"| f5b`,
+    },
+    'mcts-final': {
+      nodes: 7,
+      source: `flowchart TD
+        ${mctsNode('root', '141', isSpanish ? '-2,4' : '-2.4', isSpanish ? '1,000' : '1.000')}
+        ${mctsNode('rf3', '101', isSpanish ? '4,6' : '4.6', isSpanish ? '0,625' : '0.625')}
+        ${mctsNode('b3', '10', '-4', isSpanish ? '0,125' : '0.125')}
+        ${mctsNode('db3', '30', '-3', isSpanish ? '0,250' : '0.250')}
+        ${mctsNode('f5a', '91', isSpanish ? '-3,6' : '-3.6', isSpanish ? '0,875' : '0.875')}
+        ${mctsNode('ce7', '10', '-1', isSpanish ? '0,125' : '0.125')}
+        ${mctsNode('f5b', '10', '-4', isSpanish ? '1,000' : '1.000')}
+        root -->|"${isSpanish ? 'Rf3' : 'Kf3'}"| rf3
+        root -->|"b3"| b3
+        root -->|"${isSpanish ? 'Db3' : 'Qb3'}"| db3
+        rf3 -->|"f5"| f5a
+        rf3 -->|"${isSpanish ? 'Ce7' : 'Ne7'}"| ce7
+        b3 -->|"f5"| f5b`,
+    },
+  };
   const templates = {
     cover: `<div class="cover-diagram"><div class="cover-mini-board">${Array.from({ length: 16 }, (_, i) => `<i class="${(Math.floor(i/4)+i)%2 ? 'dark' : ''}"></i>`).join('')}<b>♞</b></div><p>64<sup>+</sup></p></div>`,
     'n-queens': `<div class="bar-chart">${[1,0,0,2,10,4,40,92].map((value, i) => `<span style="--value:${Math.max(2,value)}"><i>${value}</i><b>${i+1}</b></span>`).join('')}</div><div class="diagram-legend"><span>${labels.queens}</span><span>${labels.solutions}</span></div>`,
@@ -145,6 +305,16 @@ const { lang } = Astro.props as { lang: Language };
   document.querySelectorAll('.localized-diagram[data-diagram]').forEach((figure) => {
     const key = figure.dataset.diagram;
     if (key === 'flowchart') return;
+    const flowDefinition = flowDefinitions[key];
+    if (flowDefinition) {
+      figure.classList.add('flow-diagram', 'mermaid-flowchart');
+      figure.dataset.nodeCount = String(flowDefinition.nodes);
+      figure.dataset.mermaid = flowDefinition.source;
+      figure.setAttribute('role', 'img');
+      figure.setAttribute('aria-label', figure.dataset.label || flowAriaLabels[key] || key.replaceAll('-', ' '));
+      figure.replaceChildren();
+      return;
+    }
     const template = templates[key];
     if (!template) return;
     const stage = document.createElement('div');

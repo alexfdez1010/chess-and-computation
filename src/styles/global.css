@@ -195,6 +195,18 @@ div.outline-heading { color: var(--ink); }
 .board-arrows i::after { content: ''; position: absolute; top: 50%; right: -3px; width: 12px; height: 12px; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 12px solid rgba(226, 150, 41, .82); transform: translateY(-50%); }
 
 .localized-diagram { width: 100%; margin: 2.5em 0; font-family: var(--sans); }
+.mdp-chess-flow { position: relative; isolation: isolate; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-items: center; gap: clamp(70px, 10vw, 120px) clamp(28px, 10vw, 130px); overflow: hidden; padding: clamp(28px, 5vw, 54px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-raised); }
+.mdp-agent { position: relative; z-index: 2; grid-column: 1 / -1; display: grid; place-items: center; width: clamp(120px, 20vw, 170px); aspect-ratio: 1; border-radius: 50%; color: #fff; background: #6f786f; font: 700 clamp(20px, 4vw, 34px) var(--serif); }
+.mdp-state { position: relative; z-index: 2; width: min(100%, 280px); padding: clamp(15px, 2.2vw, 24px); border-radius: 50%; background: #8f918f; }
+.mdp-state .chessboard { width: 100%; margin: 0; }
+.mdp-state .source-chessboard { border-radius: 2px !important; }
+.mdp-edge-label { position: absolute; z-index: 3; max-width: min(34%, 310px); color: var(--ink-soft); font: 500 clamp(10px, 1.35vw, 16px)/1.35 var(--sans); }
+.mdp-edge-state-label { top: 40%; left: 3%; text-align: right; }
+.mdp-edge-action-label { top: 40%; right: 3%; text-align: left; }
+.mdp-edge-transition-label { bottom: 5%; left: 50%; transform: translateX(-50%); text-align: center; }
+.mdp-flow-arrows { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.mdp-flow-arrows path { fill: none; stroke: var(--accent); stroke-width: 5; }
+.mdp-flow-arrows marker path { fill: var(--accent); stroke: none; }
 .diagram-stage { position: relative; min-height: 210px; display: grid; place-items: center; overflow: hidden; padding: clamp(25px, 5vw, 55px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-raised); isolation: isolate; }
 .diagram-stage::before { content: ''; position: absolute; z-index: -1; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 28px 28px; opacity: .2; }
 .diagram-node { min-width: 76px; display: grid; place-items: center; padding: 11px 13px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--paper); color: var(--ink); font-size: 11px; font-weight: 650; text-align: center; animation: diagram-in .45s both; }
@@ -321,6 +333,12 @@ div.outline-heading { color: var(--ink); }
   .chapter-pagination > span:empty { display: none; }
   .site-footer { gap: 20px; padding: 24px; }
   .diagram-stage { min-height: 180px; padding: 25px 14px; }
+  .mdp-chess-flow { gap: 58px 16px; padding: 24px 12px; }
+  .mdp-agent { width: 106px; }
+  .mdp-state { padding: 10px; }
+  .mdp-edge-label { max-width: 42%; font-size: 9px; }
+  .mdp-edge-state-label { top: 42%; left: 1%; }
+  .mdp-edge-action-label { top: 42%; right: 1%; }
   .diagram-cycle, .network-diagram, .residual-diagram { flex-wrap: wrap; }
   .diagram-node { min-width: 66px; padding: 9px 8px; }
   .diagram-node.wide { min-width: 92px; }

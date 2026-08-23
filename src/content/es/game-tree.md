@@ -21,7 +21,7 @@ El concepto principal que subyace en el árbol de juego es el análisis exhausti
 A continuación, se presenta un ejemplo ilustrativo de un árbol de juego. Esta representación será notablemente similar a la de una partida de ajedrez real, lo cual no es coincidencia, ya que el árbol de juego es, en esencia, una simulación de una partida que toma en consideración todos los movimientos posibles.
 
 <figure id="fig-ejemplo-de-arbol-de-juego">
-  <img src="/assets/book/game-tree/tree.png" alt="Ejemplo de árbol de juego" loading="lazy" />
+  <div class="localized-diagram" data-diagram="game-tree" data-label="Ejemplo de árbol de juego" role="img" aria-label="Ejemplo de árbol de juego">Ejemplo de árbol de juego</div>
   <figcaption>Ejemplo de árbol de juego</figcaption>
 </figure>
 

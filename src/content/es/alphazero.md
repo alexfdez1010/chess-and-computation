@@ -31,7 +31,7 @@ La red neuronal en cuestión cuenta con un gran número de capas, particularment
 La Figura [referencia](#fig-red-neuronal-de-alphazero) muestra la red neuronal usada por AlphaZero con las partes antes mencionadas.
 
 <figure id="fig-red-neuronal-de-alphazero">
-  <img src="/assets/book/alphazero/network.png" alt="Red neuronal de AlphaZero" loading="lazy" />
+  <div class="localized-diagram" data-diagram="alphazero-network" data-label="Red neuronal de AlphaZero" role="img" aria-label="Red neuronal de AlphaZero">Red neuronal de AlphaZero</div>
   <figcaption>Red neuronal de AlphaZero</figcaption>
 </figure>
 
@@ -46,8 +46,8 @@ Para representar la disposición de las piezas se utiliza el formato conocido co
 A modo de ilustración, consideremos el tablero mostrado en la Figura [referencia](#fig-posicion-de-ejemplo-para-mostrar-el-formato-one-hot-encoding). A continuación, se muestran los canales correspondientes a varias de las piezas presentes en este tablero.
 
 <figure id="fig-posicion-de-ejemplo-para-mostrar-el-formato-one-hot-encoding">
-  <div class="chessboard" data-fen="rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7" data-size="8" data-chess-options="&quot;maxfield=h8, setfen=rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7, largeboard&quot;" role="img" aria-label="Ilustración" data-rendered="source" data-board-asset="board-8x8-8a233edf3b81d5da.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-8a233edf3b81d5da.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
-  <figcaption>Ilustración</figcaption>
+  <div class="chessboard" data-fen="rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7" data-size="8" data-chess-options="&quot;maxfield=h8, setfen=rnbqk1nr/ppp2ppp/8/4P3/1BP5/8/PP2KpPP/RN1Q1BNR b kq - 1 7, largeboard&quot;" role="img" aria-label="Posición de ejemplo para mostrar el formato one-hot encoding" data-rendered="source" data-board-asset="board-8x8-8a233edf3b81d5da.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-8a233edf3b81d5da.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
+  <figcaption>Posición de ejemplo para mostrar el formato <em>one-hot encoding</em></figcaption>
 </figure>
 
 En primer lugar, se inicia con los peones blancos. La Figura [referencia](#fig-representacion-en-formato-one-hot-encoding-de-los-peones-blancos) muestra la matriz resultante. En esta matriz, todas las posiciones ocupadas por peones blancos se representan con el valor 1, mientras que las posiciones vacías se representan con el valor 0. Cada tipo de pieza (peón, caballo, alfil, torre, dama y rey de ambos colores) se asigna a un canal específico, lo que da un total de 12 canales distintos.
@@ -63,7 +63,7 @@ En primer lugar, se inicia con los peones blancos. La Figura [referencia](#fig-r
             1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
             0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
         \end{bmatrix}" aria-label="bmatrix 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ bmatrix"></div>
-  <figcaption>Ilustración</figcaption>
+  <figcaption>Representación en formato <em>one-hot encoding</em> de los peones blancos</figcaption>
 </figure>
 
 En el caso siguiente, se procede con los caballos negros. La Figura [referencia](#fig-representacion-en-formato-one-hot-encoding-de-los-caballos-negros) ilustra el canal correspondiente a esta pieza.
@@ -79,7 +79,7 @@ En el caso siguiente, se procede con los caballos negros. La Figura [referencia]
             0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
             0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
         \end{bmatrix}" aria-label="bmatrix 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ bmatrix"></div>
-  <figcaption>Ilustración</figcaption>
+  <figcaption>Representación en formato <em>one-hot encoding</em> de los caballos negros</figcaption>
 </figure>
 
 De forma análoga, se procedería con el resto de tipos de piezas. Continuando con los canales, es pertinente hablar sobre los dos canales utilizados para informar sobre la repetición de la posición. El primer canal tendrá todos sus valores a 1 solo si la posición se ha repetido una vez, mientras que el segundo canal se activará si la posición actual se ha repetido exactamente dos veces. Esto proporciona a la red neuronal la información de que si repite la posición una vez más (habiendo sido repetida un total de tres veces), el juego se declarará en tablas. En total, este primer grupo de canales cuenta con $12+2=14$ canales. Este grupo se repite 8 veces, ya que se almacenan las 8 últimas posiciones en lugar de únicamente la última <span class="footnote" role="note">En mi opinión, no considero necesario almacenar las 8 últimas posiciones, siendo solo necesaria la última, ya que la información de los dos primeros grupos de canales provee toda la necesaria para la posición actual</span>. De esta forma, habrá $14*8=112$ canales en total.
@@ -125,7 +125,7 @@ Gracias a esta conexión residual, se puede realizar la retropropagación (*back
 La Figura [referencia](#fig-estructura-de-un-bloque-residual-en-alphazero) ilustra la estructura de un bloque residual como el que se ha descrito anteriormente.
 
 <figure id="fig-estructura-de-un-bloque-residual-en-alphazero">
-  <img src="/assets/book/alphazero/residual.png" alt="Estructura de un bloque residual en AlphaZero" loading="lazy" />
+  <div class="localized-diagram" data-diagram="alphazero-residual" data-label="Estructura de un bloque residual en AlphaZero" role="img" aria-label="Estructura de un bloque residual en AlphaZero">Estructura de un bloque residual en AlphaZero</div>
   <figcaption>Estructura de un bloque residual en AlphaZero</figcaption>
 </figure>
 
@@ -140,7 +140,7 @@ Dentro de estos 73 movimientos posibles, los primeros 56 corresponden a los movi
 La lógica detrás de los movimientos de la dama se rige por la orientación de un compás; en consecuencia, la dama puede moverse en cualquiera de las 8 direcciones indicadas por este. En cada dirección, la dama tiene la capacidad de moverse entre 1 y 7 casillas. El producto de estos valores nos proporciona el total de movimientos posibles para la dama. Durante la codificación, se asignará a cada dirección un valor numérico entre 1 y 7, tal y como se muestra en la Figura [referencia](#fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama). A este valor se le sumará el número de casillas que la dama planea moverse.
 
 <figure id="fig-asignacion-de-valores-a-las-direcciones-de-los-movimientos-de-dama">
-  <img src="/assets/book/alphazero/directions.png" alt="Asignación de valores a las direcciones de los movimientos de dama" loading="lazy" />
+  <div class="localized-diagram" data-diagram="alphazero-directions" data-label="Asignación de valores a las direcciones de los movimientos de dama" role="img" aria-label="Asignación de valores a las direcciones de los movimientos de dama">Asignación de valores a las direcciones de los movimientos de dama</div>
   <figcaption>Asignación de valores a las direcciones de los movimientos de dama</figcaption>
 </figure>
 
@@ -266,14 +266,14 @@ Consideremos la posición que se muestra en la Figura [referencia](#fig-posicion
 El agente que juega con las piezas blancas ha generado un árbol de búsqueda Monte Carlo, y está a punto de llevar a cabo la última simulación del árbol. En el nodo sólo se muestran los valores $N$, $W$ y $P$, ya que $Q$ puede calcularse fácilmente a partir de $W$ y $N$.
 
 <figure id="fig-mcts-antes-de-la-ultima-simulacion">
-  <img src="/assets/book/alphazero/initial_MCTS.png" alt="Estado del árbol MCTS antes de realizar la última simulación" loading="lazy" />
+  <div class="localized-diagram" data-diagram="mcts-initial" data-label="Estado del árbol MCTS antes de realizar la última simulación" role="img" aria-label="Estado del árbol MCTS antes de realizar la última simulación">Estado del árbol MCTS antes de realizar la última simulación</div>
   <figcaption>Estado del árbol MCTS antes de realizar la última simulación</figcaption>
 </figure>
 
 Se efectúa la última simulación, seleccionando los movimientos Rf3 y f5, ya que son los que presentan el valor más alto según la fórmula empleada para las simulaciones. Al llegar al nodo después de f5, se ejecuta la red neuronal, obteniendo un valor de $v=0,6$. Con este valor, se procede a actualizar todos los nodos que fueron atravesados durante la simulación, lo que resulta en el siguiente árbol:
 
 <figure id="fig-mcts-despues-de-terminar-la-simulacion">
-  <img src="/assets/book/alphazero/final_MCTS.png" alt="Estado del árbol MCTS después de finalizar la última simulación" loading="lazy" />
+  <div class="localized-diagram" data-diagram="mcts-final" data-label="Estado del árbol MCTS después de finalizar la última simulación" role="img" aria-label="Estado del árbol MCTS después de finalizar la última simulación">Estado del árbol MCTS después de finalizar la última simulación</div>
   <figcaption>Estado del árbol MCTS después de finalizar la última simulación</figcaption>
 </figure>
 

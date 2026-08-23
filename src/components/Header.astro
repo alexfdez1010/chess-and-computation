@@ -10,7 +10,7 @@ const { lang, entries, alternatePath = `/${lang === 'es' ? 'en' : 'es'}` } = Ast
 <header class="site-header">
   <a class="wordmark" href={`/${lang}`} aria-label={copy[lang].title}>
     <span class="brand-piece" aria-hidden="true">♞</span>
-    <span>{lang === 'es' ? 'Ajedrez' : 'Chess'}<small>&amp; computation</small></span>
+    <span>{lang === 'es' ? 'Ajedrez' : 'Chess'}<small>{lang === 'es' ? 'y Computación' : 'and Computation'}</small></span>
   </a>
   <div class="header-actions">
     <SearchDialog {lang} {entries} />

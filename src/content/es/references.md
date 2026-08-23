@@ -1,6 +1,6 @@
 ---
 title: "Referencias"
-description: "Bibliografía y fuentes citadas en Ajedrez y computación."
+description: "Bibliografía y fuentes citadas en Ajedrez y Computación."
 chapter: "Referencias"
 part: "backmatter"
 order: 27

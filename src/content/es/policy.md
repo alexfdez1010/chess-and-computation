@@ -69,8 +69,8 @@ $$
 Dadas las recompensas esperadas (valores) mostradas en la Figura [referencia](#fig-recompensas-esperadas-para-calcular-la-politica-en-el-grid-de-2-dimensiones), podemos mostrar cómo seleccionaría las acciones una política determinista y una no determinista.
 
 <figure id="fig-recompensas-esperadas-para-calcular-la-politica-en-el-grid-de-2-dimensiones">
-  <img src="/assets/book/reward/values2.png" alt="Ilustración" loading="lazy" />
-  <figcaption>Ilustración</figcaption>
+  <img src="/assets/book/reward/values2.png" alt="Recompensas esperadas para calcular la política en el Grid de 2 dimensiones" loading="lazy" />
+  <figcaption>Recompensas esperadas para calcular la política en el <em>Grid</em> de 2 dimensiones</figcaption>
 </figure>
 
 La pieza de juego está ubicada en la casilla inicial (esquina superior izquierda) y puede realizar las cuatro acciones. Dado que las casillas sin ningún valor tendrían un valor de $0$, la política determinista devolvería el valor 2, correspondiente a moverse hacia abajo. Este movimiento llevaría al estado con mayor valor. Siguiendo este procedimiento, la política determinista continuaría seleccionando el valor 2 hasta llegar a la esquina inferior izquierda. A partir de ese punto, sólo devolvería el valor 1, correspondiente al movimiento a la derecha, hasta llegar a la casilla final.

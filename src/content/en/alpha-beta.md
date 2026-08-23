@@ -145,7 +145,7 @@ $$
 $$
 
 <figure id="fig-ejemplo-de-poda-alfa-beta-aplicado-al-ajedrez-usando-orden-derecha-izquierda">
-  <img src="/assets/book/alpha-beta/pruning-example.png" alt="Example of alpha beta pruning applied to chess using right-to-left order" loading="lazy" />
+  <div class="localized-diagram" data-diagram="alpha-beta" data-label="Example of alpha beta pruning applied to chess using right-to-left order" role="img" aria-label="Example of alpha beta pruning applied to chess using right-to-left order">Example of alpha beta pruning applied to chess using right-to-left order</div>
   <figcaption>Example of alpha beta pruning applied to chess using right-to-left order</figcaption>
 </figure>
 

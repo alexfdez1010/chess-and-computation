@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Convert the bilingual LaTeX sources of "Ajedrez y Computacion" into the
+ * Convert the bilingual LaTeX sources of "Ajedrez y Computación" into the
  * deliberately boring Markdown contract consumed by Astro content collections.
  *
  * No npm dependencies are used: the script runs with either Bun or Node and is
@@ -63,6 +63,10 @@ function plainText(value) {
     .trim();
 }
 
+function accessiblePlainText(value) {
+  return plainText(String(value ?? "").replace(/\$+\s*([^$]*?)\s*\$+/g, "$1"));
+}
+
 function makeDescription(body) {
   const withoutHeadings = String(body).replace(/^#{1,6}\s+.*$/gm, " ");
   const text = plainText(withoutHeadings);
@@ -121,26 +125,52 @@ function sourceAssetPath(sourcePath) {
 
 function localizedDiagramKey(lang, sourcePath, caption) {
   const path = sourceAssetPath(sourcePath);
-  if (lang === "es" && path === "alpha-beta/pruning-example.png") return "alpha-beta";
-  if (lang !== "en") return null;
   const replacements = new Map([
+    ["alpha-beta/pruning-example.png", "alpha-beta"],
     ["alphazero/network.png", "alphazero-network"],
     ["alphazero/residual.png", "alphazero-residual"],
     ["alphazero/directions.png", "alphazero-directions"],
     ["alphazero/final_MCTS.png", "mcts-final"],
-    ["definition/example_definition.png", "definition"],
     ["game-tree/tree.png", "game-tree"],
-    ["n-queens/myplot.png", "n-queens"],
-    ["game/image2.png", "game-tree"],
-    ["game/image3.png", "game-tree"],
+    ["game/image2.png", "game-path-1"],
+    ["game/image3.png", "game-path-2"],
   ]);
   if (path === "alphazero/initial_MCTS.png") return /after|despu[eé]s|final/i.test(plainText(caption)) ? "mcts-final" : "mcts-initial";
+  // The plot is not a flow diagram. Its existing responsive chart is only
+  // needed where the Spanish-labelled bitmap is unavailable.
+  if (lang === "en" && path === "n-queens/myplot.png") return "n-queens";
   return replacements.get(path) || null;
 }
 
 function localizedDiagram(key, caption) {
-  const label = plainText(caption);
+  const label = accessiblePlainText(caption);
   return `<div class=\"localized-diagram\" data-diagram=\"${escapeAttribute(key)}\" data-label=\"${escapeAttribute(label)}\" role=\"img\" aria-label=\"${escapeAttribute(label)}\">${escapeHtml(label)}</div>`;
+}
+
+function definitionChessFlow(lang, caption) {
+  const label = accessiblePlainText(caption);
+  const agent = lang === "es" ? "Agente" : "Agent";
+  const stateLabel = lang === "es" ? "1. Estado (posición) y recompensa (0)" : "1. State (position) and reward (0)";
+  const actionLabel = lang === "es" ? "2. Acción (d5)" : "2. Action (d5)";
+  const transitionLabel = lang === "es" ? "3. Función de transición" : "3. Transition function";
+  const firstLabel = lang === "es" ? "Posición antes de ...d5" : "Position before ...d5";
+  const secondLabel = lang === "es" ? "Posición después de ...d5" : "Position after ...d5";
+  const firstFen = "rnbqkb1r/pppppppp/5n2/8/3P4/5N2/PPP1PPPP/RNBQKB1R b KQkq - 2 2";
+  const secondFen = "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq - 0 3";
+  return `<div class=\"localized-diagram mdp-chess-flow\" role=\"group\" aria-label=\"${escapeAttribute(label)}\">
+    <strong class=\"mdp-agent\">${escapeHtml(agent)}</strong>
+    <div class=\"mdp-state mdp-state-before\">${boardHtml(`setfen=${firstFen}, largeboard`, firstLabel)}</div>
+    <div class=\"mdp-state mdp-state-after\">${boardHtml(`setfen=${secondFen}, largeboard`, secondLabel)}</div>
+    <span class=\"mdp-edge-label mdp-edge-state-label\">${escapeHtml(stateLabel)}</span>
+    <span class=\"mdp-edge-label mdp-edge-action-label\">${escapeHtml(actionLabel)}</span>
+    <span class=\"mdp-edge-label mdp-edge-transition-label\">${escapeHtml(transitionLabel)}</span>
+    <svg class=\"mdp-flow-arrows\" viewBox=\"0 0 1000 650\" preserveAspectRatio=\"none\" aria-hidden=\"true\">
+      <defs><marker id=\"mdp-arrow-${lang}\" markerWidth=\"9\" markerHeight=\"9\" refX=\"7\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L0,9 L8,4.5 z\" /></marker></defs>
+      <path d=\"M300 470 Q360 235 455 175\" marker-end=\"url(#mdp-arrow-${lang})\" />
+      <path d=\"M455 190 Q360 300 300 430\" marker-end=\"url(#mdp-arrow-${lang})\" />
+      <path d=\"M430 535 L670 535\" marker-end=\"url(#mdp-arrow-${lang})\" />
+    </svg>
+  </div>`;
 }
 
 function protectMath(text) {
@@ -253,6 +283,42 @@ function extractCommandOptions(source, command) {
   return { options: source.slice(cursor + 1, end), start: index, end: end + 1 };
 }
 
+function commandArguments(source, command) {
+  const values = [];
+  const token = `\\${command}`;
+  let searchFrom = 0;
+  while (searchFrom < source.length) {
+    const index = source.indexOf(token, searchFrom);
+    if (index < 0) break;
+    let cursor = index + token.length;
+    while (/\s/.test(source[cursor] ?? "")) cursor += 1;
+    if (source[cursor] === "[") {
+      let squareDepth = 1;
+      cursor += 1;
+      while (cursor < source.length && squareDepth) {
+        if (source[cursor] === "[") squareDepth += 1;
+        if (source[cursor] === "]") squareDepth -= 1;
+        cursor += 1;
+      }
+      while (/\s/.test(source[cursor] ?? "")) cursor += 1;
+    }
+    if (source[cursor] !== "{") {
+      searchFrom = cursor + 1;
+      continue;
+    }
+    const start = ++cursor;
+    let braceDepth = 1;
+    while (cursor < source.length && braceDepth) {
+      if (source[cursor] === "{" && source[cursor - 1] !== "\\") braceDepth += 1;
+      if (source[cursor] === "}" && source[cursor - 1] !== "\\") braceDepth -= 1;
+      cursor += 1;
+    }
+    if (braceDepth === 0) values.push(source.slice(start, cursor - 1));
+    searchFrom = cursor;
+  }
+  return values;
+}
+
 function optionValues(options, key) {
   const values = [];
   const pattern = new RegExp(`(?:^|[,\\n])\\s*${key}\\s*=\\s*(\\{[^}]*\\}|[^,\\n]+)`, "g");
@@ -354,12 +420,13 @@ function parseTabularHtml(body, lang) {
 }
 
 function parseFigure(body, lang) {
-  const captions = [...body.matchAll(/\\caption(?:\[[^\]]*\])?\s*\{([^{}]*)\}/gs)];
+  const captions = commandArguments(body, "caption");
   const labels = [...body.matchAll(/\\label\s*\{([^{}]+)\}/gs)];
-  const captionMatch = captions.at(-1);
+  const captionSource = captions.at(-1);
   const labelMatch = labels.at(-1);
-  const caption = inlineHtml(captionMatch?.[1] || (lang === "es" ? "Ilustración" : "Illustration"), lang);
-  const id = slugify(labelMatch?.[1] || plainText(caption));
+  const caption = inlineHtml(captionSource || (lang === "es" ? "Ilustración" : "Illustration"), lang);
+  const captionText = accessiblePlainText(caption);
+  const id = slugify(labelMatch?.[1] || captionText);
   const images = [...body.matchAll(/\\includegraphics(?:\[[^\]]*\])?\s*\{([^{}]+)\}/g)];
   const boardMatches = [...body.matchAll(/\\chessboard\s*\[([\s\S]*?)\]/g)];
   const rendered = images.map((match) => {
@@ -370,8 +437,11 @@ function parseFigure(body, lang) {
     }
     // The second upstream MCTS figure accidentally repeats the initial image.
     // Its caption identifies the post-simulation state and therefore final_MCTS.
-    if (/alphazero\/initial_MCTS\.png$/.test(path) && /after|despu[eé]s|final/i.test(plainText(caption))) {
+    if (/alphazero\/initial_MCTS\.png$/.test(path) && /after|despu[eé]s|final/i.test(captionText)) {
       path = path.replace(/initial_MCTS\.png$/, "final_MCTS.png");
+    }
+    if (sourceAssetPath(path) === "definition/example_definition.png") {
+      return `  ${definitionChessFlow(lang, caption)}`;
     }
     const diagramKey = localizedDiagramKey(lang, path, caption);
     if (diagramKey) return `  ${localizedDiagram(diagramKey, caption)}`;
@@ -379,10 +449,10 @@ function parseFigure(body, lang) {
     if (unavailableAssetsByLang.get(lang)?.has(relative)) {
       throw new Error(`Missing localized replacement for ${lang}: ${relative}`);
     }
-    return `  <img src=\"${escapeAttribute(publicAssetPath(path))}\" alt=\"${escapeAttribute(plainText(caption))}\" loading=\"lazy\" />`;
+    return `  <img src=\"${escapeAttribute(publicAssetPath(path))}\" alt=\"${escapeAttribute(captionText)}\" loading=\"lazy\" />`;
   });
   for (const match of boardMatches) {
-    rendered.push(`  ${boardHtml(match[1], plainText(caption))}`);
+    rendered.push(`  ${boardHtml(match[1], captionText)}`);
   }
   if (!rendered.length) {
     const equations = [...body.matchAll(/\\begin\{(?:align\*?|equation\*?)\}([\s\S]*?)\\end\{(?:align\*?|equation\*?)\}/g)];
@@ -399,7 +469,7 @@ function parseFigure(body, lang) {
     const tabular = body.match(/\\begin\{tabular\}(?:\[[^\]]*\])?\s*\{[^{}]*\}([\s\S]*?)\\end\{tabular\}/);
     if (tabular) rendered.push(`  <div class=\"figure-table\">\n${parseTabularHtml(tabular[1], lang)}\n  </div>`);
     const tikz = body.match(/\\begin\{tikzpicture\}(?:\[[^\]]*\])?([\s\S]*?)\\end\{tikzpicture\}/);
-    if (tikz) rendered.push(`  ${parseDiagram(tikz[1], plainText(caption))}`);
+    if (tikz) rendered.push(`  ${parseDiagram(tikz[1], captionText)}`);
   }
   return `<figure id=\"${id}\">\n${rendered.join("\n")}\n  <figcaption>${caption}</figcaption>\n</figure>`;
 }
@@ -418,7 +488,7 @@ function parseList(body, ordered, lang) {
 function parseTable(body, lang) {
   const tabular = body.match(/\\begin\{tabular\}(?:\[[^\]]*\])?\s*\{[^{}]*\}([\s\S]*?)\\end\{tabular\}/);
   if (!tabular) return fallbackLatex(body, "table");
-  const caption = body.match(/\\caption(?:\[[^\]]*\])?\s*\{([^{}]*)\}/s)?.[1];
+  const caption = commandArguments(body, "caption").at(-1);
   const markdown = parseTabularBody(tabular[1], lang);
   if (!markdown) return "";
   return caption ? `${markdown}\n\n*${inlineMarkdown(caption, lang)}*` : markdown;
@@ -657,7 +727,7 @@ async function main() {
       sectionNumber: "references",
       sectionTitle: lang === "es" ? "Referencias" : "References",
       navDepth: 1,
-      description: lang === "es" ? "Bibliografía y fuentes citadas en Ajedrez y computación." : "Bibliography and sources cited in Chess and computation.",
+      description: lang === "es" ? "Bibliografía y fuentes citadas en Ajedrez y Computación." : "Bibliography and sources cited in Chess and computation.",
     };
     await writePage(lang, referencePage, referencesMarkdown(bibliography, lang));
     const manifest = [...pages, referencePage].map(({ sourceName, ...page }) => ({ ...page, source: sourceName }));

@@ -94,7 +94,7 @@ export function equivalentPath(entry: ChapterEntry, target: Language) {
 
 export const copy = {
   es: {
-    title: 'Ajedrez y computación',
+    title: 'Ajedrez y Computación',
     subtitle: 'Del tablero a la inteligencia artificial',
     description: 'Una edición web abierta sobre algoritmos, búsqueda, aprendizaje y el juego que convirtió el cálculo en estrategia.',
     contents: 'Contenido', search: 'Buscar', searchHint: 'Busca conceptos, capítulos y técnicas',
