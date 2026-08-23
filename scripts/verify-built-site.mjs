@@ -2,6 +2,7 @@
 
 import { access, readFile, readdir } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
+import katex from 'katex';
 
 const root = resolve(import.meta.dirname, '..');
 const dist = join(root, 'dist');
@@ -24,6 +25,16 @@ function routeCandidates(pathname) {
   return [join(dist, clean), join(dist, clean, 'index.html'), join(dist, `${clean}.html`)];
 }
 
+function decodeHtml(value) {
+  return value
+    .replace(/&#(?:x([0-9a-f]+)|(\d+));/gi, (_, hex, decimal) => String.fromCodePoint(Number.parseInt(hex || decimal, hex ? 16 : 10)))
+    .replaceAll('&amp;', '&')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&#39;', "'");
+}
+
 const files = await walk(dist);
 const htmlFiles = files.filter((file) => file.endsWith('.html'));
 const htmlByFile = new Map(await Promise.all(htmlFiles.map(async (file) => [file, await readFile(file, 'utf8')])));
@@ -44,6 +55,8 @@ let mdpChessboardCount = 0;
 let subfigureGridCount = 0;
 let subfigureCount = 0;
 let captionedSubfigureCount = 0;
+let matrixFormulaCount = 0;
+const matrixEnvironment = /\\begin\{(?:[bpvVB]?matrix|smallmatrix|array)\}/;
 
 for (const [file, html] of htmlByFile) {
   const relative = file.slice(dist.length);
@@ -59,6 +72,21 @@ for (const [file, html] of htmlByFile) {
   subfigureCount += (html.match(/<figure class="subfigure"(?:\s|>)/g) || []).length;
   captionedSubfigureCount += (html.match(/<figure class="subfigure"[^>]*>[\s\S]*?<figcaption>[\s\S]*?<\/figcaption>\s*<\/figure>/g) || []).length;
   if (/data-diagram="flowchart"[^>]*data-(?:nodes|edges)=/.test(html)) failures.push(`${relative}: contains a legacy non-Mermaid flowchart`);
+
+  const mathSources = [
+    ...html.matchAll(/data-math="([\s\S]*?)"/g),
+    ...html.matchAll(/<annotation encoding="application\/x-tex">([\s\S]*?)<\/annotation>/g),
+  ];
+  for (const match of mathSources) {
+    const formula = decodeHtml(match[1]);
+    if (!matrixEnvironment.test(formula)) continue;
+    matrixFormulaCount += 1;
+    try {
+      katex.renderToString(formula, { displayMode: true, throwOnError: true, strict: 'error' });
+    } catch (error) {
+      failures.push(`${relative}: invalid matrix formula (${error.message})`);
+    }
+  }
 
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
@@ -110,6 +138,7 @@ if (mdpChessFlowCount !== 2 || mdpChessboardCount < 4) {
 if (subfigureGridCount !== 26 || subfigureCount !== 88 || captionedSubfigureCount !== subfigureCount) {
   failures.push(`expected 26 grouped figures with 88 captioned panels, found ${subfigureGridCount} groups and ${captionedSubfigureCount}/${subfigureCount} captioned panels`);
 }
+if (matrixFormulaCount !== 36) failures.push(`expected 36 matrix formulas, found ${matrixFormulaCount}`);
 
 const legacyLocalizedBitmaps = [
   'alpha-beta/pruning-example.png',

@@ -380,4 +380,38 @@ const { lang } = Astro.props as { lang: Language };
       equation.textContent = equation.getAttribute('aria-label') || formula;
     }
   });
+
+  const matrixEnvironment = /\\begin\{(?:[bpvVB]?matrix|smallmatrix|array)\}/;
+  const fitMatrixDisplays = () => {
+    document.querySelectorAll<HTMLElement>('.katex-display').forEach((display) => {
+      const formula = display.querySelector('annotation[encoding="application/x-tex"]')?.textContent || '';
+      if (!matrixEnvironment.test(formula)) return;
+
+      display.style.removeProperty('font-size');
+      display.removeAttribute('data-matrix-fit');
+      const renderedFormula = display.querySelector<HTMLElement>(':scope > .katex');
+      if (!renderedFormula || display.clientWidth === 0) return;
+
+      const availableWidth = display.clientWidth - 4;
+      const requiredWidth = renderedFormula.scrollWidth;
+      if (requiredWidth <= availableWidth) {
+        display.dataset.matrixFit = 'natural';
+        return;
+      }
+
+      const baseSize = Number.parseFloat(getComputedStyle(display).fontSize);
+      const scale = Math.max(0.68, availableWidth / requiredWidth);
+      display.style.fontSize = `${baseSize * scale}px`;
+      display.dataset.matrixFit = scale > 0.68 ? 'scaled' : 'scroll';
+    });
+  };
+
+  let matrixFitFrame = 0;
+  const scheduleMatrixFit = () => {
+    cancelAnimationFrame(matrixFitFrame);
+    matrixFitFrame = requestAnimationFrame(fitMatrixDisplays);
+  };
+  scheduleMatrixFit();
+  document.fonts?.ready.then(scheduleMatrixFit);
+  window.addEventListener('resize', scheduleMatrixFit, { passive: true });
 </script>
