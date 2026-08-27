@@ -56,7 +56,7 @@ button:active, .primary-link:active { transform: translateY(1px); }
 .site-header { position: sticky; z-index: 50; top: 0; height: var(--header-height); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(12px); }
 .wordmark { display: inline-flex; align-items: center; gap: 11px; font-size: 15px; font-weight: 720; letter-spacing: -.025em; line-height: 1; }
 .wordmark small { display: block; margin-top: 5px; color: var(--ink-soft); font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
-.brand-piece { display: grid; place-items: center; width: 35px; height: 35px; color: var(--paper-raised); background: var(--accent); border-radius: var(--radius); font-family: Georgia, serif; font-size: 24px; }
+.brand-piece { display: block; width: 35px; height: 35px; flex: 0 0 auto; border-radius: var(--radius); object-fit: contain; }
 .header-actions { display: flex; align-items: center; gap: 8px; }
 .icon-button, .search-trigger, .language-switch { height: 38px; border: 1px solid var(--line); border-radius: var(--radius); color: var(--ink); background: var(--paper-raised); }
 .icon-button { width: 38px; display: grid; place-items: center; padding: 0; cursor: pointer; }

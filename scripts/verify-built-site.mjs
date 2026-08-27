@@ -156,7 +156,20 @@ for (const bitmap of legacyLocalizedBitmaps) {
   }
 }
 
-for (const required of ['robots.txt', 'sitemap-index.xml', 'favicon.svg', 'assets/social/og-es.png', 'assets/social/og-en.png']) {
+for (const required of [
+  'robots.txt',
+  'sitemap-index.xml',
+  'favicon.ico',
+  'favicon-16x16.png',
+  'favicon-32x32.png',
+  'apple-touch-icon.png',
+  'icon-192.png',
+  'icon-512.png',
+  'site.webmanifest',
+  'assets/brand/book-icon.png',
+  'assets/social/og-es.png',
+  'assets/social/og-en.png',
+]) {
   if (!await exists(join(dist, required))) failures.push(`missing generated artifact /${required}`);
 }
 const spanishOgSvg = await readFile(join(root, 'public/assets/social/og-es.svg'), 'utf8');
