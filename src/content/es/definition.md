@@ -92,18 +92,16 @@ Este proceso se repite hasta que se llegue a un estado terminal, lo cual en el a
 
 <figure id="fig-ejemplo-del-ajedrez-como-proceso-de-decision-de-markov">
   <div class="localized-diagram mdp-chess-flow" role="group" aria-label="Ejemplo del ajedrez como Proceso de Decisión de Markov">
-    <strong class="mdp-agent">Agente</strong>
+    <strong class="mdp-agent"><span>Agente</span><small>Política de decisión π(a|s)</small></strong>
+    <div class="mdp-exchange" aria-label="Intercambio entre el agente y el entorno">
+      <span class="mdp-message mdp-message-state"><i aria-hidden="true">↑</i><b>1</b><span>Estado s<sub>t</sub> + recompensa r<sub>t</sub> = 0</span></span>
+      <span class="mdp-message mdp-message-action"><b>2</b><span>Acción a<sub>t</sub> = ...d5</span><i aria-hidden="true">↓</i></span>
+    </div>
+    <section class="mdp-environment" aria-label="Entorno y función de transición">
+      <header><span>Entorno</span><strong>3 · Función de transición T(s<sub>t</sub>, a<sub>t</sub>)</strong></header>
     <div class="mdp-state mdp-state-before"><div class="chessboard" data-fen="rnbqkb1r/pppppppp/5n2/8/3P4/5N2/PPP1PPPP/RNBQKB1R b KQkq - 2 2" data-size="8" data-chess-options="&quot;setfen=rnbqkb1r/pppppppp/5n2/8/3P4/5N2/PPP1PPPP/RNBQKB1R b KQkq - 2 2, largeboard&quot;" role="img" aria-label="Posición antes de ...d5" data-rendered="source" data-board-asset="board-8x8-83f553f9ecb1316f.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-83f553f9ecb1316f.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div></div>
     <div class="mdp-state mdp-state-after"><div class="chessboard" data-fen="rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq - 0 3" data-size="8" data-chess-options="&quot;setfen=rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq - 0 3, largeboard&quot;" role="img" aria-label="Posición después de ...d5" data-rendered="source" data-board-asset="board-8x8-45f7874441012b4c.svg"><img class="source-chessboard" src="/assets/boards/board-8x8-45f7874441012b4c.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div></div>
-    <span class="mdp-edge-label mdp-edge-state-label">1. Estado (posición) y recompensa (0)</span>
-    <span class="mdp-edge-label mdp-edge-action-label">2. Acción (d5)</span>
-    <span class="mdp-edge-label mdp-edge-transition-label">3. Función de transición</span>
-    <svg class="mdp-flow-arrows" viewBox="0 0 1000 650" preserveAspectRatio="none" aria-hidden="true">
-      <defs><marker id="mdp-arrow-es" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L0,9 L8,4.5 z" /></marker></defs>
-      <path d="M300 470 Q360 235 455 175" marker-end="url(#mdp-arrow-es)" />
-      <path d="M455 190 Q360 300 300 430" marker-end="url(#mdp-arrow-es)" />
-      <path d="M430 535 L670 535" marker-end="url(#mdp-arrow-es)" />
-    </svg>
+    </section>
   </div>
   <figcaption>Ejemplo del ajedrez como Proceso de Decisión de Markov</figcaption>
 </figure>

@@ -39,7 +39,7 @@ To simplify the understanding of this problem, we can begin by examining the squ
 In addition to the strategy mentioned above, it is also possible to resort to a direct formula that, knowing the position of the king and the coordinates of the target square, provides the minimum number of moves necessary for the king to reach it. The formula is as follows:
 
 $$
-\max(\abs{r_0-a_0},\abs{r_1-a_1})
+\max\left(\lvert r_0-a_0\rvert,\lvert r_1-a_1\rvert\right)
 $$
 
 Where $r = (r_0,r_1)$ are the coordinates of the king, where $r_0$ represents the row and $r_1$ the column, and $a = (a_0,a_1)$ the coordinates of the square whose distance is to be calculated, with $a_0$ being the row and $a_1$ the column of said square. In the case of rows, the conversion is direct, but for the column, the numerical conversion of the letter must be used. That is, "a" becomes 1, "b" 2, and so on.
@@ -80,7 +80,7 @@ Where $f(x, k)$ is the function that indicates the number of routes from square 
 After analyzing the formula, we can notice that it contains recursion; the upper part of the piecewise function would correspond to the base case, while the lower part would be the recursive case. Being a recursive function, it would be relevant to analyze the number of recursive calls that would be necessary in the case of a computational treatment of the function. Returning to the [route-count calculation](#fig-resolucion-del-numero-de-rutas-hacia-la-casilla-d1), we see that some values are calculated several times, which obviously is a waste of time. Regarding this point, we can analyze the number of recursive calls using the theory seen in the previous topic. In the example analyzed above, we could see that, depending on the square, there can be 1, 2 or 3 recursive calls if it is not the base case and, as we already know, the worst case must be chosen, where there are up to three recursive calls. Additionally, we must consider that, in this case, the size of the problem will not be the size of the board, but the distance between the analyzed square and the king. Below, the formula that gives the complexity of the algorithm is shown.
 
 $$
-3^{\max(\abs{x_0-k_0},\abs{x_1-k_1})} \in O(3^n)
+3^{\max\left(\lvert x_0-k_0\rvert,\lvert x_1-k_1\rvert\right)} \in O(3^n)
 $$
 
 Returning to the problem of the numerous recursive calls for the number of squares we process, the astute reader will realize that some arrows point to the same square and this indicates that we calculate the value of the same square several times, which clearly is not efficient. Wouldn't there be some way to avoid this? The answer is yes, when the value of a square is calculated, its value can be stored in a vector or matrix, depending on the situation, to avoid having to recalculate it. This procedure is known as dynamic programming.

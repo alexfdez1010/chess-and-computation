@@ -143,6 +143,7 @@ def add_svg_labels(svg: str, attrs: dict[str, str], size: int) -> str:
     if not values:
         return svg
     root = ET.fromstring(svg)
+    board = board_from_attrs(attrs)
     # python-chess: 15 unit coordinate margin, 1 unit inner/outer borders,
     # then 45 units per square.
     offset, square = 17, 45
@@ -151,15 +152,28 @@ def add_svg_labels(svg: str, attrs: dict[str, str], size: int) -> str:
         if not position:
             continue
         file_index, rank = position
+        shares_square_with_piece = board.piece_at(chess.square(file_index, rank - 1)) is not None
+        x = offset + (file_index + (0.8 if shares_square_with_piece else 0.5)) * square
+        y = offset + (size - rank + (0.2 if shares_square_with_piece else 0.5)) * square
+        if shares_square_with_piece:
+            ET.SubElement(root, f"{{{SVG_NS}}}circle", {
+                "cx": str(x),
+                "cy": str(y),
+                "r": "9",
+                "fill": "#f4f5ef",
+                "stroke": "#17241d",
+                "stroke-width": "0.7",
+                "opacity": "0.96",
+            })
         node = ET.SubElement(root, f"{{{SVG_NS}}}text", {
-            "x": str(offset + (file_index + 0.5) * square),
-            "y": str(offset + (size - rank + 0.5) * square),
+            "x": str(x),
+            "y": str(y),
             "text-anchor": "middle",
             "dominant-baseline": "central",
             "font-family": "ui-monospace, SFMono-Regular, Menlo, monospace",
             "font-size": "13",
             "font-weight": "700",
-            "fill": "#ffffff" if (file_index + rank) % 2 else "#17231d",
+            "fill": "#17231d" if shares_square_with_piece else ("#ffffff" if (file_index + rank) % 2 else "#17231d"),
         })
         node.text = value
     return ET.tostring(root, encoding="unicode")

@@ -39,7 +39,7 @@ Para simplificar la comprensión de este problema, podemos comenzar examinando l
 Además de la estrategia mencionada anteriormente, también es posible recurrir a una fórmula directa que, conociendo la posición del rey y las coordenadas de la casilla objetivo, proporciona el número mínimo de movimientos necesarios para que el rey llegue a ella. La fórmula es la siguiente:
 
 $$
-\max(\abs{r_0-a_0},\abs{r_1-a_1})
+\max\left(\lvert r_0-a_0\rvert,\lvert r_1-a_1\rvert\right)
 $$
 
 Donde $r = (r_0,r_1)$ son las coordenadas del rey, donde $r_0$ representa la fila y $r_1$ la columna, y $a = (a_0,a_1)$ las coordenadas de la casilla cuya distancia se busca calcular, con $a_0$ siendo la fila y $a_1$ la columna de dicha casilla. En el caso de las filas la conversión es directa, pero para la columna se deberá usar la conversión en número de la letra. Es decir, la "a" pasará a ser 1, la "b" 2, etcétera.
@@ -80,7 +80,7 @@ Donde $f(x, k)$ es la función que indica el número de rutas desde la casilla $
 Después de analizar la fórmula, podemos notar que contiene recursividad; la parte superior de la función a trozos correspondería al caso base, mientras que la parte inferior sería el caso recursivo. Al ser una función recursiva, sería relevante analizar el número de llamadas recursivas que serían necesarias en el caso de un tratamiento informático de la función. Volviendo al [cálculo del número de rutas](#fig-resolucion-del-numero-de-rutas-hacia-la-casilla-d1), vemos que algunos valores se calculan varias veces, lo que obviamente es una pérdida de tiempo. Respecto a este punto, podemos analizar el número de llamadas recursivas usando la teoría vista en el tema anterior. En el ejemplo analizado anteriormente, pudimos ver que, dependiendo de la casilla, puede haber 1, 2 o 3 llamadas recursivas si no se trata del caso base y, como ya sabemos, hay que escoger el peor caso, donde hay hasta tres llamadas recursivas. Además, debemos tener en cuenta que, en este caso, el tamaño del problema no será el tamaño del tablero, sino la distancia entre la casilla analizada y el rey. A continuación, se muestra la fórmula que da la complejidad del algoritmo.
 
 $$
-3^{\max(\abs{x_0-k_0},\abs{x_1-k_1})} \in O(3^n)
+3^{\max\left(\lvert x_0-k_0\rvert,\lvert x_1-k_1\rvert\right)} \in O(3^n)
 $$
 
 Retomando el problema de las numerosas llamadas recursivas para el número de casillas que procesamos, el lector avispado se dará cuenta de que algunas flechas apuntan a la misma casilla y esto indica que calculamos el valor de la misma casilla varias veces, lo que claramente no es eficiente. ¿No habría alguna forma de evitar esto? La respuesta es sí, cuando se calcula el valor de una casilla, se puede almacenar su valor en un vector o matriz, dependiendo de la situación, para no tener que volver a calcularlo. Este procedimiento se conoce como programación dinámica.

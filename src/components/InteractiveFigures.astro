@@ -83,9 +83,10 @@ const { lang } = Astro.props as { lang: Language };
       const labels = JSON.parse(board.dataset.labels || '{}');
       Object.entries(labels).forEach(([square, value]) => {
         const cell = visual.querySelector(`[data-square="${square}"]`);
-        if (!cell || cell.querySelector('.chess-piece')) return;
+        if (!cell) return;
         const label = document.createElement('b');
         label.className = 'square-value';
+        if (cell.querySelector('.chess-piece')) label.classList.add('shares-square-with-piece');
         label.textContent = String(value);
         label.setAttribute('aria-label', `${square}: ${value}`);
         cell.append(label);
