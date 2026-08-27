@@ -1,51 +1,51 @@
 <p align="center">
-  <img src="public/assets/book/cover-es.png" alt="Portada de Ajedrez y Computación" width="260" />
+  <img src="public/assets/book/cover-es.png" alt="Cover of Ajedrez y Computación" width="260" />
 </p>
 
 <h1 align="center">♟️ Ajedrez y Computación</h1>
 
 <p align="center">
-  <strong>Una introducción visual a los algoritmos, la inteligencia artificial y el ajedrez.</strong>
+  <strong>A visual introduction to algorithms, artificial intelligence, and chess.</strong>
 </p>
 
 <p align="center">
-  Edición web bilingüe de <em>Ajedrez y Computación / Chess and Computation</em>,<br />
-  escrito por Alejandro Fernández Camello.
+  A bilingual web edition of <em>Ajedrez y Computación / Chess and Computation</em>,<br />
+  written by Alejandro Fernández Camello.
 </p>
 
 <p align="center">
-  <a href="https://chess-and-computation.alejandrofernandezcamello.me">🌐 Leer online</a>
+  <a href="https://chess-and-computation.alejandrofernandezcamello.me">🌐 Read online</a>
   ·
-  <a href="https://www.amazon.es/Ajedrez-Computación-movimientos-revolución-ajedrez/dp/B0CNCT6DZ1">📕 Comprar la edición en español</a>
+  <a href="https://www.amazon.es/Ajedrez-Computación-movimientos-revolución-ajedrez/dp/B0CNCT6DZ1">📕 Buy on Amazon</a>
 </p>
 
-## 📖 Sobre el libro
+## 📖 About the book
 
-¿Cómo consigue una máquina jugar al ajedrez? Este proyecto recorre las ideas que hicieron posible el ajedrez computacional, desde los problemas combinatorios clásicos y los algoritmos de búsqueda hasta el aprendizaje por refuerzo, las redes neuronales y sistemas como AlphaZero.
+How does a machine learn to play chess? This project explores the ideas that made computer chess possible, from classic combinatorial problems and search algorithms to reinforcement learning, neural networks, and systems such as AlphaZero.
 
-El contenido está pensado para lectores curiosos: no hace falta ser especialista en programación ni un jugador experto para seguirlo.
+The content is written for curious readers: you do not need to be a programming specialist or an expert chess player to follow along.
 
-## ✨ Qué incluye la edición web
+## ✨ What the web edition includes
 
-- 🇪🇸 🇬🇧 Lectura completa en español e inglés.
-- 🧭 Navegación por capítulos, buscador y progreso de lectura.
-- ♞ Diagramas de ajedrez y figuras interactivas.
-- 🧮 Fórmulas matemáticas renderizadas con KaTeX.
-- 🌙 Temas claro y oscuro.
-- 📱 Diseño accesible y adaptable a móvil, tableta y escritorio.
-- 🔎 Metadatos SEO, Open Graph, JSON-LD y sitemap.
+- 🇪🇸 🇬🇧 Complete Spanish and English editions.
+- 🧭 Chapter navigation, search, and reading progress.
+- ♞ Chess diagrams and interactive figures.
+- 🧮 Mathematical notation rendered with KaTeX.
+- 🌙 Light and dark themes.
+- 📱 An accessible, responsive design for mobile, tablet, and desktop.
+- 🔎 SEO metadata, Open Graph, JSON-LD, and a sitemap.
 
-## 🛒 Consigue el libro
+## 🛒 Get the book
 
-La edición en español está disponible en Amazon:
+The book available on Amazon is in Spanish only:
 
-### [📕 Comprar *Ajedrez y Computación* en Amazon España](https://www.amazon.es/Ajedrez-Computación-movimientos-revolución-ajedrez/dp/B0CNCT6DZ1)
+### [📕 Buy *Ajedrez y Computación* on Amazon Spain](https://www.amazon.es/Ajedrez-Computación-movimientos-revolución-ajedrez/dp/B0CNCT6DZ1)
 
-También puedes [leer gratis la edición web bilingüe](https://chess-and-computation.alejandrofernandezcamello.me).
+You can also [read the bilingual web edition for free](https://chess-and-computation.alejandrofernandezcamello.me).
 
-## 🚀 Desarrollo local
+## 🚀 Local development
 
-El sitio está construido con [Astro](https://astro.build/) y utiliza [Bun](https://bun.sh/) como gestor de paquetes y entorno de ejecución.
+The site is built with [Astro](https://astro.build/) and uses [Bun](https://bun.sh/) as its package manager and runtime.
 
 ```sh
 git clone https://github.com/alexfdez1010/chess-and-computation.git
@@ -54,36 +54,36 @@ bun install --frozen-lockfile
 bun run dev
 ```
 
-El servidor de desarrollo mostrará la URL local en la terminal.
+The development server will print the local URL in the terminal.
 
-## 🧰 Comandos
+## 🧰 Commands
 
-| Comando | Descripción |
+| Command | Description |
 | --- | --- |
-| `bun run dev` | Inicia el servidor de desarrollo. |
-| `bun run check` | Comprueba los tipos y archivos de Astro. |
-| `bun run build` | Valida y genera el sitio estático de producción. |
-| `bun run qa` | Ejecuta la compilación y todas las verificaciones del sitio. |
-| `bun run preview` | Sirve localmente la compilación de producción. |
+| `bun run dev` | Start the development server. |
+| `bun run check` | Check Astro files and types. |
+| `bun run build` | Validate and generate the production site. |
+| `bun run qa` | Build and run the complete site verification suite. |
+| `bun run preview` | Serve the production build locally. |
 
-## 🏗️ Contenido y arquitectura
+## 🏗️ Content and architecture
 
-La compilación genera las rutas de lectura en español e inglés, los diagramas localizados, las ecuaciones, los recursos estáticos y los metadatos del sitio. La URL de producción está configurada en Astro como `https://chess-and-computation.alejandrofernandezcamello.me`, por lo que no necesita una variable de entorno.
+The build generates Spanish and English reading routes, localized diagrams, equations, static assets, and site metadata. The production URL is configured in Astro as `https://chess-and-computation.alejandrofernandezcamello.me`, so no environment variable is required.
 
-El contenido LaTeX original se utiliza en `tmp/source/AC` durante la conversión. Para regenerar los archivos Markdown:
+The original LaTeX content is used from `tmp/source/AC` during conversion. To regenerate the Markdown files:
 
 ```sh
 bun scripts/convert-latex-content.mjs
 ```
 
-Los recursos del libro y los tableros SVG generados tienen verificaciones adicionales en `scripts/`.
+Book assets and generated SVG boards have additional verification scripts in `scripts/`.
 
-## 🎨 Diseño
+## 🎨 Design
 
-Consulta el [sistema de diseño](docs/DESIGN_SYSTEM.md) para conocer las reglas visuales, de accesibilidad, localización y contenido del proyecto.
+See the [design system](docs/DESIGN_SYSTEM.md) for the project's visual, accessibility, localization, and content guidelines.
 
 ---
 
 <p align="center">
-  Hecho con ♟️, código y curiosidad por <strong>Alejandro Fernández Camello</strong>.
+  Made with ♟️, code, and curiosity by <strong>Alejandro Fernández Camello</strong>.
 </p>
