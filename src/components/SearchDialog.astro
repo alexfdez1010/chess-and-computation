@@ -4,7 +4,7 @@ import { copy } from './content';
 const { lang, entries } = Astro.props as { lang: Language; entries: ChapterEntry[] };
 const searchEntries = entries.map(({ title, description, slug, order }, index) => ({ title, description, slug, chapter: (order ?? index) + 1 }));
 ---
-<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog">
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-label={copy[lang].search}>
   <span aria-hidden="true">⌕</span><span>{copy[lang].search}</span><kbd>/</kbd>
 </button>
 
@@ -46,9 +46,11 @@ const searchEntries = entries.map(({ title, description, slug, order }, index) =
   document.querySelector('[data-search-open]')?.addEventListener('click', () => { render(); dialog.showModal(); requestAnimationFrame(() => input.focus()); });
   input?.addEventListener('input', () => render(input.value));
   document.addEventListener('keydown', (event) => {
-    if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+    if (event.key === 'Escape' && dialog.open) { event.preventDefault(); dialog.close(); return; }
+    if (event.key === '/' && !document.body.classList.contains('nav-open') && !dialog.open && !document.activeElement?.isContentEditable && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
       event.preventDefault(); render(); dialog.showModal(); requestAnimationFrame(() => input.focus());
     }
   });
+  dialog?.addEventListener('close', () => document.querySelector('[data-search-open]')?.focus());
   dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
 </script>

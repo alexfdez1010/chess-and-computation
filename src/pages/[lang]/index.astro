@@ -33,15 +33,15 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
       </picture>
     </section>
 
-    <section class="thesis-strip" aria-label={lang === 'es' ? 'Temas principales' : 'Main themes'}>
-      <span>{lang === 'es' ? 'Algoritmos' : 'Algorithms'}</span><i></i>
-      <span>{lang === 'es' ? 'Búsqueda' : 'Search'}</span><i></i>
-      <span>{lang === 'es' ? 'Aprendizaje' : 'Learning'}</span><i></i>
-      <span>{lang === 'es' ? 'Estrategia' : 'Strategy'}</span>
+    <section class="book-details" aria-label={lang === 'es' ? 'Sobre esta edición' : 'About this edition'}>
+      <span>Alejandro Fernández Camello</span>
+      <span>{entries.length} {lang === 'es' ? 'secciones · Lectura gratuita' : 'sections · Free to read'}</span>
+      <a href={`/${lang === 'es' ? 'en' : 'es'}`} hreflang={lang === 'es' ? 'en' : 'es'}>{lang === 'es' ? 'También en inglés' : 'Also in Spanish'} <span aria-hidden="true">↗</span></a>
     </section>
 
-    <section class="contents-preview">
+    <section class="contents-preview" id="contents">
       <div>
+        <p class="edition-label">{text.contents}</p>
         <h2>{lang === 'es' ? 'Ideas que transformaron el juego' : 'Ideas that transformed the game'}</h2>
         <p>{lang === 'es' ? 'Una lectura progresiva, desde la representación del tablero hasta las redes neuronales modernas.' : 'A progressive reading, from board representation to modern neural networks.'}</p>
       </div>
@@ -53,7 +53,7 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
             </a> : <div class="outline-heading"><span>{groupNumber(group.key)}</span><strong>{group.title}</strong></div>}
             {group.sections.length > 0 && <ol>
               {group.sections.map((entry) => <li><a href={`/${lang}/${entry.slug}`}>
-                <span>{entry.sectionNumber}</span><strong>{entry.sectionTitle || entry.title}</strong><small>{entry.description}</small><b aria-hidden="true">↗</b>
+                <span>{entry.sectionNumber}</span><div class="outline-copy"><strong>{entry.sectionTitle || entry.title}</strong><small>{entry.description}</small></div><b aria-hidden="true">→</b>
               </a></li>)}
             </ol>}
           </li>

@@ -99,7 +99,7 @@ const structuredData = {
       })();
     </script>
   </head>
-  <body>
+  <body class:list={{ 'is-home': !entry }}>
     <a class="skip-link" href="#main-content">{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
     <Header {lang} {entries} {alternatePath} />
     <div class="book-shell">

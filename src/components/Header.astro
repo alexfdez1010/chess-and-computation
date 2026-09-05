@@ -13,34 +13,46 @@ const { lang, entries, alternatePath = `/${lang === 'es' ? 'en' : 'es'}` } = Ast
     <span>{lang === 'es' ? 'Ajedrez' : 'Chess'}<small>{lang === 'es' ? 'y Computación' : 'and Computation'}</small></span>
   </a>
   <div class="header-actions">
+    <a class="header-contents" href={`/${lang}#contents`}>{copy[lang].contents}</a>
     <SearchDialog {lang} {entries} />
     <a class="language-switch" href={alternatePath} hreflang={lang === 'es' ? 'en' : 'es'}>{lang === 'es' ? 'EN' : 'ES'}<span>{copy[lang].language}</span></a>
     <ThemeToggle {lang} />
     <button class="menu-toggle icon-button" type="button" aria-label={copy[lang].contents} aria-expanded="false" aria-controls="book-sidebar"><i></i><i></i></button>
   </div>
 </header>
+<button class="nav-backdrop" type="button" tabindex="-1" aria-label={lang === 'es' ? 'Cerrar índice' : 'Close contents'} hidden></button>
 
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
   const sidebar = document.querySelector<HTMLElement>('#book-sidebar');
-  toggle?.addEventListener('click', () => {
-    const open = toggle.getAttribute('aria-expanded') !== 'true';
-    toggle.setAttribute('aria-expanded', String(open));
+  const backdrop = document.querySelector<HTMLButtonElement>('.nav-backdrop');
+  const mobile = matchMedia('(max-width: 900px)');
+  const background = [...document.querySelectorAll<HTMLElement>('main, .site-footer, .wordmark, .header-actions > :not(.menu-toggle):not(dialog)')];
+  const setMenu = (open: boolean, restoreFocus = false) => {
+    toggle?.setAttribute('aria-expanded', String(open));
     sidebar?.toggleAttribute('data-open', open);
+    if (sidebar) sidebar.inert = mobile.matches && !open;
+    if (backdrop) backdrop.hidden = !open;
+    background.forEach((element) => { element.inert = open; });
     document.body.classList.toggle('nav-open', open);
-  });
-  const closeMenu = () => {
-    toggle?.setAttribute('aria-expanded', 'false');
-    sidebar?.removeAttribute('data-open');
-    document.body.classList.remove('nav-open');
+    if (open) sidebar?.querySelector<HTMLAnchorElement>('a[aria-current="page"], a')?.focus();
+    else if (restoreFocus) toggle?.focus();
   };
+  toggle?.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true', true));
+  backdrop?.addEventListener('click', () => setMenu(false, true));
   sidebar?.addEventListener('click', (event) => {
-    if ((event.target as HTMLElement).closest('a')) closeMenu();
+    if ((event.target as HTMLElement).closest('a')) setMenu(false);
   });
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
-      closeMenu();
-      toggle.focus();
+    if (toggle?.getAttribute('aria-expanded') !== 'true') return;
+    if (event.key === 'Escape') { setMenu(false, true); return; }
+    if (event.key === 'Tab') {
+      const items = [toggle, ...sidebar!.querySelectorAll<HTMLAnchorElement>('a')];
+      const index = items.indexOf(document.activeElement as HTMLAnchorElement);
+      event.preventDefault();
+      items[(index + (event.shiftKey ? -1 : 1) + items.length) % items.length]?.focus();
     }
   });
+  mobile.addEventListener('change', () => setMenu(false));
+  setMenu(false);
 </script>

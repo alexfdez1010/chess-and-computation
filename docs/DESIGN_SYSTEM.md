@@ -36,16 +36,16 @@ The green accent is the only chromatic accent. Amber is reserved for semantic mo
 - Display and long-form body: an editorial system serif with local fallbacks (`Iowan Old Style`, Baskerville, Georgia).
 - Navigation and UI: Avenir/Helvetica family.
 - Coordinates, metadata, and code: platform monospace.
-- Maximum prose measure: 720px, with an 18px base and 1.82 line height on desktop.
+- Maximum prose measure: 68 characters, with a 20px base and 1.8 line height on desktop; 18px on mobile.
 
 Serif is intentional here because the product is a book and publication, not a marketing dashboard.
 
 ## Geometry
 
-- Base radius: 4px. Buttons, controls, figures, and focus surfaces use the same restrained radius.
+- Base radius: 5px. Buttons, controls, figures, and focus surfaces use the same restrained radius.
 - Header: 68px desktop, 60px mobile.
-- Sidebar: 292px desktop, off-canvas below 900px.
-- Reading content: 920px page container, 720px prose measure.
+- Sidebar: 280px desktop, off-canvas below 900px.
+- Reading content: 1060px page container, 68ch prose measure.
 - The 8x8 rhythm appears in chess assets and spacing decisions, not as decorative grid lines across the entire page.
 
 ## Components
@@ -56,7 +56,7 @@ Sticky, single-line, and under 80px. It exposes search, equivalent-language navi
 
 ### Book index
 
-Persistent on desktop and off-canvas on mobile. Active sections use `--accent-soft`; hierarchy is expressed with grouping and whitespace.
+Persistent on desktop chapter pages and off-canvas on mobile. The homepage uses its full-width index instead of repeating the sidebar. Active sections use `--accent-soft`; hierarchy is expressed with grouping and whitespace.
 
 ### Chapter page
 
@@ -80,7 +80,7 @@ retains a localized text fallback and an accessible figure label.
 
 ### Search
 
-Keyboard-accessible dialog. Results always link to the active locale and expose a clear empty state.
+Keyboard-accessible dialog with a named mobile trigger, visible input focus, and a 44px close target. Results always link to the active locale and expose a clear empty state.
 
 ## Accessibility
 
@@ -93,10 +93,20 @@ Keyboard-accessible dialog. Results always link to the active locale and expose 
 
 ## Responsive behavior
 
-- Below 900px: sidebar becomes off-canvas and all main layouts become a single column.
-- Below 640px: controls compact to icons, chapter headers stack, tables scroll horizontally, and pagination becomes one column.
+- At 900px and below: sidebar becomes off-canvas and all main layouts become a single column. Closed navigation is inert; open navigation contains keyboard focus and makes background content inert. Escape, the menu button, and the backdrop dismiss it.
+- At 901–1150px: chapter headers stack to keep long bilingual titles readable beside the index.
+- At 640px and below: controls compact to icons, chapter headers stack, tables scroll horizontally, and pagination becomes one column.
 - No layout uses `h-screen`; viewport-dependent heights use `100dvh`.
 
 ## SEO and sharing
 
 Every route must provide canonical and alternate-language links, localized Open Graph metadata, Twitter cards, and structured data. The project ships a sitemap, robots policy, real favicon, and 1200x630 share images.
+
+## Homepage and information hierarchy
+
+- A 1440px maximum canvas pairs the title and reading action with the existing editorial image.
+- No ornamental image shadow or repeated topic strip. Edition metadata identifies the author, section count, free reading access, and alternate language.
+- The reading action is primary; buying the print book is a quiet secondary link.
+- Index entries pair a serif title with a readable description at every viewport size. Numbers support hierarchy without competing with titles.
+- Header controls have 44px targets. Navigation uses 14px text, captions use 12–13px text, and metadata uses at least 11px where practical.
+- Wide equations and code scroll inside their own containers; citations wrap without widening the page.
