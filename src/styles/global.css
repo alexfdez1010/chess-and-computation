@@ -461,6 +461,45 @@ button, a { transition: color .18s ease, background-color .18s ease, border-colo
   .cover-diagram { grid-template-columns: 1fr; }
 }
 
+/* Short, one-shot motion keeps the reading surface quiet. All content is
+   visible by default; scroll reveals only animate after entering the viewport. */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes media-enter {
+  from { opacity: 0; transform: translateY(16px) scale(.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes backdrop-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes read-confirm {
+  50% { transform: scale(1.2); }
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  .hero-copy > * { animation: page-enter 520ms cubic-bezier(.2,.7,.2,1) both; }
+  .hero-author { animation-delay: 60ms; }
+  .hero-description { animation-delay: 110ms; }
+  .hero-actions { animation-delay: 160ms; }
+  .hero-media { animation: media-enter 650ms 100ms cubic-bezier(.2,.7,.2,1) both; }
+  .chapter-header { animation: page-enter 420ms cubic-bezier(.2,.7,.2,1) both; }
+  .motion-enter { animation: page-enter 450ms cubic-bezier(.2,.7,.2,1) both; }
+  .search-dialog[open] { animation: page-enter 180ms ease-out; }
+  .search-dialog[open]::backdrop, .nav-backdrop:not([hidden]) { animation: backdrop-enter 180ms ease-out; }
+  .theme-mark { transition: transform 320ms ease; }
+  :root[data-theme='dark'] .theme-mark { transform: rotate(180deg); }
+  .menu-toggle i { transition: transform 220ms ease; }
+  .menu-toggle[aria-expanded='true'] i:first-child { transform: translateY(2.5px) rotate(45deg); }
+  .menu-toggle[aria-expanded='true'] i:last-child { transform: translateY(-2.5px) rotate(-45deg); }
+  .read-check { transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }
+  .read-status[data-done] .read-check { animation: read-confirm 260ms ease-out; }
+  .primary-link:focus-visible span { transform: translateX(4px); }
+  .contents-preview li a:focus-visible b { transform: translate(2px, -2px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

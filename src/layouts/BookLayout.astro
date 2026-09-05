@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Sidebar from '../components/Sidebar.astro';
 import InteractiveFigures from '../components/InteractiveFigures.astro';
+import PageMotion from '../components/PageMotion.astro';
 import type { ChapterEntry, Language } from '../components/content';
 import { chaptersFor, copy, navigationGroupsFor } from '../components/content';
 import '../styles/global.css';
@@ -111,5 +112,6 @@ const structuredData = {
       <a href="https://github.com/alexfdez1010/chess-and-computation" rel="noreferrer">{lang === 'es' ? 'Código fuente' : 'Source code'} ↗</a>
     </footer>
     <InteractiveFigures {lang} />
+    <PageMotion />
   </body>
 </html>
