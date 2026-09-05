@@ -16,10 +16,9 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
   <div class="home-page">
     <section class="home-hero">
       <div class="hero-copy">
-        <p class="edition-label">{lang === 'es' ? 'Edición web · 2026' : 'Web edition · 2026'}</p>
         <h1>{text.title}</h1>
-        <p class="hero-subtitle">{text.subtitle}</p>
-        <p class="hero-description">{text.description}</p>
+        <p class="hero-author">Alejandro Fernández Camello</p>
+        <p class="hero-description">{lang === 'es' ? 'Un libro gratuito sobre algoritmos de ajedrez, búsqueda y aprendizaje automático.' : 'A free book on chess algorithms, search, and machine learning.'}</p>
         <div class="hero-actions">
           {first && <a class="primary-link" href={`/${lang}/${first.slug}`}>{text.start}<span aria-hidden="true">→</span></a>}
           <a class="secondary-link" href="https://www.amazon.es/Ajedrez-Computación-movimientos-revolución-ajedrez/dp/B0CNCT6DZ1" rel="sponsored noopener noreferrer" target="_blank">
@@ -33,17 +32,9 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
       </picture>
     </section>
 
-    <section class="book-details" aria-label={lang === 'es' ? 'Sobre esta edición' : 'About this edition'}>
-      <span>Alejandro Fernández Camello</span>
-      <span>{entries.length} {lang === 'es' ? 'secciones · Lectura gratuita' : 'sections · Free to read'}</span>
-      <a href={`/${lang === 'es' ? 'en' : 'es'}`} hreflang={lang === 'es' ? 'en' : 'es'}>{lang === 'es' ? 'También en inglés' : 'Also in Spanish'} <span aria-hidden="true">↗</span></a>
-    </section>
-
     <section class="contents-preview" id="contents">
       <div>
-        <p class="edition-label">{text.contents}</p>
-        <h2>{lang === 'es' ? 'Ideas que transformaron el juego' : 'Ideas that transformed the game'}</h2>
-        <p>{lang === 'es' ? 'Una lectura progresiva, desde la representación del tablero hasta las redes neuronales modernas.' : 'A progressive reading, from board representation to modern neural networks.'}</p>
+        <h2>{text.contents}</h2>
       </div>
       <ol class="home-outline">
         {outline.map((group) => (
@@ -59,7 +50,6 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
           </li>
         ))}
       </ol>
-      {first && <a class="text-link" href={`/${lang}/${first.slug}`}>{text.start} →</a>}
     </section>
   </div>
 </BookLayout>

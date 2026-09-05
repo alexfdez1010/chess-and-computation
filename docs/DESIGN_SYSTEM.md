@@ -60,7 +60,7 @@ Persistent on desktop chapter pages and off-canvas on mobile. The homepage uses 
 
 ### Chapter page
 
-Chapter identity, localized deck, semantic headings, rendered equations, original or localized figures, reading state, and adjacent chapter navigation.
+Chapter identity, semantic headings, rendered equations, original or localized figures, reading state, and adjacent chapter navigation.
 
 ### Chessboards
 
@@ -105,8 +105,11 @@ Every route must provide canonical and alternate-language links, localized Open 
 ## Homepage and information hierarchy
 
 - A 1440px maximum canvas pairs the title and reading action with the existing editorial image.
-- No ornamental image shadow or repeated topic strip. Edition metadata identifies the author, section count, free reading access, and alternate language.
+- No ornamental borders, image shadows, topic strips, or edition badges. The hero identifies the author and states the subject and free access once. Language switching stays in the header.
 - The reading action is primary; buying the print book is a quiet secondary link.
 - Index entries pair a serif title with a readable description at every viewport size. Numbers support hierarchy without competing with titles.
 - Header controls have 44px targets. Navigation uses 14px text, captions use 12–13px text, and metadata uses at least 11px where practical.
 - Wide equations and code scroll inside their own containers; citations wrap without widening the page.
+- Use whitespace for header, sidebar, index, and pagination grouping. Keep borders only when they communicate content or state: table cells, diagram connections, checkboxes, focus outlines, and the search input/results boundary.
+- Chapter descriptions remain in metadata, search, and the index; do not repeat them above the opening paragraph. Avoid repeating the chapter category below the breadcrumb.
+- Use direct labels such as “Contents” instead of promotional headings or explanatory copy that merely describes the interface.

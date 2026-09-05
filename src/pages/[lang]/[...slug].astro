@@ -37,17 +37,15 @@ const Content = entry.Content;
 <BookLayout {lang} entry={entry} title={entry.title} description={entry.description} {alternatePath}>
   <article class="chapter-page">
     <nav class="breadcrumbs" aria-label={lang === 'es' ? 'Migas de pan' : 'Breadcrumb'}>
-      <a href={`/${lang}`}>{copy[lang].title}</a><span aria-hidden="true">/</span>
+      <a href={`/${lang}`}>{copy[lang].title}</a>{isSection && <span aria-hidden="true">/</span>}
       {isSection && chapterLanding && chapterLanding.slug !== entry.slug
         ? <a href={`/${lang}/${chapterLanding.slug}`}>{entry.bookChapterTitle}</a>
         : isSection ? <span>{entry.bookChapterTitle}</span> : null}
     </nav>
-    <header class="chapter-header">
-      <div class="chapter-number"><span>{entryLabel}</span>{displayNumber && <b>{displayNumber}</b>}</div>
+    <header class:list={['chapter-header', { 'chapter-header-unnumbered': !displayNumber }]}>
+      {displayNumber && <div class="chapter-number"><span>{entryLabel}</span><b>{displayNumber}</b></div>}
       <div>
-        {isSection && <p>{entry.bookChapterTitle}</p>}
         <h1>{entry.title}</h1>
-        {entry.description && <p class="chapter-deck">{entry.description}</p>}
       </div>
     </header>
     <div class="book-prose"><Content /></div>
