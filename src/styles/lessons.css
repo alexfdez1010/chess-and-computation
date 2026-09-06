@@ -1,0 +1,59 @@
+.book-prose figure[data-lesson] { scroll-margin-top: calc(var(--header-height) + 20px); }
+.lesson-panel { padding: clamp(16px, 3vw, 28px); background: var(--paper-raised); border-radius: var(--radius); font-family: var(--sans); }
+.lesson-heading > span { color: var(--accent); font: 600 10px var(--mono); letter-spacing: .1em; }
+.book-prose .lesson-heading h4 { margin: 8px 0 20px; font: 500 clamp(24px, 3vw, 32px)/1.15 var(--serif); letter-spacing: -.02em; }
+.book-prose .lesson-stage svg { width: 100%; height: auto; margin: 0 auto; overflow: visible; }
+.book-prose .lesson-stage .lesson-board { max-width: 370px; }
+.book-prose .lesson-stage .lesson-tree { max-width: 540px; }
+.lesson-stage svg text { fill: var(--ink); text-anchor: middle; font: 600 20px var(--mono); }
+.lesson-tree line { stroke: var(--line-strong); stroke-width: 2; }
+.lesson-tree circle { fill: var(--paper-raised); stroke: var(--line-strong); stroke-width: 1.5; }
+.lesson-tree .is-active circle { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 3; }
+.lesson-tree line.is-chosen { stroke: var(--accent); stroke-width: 4; stroke-dasharray: 7 4; }
+.lesson-board .dark { fill: var(--board-dark); }
+.lesson-board .light { fill: var(--board-light); }
+.lesson-board .is-option rect { fill: #e0d396; stroke: #685514; stroke-width: 2; }
+.lesson-board .is-attacked rect { fill: #e2bdb5; }
+.lesson-board .lesson-cell-note { fill: #192d23; font-size: 16px; }
+.lesson-board .is-visited rect { fill: #bacfc1; }
+.lesson-board .lesson-coordinate { fill: var(--ink-soft); font-size: 10px; }
+.lesson-board .lesson-pieces text { fill: #111b15; stroke: #f5f4e9; stroke-width: 1px; paint-order: stroke fill; font: 34px Georgia, serif; }
+.lesson-jump { stroke: #624617; stroke-width: 3; stroke-dasharray: 4 3; }
+.book-prose .lesson-board-key { margin: 8px 0 0; text-align: center; font: 11px/1.6 var(--mono); color: var(--ink-soft); }
+.lesson-explanation { min-height: 120px; margin-top: 22px; }
+.lesson-explanation strong { display: block; font: 650 16px/1.4 var(--sans); }
+.book-prose .lesson-explanation p { margin: 8px 0 0; color: var(--ink-soft); font: 14px/1.7 var(--sans); }
+.lesson-timeline { display: flex; align-items: center; gap: 12px; font: 11px var(--mono); color: var(--ink-soft); }
+.lesson-timeline label, .lesson-timeline output { flex-shrink: 0; white-space: nowrap; }
+.lesson-timeline input { width: 100%; min-width: 0; height: 44px; accent-color: var(--accent); cursor: pointer; }
+.lesson-timeline output { min-width: 7ch; text-align: right; }
+.lesson-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.lesson-controls button { min-height: 44px; padding: 9px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: var(--ink); font: 600 12px var(--sans); cursor: pointer; }
+.lesson-controls [data-control='play'] { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+.lesson-controls button:disabled { opacity: .4; cursor: default; }
+.lesson-controls button:disabled:active { transform: none; }
+.lesson-original { margin-top: 14px; }
+.lesson-original summary { width: fit-content; padding: 8px 0; color: var(--ink-soft); font: 12px var(--sans); cursor: pointer; }
+.book-prose .lesson-enhanced > figcaption { margin-top: 12px; }
+@media screen and (prefers-reduced-motion: no-preference) {
+  .lesson-moving-piece { transition: transform 300ms ease-in-out; }
+  .lesson-pieces > g:not(.lesson-moving-piece) { transition: opacity 220ms ease; }
+  .lesson-board rect, .lesson-tree circle { transition: fill 220ms ease, stroke 220ms ease; }
+  .lesson-tree .is-chosen { animation: lesson-flow 700ms linear 1; }
+}
+@keyframes lesson-flow { from { stroke-dashoffset: 22; } to { stroke-dashoffset: 0; } }
+@media (min-width: 1100px) {
+  .lesson-panel:not(.lesson-minimax) { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); column-gap: 24px; }
+  .lesson-panel:not(.lesson-minimax) > :is(.lesson-heading, .lesson-timeline, .lesson-controls) { grid-column: 1 / -1; }
+  .lesson-panel:not(.lesson-minimax) .lesson-explanation { align-self: center; min-height: 0; margin-top: 0; }
+}
+@media (max-width: 640px) {
+  .lesson-controls { display: grid; grid-template-columns: 1fr 1fr; }
+  .lesson-explanation { min-height: 185px; }
+  .lesson-tree text { font-size: 24px; }
+}
+@media print {
+  .lesson-panel, .lesson-original > summary { display: none !important; }
+  .lesson-original, .lesson-original > :not(summary) { display: block !important; }
+  .lesson-original::details-content { content-visibility: visible; display: block; }
+}

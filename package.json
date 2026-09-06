@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
-    "qa": "bun run build && bun scripts/verify-built-site.mjs && bash scripts/verify-book-assets.sh",
+    "qa": "bun run build && bun scripts/verify-built-site.mjs && bun scripts/verify-lessons.mjs && bash scripts/verify-book-assets.sh",
     "preview": "astro preview",
     "check": "astro check"
   },

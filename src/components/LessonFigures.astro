@@ -1,0 +1,169 @@
+---
+import '../styles/lessons.css';
+---
+<script>
+  import { isAttacked, knightSteps, minimaxSteps, queenSteps, squarePosition, type LessonStep } from '../lib/lesson-models';
+
+  const lang = document.documentElement.lang === 'es' ? 'es' : 'en';
+  const es = lang === 'es';
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const copy = es ? {
+    play: 'Reproducir', pause: 'Pausar', previous: 'Anterior', next: 'Siguiente', reset: 'Reiniciar',
+    original: 'Ver figura original', step: 'Paso', interactive: 'EXPLORA PASO A PASO',
+    minimax: 'Cómo decide minimax', queens: 'Por qué hay que volver atrás', knight: 'Un salto cada vez',
+  } : {
+    play: 'Play', pause: 'Pause', previous: 'Previous', next: 'Next', reset: 'Restart',
+    original: 'View original figure', step: 'Step', interactive: 'EXPLORE STEP BY STEP',
+    minimax: 'How minimax decides', queens: 'Why we need to backtrack', knight: 'One jump at a time',
+  };
+  const treeNodes = [
+    { id: 'root', x: 300, y: 48, label: 'MAX' },
+    { id: 'left', x: 130, y: 165, label: 'MIN' },
+    { id: 'middle', x: 350, y: 165, label: 'MIN' },
+    { id: 'right', x: 535, y: 165, label: '?' },
+    { id: 'l1', x: 65, y: 282, label: '?' }, { id: 'l2', x: 195, y: 282, label: '?' },
+    { id: 'm1', x: 285, y: 282, label: '?' }, { id: 'm2', x: 415, y: 282, label: '?' },
+  ];
+  const edges = [['root', 'left'], ['root', 'middle'], ['root', 'right'], ['left', 'l1'], ['left', 'l2'], ['middle', 'm1'], ['middle', 'm2']];
+
+  document.querySelectorAll<HTMLElement>('figure[data-lesson]').forEach((figure) => {
+    const kind = figure.dataset.lesson;
+    if (kind !== 'minimax' && kind !== 'queens' && kind !== 'knight') return;
+    let steps: LessonStep[];
+    try {
+      steps = kind === 'minimax' ? minimaxSteps(lang) : kind === 'queens' ? queenSteps(lang)
+        : knightSteps(figure.querySelector<HTMLElement>('[data-arrows]')?.dataset.arrows || '', lang);
+    } catch {
+      // Keep the source figure if its route cannot be safely animated.
+      return;
+    }
+    const panel = document.createElement('section');
+    panel.className = `lesson-panel lesson-${kind}`;
+    panel.setAttribute('aria-label', copy[kind]);
+    panel.innerHTML = `<header class="lesson-heading"><span>${copy.interactive}</span><h4>${copy[kind]}</h4></header>
+      <div class="lesson-stage"></div>
+      <div class="lesson-explanation" aria-live="polite" aria-atomic="true"><strong></strong><p></p></div>
+      <div class="lesson-timeline"><label for="${figure.id}-step">${copy.step}</label><input id="${figure.id}-step" type="range" min="0" max="${steps.length - 1}" value="0" step="1" /><output></output></div>
+      <div class="lesson-controls"><button type="button" data-control="previous">← ${copy.previous}</button><button type="button" data-control="play">${copy.play}</button><button type="button" data-control="next">${copy.next} →</button><button type="button" data-control="reset">↺ ${copy.reset}</button></div>`;
+    const stage = panel.querySelector<HTMLElement>('.lesson-stage')!;
+    const point = (square: string, size: number) => {
+      const { file, rank } = squarePosition(square);
+      return { x: 24 + (file + .5) * 40, y: 8 + (size - rank + .5) * 40 };
+    };
+    if (kind === 'minimax') {
+      stage.innerHTML = `<svg viewBox="0 0 600 325" role="img" class="lesson-tree">
+        ${edges.map(([from, to]) => {
+          const a = treeNodes.find((node) => node.id === from)!; const b = treeNodes.find((node) => node.id === to)!;
+          return `<line data-edge="${from}-${to}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" />`;
+        }).join('')}
+        ${treeNodes.map((node) => `<g data-node="${node.id}"><circle cx="${node.x}" cy="${node.y}" r="32"/><text x="${node.x}" y="${node.y}" dy=".35em">${node.label}</text></g>`).join('')}</svg>`;
+    } else {
+      const size = kind === 'queens' ? 5 : 8;
+      stage.innerHTML = `<svg viewBox="0 0 ${size * 40 + 32} ${size * 40 + 30}" role="img" class="lesson-board">
+        ${Array.from({ length: size * size }, (_, index) => {
+          const file = index % size; const rank = size - Math.floor(index / size);
+          const square = `${String.fromCharCode(97 + file)}${rank}`; const p = point(square, size);
+          return `<g data-cell="${square}"><rect x="${p.x - 20}" y="${p.y - 20}" width="40" height="40" class="${(file + rank) % 2 ? 'dark' : 'light'}"/><text class="lesson-cell-note" x="${p.x}" y="${p.y}" dy=".35em"></text></g>`;
+        }).join('')}
+        ${Array.from({ length: size }, (_, i) => `<text class="lesson-coordinate" x="${44 + i * 40}" y="${size * 40 + 23}">${String.fromCharCode(97 + i)}</text><text class="lesson-coordinate" x="11" y="${size * 40 - i * 40 - 9}">${i + 1}</text>`).join('')}
+        <line class="lesson-jump" />
+        <g class="lesson-pieces">${kind === 'knight' ? '<g data-piece="knight" class="lesson-moving-piece"><text dy=".35em">♞</text></g>' : ['b3', 'e2', 'a1', 'c5', 'a5', 'c1', 'd4'].map((square) => {
+          const p = point(square, size);
+          return `<g data-piece="${square}" style="transform:translate(${p.x}px,${p.y}px)"><text dy=".35em">♛</text></g>`;
+        }).join('')}</g></svg>
+        <p class="lesson-board-key"></p>`;
+    }
+    const explanation = panel.querySelector<HTMLElement>('.lesson-explanation')!;
+    const range = panel.querySelector<HTMLInputElement>('input')!;
+    const output = panel.querySelector('output')!;
+    const play = panel.querySelector<HTMLButtonElement>('[data-control="play"]')!;
+    const previous = panel.querySelector<HTMLButtonElement>('[data-control="previous"]')!;
+    const next = panel.querySelector<HTMLButtonElement>('[data-control="next"]')!;
+    let index = 0;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const render = () => {
+      const step = steps[index];
+      explanation.querySelector('strong')!.textContent = step.title;
+      explanation.querySelector('p')!.textContent = step.text;
+      range.value = String(index);
+      range.setAttribute('aria-valuetext', `${index + 1} / ${steps.length}: ${step.title}`);
+      output.textContent = `${index + 1} / ${steps.length}`;
+      previous.disabled = index === 0; next.disabled = index === steps.length - 1;
+      stage.querySelector('svg')!.setAttribute('aria-label', `${step.title}. ${step.text}`);
+      if (kind === 'minimax') {
+        treeNodes.forEach((node) => {
+          const group = stage.querySelector(`[data-node="${node.id}"]`)!;
+          const value = step.values?.[node.id];
+          group.querySelector('text')!.textContent = value === undefined ? node.label : value.toLocaleString(lang, { minimumFractionDigits: 2 });
+          group.classList.toggle('is-active', step.active?.includes(node.id) || false);
+        });
+        stage.querySelectorAll<SVGElement>('[data-edge]').forEach((edge) => edge.classList.toggle('is-chosen', step.chosen?.includes(edge.dataset.edge!) || false));
+      } else {
+        const size = kind === 'queens' ? 5 : 8;
+        stage.querySelectorAll<SVGElement>('[data-cell]').forEach((cell) => {
+          const square = cell.dataset.cell!;
+          const isColumn = square[0] === step.column;
+          const attacked = isColumn && isAttacked(square, step.queens || []);
+          const visit = step.visited?.indexOf(square) ?? -1;
+          cell.classList.toggle('is-option', isColumn && !attacked);
+          cell.classList.toggle('is-attacked', attacked);
+          cell.classList.toggle('is-visited', visit >= 0);
+          cell.querySelector('text')!.textContent = isColumn ? (attacked ? '×' : '○') : visit >= 0 && square !== step.knight ? String(visit + 1) : '';
+        });
+        stage.querySelectorAll<SVGElement>('[data-piece]').forEach((piece) => {
+          if (kind === 'knight') {
+            const p = point(step.knight!, size);
+            piece.style.transform = `translate(${p.x}px,${p.y}px)`;
+          } else piece.style.opacity = step.queens!.includes(piece.dataset.piece!) ? '1' : '0';
+        });
+        const jump = stage.querySelector<SVGLineElement>('.lesson-jump')!;
+        jump.style.opacity = kind === 'knight' && index > 0 ? '1' : '0';
+        if (kind === 'knight' && index > 0) {
+          const a = point(steps[index - 1].knight!, size); const b = point(step.knight!, size);
+          for (const [key, value] of Object.entries({ x1: a.x, y1: a.y, x2: b.x, y2: b.y })) jump.setAttribute(key, String(value));
+        }
+        stage.querySelector('.lesson-board-key')!.textContent = kind === 'queens'
+          ? `[${Array.from({ length: 5 }, (_, file) => step.queens!.find((square) => square[0] === String.fromCharCode(97 + file))?.slice(1) || '−1').join(', ')}] · ${es ? '○ Disponible · × Atacada' : '○ Available · × Attacked'}`
+          : `${es ? 'Caballo en' : 'Knight on'} ${step.knight} · ${index} ${es ? 'saltos' : 'moves'}`;
+      }
+    };
+    const pause = () => {
+      clearInterval(timer); timer = undefined;
+      play.textContent = copy.play;
+      explanation.setAttribute('aria-live', 'polite');
+    };
+    const seek = (value: number) => { pause(); index = Math.max(0, Math.min(steps.length - 1, value)); render(); };
+    previous.addEventListener('click', () => seek(index - 1));
+    next.addEventListener('click', () => seek(index + 1));
+    panel.querySelector('[data-control="reset"]')!.addEventListener('click', () => seek(0));
+    range.addEventListener('input', () => seek(Number(range.value)));
+    play.addEventListener('click', () => {
+      if (timer !== undefined) { pause(); return; }
+      if (index === steps.length - 1) { index = 0; render(); }
+      explanation.setAttribute('aria-live', 'off');
+      play.textContent = copy.pause;
+      timer = setInterval(() => {
+        index++; render();
+        if (index === steps.length - 1) pause();
+      }, kind === 'knight' ? 800 : 3200);
+    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+    window.addEventListener('pagehide', pause);
+    reducedMotion.addEventListener('change', pause);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => { if (!entry.isIntersecting) pause(); }).observe(panel);
+    }
+    render();
+    // Only replace the visual once the player is ready. Keep anchors, captions,
+    // the original image and its accessible alternative for print/no-JS reading.
+    const original = document.createElement('details');
+    original.className = 'lesson-original';
+    const summary = document.createElement('summary'); summary.textContent = copy.original; original.append(summary);
+    const caption = figure.querySelector('figcaption');
+    // A collapsed lazy image may otherwise still be unloaded when printing.
+    figure.querySelectorAll('img').forEach((image) => { image.loading = 'eager'; });
+    [...figure.children].filter((child) => child !== caption).forEach((child) => original.append(child));
+    figure.prepend(panel); figure.insertBefore(original, caption);
+    figure.classList.add('lesson-enhanced');
+  });
+</script>

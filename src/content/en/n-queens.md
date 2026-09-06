@@ -126,7 +126,7 @@ To illustrate how the *Backtracking* algorithm operates, a step-by-step example 
 
 The [initial backtracking configuration](#fig-posicion-inicial-de-resolucion-usando-vuelta-atras) shows the initial configuration of the queens that will be used to solve the problem.
 
-<figure id="fig-posicion-inicial-de-resolucion-usando-vuelta-atras">
+<figure id="fig-posicion-inicial-de-resolucion-usando-vuelta-atras" data-lesson="queens">
   <div class="chessboard" data-fen="start" data-size="5" data-pieces="qb3, qe2" data-chess-options="&quot;maxfield=e5, showmover=false, setpieces={qb3, qe2}, largeboard&quot;" role="img" aria-label="Initial position of resolution using backtracking" data-rendered="source" data-board-asset="board-5x5-bae4b4d9608c98c7.svg"><img class="source-chessboard" src="/assets/boards/board-5x5-bae4b4d9608c98c7.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;margin:0;border-radius:0" onerror="this.parentElement.removeAttribute('data-rendered');this.remove()" /></div>
   <figcaption>Initial position of resolution using backtracking</figcaption>
 </figure>

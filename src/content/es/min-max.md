@@ -28,7 +28,7 @@ El concepto del algoritmo minimax puede ser un tanto abstracto a primera vista, 
 
 El primer paso es calcular los valores de los estados finales del árbol de juego generado (en este caso, los estados al final de cada rama), empleando la heurística. Este proceso se representa en el [primer paso del Minimax genérico](#fig-primer-paso-del-algoritmo-minimax-generico).
 
-<figure id="fig-primer-paso-del-algoritmo-minimax-generico">
+<figure id="fig-primer-paso-del-algoritmo-minimax-generico" data-lesson="minimax">
   <img src="/assets/book/min-max/step1.png" alt="Primer paso del algoritmo Minimax genérico" loading="lazy" />
   <figcaption>Primer paso del algoritmo Minimax genérico</figcaption>
 </figure>

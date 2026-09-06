@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Sidebar from '../components/Sidebar.astro';
 import InteractiveFigures from '../components/InteractiveFigures.astro';
 import PageMotion from '../components/PageMotion.astro';
+import LessonFigures from '../components/LessonFigures.astro';
 import type { ChapterEntry, Language } from '../components/content';
 import { chaptersFor, copy, navigationGroupsFor } from '../components/content';
 import '../styles/global.css';
@@ -113,5 +114,6 @@ const structuredData = {
     </footer>
     <InteractiveFigures {lang} />
     <PageMotion />
+    <LessonFigures />
   </body>
 </html>

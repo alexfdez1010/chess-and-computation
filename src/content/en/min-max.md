@@ -28,7 +28,7 @@ The concept of the minimax algorithm can be somewhat abstract at first glance, s
 
 The first step is to calculate the values of the final states of the generated game tree (in this case, the states at the end of each branch), using the heuristic. This process is represented in the [first generic Minimax step](#fig-primer-paso-del-algoritmo-minimax-generico).
 
-<figure id="fig-primer-paso-del-algoritmo-minimax-generico">
+<figure id="fig-primer-paso-del-algoritmo-minimax-generico" data-lesson="minimax">
   <img src="/assets/book/min-max/step1.png" alt="First step of the generic Minimax algorithm" loading="lazy" />
   <figcaption>First step of the generic Minimax algorithm</figcaption>
 </figure>
