@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "src/styles/global.css"
+        ],
+        "createdAt": "2026-10-04T13:12:29.772Z",
+        "reason": "Agent review: existing article blockquote marks quoted text; board-arrows i::after uses borders as a chess move arrowhead. Both are documented semantic elements, not card accents."
+      },
+      {
+        "rule": "border-accent-on-rounded",
+        "value": "*",
+        "files": [
+          "src/styles/global.css"
+        ],
+        "createdAt": "2026-10-04T13:12:29.980Z",
+        "reason": "Agent review: board-arrows i::after uses transparent CSS borders to form the existing chess move arrowhead; this is geometric diagram rendering, not a rounded card border."
+      }
+    ]
+  }
+}
