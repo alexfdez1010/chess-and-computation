@@ -99,7 +99,7 @@ export const copy = {
     description: 'Una edición web abierta sobre algoritmos, búsqueda, aprendizaje y el juego que convirtió el cálculo en estrategia.',
     contents: 'Contenido', search: 'Buscar', searchHint: 'Busca conceptos, capítulos y técnicas',
     theme: 'Cambiar tema', language: 'Read in English', onPage: 'En esta página',
-    start: 'Empezar a leer', continue: 'Continuar', read: 'Marcar como leído', readDone: 'Capítulo leído',
+    start: 'Empezar a leer', continue: 'Continuar', read: 'Marcar como leído', readDone: 'Lectura completada',
     previous: 'Anterior', next: 'Siguiente', chapters: 'capítulos', sections: 'secciones', noResults: 'No hay resultados para esta búsqueda.',
   },
   en: {
@@ -108,7 +108,7 @@ export const copy = {
     description: 'An open web edition about algorithms, search, learning, and the game that turned calculation into strategy.',
     contents: 'Contents', search: 'Search', searchHint: 'Search concepts, chapters, and techniques',
     theme: 'Switch theme', language: 'Leer en español', onPage: 'On this page',
-    start: 'Start reading', continue: 'Continue', read: 'Mark as read', readDone: 'Chapter read',
+    start: 'Start reading', continue: 'Continue', read: 'Mark as read', readDone: 'Reading complete',
     previous: 'Previous', next: 'Next', chapters: 'chapters', sections: 'sections', noResults: 'No results for this search.',
   },
 } as const;

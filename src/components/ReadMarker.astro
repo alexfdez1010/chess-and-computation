@@ -1,0 +1,8 @@
+---
+import { copy, type Language } from './content';
+const { lang } = Astro.props as { lang: Language };
+---
+<span class="read-marker">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6" /></svg>
+  <span class="sr-only">{copy[lang].readDone}</span>
+</span>

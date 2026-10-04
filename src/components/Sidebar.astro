@@ -1,4 +1,5 @@
 ---
+import ReadMarker from './ReadMarker.astro';
 import type { ChapterEntry, Language } from './content';
 import { copy, navigationGroupsFor } from './content';
 const { lang, entries, activeSlug } = Astro.props as { lang: Language; entries: ChapterEntry[]; activeSlug?: string };
@@ -6,6 +7,7 @@ const groups = navigationGroupsFor(lang);
 const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.padStart(2, '0') : key === 'references' ? '—' : key;
 ---
 <aside class="book-sidebar" id="book-sidebar">
+  {activeSlug && <nav class="page-toc" data-page-toc hidden aria-label={copy[lang].onPage}><h2>{copy[lang].onPage}</h2><ol></ol></nav>}
   <div class="sidebar-scroll">
     <p class="sidebar-title">{copy[lang].contents}<span>{entries.length} {copy[lang].sections}</span></p>
     <nav aria-label={copy[lang].contents}>
@@ -13,16 +15,16 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
         <section class:list={['chapter-group', `group-${group.kind}`]}>
           <h2>
             {group.landing ? (
-              <a href={`/${lang}/${group.landing.slug}`} aria-current={group.landing.slug === activeSlug ? 'page' : undefined}>
-                <span>{groupNumber(group.key)}</span>{group.title}
+              <a href={`/${lang}/${group.landing.slug}`} aria-current={group.landing.slug === activeSlug ? 'page' : undefined} data-reading-key={`${lang}:${group.landing.slug}`}>
+                <span>{groupNumber(group.key)}</span><span class="sidebar-link-title">{group.title}<ReadMarker {lang} /></span>
               </a>
             ) : <span class="group-heading"><b>{groupNumber(group.key)}</b>{group.title}</span>}
           </h2>
           {group.sections.length > 0 && <ol>
             {group.sections.map((item) => (
               <li>
-                <a href={`/${lang}/${item.slug}`} aria-current={item.slug === activeSlug ? 'page' : undefined}>
-                  <span>{item.sectionNumber}</span>{item.sectionTitle || item.title}
+                <a href={`/${lang}/${item.slug}`} aria-current={item.slug === activeSlug ? 'page' : undefined} data-reading-key={`${lang}:${item.slug}`}>
+                  <span>{item.sectionNumber}</span><span class="sidebar-link-title">{item.sectionTitle || item.title}<ReadMarker {lang} /></span>
                 </a>
               </li>
             ))}
@@ -30,7 +32,6 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
         </section>
       ))}
     </nav>
-    {activeSlug && <div class="page-toc" data-page-toc hidden><h2>{copy[lang].onPage}</h2><ol></ol></div>}
   </div>
 </aside>
 
@@ -44,11 +45,36 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
       if (!heading.id) heading.id = `section-${index + 1}`;
       const item = document.createElement('li');
       const link = document.createElement('a');
-      link.href = `#${heading.id}`;
+      link.href = `#${encodeURIComponent(heading.id)}`;
       link.textContent = heading.textContent || '';
       if (heading.tagName === 'H3') link.dataset.depth = '3';
       item.append(link); list.append(item);
     });
     toc.hidden = headings.length === 0;
+    let queued = false;
+    const updateCurrentHeading = () => {
+      queued = false;
+      const threshold = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) + 80;
+      let current = -1;
+      headings.forEach((heading, index) => { if (heading.getBoundingClientRect().top <= threshold) current = index; });
+      list.querySelectorAll('a').forEach((link, index) => {
+        if (index === current) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+    const queueUpdate = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(updateCurrentHeading);
+    };
+    addEventListener('scroll', queueUpdate, { passive: true });
+    addEventListener('resize', queueUpdate);
+    updateCurrentHeading();
+  }
+  const scroller = document.querySelector<HTMLElement>('.sidebar-scroll');
+  const active = scroller?.querySelector<HTMLElement>('[aria-current="page"]');
+  if (scroller && active) {
+    const offset = active.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
+    if (offset > scroller.clientHeight - 80) scroller.scrollTop = offset - scroller.clientHeight / 2;
   }
 </script>

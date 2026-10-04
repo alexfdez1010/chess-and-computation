@@ -17,7 +17,7 @@ const { lang, entries, alternatePath = `/${lang === 'es' ? 'en' : 'es'}` } = Ast
     <SearchDialog {lang} {entries} />
     <a class="language-switch" href={alternatePath} hreflang={lang === 'es' ? 'en' : 'es'}>{lang === 'es' ? 'EN' : 'ES'}<span>{copy[lang].language}</span></a>
     <ThemeToggle {lang} />
-    <button class="menu-toggle icon-button" type="button" aria-label={copy[lang].contents} aria-expanded="false" aria-controls="book-sidebar"><i></i><i></i></button>
+    <button class="menu-toggle icon-button" type="button" aria-label={copy[lang].contents} aria-expanded="false" aria-controls="book-sidebar"><i aria-hidden="true"></i><i aria-hidden="true"></i></button>
   </div>
 </header>
 <button class="nav-backdrop" type="button" tabindex="-1" aria-label={lang === 'es' ? 'Cerrar índice' : 'Close contents'} hidden></button>
@@ -35,7 +35,7 @@ const { lang, entries, alternatePath = `/${lang === 'es' ? 'en' : 'es'}` } = Ast
     if (backdrop) backdrop.hidden = !open;
     background.forEach((element) => { element.inert = open; });
     document.body.classList.toggle('nav-open', open);
-    if (open) sidebar?.querySelector<HTMLAnchorElement>('a[aria-current="page"], a')?.focus();
+    if (open) (sidebar?.querySelector<HTMLAnchorElement>('a[aria-current="page"]') || sidebar?.querySelector<HTMLAnchorElement>('a'))?.focus();
     else if (restoreFocus) toggle?.focus();
   };
   toggle?.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true', true));

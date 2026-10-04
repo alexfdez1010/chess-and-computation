@@ -1,5 +1,7 @@
 ---
+import ReadMarker from '../../components/ReadMarker.astro';
 import BookLayout from '../../layouts/BookLayout.astro';
+import ResumeReading from '../../components/ResumeReading.astro';
 import { chaptersFor, copy, navigationGroupsFor, type Language } from '../../components/content';
 
 export function getStaticPaths() {
@@ -25,6 +27,7 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
             {lang === 'es' ? 'Comprar el libro' : 'Buy the book'}<span aria-hidden="true">↗</span>
           </a>
         </div>
+        <ResumeReading {lang} {entries} />
       </div>
       <picture class="hero-media">
         <source type="image/webp" srcset="/assets/hero/chess-pieces-editorial-720.webp 720w, /assets/hero/chess-pieces-editorial-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 44vw" />
@@ -39,12 +42,12 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
       <ol class="home-outline">
         {outline.map((group) => (
           <li class="outline-group">
-            {group.landing ? <a class="outline-heading" href={`/${lang}/${group.landing.slug}`}>
-              <span>{groupNumber(group.key)}</span><strong>{group.title}</strong><b aria-hidden="true">↗</b>
+            {group.landing ? <a class="outline-heading" href={`/${lang}/${group.landing.slug}`} data-reading-key={`${lang}:${group.landing.slug}`}>
+              <span>{groupNumber(group.key)}</span><strong>{group.title}<ReadMarker {lang} /></strong><b aria-hidden="true">↗</b>
             </a> : <div class="outline-heading"><span>{groupNumber(group.key)}</span><strong>{group.title}</strong></div>}
             {group.sections.length > 0 && <ol>
-              {group.sections.map((entry) => <li><a href={`/${lang}/${entry.slug}`}>
-                <span>{entry.sectionNumber}</span><div class="outline-copy"><strong>{entry.sectionTitle || entry.title}</strong><small>{entry.description}</small></div><b aria-hidden="true">→</b>
+              {group.sections.map((entry) => <li><a href={`/${lang}/${entry.slug}`} data-reading-key={`${lang}:${entry.slug}`}>
+                <span>{entry.sectionNumber}</span><div class="outline-copy"><strong>{entry.sectionTitle || entry.title}<ReadMarker {lang} /></strong><small>{entry.description}</small></div><b aria-hidden="true">→</b>
               </a></li>)}
             </ol>}
           </li>

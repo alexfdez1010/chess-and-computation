@@ -96,8 +96,13 @@ const structuredData = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <script is:inline>
       (() => {
-        const saved = localStorage.getItem('ac-theme');
-        document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        let saved;
+        try { saved = localStorage.getItem('ac-theme'); } catch {}
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#111512' : '#f3f3ed');
       })();
     </script>
   </head>

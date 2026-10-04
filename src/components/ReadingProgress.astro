@@ -4,25 +4,61 @@ import { copy } from './content';
 const { lang, slug } = Astro.props as { lang: Language; slug: string };
 ---
 <div class="reading-meter" aria-hidden="true"><span></span></div>
-<button class="read-status" type="button" data-read-status data-key={`${lang}:${slug}`}>
+<button class="read-status" type="button" data-read-status data-lang={lang} data-slug={slug} data-idle-label={copy[lang].read} data-done-label={copy[lang].readDone} aria-pressed="false">
   <span class="read-check" aria-hidden="true"></span><b data-read-label>{copy[lang].read}</b>
 </button>
 
-<script is:inline define:vars={{ idleLabel: copy[lang].read, doneLabel: copy[lang].readDone }}>
-  const meter = document.querySelector('.reading-meter span');
-  const button = document.querySelector('[data-read-status]');
-  const label = button?.querySelector('[data-read-label]');
-  const key = `ac-read:${button?.dataset.key}`;
-  const updateStatus = (done) => { button?.toggleAttribute('data-done', done); if (label) label.textContent = done ? doneLabel : idleLabel; };
-  updateStatus(localStorage.getItem(key) === '1');
-  button?.addEventListener('click', () => { const done = !button.hasAttribute('data-done'); localStorage.setItem(key, done ? '1' : '0'); updateStatus(done); });
+<script>
+  import { getReadStatus, setReadStatus, setLastVisited, syncReadingMarkers, READ_STATUS_EVENT } from '../lib/reading-state';
+  import type { Language } from './content';
+
+  const meter = document.querySelector<HTMLElement>('.reading-meter span');
+  const button = document.querySelector<HTMLButtonElement>('[data-read-status]');
+  if (button) {
+    const lang = button.dataset.lang as Language;
+    const slug = button.dataset.slug!;
+    const label = button.querySelector<HTMLElement>('[data-read-label]');
+    const updateStatus = () => {
+      const done = getReadStatus(lang, slug);
+      button.toggleAttribute('data-done', done);
+      button.setAttribute('aria-pressed', String(done));
+      if (label) label.textContent = (done ? button.dataset.doneLabel : button.dataset.idleLabel) ?? '';
+    };
+    setLastVisited(lang, slug);
+    updateStatus();
+    button.addEventListener('click', () => setReadStatus(lang, slug, !getReadStatus(lang, slug)));
+    window.addEventListener(READ_STATUS_EVENT, updateStatus);
+    window.addEventListener('storage', updateStatus);
+    window.addEventListener('pageshow', () => {
+      // A restored chapter is the current visit, even when its script does not rerun.
+      setLastVisited(lang, slug);
+      updateStatus();
+    });
+  }
+  syncReadingMarkers();
+
+  const article = document.querySelector<HTMLElement>('.book-prose');
+  let frame = 0;
+  let geometryDirty = true;
+  let start = 0;
+  let distance = 1;
   const updateMeter = () => {
-    const article = document.querySelector('.book-prose');
+    frame = 0;
     if (!article || !meter) return;
-    const start = article.getBoundingClientRect().top + scrollY;
-    const distance = Math.max(1, article.scrollHeight - innerHeight * .55);
+    if (geometryDirty) {
+      start = article.getBoundingClientRect().top + scrollY;
+      distance = Math.max(1, article.scrollHeight - innerHeight * .55);
+      geometryDirty = false;
+    }
     const progress = Math.min(1, Math.max(0, (scrollY - start + innerHeight * .2) / distance));
     meter.style.transform = `scaleX(${progress})`;
   };
-  updateMeter(); addEventListener('scroll', updateMeter, { passive: true }); addEventListener('resize', updateMeter);
+  const scheduleMeter = () => { if (!frame) frame = requestAnimationFrame(updateMeter); };
+  const refreshGeometry = () => { geometryDirty = true; scheduleMeter(); };
+  scheduleMeter();
+  window.addEventListener('scroll', scheduleMeter, { passive: true });
+  window.addEventListener('resize', refreshGeometry);
+  window.addEventListener('pageshow', refreshGeometry);
+  if (article && typeof ResizeObserver !== 'undefined') new ResizeObserver(refreshGeometry).observe(article);
+  document.fonts?.ready.then(refreshGeometry);
 </script>

@@ -62,6 +62,10 @@ Persistent on desktop chapter pages and off-canvas on mobile. The homepage uses 
 
 Chapter identity, semantic headings, rendered equations, original or localized figures, reading state, and adjacent chapter navigation.
 
+The sidebar keeps the current page's headings above the scrollable book index. The heading reached while reading uses an accent and `aria-current="location"`; the current book section remains highlighted separately. Later sections open with their index entry visible. Opening the mobile index focuses that current section.
+
+Reading state stays on the device and is separate for each language. Completed sections show a small check in both indexes, and the homepage offers a quiet “Continue reading” link to the last visited section. The read toggle exposes its state with `aria-pressed`. Blocked or full storage must not disable controls; state then lasts for the current page.
+
 ### Chessboards
 
 Primary presentation uses pre-rendered SVGs generated from the structured source position. Every board retains a semantic fallback with piece, square, mark, label, and arrow data.
@@ -81,6 +85,8 @@ retains a localized text fallback and an accessible figure label.
 ### Search
 
 Keyboard-accessible dialog with a named mobile trigger, visible input focus, and a 44px close target. Results always link to the active locale and expose a clear empty state.
+
+Search preserves the query when reopened, ignores accents, and matches each word against section titles and descriptions. Results use the book's actual section numbers. A small status line announces the match count without reannouncing the full list. Enter opens the first match; arrow keys move between the input and results, while Tab follows the native order. The header and status remain visible while results scroll on short screens.
 
 ## Accessibility
 
@@ -113,3 +119,5 @@ Every route must provide canonical and alternate-language links, localized Open 
 - Use whitespace for header, sidebar, index, and pagination grouping. Keep borders only when they communicate content or state: table cells, diagram connections, checkboxes, focus outlines, and the search input/results boundary.
 - Chapter descriptions remain in metadata, search, and the index; do not repeat them above the opening paragraph. Avoid repeating the chapter category below the breadcrumb.
 - Use direct labels such as “Contents” instead of promotional headings or explanatory copy that merely describes the interface.
+
+The mechanical design detector's existing thick-border findings are intentional semantic geometry: the article blockquote marks quoted text, and `.board-arrows i::after` uses CSS borders to draw a move arrowhead. Neither is an accent on a card.

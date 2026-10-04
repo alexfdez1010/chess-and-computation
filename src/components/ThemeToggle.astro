@@ -3,16 +3,34 @@ import type { Language } from './content';
 import { copy } from './content';
 const { lang } = Astro.props as { lang: Language };
 ---
-<button class="icon-button theme-toggle" type="button" aria-label={copy[lang].theme} title={copy[lang].theme}>
+<button class="icon-button theme-toggle" type="button" aria-label={copy[lang].theme} title={copy[lang].theme} data-light-label={lang === 'es' ? 'Usar tema claro' : 'Use light theme'} data-dark-label={lang === 'es' ? 'Usar tema oscuro' : 'Use dark theme'}>
   <span class="theme-mark" aria-hidden="true"></span>
 </button>
 
 <script>
   const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
   const root = document.documentElement;
+  const preference = matchMedia('(prefers-color-scheme: dark)');
+  let manual = false;
+  try { manual = ['light', 'dark'].includes(localStorage.getItem('ac-theme') || ''); } catch {}
+  const syncTheme = () => {
+    const dark = root.dataset.theme === 'dark';
+    const label = (dark ? button?.dataset.lightLabel : button?.dataset.darkLabel) || '';
+    button?.setAttribute('aria-label', label);
+    button?.setAttribute('title', label);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#111512' : '#f3f3ed');
+  };
+  syncTheme();
   button?.addEventListener('click', () => {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
-    localStorage.setItem('ac-theme', next);
+    manual = true;
+    try { localStorage.setItem('ac-theme', next); } catch {}
+    syncTheme();
+  });
+  preference.addEventListener('change', () => {
+    if (manual) return;
+    root.dataset.theme = preference.matches ? 'dark' : 'light';
+    syncTheme();
   });
 </script>

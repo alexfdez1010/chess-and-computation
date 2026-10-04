@@ -2,36 +2,48 @@
 import type { ChapterEntry, Language } from './content';
 import { copy } from './content';
 const { lang, entries } = Astro.props as { lang: Language; entries: ChapterEntry[] };
-const searchEntries = entries.map(({ title, description, slug, order }, index) => ({ title, description, slug, chapter: (order ?? index) + 1 }));
+const searchEntries = entries.map(({ title, description, slug, sectionNumber, bookChapter }) => ({
+  title,
+  description,
+  slug,
+  chapter: ['0', 'references'].includes(sectionNumber || bookChapter || '') ? '' : (sectionNumber || bookChapter || ''),
+}));
 ---
 <button class="search-trigger" type="button" data-search-open aria-haspopup="dialog" aria-label={copy[lang].search}>
-  <span aria-hidden="true">⌕</span><span>{copy[lang].search}</span><kbd>/</kbd>
+  <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4.5 4.5" /></svg><span>{copy[lang].search}</span><kbd>/</kbd>
 </button>
 
 <dialog class="search-dialog" data-search-dialog aria-label={copy[lang].search}>
   <form method="dialog" class="search-head">
     <label class="sr-only" for="book-search">{copy[lang].search}</label>
     <input id="book-search" type="search" autocomplete="off" placeholder={copy[lang].searchHint} />
-    <button value="close" aria-label={lang === 'es' ? 'Cerrar búsqueda' : 'Close search'}>Esc</button>
+    <button type="button" data-search-close aria-label={lang === 'es' ? 'Cerrar búsqueda' : 'Close search'}>Esc</button>
   </form>
-  <div class="search-results" aria-live="polite"></div>
-  <p class="search-empty" hidden>{copy[lang].noResults}</p>
+  <p class="search-summary" role="status" aria-live="polite" aria-atomic="true"></p>
+  <div class="search-results"></div>
+  <p class="search-empty" hidden>{copy[lang].noResults} {lang === 'es' ? 'Prueba con menos palabras o con otro concepto.' : 'Try fewer words or a different concept.'}</p>
 </dialog>
 
 <script is:inline define:vars={{ searchEntries, lang }}>
+  (() => {
   const dialog = document.querySelector('[data-search-dialog]');
   const input = dialog?.querySelector('input');
   const results = dialog?.querySelector('.search-results');
   const empty = dialog?.querySelector('.search-empty');
+  const summary = dialog?.querySelector('.search-summary');
+  const trigger = document.querySelector('[data-search-open]');
+  if (!dialog || !input || !results || !empty || !summary) return;
   const normalize = (value) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const indexedEntries = searchEntries.map((item) => ({ ...item, searchText: normalize(`${item.title} ${item.description || ''}`) }));
   const render = (query = '') => {
-    const needle = normalize(query);
-    const matches = searchEntries.filter((item) => normalize(`${item.title} ${item.description || ''}`).includes(needle)).slice(0, 12);
+    const terms = normalize(query.trim()).split(/\s+/).filter(Boolean);
+    const allMatches = indexedEntries.filter((item) => terms.every((term) => item.searchText.includes(term)));
+    const matches = allMatches.slice(0, 12);
     results.replaceChildren(...matches.map((item) => {
       const link = document.createElement('a');
       link.href = `/${lang}/${item.slug}`;
       const index = document.createElement('span');
-      index.textContent = String(item.chapter || '').padStart(2, '0');
+      index.textContent = item.chapter;
       const body = document.createElement('span');
       const strong = document.createElement('strong');
       strong.textContent = item.title;
@@ -41,16 +53,45 @@ const searchEntries = entries.map(({ title, description, slug, order }, index) =
       link.append(index, body);
       return link;
     }));
+    const count = allMatches.length;
+    const noun = lang === 'es' ? (count === 1 ? 'resultado' : 'resultados') : (count === 1 ? 'result' : 'results');
+    summary.textContent = count > matches.length
+      ? (lang === 'es' ? `${matches.length} de ${count} ${noun}` : `${matches.length} of ${count} ${noun}`)
+      : `${count} ${noun}`;
     empty.hidden = matches.length > 0;
   };
-  document.querySelector('[data-search-open]')?.addEventListener('click', () => { render(); dialog.showModal(); requestAnimationFrame(() => input.focus()); });
-  input?.addEventListener('input', () => render(input.value));
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && dialog.open) { event.preventDefault(); dialog.close(); return; }
-    if (event.key === '/' && !document.body.classList.contains('nav-open') && !dialog.open && !document.activeElement?.isContentEditable && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
-      event.preventDefault(); render(); dialog.showModal(); requestAnimationFrame(() => input.focus());
+  const open = () => {
+    render(input.value);
+    dialog.showModal();
+    requestAnimationFrame(() => input.focus());
+  };
+  trigger?.addEventListener('click', open);
+  dialog.querySelector('[data-search-close]')?.addEventListener('click', () => dialog.close());
+  dialog.querySelector('form')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    results.querySelector('a')?.click();
+  });
+  input.addEventListener('input', () => render(input.value));
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown' && results.firstElementChild) {
+      event.preventDefault();
+      results.firstElementChild.focus();
     }
   });
-  dialog?.addEventListener('close', () => document.querySelector('[data-search-open]')?.focus());
-  dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  results.addEventListener('keydown', (event) => {
+    const link = event.target.closest('a');
+    if (!link || !['ArrowUp', 'ArrowDown'].includes(event.key)) return;
+    event.preventDefault();
+    if (event.key === 'ArrowUp') (link.previousElementSibling || input).focus();
+    else link.nextElementSibling?.focus();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && dialog.open) { event.preventDefault(); dialog.close(); return; }
+    if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey && !document.body.classList.contains('nav-open') && !dialog.open && !document.activeElement?.isContentEditable && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) {
+      event.preventDefault(); open();
+    }
+  });
+  dialog.addEventListener('close', () => trigger?.focus());
+  dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  })();
 </script>
