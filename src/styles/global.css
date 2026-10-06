@@ -1,43 +1,43 @@
-@font-face {
-  font-family: 'Literata Fallback';
-  src: local('Iowan Old Style'), local('Baskerville');
-  font-display: swap;
-}
+@import "./fonts.css";
 
 :root {
   color-scheme: light;
-  --paper: #f3f3ed;
-  --paper-raised: #fafaf6;
-  --ink: #171a18;
-  --ink-soft: #5c625e;
-  --line: #cfd2cb;
-  --line-strong: #9ea49f;
-  --accent: #176b4d;
-  --accent-soft: #d8e7df;
-  --board-dark: #225f49;
-  --board-light: #dfe6da;
-  --code: #111713;
-  --header-height: 68px;
-  --sidebar-width: 280px;
-  --radius: 5px;
-  --sans: 'Avenir Next', Avenir, 'Helvetica Neue', Arial, sans-serif;
-  --serif: 'Literata Fallback', 'Iowan Old Style', Baskerville, Georgia, serif;
+  --paper: #fafbff;
+  --paper-raised: #edf1fb;
+  --ink: #142248;
+  --ink-soft: #505d78;
+  --line: #d5dcef;
+  --line-strong: #8896b6;
+  --accent: #2345ec;
+  --accent-soft: #e3e9ff;
+  --board-dark: #3454d4;
+  --board-light: #e3e9ff;
+  --code: #121b32;
+  --header-height: 76px;
+  --sidebar-width: 290px;
+  --radius: 3px;
+  --sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --display: 'Archivo Black', 'Archivo', sans-serif;
+  --citron: #d9f65c;
+  --cover: #2345ec;
+  --cover-ink: #ffffff;
+  --serif: 'Source Serif 4', Georgia, serif;
   --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --paper: #111512;
-  --paper-raised: #171c19;
-  --ink: #eef1eb;
-  --ink-soft: #a9b0aa;
-  --line: #343b36;
-  --line-strong: #59625c;
-  --accent: #66c69d;
-  --accent-soft: #1b3b2e;
-  --board-dark: #2f8d67;
-  --board-light: #29332c;
-  --code: #090c0a;
+  --paper: #121b32;
+  --paper-raised: #182540;
+  --ink: #edf1ff;
+  --ink-soft: #b2bed7;
+  --line: #34425f;
+  --line-strong: #7d8cac;
+  --accent: #9cacff;
+  --accent-soft: #263667;
+  --board-dark: #5671cc;
+  --board-light: #283655;
+  --code: #0b1223;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -478,43 +478,12 @@ button, a { transition: color .18s ease, background-color .18s ease, border-colo
   .cover-diagram { grid-template-columns: 1fr; }
 }
 
-/* Short, one-shot motion keeps the reading surface quiet. All content is
-   visible by default; scroll reveals only animate after entering the viewport. */
-@keyframes page-enter {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes media-enter {
-  from { opacity: 0; transform: translateY(16px) scale(.98); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes backdrop-enter {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes read-confirm {
-  50% { transform: scale(1.2); }
-}
-
 @media screen and (prefers-reduced-motion: no-preference) {
-  .hero-copy > * { animation: page-enter 520ms cubic-bezier(.2,.7,.2,1) both; }
-  .hero-author { animation-delay: 60ms; }
-  .hero-description { animation-delay: 110ms; }
-  .hero-actions { animation-delay: 160ms; }
-  .hero-media { animation: media-enter 650ms 100ms cubic-bezier(.2,.7,.2,1) both; }
-  .chapter-header { animation: page-enter 420ms cubic-bezier(.2,.7,.2,1) both; }
-  .motion-enter { animation: page-enter 450ms cubic-bezier(.2,.7,.2,1) both; }
-  .search-dialog[open] { animation: page-enter 180ms ease-out; }
-  .search-dialog[open]::backdrop, .nav-backdrop:not([hidden]) { animation: backdrop-enter 180ms ease-out; }
   .theme-mark { transition: transform 320ms ease; }
   :root[data-theme='dark'] .theme-mark { transform: rotate(180deg); }
   .menu-toggle i { transition: transform 220ms ease; }
   .menu-toggle[aria-expanded='true'] i:first-child { transform: translateY(2.5px) rotate(45deg); }
   .menu-toggle[aria-expanded='true'] i:last-child { transform: translateY(-2.5px) rotate(-45deg); }
-  .read-check { transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }
-  .read-status[data-done] .read-check { animation: read-confirm 260ms ease-out; }
-  .primary-link:focus-visible span { transform: translateX(4px); }
-  .contents-preview li a:focus-visible b { transform: translate(2px, -2px); }
 }
 
 @media (prefers-reduced-motion: reduce) {

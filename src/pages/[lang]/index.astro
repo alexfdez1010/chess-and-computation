@@ -1,5 +1,7 @@
 ---
 import ReadMarker from '../../components/ReadMarker.astro';
+import Arrow from '../../components/Arrow.astro';
+import HomeBoard from '../../components/HomeBoard.astro';
 import BookLayout from '../../layouts/BookLayout.astro';
 import ResumeReading from '../../components/ResumeReading.astro';
 import { chaptersFor, copy, navigationGroupsFor, type Language } from '../../components/content';
@@ -18,36 +20,37 @@ const groupNumber = (key: string) => key === '0' ? '' : /^\d$/.test(key) ? key.p
   <div class="home-page">
     <section class="home-hero">
       <div class="hero-copy">
-        <h1>{text.title}</h1>
+        <h1 aria-label={text.title}><span>{lang === 'es' ? 'Ajedrez' : 'Chess'}</span><span class="title-join">{lang === 'es' ? 'y' : 'and'}</span><span class="title-computation">{lang === 'es' ? 'Computación' : 'Computation'}</span></h1>
         <p class="hero-author">Alejandro Fernández Camello</p>
         <p class="hero-description">{lang === 'es' ? 'Un libro gratuito sobre algoritmos de ajedrez, búsqueda y aprendizaje automático.' : 'A free book on chess algorithms, search, and machine learning.'}</p>
         <div class="hero-actions">
-          {first && <a class="primary-link" href={`/${lang}/${first.slug}`}>{text.start}<span aria-hidden="true">→</span></a>}
+          {first && <a class="primary-link" href={`/${lang}/${first.slug}`}>{text.start}<Arrow /></a>}
           <a class="secondary-link" href="https://www.amazon.es/Ajedrez-Computación-movimientos-revolución-ajedrez/dp/B0CNCT6DZ1" rel="sponsored noopener noreferrer" target="_blank">
-            {lang === 'es' ? 'Comprar el libro' : 'Buy the book'}<span aria-hidden="true">↗</span>
+            {lang === 'es' ? 'Comprar el libro' : 'Buy the book'}<Arrow diagonal />
           </a>
         </div>
         <ResumeReading {lang} {entries} />
       </div>
-      <picture class="hero-media">
-        <source type="image/webp" srcset="/assets/hero/chess-pieces-editorial-720.webp 720w, /assets/hero/chess-pieces-editorial-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 44vw" />
-        <img src="/assets/hero/chess-pieces-editorial.png" width="1200" height="800" alt={lang === 'es' ? 'Composición editorial de un caballo negro, una dama blanca y una torre verde' : 'Editorial composition of a black knight, a white queen, and a green rook'} loading="eager" decoding="async" fetchpriority="high" />
-      </picture>
+      <HomeBoard {lang} />
     </section>
 
+    <nav class="chapter-rail" aria-label={lang === 'es' ? 'Capítulos del libro' : 'Book chapters'}>
+      {outline.filter((group) => /^\d$/.test(group.key) && group.key !== '0').map((group) => <a href={`#chapter-${group.key}`}><span>{groupNumber(group.key)}</span><strong>{group.title}</strong><Arrow /></a>)}
+    </nav>
     <section class="contents-preview" id="contents">
       <div>
         <h2>{text.contents}</h2>
+
       </div>
       <ol class="home-outline">
         {outline.map((group) => (
-          <li class="outline-group">
+          <li class="outline-group" id={`chapter-${group.key}`}>
             {group.landing ? <a class="outline-heading" href={`/${lang}/${group.landing.slug}`} data-reading-key={`${lang}:${group.landing.slug}`}>
-              <span>{groupNumber(group.key)}</span><strong>{group.title}<ReadMarker {lang} /></strong><b aria-hidden="true">↗</b>
+              <span>{groupNumber(group.key)}</span><strong>{group.title}<ReadMarker {lang} /></strong><Arrow diagonal />
             </a> : <div class="outline-heading"><span>{groupNumber(group.key)}</span><strong>{group.title}</strong></div>}
             {group.sections.length > 0 && <ol>
               {group.sections.map((entry) => <li><a href={`/${lang}/${entry.slug}`} data-reading-key={`${lang}:${entry.slug}`}>
-                <span>{entry.sectionNumber}</span><div class="outline-copy"><strong>{entry.sectionTitle || entry.title}<ReadMarker {lang} /></strong><small>{entry.description}</small></div><b aria-hidden="true">→</b>
+                <span>{entry.sectionNumber}</span><div class="outline-copy"><strong>{entry.sectionTitle || entry.title}<ReadMarker {lang} /></strong><small>{entry.description}</small></div><Arrow />
               </a></li>)}
             </ol>}
           </li>

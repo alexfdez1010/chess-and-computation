@@ -9,11 +9,11 @@ import '../styles/lessons.css';
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const copy = es ? {
     play: 'Reproducir', pause: 'Pausar', previous: 'Anterior', next: 'Siguiente', reset: 'Reiniciar',
-    original: 'Ver figura original', step: 'Paso', interactive: 'EXPLORA PASO A PASO',
+    original: 'Ver figura original', step: 'Paso',
     minimax: 'Cómo decide minimax', queens: 'Por qué hay que volver atrás', knight: 'Un salto cada vez',
   } : {
     play: 'Play', pause: 'Pause', previous: 'Previous', next: 'Next', reset: 'Restart',
-    original: 'View original figure', step: 'Step', interactive: 'EXPLORE STEP BY STEP',
+    original: 'View original figure', step: 'Step',
     minimax: 'How minimax decides', queens: 'Why we need to backtrack', knight: 'One jump at a time',
   };
   const treeNodes = [
@@ -40,7 +40,7 @@ import '../styles/lessons.css';
     const panel = document.createElement('section');
     panel.className = `lesson-panel lesson-${kind}`;
     panel.setAttribute('aria-label', copy[kind]);
-    panel.innerHTML = `<header class="lesson-heading"><span>${copy.interactive}</span><h4>${copy[kind]}</h4></header>
+    panel.innerHTML = `<header class="lesson-heading"><h4>${copy[kind]}</h4></header>
       <div class="lesson-stage"></div>
       <div class="lesson-explanation" aria-live="polite" aria-atomic="true"><strong></strong><p></p></div>
       <div class="lesson-timeline"><label for="${figure.id}-step">${copy.step}</label><input id="${figure.id}-step" type="range" min="0" max="${steps.length - 1}" value="0" step="1" /><output></output></div>

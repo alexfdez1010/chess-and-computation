@@ -1,0 +1,26 @@
+---
+import Arrow from './Arrow.astro';
+import type { Language } from './content';
+const { lang } = Astro.props as { lang: Language };
+// The opening moves of the knight tour already published in the book.
+const route = ['a8', 'b6', 'd7', 'c5', 'a4', 'b2', 'd1', 'c3', 'e4', 'f2', 'h1', 'g3', 'h5', 'g7', 'e6', 'f8'];
+const position = (square: string) => ({ x: (square.charCodeAt(0) - 97) * 48 + 24, y: (8 - Number(square[1])) * 48 + 24 });
+const points = route.map((square) => { const { x, y } = position(square); return `${x},${y}`; }).join(' ');
+---
+<a class="cover-board" href={`/${lang}/knight-tour`} aria-label={lang === 'es' ? 'Explorar El tour del caballo' : "Explore The knight’s tour"}>
+  <div class="cover-board-frame">
+    <svg viewBox="-24 -24 432 432" role="img" aria-label={lang === 'es' ? 'Primeros movimientos del recorrido del caballo del libro' : 'Opening moves of the knight tour from the book'}>
+      {Array.from({ length: 64 }, (_, i) => <rect x={(i % 8) * 48} y={Math.floor(i / 8) * 48} width="48" height="48" fill={(i + Math.floor(i / 8)) % 2 === 0 ? '#ffffff' : '#b7c6ff'} />)}
+      {Array.from({ length: 8 }, (_, i) => <><text x={i * 48 + 24} y="400" class="cover-coordinate">{String.fromCharCode(97 + i)}</text><text x="-12" y={i * 48 + 29} class="cover-coordinate">{8 - i}</text></>)}
+      <polyline class="knight-route" points={points} fill="none" stroke="#2345ec" stroke-width="3" pathLength="1" />
+      {route.slice(1).map((square) => { const {x, y} = position(square); return <circle cx={x} cy={y} r="4" fill="#2345ec" />; })}
+      <rect x="0" y="0" width="48" height="48" fill="#d9f65c" />
+      <g transform="translate(2 1)" fill="#142248" stroke="#142248" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 10c10.5 1 16.5 8 16 29H15c0-9 10-6.5 8-21" />
+        <path d="M24 18c.4 3-5.5 7.4-8 9-3 2-2.8 4.3-5 4-1-1 1.4-3 0-3-1 0 .2 1.2-1 2-1 0-4 .9-4-4 0-2 6-12 6-12s1.9-1.9 2-3.5c-.7-1-.5-2-.5-3.5 1-1 3 2.5 3 2.5h2S19.3 8 21 7c1 0 1 3 1 3" />
+        <path d="M15 15v2m-6 9h1" stroke="#d9f65c" stroke-width="2" />
+      </g>
+    </svg>
+  </div>
+  <div class="cover-board-caption"><span>{lang === 'es' ? 'El tour del caballo' : "The knight’s tour"}</span><span class="board-section">1.2 <Arrow diagonal /></span></div>
+</a>

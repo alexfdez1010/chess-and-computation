@@ -18,7 +18,7 @@ const { lang } = Astro.props as { lang: Language };
     const label = (dark ? button?.dataset.lightLabel : button?.dataset.darkLabel) || '';
     button?.setAttribute('aria-label', label);
     button?.setAttribute('title', label);
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#111512' : '#f3f3ed');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#121b32' : '#fafbff');
   };
   syncTheme();
   button?.addEventListener('click', () => {

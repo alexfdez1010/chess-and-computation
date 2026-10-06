@@ -7,6 +7,8 @@ import LessonFigures from '../components/LessonFigures.astro';
 import type { ChapterEntry, Language } from '../components/content';
 import { chaptersFor, copy, navigationGroupsFor } from '../components/content';
 import '../styles/global.css';
+import '../styles/redesign.css';
+import '../styles/reader.css';
 import 'katex/dist/katex.min.css';
 
 const { lang, title, description, entry, alternatePath } = Astro.props as {
@@ -64,7 +66,7 @@ const structuredData = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="theme-color" content="#f3f3ed" />
+    <meta name="theme-color" content="#fafbff" />
     <meta name="description" content={summary} />
     <meta name="generator" content={Astro.generator} />
     <meta property="og:type" content={entry ? 'article' : 'website'} />
@@ -92,6 +94,8 @@ const structuredData = {
     <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" href="/fonts/archivo-black-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
     <title>{pageTitle}</title>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <script is:inline>
@@ -102,7 +106,7 @@ const structuredData = {
           ? saved
           : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.dataset.theme = theme;
-        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#111512' : '#f3f3ed');
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#121b32' : '#fafbff');
       })();
     </script>
   </head>

@@ -3,4 +3,6 @@ dist/
 .astro/
 .DS_Store
 tmp/
-
+.impeccable/review/
+.impeccable/questions/
+.impeccable/direction-options.json

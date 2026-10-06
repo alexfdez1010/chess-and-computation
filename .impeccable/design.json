@@ -1,0 +1,567 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-06T10:28:14.550282+00:00",
+  "title": "Design System: Ajedrez y Computación",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0054 274.97)",
+          "oklch(26% 0.0054 274.97)",
+          "oklch(38% 0.0054 274.97)",
+          "oklch(49% 0.0054 274.97)",
+          "oklch(61% 0.0054 274.97)",
+          "oklch(72% 0.0054 274.97)",
+          "oklch(84% 0.0054 274.97)",
+          "oklch(95% 0.0054 274.97)"
+        ]
+      },
+      "paper-raised": {
+        "role": "neutral",
+        "displayName": "Paper raised",
+        "tonalRamp": [
+          "oklch(15% 0.0141 268.49)",
+          "oklch(26% 0.0141 268.49)",
+          "oklch(38% 0.0141 268.49)",
+          "oklch(49% 0.0141 268.49)",
+          "oklch(61% 0.0141 268.49)",
+          "oklch(72% 0.0141 268.49)",
+          "oklch(84% 0.0141 268.49)",
+          "oklch(95% 0.0141 268.49)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0734 266.26)",
+          "oklch(26% 0.0734 266.26)",
+          "oklch(38% 0.0734 266.26)",
+          "oklch(49% 0.0734 266.26)",
+          "oklch(61% 0.0734 266.26)",
+          "oklch(72% 0.0734 266.26)",
+          "oklch(84% 0.0734 266.26)",
+          "oklch(95% 0.0734 266.26)"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink soft",
+        "tonalRamp": [
+          "oklch(15% 0.0467 264.65)",
+          "oklch(26% 0.0467 264.65)",
+          "oklch(38% 0.0467 264.65)",
+          "oklch(49% 0.0467 264.65)",
+          "oklch(61% 0.0467 264.65)",
+          "oklch(72% 0.0467 264.65)",
+          "oklch(84% 0.0467 264.65)",
+          "oklch(95% 0.0467 264.65)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "tonalRamp": [
+          "oklch(15% 0.0271 269.65)",
+          "oklch(26% 0.0271 269.65)",
+          "oklch(38% 0.0271 269.65)",
+          "oklch(49% 0.0271 269.65)",
+          "oklch(61% 0.0271 269.65)",
+          "oklch(72% 0.0271 269.65)",
+          "oklch(84% 0.0271 269.65)",
+          "oklch(95% 0.0271 269.65)"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Line strong",
+        "tonalRamp": [
+          "oklch(15% 0.0502 266.49)",
+          "oklch(26% 0.0502 266.49)",
+          "oklch(38% 0.0502 266.49)",
+          "oklch(49% 0.0502 266.49)",
+          "oklch(61% 0.0502 266.49)",
+          "oklch(72% 0.0502 266.49)",
+          "oklch(84% 0.0502 266.49)",
+          "oklch(95% 0.0502 266.49)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Accent",
+        "tonalRamp": [
+          "oklch(15% 0.2497 266.45)",
+          "oklch(26% 0.2497 266.45)",
+          "oklch(38% 0.2497 266.45)",
+          "oklch(49% 0.2497 266.45)",
+          "oklch(61% 0.2497 266.45)",
+          "oklch(72% 0.2497 266.45)",
+          "oklch(84% 0.2497 266.45)",
+          "oklch(95% 0.2497 266.45)"
+        ]
+      },
+      "accent-soft": {
+        "role": "neutral",
+        "displayName": "Accent soft",
+        "tonalRamp": [
+          "oklch(15% 0.0305 273.64)",
+          "oklch(26% 0.0305 273.64)",
+          "oklch(38% 0.0305 273.64)",
+          "oklch(49% 0.0305 273.64)",
+          "oklch(61% 0.0305 273.64)",
+          "oklch(72% 0.0305 273.64)",
+          "oklch(84% 0.0305 273.64)",
+          "oklch(95% 0.0305 273.64)"
+        ]
+      },
+      "board-dark": {
+        "role": "neutral",
+        "displayName": "Board dark",
+        "tonalRamp": [
+          "oklch(15% 0.1999 267.64)",
+          "oklch(26% 0.1999 267.64)",
+          "oklch(38% 0.1999 267.64)",
+          "oklch(49% 0.1999 267.64)",
+          "oklch(61% 0.1999 267.64)",
+          "oklch(72% 0.1999 267.64)",
+          "oklch(84% 0.1999 267.64)",
+          "oklch(95% 0.1999 267.64)"
+        ]
+      },
+      "board-light": {
+        "role": "neutral",
+        "displayName": "Board light",
+        "tonalRamp": [
+          "oklch(15% 0.0305 273.64)",
+          "oklch(26% 0.0305 273.64)",
+          "oklch(38% 0.0305 273.64)",
+          "oklch(49% 0.0305 273.64)",
+          "oklch(61% 0.0305 273.64)",
+          "oklch(72% 0.0305 273.64)",
+          "oklch(84% 0.0305 273.64)",
+          "oklch(95% 0.0305 273.64)"
+        ]
+      },
+      "code": {
+        "role": "neutral",
+        "displayName": "Code",
+        "tonalRamp": [
+          "oklch(15% 0.0468 266.56)",
+          "oklch(26% 0.0468 266.56)",
+          "oklch(38% 0.0468 266.56)",
+          "oklch(49% 0.0468 266.56)",
+          "oklch(61% 0.0468 266.56)",
+          "oklch(72% 0.0468 266.56)",
+          "oklch(84% 0.0468 266.56)",
+          "oklch(95% 0.0468 266.56)"
+        ]
+      },
+      "citron": {
+        "role": "secondary",
+        "displayName": "Citron",
+        "tonalRamp": [
+          "oklch(15% 0.1789 119.14)",
+          "oklch(26% 0.1789 119.14)",
+          "oklch(38% 0.1789 119.14)",
+          "oklch(49% 0.1789 119.14)",
+          "oklch(61% 0.1789 119.14)",
+          "oklch(72% 0.1789 119.14)",
+          "oklch(84% 0.1789 119.14)",
+          "oklch(95% 0.1789 119.14)"
+        ]
+      },
+      "cover": {
+        "role": "primary",
+        "displayName": "Cover",
+        "tonalRamp": [
+          "oklch(15% 0.2497 266.45)",
+          "oklch(26% 0.2497 266.45)",
+          "oklch(38% 0.2497 266.45)",
+          "oklch(49% 0.2497 266.45)",
+          "oklch(61% 0.2497 266.45)",
+          "oklch(72% 0.2497 266.45)",
+          "oklch(84% 0.2497 266.45)",
+          "oklch(95% 0.2497 266.45)"
+        ]
+      },
+      "cover-ink": {
+        "role": "neutral",
+        "displayName": "Cover ink",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "primary-hover": {
+        "role": "secondary",
+        "displayName": "Primary hover",
+        "tonalRamp": [
+          "oklch(15% 0.1229 118.28)",
+          "oklch(26% 0.1229 118.28)",
+          "oklch(38% 0.1229 118.28)",
+          "oklch(49% 0.1229 118.28)",
+          "oklch(61% 0.1229 118.28)",
+          "oklch(72% 0.1229 118.28)",
+          "oklch(84% 0.1229 118.28)",
+          "oklch(95% 0.1229 118.28)"
+        ]
+      },
+      "rail-hover": {
+        "role": "secondary",
+        "displayName": "Rail hover",
+        "tonalRamp": [
+          "oklch(15% 0.1365 118.81)",
+          "oklch(26% 0.1365 118.81)",
+          "oklch(38% 0.1365 118.81)",
+          "oklch(49% 0.1365 118.81)",
+          "oklch(61% 0.1365 118.81)",
+          "oklch(72% 0.1365 118.81)",
+          "oklch(84% 0.1365 118.81)",
+          "oklch(95% 0.1365 118.81)"
+        ]
+      },
+      "cover-board-dark": {
+        "role": "neutral",
+        "displayName": "Cover board dark",
+        "tonalRamp": [
+          "oklch(15% 0.0818 273.07)",
+          "oklch(26% 0.0818 273.07)",
+          "oklch(38% 0.0818 273.07)",
+          "oklch(49% 0.0818 273.07)",
+          "oklch(61% 0.0818 273.07)",
+          "oklch(72% 0.0818 273.07)",
+          "oklch(84% 0.0818 273.07)",
+          "oklch(95% 0.0818 273.07)"
+        ]
+      },
+      "dark-paper": {
+        "role": "neutral",
+        "displayName": "Dark paper",
+        "tonalRamp": [
+          "oklch(15% 0.0468 266.56)",
+          "oklch(26% 0.0468 266.56)",
+          "oklch(38% 0.0468 266.56)",
+          "oklch(49% 0.0468 266.56)",
+          "oklch(61% 0.0468 266.56)",
+          "oklch(72% 0.0468 266.56)",
+          "oklch(84% 0.0468 266.56)",
+          "oklch(95% 0.0468 266.56)"
+        ]
+      },
+      "dark-paper-raised": {
+        "role": "neutral",
+        "displayName": "Dark paper raised",
+        "tonalRamp": [
+          "oklch(15% 0.0538 263.68)",
+          "oklch(26% 0.0538 263.68)",
+          "oklch(38% 0.0538 263.68)",
+          "oklch(49% 0.0538 263.68)",
+          "oklch(61% 0.0538 263.68)",
+          "oklch(72% 0.0538 263.68)",
+          "oklch(84% 0.0538 263.68)",
+          "oklch(95% 0.0538 263.68)"
+        ]
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "Dark ink",
+        "tonalRamp": [
+          "oklch(15% 0.0193 273.24)",
+          "oklch(26% 0.0193 273.24)",
+          "oklch(38% 0.0193 273.24)",
+          "oklch(49% 0.0193 273.24)",
+          "oklch(61% 0.0193 273.24)",
+          "oklch(72% 0.0193 273.24)",
+          "oklch(84% 0.0193 273.24)",
+          "oklch(95% 0.0193 273.24)"
+        ]
+      },
+      "dark-ink-soft": {
+        "role": "neutral",
+        "displayName": "Dark ink soft",
+        "tonalRamp": [
+          "oklch(15% 0.0378 265.09)",
+          "oklch(26% 0.0378 265.09)",
+          "oklch(38% 0.0378 265.09)",
+          "oklch(49% 0.0378 265.09)",
+          "oklch(61% 0.0378 265.09)",
+          "oklch(72% 0.0378 265.09)",
+          "oklch(84% 0.0378 265.09)",
+          "oklch(95% 0.0378 265.09)"
+        ]
+      },
+      "dark-line": {
+        "role": "neutral",
+        "displayName": "Dark line",
+        "tonalRamp": [
+          "oklch(15% 0.0532 264.22)",
+          "oklch(26% 0.0532 264.22)",
+          "oklch(38% 0.0532 264.22)",
+          "oklch(49% 0.0532 264.22)",
+          "oklch(61% 0.0532 264.22)",
+          "oklch(72% 0.0532 264.22)",
+          "oklch(84% 0.0532 264.22)",
+          "oklch(95% 0.0532 264.22)"
+        ]
+      },
+      "dark-line-strong": {
+        "role": "neutral",
+        "displayName": "Dark line strong",
+        "tonalRamp": [
+          "oklch(15% 0.0513 265.26)",
+          "oklch(26% 0.0513 265.26)",
+          "oklch(38% 0.0513 265.26)",
+          "oklch(49% 0.0513 265.26)",
+          "oklch(61% 0.0513 265.26)",
+          "oklch(72% 0.0513 265.26)",
+          "oklch(84% 0.0513 265.26)",
+          "oklch(95% 0.0513 265.26)"
+        ]
+      },
+      "dark-accent": {
+        "role": "primary",
+        "displayName": "Dark accent",
+        "tonalRamp": [
+          "oklch(15% 0.1205 274.86)",
+          "oklch(26% 0.1205 274.86)",
+          "oklch(38% 0.1205 274.86)",
+          "oklch(49% 0.1205 274.86)",
+          "oklch(61% 0.1205 274.86)",
+          "oklch(72% 0.1205 274.86)",
+          "oklch(84% 0.1205 274.86)",
+          "oklch(95% 0.1205 274.86)"
+        ]
+      },
+      "dark-accent-soft": {
+        "role": "neutral",
+        "displayName": "Dark accent soft",
+        "tonalRamp": [
+          "oklch(15% 0.0880 268.01)",
+          "oklch(26% 0.0880 268.01)",
+          "oklch(38% 0.0880 268.01)",
+          "oklch(49% 0.0880 268.01)",
+          "oklch(61% 0.0880 268.01)",
+          "oklch(72% 0.0880 268.01)",
+          "oklch(84% 0.0880 268.01)",
+          "oklch(95% 0.0880 268.01)"
+        ]
+      },
+      "dark-board-dark": {
+        "role": "neutral",
+        "displayName": "Dark board dark",
+        "tonalRamp": [
+          "oklch(15% 0.1434 269.08)",
+          "oklch(26% 0.1434 269.08)",
+          "oklch(38% 0.1434 269.08)",
+          "oklch(49% 0.1434 269.08)",
+          "oklch(61% 0.1434 269.08)",
+          "oklch(72% 0.1434 269.08)",
+          "oklch(84% 0.1434 269.08)",
+          "oklch(95% 0.1434 269.08)"
+        ]
+      },
+      "dark-board-light": {
+        "role": "neutral",
+        "displayName": "Dark board light",
+        "tonalRamp": [
+          "oklch(15% 0.0581 264.95)",
+          "oklch(26% 0.0581 264.95)",
+          "oklch(38% 0.0581 264.95)",
+          "oklch(49% 0.0581 264.95)",
+          "oklch(61% 0.0581 264.95)",
+          "oklch(72% 0.0581 264.95)",
+          "oklch(84% 0.0581 264.95)",
+          "oklch(95% 0.0581 264.95)"
+        ]
+      },
+      "dark-code": {
+        "role": "neutral",
+        "displayName": "Dark code",
+        "tonalRamp": [
+          "oklch(15% 0.0366 266.00)",
+          "oklch(26% 0.0366 266.00)",
+          "oklch(38% 0.0366 266.00)",
+          "oklch(49% 0.0366 266.00)",
+          "oklch(61% 0.0366 266.00)",
+          "oklch(72% 0.0366 266.00)",
+          "oklch(84% 0.0366 266.00)",
+          "oklch(95% 0.0366 266.00)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Cover display",
+        "purpose": "Book title on the cobalt cover."
+      },
+      "headline": {
+        "displayName": "Chapter headline",
+        "purpose": "Chapter titles."
+      },
+      "section": {
+        "displayName": "Study section",
+        "purpose": "Article h2 headings."
+      },
+      "body": {
+        "displayName": "Study prose",
+        "purpose": "Long-form educational text at 68ch."
+      }
+    },
+    "shadows": [
+      {
+        "name": "mobile-drawer",
+        "value": "20px 0 60px color-mix(in srgb, var(--ink) 15%, transparent)",
+        "purpose": "Distinguish the mobile navigation overlay."
+      }
+    ],
+    "motion": [
+      {
+        "name": "control-state",
+        "value": "180ms ease",
+        "purpose": "Color and background state changes."
+      },
+      {
+        "name": "drawer",
+        "value": "250ms ease",
+        "purpose": "Mobile index opening and closing."
+      },
+      {
+        "name": "knight-trace",
+        "value": "1800ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "Trace the cover path once; show it complete for reduced motion."
+      },
+      {
+        "name": "lesson-piece",
+        "value": "300ms ease-in-out",
+        "purpose": "Explain a piece changing position; disabled for reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tiny-max",
+        "value": "360px"
+      },
+      {
+        "name": "mobile-max",
+        "value": "640px"
+      },
+      {
+        "name": "drawer-max",
+        "value": "900px"
+      },
+      {
+        "name": "desktop-min",
+        "value": "901px"
+      },
+      {
+        "name": "lesson-columns-min-cover-compact-max",
+        "value": "1100px"
+      },
+      {
+        "name": "stacked-chapter-max",
+        "value": "1150px"
+      },
+      {
+        "name": "language-label-min",
+        "value": "1180px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary reading action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The principal cover link starts the book.",
+      "html": "<a class=\"ds-primary\" href=\"/es/introduction\">Empezar a leer<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M4 12h16m-6-6 6 6-6 6\"/></svg></a>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;gap:25px;min-height:52px;padding:14px 20px;border:0;border-radius:3px;background:var(--citron,#d9f65c);color:#142248;font:700 14px/1.55 var(--sans, 'Archivo', 'Helvetica Neue', Arial, sans-serif);text-decoration:none;transition:background-color .18s ease}.ds-primary:hover{background:#ebff9e}.ds-primary svg{transition:transform .2s ease}.ds-primary:hover svg{transform:translateX(4px)}.ds-primary:focus-visible{outline:2px solid var(--accent,#2345ec);outline-offset:5px;}.ds-primary:active{transform:translateY(1px)}@media(prefers-reduced-motion:reduce){.ds-primary,.ds-primary svg{transition:none}}"
+    },
+    {
+      "name": "Secondary cover action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet print-book link on the cobalt cover.",
+      "html": "<div class=\"ds-cover\"><a class=\"ds-secondary\" href=\"https://www.amazon.es/Ajedrez-Computación-movimientos-revolución-ajedrez/dp/B0CNCT6DZ1\">Comprar el libro<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M4 12h16m-6-6 6 6-6 6\"/></svg></a></div>",
+      "css": ".ds-cover{padding:20px;background:var(--cover,#2345ec)}.ds-secondary{display:inline-flex;align-items:center;gap:12px;padding:12px 0;border:0;border-radius:3px;background:transparent;color:#fff;font:500 14px/1.55 var(--sans, 'Archivo', 'Helvetica Neue', Arial, sans-serif);text-decoration:none;transition:color .18s ease}.ds-secondary:hover{color:var(--citron,#d9f65c)}.ds-secondary:focus-visible{outline:2px solid var(--citron,#d9f65c);outline-offset:5px}.ds-secondary:active{transform:translateY(1px)}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "Search input",
+      "kind": "input",
+      "refersTo": "search-input",
+      "description": "Borderless input with a semantic boundary above results.",
+      "html": "<div class=\"ds-search\"><label class=\"ds-search-label\" for=\"ds-book-search\">Buscar</label><input id=\"ds-book-search\" type=\"search\" placeholder=\"Buscar capítulos o conceptos\" autocomplete=\"off\"/><button type=\"button\" aria-label=\"Cerrar búsqueda\">Esc</button></div>",
+      "css": ".ds-search{display:grid;grid-template-columns:1fr auto;gap:10px;padding:14px 20px;background:var(--paper,#fafbff);border-bottom:1px solid var(--line,#d5dcef)}.ds-search-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.ds-search input{min-width:0;padding:10px;border:0;background:transparent;color:var(--ink,#142248);caret-color:var(--accent,#2345ec);font:400 19px var(--sans, 'Archivo', 'Helvetica Neue', Arial, sans-serif)}.ds-search input::placeholder{color:var(--ink-soft,#505d78);opacity:1}.ds-search input:focus-visible{outline:2px solid var(--accent,#2345ec);outline-offset:-2px;border-radius:3px}.ds-search button{min-width:44px;min-height:44px;border:0;border-radius:3px;color:var(--ink-soft,#505d78);background:var(--paper,#fafbff);font:12px monospace;cursor:pointer}.ds-search button:hover{color:var(--ink,#142248);background:var(--accent-soft,#e3e9ff)}.ds-search button:focus-visible{outline:2px solid var(--accent,#2345ec);outline-offset:5px;}.ds-search button:active{transform:translateY(1px)}"
+    },
+    {
+      "name": "Chapter navigation",
+      "kind": "nav",
+      "refersTo": "navigation-current",
+      "description": "Current chapter and adjacent section with distinct active color.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Índice\"><a href=\"/es/knight-tour\" aria-current=\"page\"><span>1.2</span><span>El tour del caballo</span></a><a href=\"/es/king-ways\"><span>1.3</span><span>Las marchas del rey</span></a></nav>",
+      "css": ".ds-nav{padding:16px;background:var(--paper-raised,#edf1fb)}.ds-nav a{display:grid;grid-template-columns:30px minmax(0,1fr);gap:8px;align-items:baseline;min-height:44px;padding:10px 8px;border-radius:0;color:var(--ink-soft,#505d78);font:450 13px/1.45 var(--sans, 'Archivo', 'Helvetica Neue', Arial, sans-serif);text-decoration:none;transition:color .18s ease,background-color .18s ease}.ds-nav a>span:first-child{font-size:11px;font-weight:550;font-variant-numeric:tabular-nums}.ds-nav a:hover{color:var(--accent,#2345ec);background:var(--accent-soft,#e3e9ff)}.ds-nav a[aria-current=page]{color:#fafbff;background:#2345ec;font-weight:700}.ds-nav a[aria-current=page]>span:first-child{color:var(--citron,#d9f65c)}.ds-nav a:focus-visible{outline:2px solid var(--accent,#2345ec);outline-offset:1px}@media(prefers-reduced-motion:reduce){.ds-nav a{transition:none}}"
+    },
+    {
+      "name": "Chapter pagination",
+      "kind": "card",
+      "refersTo": "pagination",
+      "description": "Raised-paper next section link at the end of an article.",
+      "html": "<a class=\"ds-pagination\" href=\"/es/knight-tour\" rel=\"next\"><span>Siguiente</span><strong>El tour del caballo</strong></a>",
+      "css": ".ds-pagination{display:flex;flex-direction:column;min-height:154px;gap:20px;padding:24px;border:0;border-radius:0;background:var(--paper-raised,#edf1fb);color:var(--ink,#142248);text-align:right;text-decoration:none;transition:background-color .18s ease}.ds-pagination span{color:var(--ink-soft,#505d78);font:650 12px/1.4 var(--sans, 'Archivo', 'Helvetica Neue', Arial, sans-serif)}.ds-pagination strong{font:750 23px/1.25 var(--sans, 'Archivo', 'Helvetica Neue', Arial, sans-serif);letter-spacing:-.02em;overflow-wrap:anywhere}.ds-pagination:hover{background:var(--accent-soft,#e3e9ff)}.ds-pagination:hover strong{color:var(--accent,#2345ec)}.ds-pagination:focus-visible{outline:2px solid var(--accent,#2345ec);outline-offset:-4px}@media(prefers-reduced-motion:reduce){.ds-pagination{transition:none}}"
+    },
+    {
+      "name": "Reading completion toggle",
+      "kind": "button",
+      "refersTo": "read-status",
+      "description": "Meaningful checkbox boundary and citron completed state.",
+      "html": "<button class=\"ds-read\" type=\"button\" aria-pressed=\"false\"><span aria-hidden=\"true\"></span><b>Marcar como leído</b></button><button class=\"ds-read\" type=\"button\" aria-pressed=\"true\"><span aria-hidden=\"true\"></span><b>Leído</b></button>",
+      "css": ".ds-read{display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:12px 16px;border:1px solid var(--line-strong,#8896b6);border-radius:0;color:var(--ink,#142248);background:var(--paper,#fafbff);cursor:pointer;transition:background-color .18s ease,border-color .18s ease}.ds-read b{font:650 13px/1.4 var(--sans, 'Archivo', 'Helvetica Neue', Arial, sans-serif)}.ds-read>span{width:18px;height:18px;flex-shrink:0;border:1px solid var(--line-strong,#8896b6)}.ds-read:hover{border-color:var(--accent,#2345ec);background:var(--accent-soft,#e3e9ff)}.ds-read[aria-pressed=true]{background:var(--citron,#d9f65c);border-color:transparent;color:#142248}.ds-read[aria-pressed=true]>span{border-color:#142248;background:#142248;box-shadow:inset 0 0 0 3px var(--citron,#d9f65c)}.ds-read:focus-visible{outline:2px solid var(--accent,#2345ec);outline-offset:5px;}.ds-read:active{transform:translateY(1px)}@media(prefers-reduced-motion:reduce){.ds-read{transition:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Mathematics in play",
+    "overview": "A bright mathematics manual with assertive cobalt fields, citron actions and quiet study pages. Large, compact display type identifies the book and chapters; serif prose supports sustained reading. Chess geometry represents actual positions and legal moves.\n\nThe system serves students navigating a bilingual book. Hierarchy comes from type, spacing and meaningful color states. The book title, author, educational text and source diagrams remain authoritative.",
+    "keyCharacteristics": [
+      "Cobalt identity and citron actions",
+      "Archivo Black headings, Archivo controls, Source Serif study prose",
+      "Flat rectangular surfaces and purposeful chess geometry",
+      "Equivalent Spanish and English reading experiences"
+    ],
+    "rules": [
+      {
+        "name": "The State Color Rule",
+        "body": "Keep the current chapter cobalt, the current in-page heading in the soft accent, and completed reading citron; these states convey different information.",
+        "section": "colors"
+      },
+      {
+        "name": "The Heading Rule",
+        "body": "Do not append decorative periods to titles or subtitles. Preserve punctuation that belongs to the educational source.",
+        "section": "typography"
+      },
+      {
+        "name": "The Meaningful Geometry Rule",
+        "body": "Borders and lines must communicate content, a control boundary, focus or state. Use spacing and type to group headers, indexes, footers and pagination; do not add decorative divider lines.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** use the actual book index, section numbers and legal chess geometry.",
+      "**Do** keep study prose at 68ch with the implemented serif roles.",
+      "**Do** preserve visible keyboard focus, reduced-motion behavior and equivalent bilingual routes.",
+      "**Do** keep borders and diagram lines only when they communicate content or state."
+    ],
+    "donts": [
+      "**Don't** add decorative divider lines or periods to headings.",
+      "**Don't** introduce shadowed cards or rounded containers into ordinary reading layouts.",
+      "**Don't** replace educational text, source diagrams or real chapter labels with invented content.",
+      "**Don't** turn the cover's fixed cobalt into the dark theme's softer link accent."
+    ]
+  }
+}

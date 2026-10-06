@@ -1,123 +1,28 @@
-# Chess and Computation design system
+# Design system and reading architecture
 
-This system translates the visual logic of chess into an editorial reading experience. It avoids decorative chess motifs unless they communicate structure, state, or movement.
+The canonical visual rules and implemented tokens are in [DESIGN.md](../DESIGN.md). The matching [.impeccable/design.json](../.impeccable/design.json) provides component previews, motion, breakpoints and metadata. Read those files before extending the interface. This document records functional behavior that the visual system must preserve.
 
-## Principles
+## Sources and assets
 
-1. **The page is the board.** Layouts use a stable grid, clear ranks of information, and deliberate asymmetry.
-2. **Content remains primary.** Long-form text, equations, diagrams, and code are never placed inside ornamental cards.
-3. **One move at a time.** Motion explains a transition or sequence. It does not run continuously without purpose.
-4. **Both languages are first-class.** Spanish and English share routes, hierarchy, components, and equivalent visual assets.
-5. **Source fidelity beats reinvention.** Original vectors and diagrams are reused when language-neutral. Localized web diagrams replace image text that would be wrong for the active language.
+- `BookLayout.astro` imports `global.css`, `redesign.css` and `reader.css` in that order; lesson behavior imports `lessons.css` separately.
+- Self-hosted Archivo, Archivo Black and Source Serif 4 use `font-display: swap`. Official download sources and SIL Open Font License copies are recorded in [public/fonts/README.md](../public/fonts/README.md).
+- The cover board and rook wordmark are local SVG geometry. No generated raster was added by the redesign. Existing book figures, icons and social assets remain project assets.
+- Keep all source text, routes, chapter order, mathematics, figures and lesson models. Original language-neutral vectors are reused; diagrams with text use the active locale.
 
-## Design dials
+## Navigation and reading state
 
-- Design variance: **6/10**. Editorial offset without sacrificing navigation.
-- Motion intensity: **4/10**. Load and state transitions only, always reduced-motion safe.
-- Visual density: **5/10**. Comfortable reading with a persistent, information-rich index.
+The homepage exposes the full book directory and five-chapter rail. Chapter pages retain a desktop index and an in-page heading list above it. Current chapter and current heading use distinct `aria-current` states. Opening the mobile index focuses the current chapter; closed navigation is inert, open navigation contains focus and makes background content inert. Escape, backdrop and menu button dismiss it.
 
-## Color tokens
+Reading state and the last visited section remain on the device, separately for each language. Completed sections receive a check in both indexes; the homepage resumes the last visited section. The read toggle synchronizes its label and `aria-pressed`. Blocked or full storage falls back to page-local state without disabling controls. Restoring a chapter from browser history refreshes its visit and state. The reading meter updates after scrolling, resizing, figure changes and font loading.
 
-| Token | Light | Dark | Purpose |
-| --- | --- | --- | --- |
-| `--paper` | `#f3f3ed` | `#111512` | Page canvas |
-| `--paper-raised` | `#fafaf6` | `#171c19` | Controls and figures |
-| `--ink` | `#171a18` | `#eef1eb` | Primary text |
-| `--ink-soft` | `#5c625e` | `#a9b0aa` | Secondary text |
-| `--accent` | `#176b4d` | `#66c69d` | Links, active state, progress |
-| `--accent-soft` | `#d8e7df` | `#1b3b2e` | Selection and depth |
-| `--board-dark` | `#225f49` | `#2f8d67` | Dark chess squares |
-| `--board-light` | `#dfe6da` | `#29332c` | Light chess squares |
+## Search and themes
 
-The green accent is the only chromatic accent. Amber is reserved for semantic move arrows and highlighted squares inside chess diagrams.
+Search uses the active locale, ignores accents and matches every query word against real titles and descriptions. It preserves the query on reopen, renders at most twelve matches and announces the full match count separately. Enter opens the first match; arrow keys move between input and results; Tab follows native order. Header and status remain visible while results scroll. `/` opens search outside editable controls; Escape closes it and returns focus.
 
-## Typography
+Theme defaults to the operating-system preference unless the reader saved an override. Both reading themes preserve contrast and focus. The cobalt cover, citron controls and cobalt chapter identity retain their visual identity across themes.
 
-- Display and long-form body: an editorial system serif with local fallbacks (`Iowan Old Style`, Baskerville, Georgia).
-- Navigation and UI: Avenir/Helvetica family.
-- Coordinates, metadata, and code: platform monospace.
-- Maximum prose measure: 68 characters, with a 20px base and 1.8 line height on desktop; 18px on mobile.
+## Figures, accessibility and output
 
-Serif is intentional here because the product is a book and publication, not a marketing dashboard.
+Chessboards retain structured descriptions of pieces, squares, labels, marks and arrows. Localized diagrams and interactive lessons retain captions and accessible fallback content. Flowcharts preserve the source's terminal, input/output, decision and process semantics, branch labels and return edges; Mermaid loads only on routes with flowcharts. Reduced motion disables decorative transitions and renders the cover path complete. Print hides interactive controls and exposes original lesson figures.
 
-## Geometry
-
-- Base radius: 5px. Buttons, controls, figures, and focus surfaces use the same restrained radius.
-- Header: 68px desktop, 60px mobile.
-- Sidebar: 280px desktop, off-canvas below 900px.
-- Reading content: 1060px page container, 68ch prose measure.
-- The 8x8 rhythm appears in chess assets and spacing decisions, not as decorative grid lines across the entire page.
-
-## Components
-
-### Header
-
-Sticky, single-line, and under 80px. It exposes search, equivalent-language navigation, theme, and the mobile contents trigger.
-
-### Book index
-
-Persistent on desktop chapter pages and off-canvas on mobile. The homepage uses its full-width index instead of repeating the sidebar. Active sections use `--accent-soft`; hierarchy is expressed with grouping and whitespace.
-
-### Chapter page
-
-Chapter identity, semantic headings, rendered equations, original or localized figures, reading state, and adjacent chapter navigation.
-
-The sidebar keeps the current page's headings above the scrollable book index. The heading reached while reading uses an accent and `aria-current="location"`; the current book section remains highlighted separately. Later sections open with their index entry visible. Opening the mobile index focuses that current section.
-
-Reading state stays on the device and is separate for each language. Completed sections show a small check in both indexes, and the homepage offers a quiet “Continue reading” link to the last visited section. The read toggle exposes its state with `aria-pressed`. Blocked or full storage must not disable controls; state then lasts for the current page.
-
-### Chessboards
-
-Primary presentation uses pre-rendered SVGs generated from the structured source position. Every board retains a semantic fallback with piece, square, mark, label, and arrow data.
-
-### Localized diagrams
-
-Used only when an original image contains language-specific text without a counterpart. Labels are selected from the active locale, and motion collapses under `prefers-reduced-motion`.
-
-### Flowcharts
-
-Algorithm flowcharts and the four notation examples are generated from the
-source TikZ with Mermaid. Terminal, input/output, decision, and process shapes
-remain semantically distinct; branch labels and return edges must match the
-book. Mermaid is loaded only on routes containing a flowchart, and every chart
-retains a localized text fallback and an accessible figure label.
-
-### Search
-
-Keyboard-accessible dialog with a named mobile trigger, visible input focus, and a 44px close target. Results always link to the active locale and expose a clear empty state.
-
-Search preserves the query when reopened, ignores accents, and matches each word against section titles and descriptions. Results use the book's actual section numbers. A small status line announces the match count without reannouncing the full list. Enter opens the first match; arrow keys move between the input and results, while Tab follows the native order. The header and status remain visible while results scroll on short screens.
-
-## Accessibility
-
-- WCAG AA color contrast is the minimum; body text targets AAA.
-- Every interactive element has a visible focus state and tactile active feedback.
-- A skip link precedes global navigation.
-- Theme defaults to the operating-system preference and can be overridden.
-- Motion is disabled for reduced-motion preferences.
-- Figures have captions and meaningful alternative text; chessboards keep structured semantic descriptions.
-
-## Responsive behavior
-
-- At 900px and below: sidebar becomes off-canvas and all main layouts become a single column. Closed navigation is inert; open navigation contains keyboard focus and makes background content inert. Escape, the menu button, and the backdrop dismiss it.
-- At 901–1150px: chapter headers stack to keep long bilingual titles readable beside the index.
-- At 640px and below: controls compact to icons, chapter headers stack, tables scroll horizontally, and pagination becomes one column.
-- No layout uses `h-screen`; viewport-dependent heights use `100dvh`.
-
-## SEO and sharing
-
-Every route must provide canonical and alternate-language links, localized Open Graph metadata, Twitter cards, and structured data. The project ships a sitemap, robots policy, real favicon, and 1200x630 share images.
-
-## Homepage and information hierarchy
-
-- A 1440px maximum canvas pairs the title and reading action with the existing editorial image.
-- No ornamental borders, image shadows, topic strips, or edition badges. The hero identifies the author and states the subject and free access once. Language switching stays in the header.
-- The reading action is primary; buying the print book is a quiet secondary link.
-- Index entries pair a serif title with a readable description at every viewport size. Numbers support hierarchy without competing with titles.
-- Header controls have 44px targets. Navigation uses 14px text, captions use 12–13px text, and metadata uses at least 11px where practical.
-- Wide equations and code scroll inside their own containers; citations wrap without widening the page.
-- Use whitespace for header, sidebar, index, and pagination grouping. Keep borders only when they communicate content or state: table cells, diagram connections, checkboxes, focus outlines, and the search input/results boundary.
-- Chapter descriptions remain in metadata, search, and the index; do not repeat them above the opening paragraph. Avoid repeating the chapter category below the breadcrumb.
-- Use direct labels such as “Contents” instead of promotional headings or explanatory copy that merely describes the interface.
-
-The mechanical design detector's existing thick-border findings are intentional semantic geometry: the article blockquote marks quoted text, and `.board-arrows i::after` uses CSS borders to draw a move arrowhead. Neither is an accent on a card.
+Keep the skip link, meaningful image alternatives, keyboard focus, localized labels and at least 44px ordinary control targets. Wide tables, equations and code scroll inside their own containers. Every route retains canonical and alternate-language URLs, localized social metadata and structured data. The sitemap, robots policy, favicon and existing share images remain part of the publication.
