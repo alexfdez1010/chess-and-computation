@@ -22,7 +22,7 @@ async function exists(path) {
 
 function routeCandidates(pathname) {
   const clean = decodeURIComponent(pathname).replace(/^\/+/, '');
-  return [join(dist, clean), join(dist, clean, 'index.html'), join(dist, `${clean}.html`)];
+  return [join(dist, `${clean}.html`), join(dist, clean, 'index.html'), join(dist, clean)];
 }
 
 function decodeHtml(value) {
@@ -100,7 +100,7 @@ for (const [file, html] of htmlByFile) {
     const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
     try { JSON.parse(jsonLd || ''); } catch { failures.push(`${relative}: invalid or missing JSON-LD`); }
   }
-  if (relative.startsWith('/es/') || relative === '/es/index.html') {
+  if (relative.startsWith('/es/') || relative === '/es.html') {
     if (!html.includes('<meta property="og:site_name" content="Ajedrez y Computación">')) {
       failures.push(`${relative}: incorrect Spanish book title`);
     }
@@ -157,6 +157,7 @@ for (const bitmap of legacyLocalizedBitmaps) {
 }
 
 for (const required of [
+  '_redirects',
   'robots.txt',
   'sitemap-index.xml',
   'favicon.ico',

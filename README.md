@@ -78,6 +78,12 @@ bun scripts/convert-latex-content.mjs
 
 Book assets and generated SVG boards have additional verification scripts in `scripts/`.
 
+## Cloudflare Pages deployment
+
+Cloudflare Pages builds the GitHub repository from `main` and publishes `dist`. Set `BUN_VERSION=1.4.5` and `SKIP_DEPENDENCY_INSTALL=1` in the Pages build settings, then use `bun install --frozen-lockfile && bun run build` as the build command. The build image reads the Node.js version from `.node-version`.
+
+The static redirect in `public/_redirects` sends `/` to `/es`.
+
 ## 🎨 Design
 
 See the [design system](docs/DESIGN_SYSTEM.md) for the project's visual, accessibility, localization, and content guidelines.

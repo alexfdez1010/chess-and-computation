@@ -40,7 +40,7 @@ for (const lang of ['es', 'en']) {
   assert.throws(() => knightPath('a8-b6,c5-a4'), /Disconnected/);
 
   for (const [slug, kind] of [['min-max', 'minimax'], ['n-queens', 'queens'], ['knight-tour', 'knight']]) {
-    const html = await readFile(new URL(`../dist/${lang}/${slug}/index.html`, import.meta.url), 'utf8');
+    const html = await readFile(new URL(`../dist/${lang}/${slug}.html`, import.meta.url), 'utf8');
     assert.ok(html.includes(`data-lesson="${kind}"`), `${lang}/${slug}: missing player mount`);
     assert.match(html, /<img[^>]+src="\/assets\//, 'Keep static images available without JS');
   }

@@ -7,6 +7,7 @@ import rehypeKatex from 'rehype-katex';
 export default defineConfig({
   site: 'https://chess-and-computation.alejandrofernandezcamello.me',
   trailingSlash: 'never',
+  build: { format: 'file' },
   integrations: [sitemap()],
   markdown: {
     processor: unified({ remarkPlugins: [remarkMath], rehypePlugins: [[rehypeKatex, { strict: 'ignore' }]] }),
